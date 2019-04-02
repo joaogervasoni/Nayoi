@@ -9,6 +9,7 @@
   "author": "Zaetic",
   "license": "ISC",
   "dependencies": {
-    "discord.js": "^11.4.2"
+    "discord.js": "^11.4.2",
+    "ms": "^2.1.1"
   }
 }

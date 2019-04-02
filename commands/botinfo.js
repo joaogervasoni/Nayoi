@@ -9,7 +9,8 @@ module.exports.run = async (bot, message, args) => {
     .setColor(bot.filoColor)
     .addField("Bot Name", bot.user.username, true)
     .addField("My master", "Zaetic#9549", true)
-    .addField("Created On", bot.user.createdAt);
+    .addField("Created On", bot.user.createdAt)
+    .addField("Ms:", message.client.ping, true)
     
     return message.channel.send(botembed);
 }
