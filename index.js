@@ -37,7 +37,8 @@ bot.on("message", async message =>{
     let args = messageArray.slice(1);
 
     let commandfile = bot.commands.get(cmd.slice(prefix.length));
-    if(commandfile) commandfile.run(bot,message,args)
+    if(commandfile && cmd.slice(0,2) === prefix) commandfile.run(bot,message,args)
+    // console.log(`${commandfile} and ${cmd} and ${args} and ${cmd.slice(prefix.length)}`);
 })
 
 bot.login(botconfig.token);
