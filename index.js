@@ -1,8 +1,12 @@
 const botconfig = require("./botconfig.json");
 const Discord = require("discord.js");
+const Guild = require("./models/guild");
 const fs = require("fs");
+const mongoose = require("mongoose");
 const bot = new Discord.Client({disabledEveryone: true})
+bot.Guild = Guild;
 bot.filoColor = "#ff8ff2";
+bot.mongodb = botconfig.mongodb;
 bot.commands = new Discord.Collection();
 
 fs.readdir("./commands/", (err, files) => {
@@ -38,7 +42,55 @@ bot.on("message", async message =>{
 
     let commandfile = bot.commands.get(cmd.slice(prefix.length));
     if(commandfile && cmd.slice(0,2) === prefix) commandfile.run(bot,message,args)
-    // console.log(`${commandfile} and ${cmd} and ${args} and ${cmd.slice(prefix.length)}`);
+})
+
+bot.on("guildCreate", async guild =>{
+
+    mongoose.connect(`mongodb+srv://${botconfig.mongodb}@filodatabse-cfehy.gcp.mongodb.net/Database?retryWrites=true`);
+
+    const guildNew = new Guild({
+        _id: mongoose.Types.ObjectId(),
+        name: guild.name,
+        guildId: guild.id,
+        memberCount: guild.memberCount,
+        createdAt: guild.joinedAt,
+        channel: "none",
+        welcome: "off",
+        welcomeMsg: "Welcome {member}!!",
+        welcomeChannel: "welcome"
+    });
+
+    guildNew.save().then(result => console.log(result)).catch(err => console.log(err));
+})
+
+bot.on("guildMemberAdd", async member => {
+    mongoose.connect(`mongodb+srv://${botconfig.mongodb}@filodatabse-cfehy.gcp.mongodb.net/Database?retryWrites=true`);
+
+    Guild.findOne({'guildId': member.guild.id}, (err, guild) => {
+        if(guild.welcome === "on"){
+            let wlchat = member.guild.channels.find(`id`, guild.welcomeChannel);
+            let msg = guild.welcomeMsg;
+            
+            function parse(str) {
+                var args = [].slice.call(arguments, 1),
+                    i = 0;
+
+                return str.replace(/{member}/g, () => args[i++]);
+            }
+
+            msg = parse(msg, member);
+
+            let welcomeEmbed = new Discord.RichEmbed()
+            .setThumbnail(member.user.avatarURL)
+            .setDescription("Welcome")
+            .setColor(bot.filoColor)
+            .addField("User", `${member} with ID: ${member.id}`)
+            .addField("Menssage", msg)
+            .addField("Time", member.guild.joinedAt);
+
+            return wlchat.send(welcomeEmbed)
+        }  
+    });
 })
 
 bot.login(botconfig.token);

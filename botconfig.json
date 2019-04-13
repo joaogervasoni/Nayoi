@@ -1,4 +1,5 @@
 {
     "token": "Token",
-    "prefix": "f!"
+    "prefix": "f!",
+    "mongodb": "user:pass"
 }

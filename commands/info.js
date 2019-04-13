@@ -2,9 +2,9 @@ const Discord = require("discord.js");
 
 module.exports.run = async (bot, message, args) => {
 
-    let reason = args.join(" ").slice(0)
+    let args2 = args.join(" ").slice(0)
     
-    if(reason === "bot"){
+    if(args2 === "bot"){
         let boticon = bot.user.avatarURL;
     
         let botembed = new Discord.RichEmbed()
@@ -19,7 +19,7 @@ module.exports.run = async (bot, message, args) => {
         return message.channel.send(botembed);
     }
     
-    if(reason === "server"){
+    if(args2 === "server"){
         var onlineCount = message.guild.members.filter(m => m.presence.status === 'online').size;
         var offlineCount = message.guild.members.filter(m => m.presence.status === 'offline').size;
         var idleCount = message.guild.members.filter(m => m.presence.status === 'idle').size;
@@ -41,7 +41,7 @@ module.exports.run = async (bot, message, args) => {
         return message.channel.send(serverembed);
     }
 
-    return message.reply("Need a info");
+    return message.reply("Need a info prefix");
 }
 
 
