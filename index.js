@@ -78,7 +78,15 @@ bot.on("guildMemberAdd", async member => {
                 return str.replace(/{member}/g, () => args[i++]);
             }
 
+            function parseCount(str) {
+                var args = [].slice.call(arguments, 1),
+                    i = 0;
+
+                return str.replace(/{membercount}/g, () => args[i++]);
+            }
+
             msg = parse(msg, member);
+            msg = parseCount(msg, member.guild.memberCount);
 
             let welcomeEmbed = new Discord.RichEmbed()
             .setThumbnail(member.user.avatarURL)
