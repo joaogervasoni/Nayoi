@@ -24,7 +24,7 @@ module.exports.run = async (bot, message, args) => {
             });
         });
     }
-    if (args2 === "off"){
+    else if (args2 === "off"){
        
         bot.Guild.findOne({'guildId': message.guild.id}, (err, guild) => {
 
@@ -37,7 +37,7 @@ module.exports.run = async (bot, message, args) => {
             });
         });
     }
-    if(args2 === "msg"){
+    else if(args2 === "msg"){
         bot.Guild.findOne({'guildId': message.guild.id}, (err, guild) => {
             guild.welcomeMsg = args.join(" ").slice(3)
             guild.save(function (err){
@@ -46,7 +46,7 @@ module.exports.run = async (bot, message, args) => {
             });
         })
     }
-    if(args2 === "ch"){
+    else if(args2 === "ch"){
         let channel = args.join(" ").slice(2).slice(3,21);
         let chat = message.guild.channels.find(`id`, channel);
         if (!chat) return message.reply(`Couldn't find the channel`)
@@ -59,11 +59,12 @@ module.exports.run = async (bot, message, args) => {
             })
         })
     }
-    if(args2 === "sh"){
+    else if(args2 === "sh"){
         bot.Guild.findOne({'guildId': message.guild.id}, (err, guild) => {
             return message.channel.send(`**Actual msg:** ${guild.welcomeMsg}`)
         })
-    }
+    
+    }else return message.reply(`Need a welcome prefix`)
 }
 
 module.exports.help = {

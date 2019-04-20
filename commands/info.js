@@ -14,12 +14,12 @@ module.exports.run = async (bot, message, args) => {
         .addField("Bot Name", bot.user.username, true)
         .addField("My master", "Zaetic#9549", true)
         .addField("Created On", bot.user.createdAt)
+        .addField("Joined At", message.member.guild.joinedAt)
         .addField("Ms:", message.client.ping, true)
         
         return message.channel.send(botembed);
     }
-    
-    if(args2 === "server"){
+    else if(args2 === "server"){
         var onlineCount = message.guild.members.filter(m => m.presence.status === 'online').size;
         var offlineCount = message.guild.members.filter(m => m.presence.status === 'offline').size;
         var idleCount = message.guild.members.filter(m => m.presence.status === 'idle').size;
@@ -34,14 +34,29 @@ module.exports.run = async (bot, message, args) => {
         .addField("id", message.guild.id, true)
         .addField("Region", message.guild.region, true)
         .addField("Created on", message.guild.createdAt)
-        .addField("You joined", message.guild.joinedAt)
+        .addField("You joined", message.member.joinedAt)
         .addField(`Total Members ${message.guild.memberCount}`, 
         `Online: ${onlineCount} | Offline: ${offlineCount} | Indle: ${idleCount} | DnD: ${dndCount}`);
     
         return message.channel.send(serverembed);
+    
     }
+    else if(message.mentions.members.first()){
+        let User = message.mentions.members.first()
 
-    return message.reply("Need a info prefix");
+        let embed = new Discord.RichEmbed()
+        .setTitle(User.user.username)
+        .setThumbnail(User.user.avatarURL)
+        .setColor(bot.filoColor)
+        .addField("Tag", User.user.tag)
+        .addField("Bot:", User.user.bot,true)
+        .addField("Id:", User.user.id, true)
+        .addField("Created at:", User.user.createdAt)
+        .addField("Joined at:", User.joinedAt)
+
+        return message.channel.send(embed)
+    
+    }else return message.reply(`Need a info prefix`);
 }
 
 

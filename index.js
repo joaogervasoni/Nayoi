@@ -94,7 +94,7 @@ bot.on("guildMemberAdd", async member => {
             .setColor(bot.filoColor)
             .addField("User", `${member} with ID: ${member.id}`)
             .addField("Menssage", msg)
-            .addField("Time", member.guild.joinedAt);
+            .addField("Time", member.joinedAt);
 
             return wlchat.send(welcomeEmbed)
         }  
