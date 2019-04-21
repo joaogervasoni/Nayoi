@@ -1,5 +1,6 @@
 const Discord = require("discord.js");
-const moongose = require("mongoose")
+const mongoose = require("mongoose");
+mongoose.set('useNewUrlParser', true);
 
 module.exports.run = async (bot, message, args) => {
     let msg = args.join(" ").slice(0);

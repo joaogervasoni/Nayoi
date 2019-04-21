@@ -1,5 +1,6 @@
 const Discord = require("discord.js");
 const mongoose = require("mongoose");
+mongoose.set('useNewUrlParser', true);
 
 module.exports.run = async (bot, message, args) => {
 

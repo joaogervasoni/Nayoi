@@ -8,6 +8,7 @@ bot.Guild = Guild;
 bot.filoColor = "#ff8ff2";
 bot.mongodb = botconfig.mongodb;
 bot.commands = new Discord.Collection();
+mongoose.set('useNewUrlParser', true);
 
 fs.readdir("./commands/", (err, files) => {
     if(err) console.log(err);
@@ -66,39 +67,44 @@ bot.on("guildCreate", async guild =>{
 bot.on("guildMemberAdd", async member => {
     mongoose.connect(`mongodb+srv://${botconfig.mongodb}@filodatabse-cfehy.gcp.mongodb.net/Database?retryWrites=true`);
 
-    Guild.findOne({'guildId': member.guild.id}, (err, guild) => {
-        if(guild.welcome === "on"){
-            let wlchat = member.guild.channels.find(`id`, guild.welcomeChannel);
-            let msg = guild.welcomeMsg;
-            
-            function parse(str) {
-                var args = [].slice.call(arguments, 1),
-                    i = 0;
-
-                return str.replace(/{member}/g, () => args[i++]);
-            }
-
-            function parseCount(str) {
-                var args = [].slice.call(arguments, 1),
-                    i = 0;
-
-                return str.replace(/{membercount}/g, () => args[i++]);
-            }
-
-            msg = parse(msg, member);
-            msg = parseCount(msg, member.guild.memberCount);
-
-            let welcomeEmbed = new Discord.RichEmbed()
-            .setThumbnail(member.user.avatarURL)
-            .setDescription("Welcome")
-            .setColor(bot.filoColor)
-            .addField("User", `${member} with ID: ${member.id}`)
-            .addField("Menssage", msg)
-            .addField("Time", member.joinedAt);
-
-            return wlchat.send(welcomeEmbed)
-        }  
-    });
+    try {
+        Guild.findOne({'guildId': member.guild.id}, (err, guild) => {
+            if(guild.welcome === "on"){
+                let wlchat = member.guild.channels.find(`id`, guild.welcomeChannel);
+                let msg = guild.welcomeMsg;
+                
+                function parse(str) {
+                    var args = [].slice.call(arguments, 1),
+                        i = 0;
+    
+                    return str.replace(/{member}/g, () => args[i++]);
+                }
+    
+                function parseCount(str) {
+                    var args = [].slice.call(arguments, 1),
+                        i = 0;
+    
+                    return str.replace(/{membercount}/g, () => args[i++]);
+                }
+    
+                msg = parse(msg, member);
+                msg = parseCount(msg, member.guild.memberCount);
+    
+                let welcomeEmbed = new Discord.RichEmbed()
+                .setThumbnail(member.user.avatarURL)
+                .setDescription("Welcome")
+                .setColor(bot.filoColor)
+                .addField("User", `${member} with ID: ${member.id}`)
+                .addField("Menssage", msg)
+                .addField("Time", member.joinedAt);
+    
+                return wlchat.send(welcomeEmbed)
+            }  
+        });
+    } catch (error) {
+        console.error(`Erro: ${error} , Data: ${Date.now()}`)
+    }
+    
 })
 
 bot.login(botconfig.token);
