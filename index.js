@@ -29,7 +29,7 @@ fs.readdir("./commands/", (err, files) => {
 
 bot.on("ready", async () =>{
     console.log(`${bot.user.username} is online on ${bot.guilds.size} servers`);
-    bot.user.setActivity("Coding", {type: "LISTENING"});
+    bot.user.setActivity("Discord", {type: "PLAYING"});
 })
 
 bot.on("message", async message =>{
@@ -67,44 +67,43 @@ bot.on("guildCreate", async guild =>{
 bot.on("guildMemberAdd", async member => {
     mongoose.connect(`mongodb+srv://${botconfig.mongodb}@filodatabse-cfehy.gcp.mongodb.net/Database?retryWrites=true`);
 
-    try {
-        Guild.findOne({'guildId': member.guild.id}, (err, guild) => {
-            if(guild.welcome === "on"){
+    Guild.findOne({ 'guildId': member.guild.id }, (err, guild) => {
+        try {
+            if (guild.welcome === "on") {
                 let wlchat = member.guild.channels.find(`id`, guild.welcomeChannel);
                 let msg = guild.welcomeMsg;
-                
+
                 function parse(str) {
                     var args = [].slice.call(arguments, 1),
                         i = 0;
-    
+
                     return str.replace(/{member}/g, () => args[i++]);
                 }
-    
+
                 function parseCount(str) {
                     var args = [].slice.call(arguments, 1),
                         i = 0;
-    
+
                     return str.replace(/{membercount}/g, () => args[i++]);
                 }
-    
+
                 msg = parse(msg, member);
                 msg = parseCount(msg, member.guild.memberCount);
-    
+
                 let welcomeEmbed = new Discord.RichEmbed()
-                .setThumbnail(member.user.avatarURL)
-                .setDescription("Welcome")
-                .setColor(bot.filoColor)
-                .addField("User", `${member} with ID: ${member.id}`)
-                .addField("Menssage", msg)
-                .addField("Time", member.joinedAt);
-    
+                    .setThumbnail(member.user.avatarURL)
+                    .setDescription("Welcome")
+                    .setColor(bot.filoColor)
+                    .addField("User", `${member} with ID: ${member.id}`)
+                    .addField("Menssage", msg)
+                    .addField("Time", member.joinedAt);
+
                 return wlchat.send(welcomeEmbed)
-            }  
-        });
-    } catch (error) {
-        console.error(`Erro: ${error} , Data: ${Date.now()}`)
-    }
-    
+            }
+        } catch (error) {
+            console.error(`Welcome.js (guildMemberAdd) Error: ${error} , Date: ${date = new Date(Date.now())}`)
+        }
+    });   
 })
 
 bot.login(botconfig.token);
