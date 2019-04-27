@@ -9,7 +9,9 @@ const guildSchema = mongoose.Schema({
     channel: String,
     welcome: String,
     welcomeMsg: String,
-    welcomeChannel: String
+    welcomeChannel: String,
+    log: String,
+    logChannel: String
 });
 
 module.exports = mongoose.model("Guild", guildSchema);

@@ -58,7 +58,9 @@ bot.on("guildCreate", async guild =>{
         channel: "none",
         welcome: "off",
         welcomeMsg: "Welcome {member}!!",
-        welcomeChannel: "welcome"
+        welcomeChannel: "welcome",
+        log: "off",
+        logChannel: ""
     });
 
     guildNew.save().then(result => console.log(result)).catch(err => console.log(err));
@@ -103,7 +105,66 @@ bot.on("guildMemberAdd", async member => {
         } catch (error) {
             console.error(`Welcome.js (guildMemberAdd) Error: ${error} , Date: ${date = new Date(Date.now())}`)
         }
-    });   
+    });
 })
+
+bot.on('messageDelete', async function (message) {
+
+    Guild.findOne({'guildId': message.guild.id }, (err, guild) => {
+
+        if (guild.log == "on" && message.channel.type == 'text') {
+
+            let channel = message.guild.channels.find('id', guild.logChannel)
+            console.log(guild.log, message.channel.type, channel)
+            if (channel != null) {
+                let embed = new Discord.RichEmbed()
+                    .addField(":x: [Mensagge Delete]", `**Message:** ${message.cleanContent} **User:** ${message.member.user} **Channel:** ${message.channel}`)
+                channel.send(embed)
+            }
+        }
+    })
+})
+
+bot.on('guildMemberRemove', async function (member){
+    let logs = await member.guild.fetchAuditLogs();
+    let entry = logs.entries.find('target',member.user);
+
+    Guild.findOne({ 'guildId': member.guild.id }, (err, guild) => {
+        if(guild.log == "on"){
+
+            let channel = member.guild.channels.find('id', guild.logChannel)
+            if(channel != null){
+                let embed = new Discord.RichEmbed()
+                
+                if (entry != null && entry.action == "MEMBER_KICK"){
+                    embed
+                    .addField(":ledger: [Kick]", `**User:** ${member.user} **Reason:** ${entry.reason} **By:** ${entry.executor} **Date:** ${entry.createdAt}`)
+                }
+                else{
+                    embed
+                    .addField(":ledger: [Leave]", `**User:** ${member.user} **Date:** ${entry.createdAt}`)
+                }
+                channel.send(embed)
+            }
+        }
+    })
+})
+
+bot.on('guildBanAdd', async function(guild, user){
+    let logs = await guild.fetchAuditLogs({type: 22});
+    let entry = logs.entries.find('target', user);
+
+    Guild.findOne({'guildId': member.guild.id}, (err, guild) => {
+        if(guild.log == "on"){
+            
+            let channel = guild.channels.find('id', guild.logChannel)
+            if(channel != null){
+                let embed = new Discord.RichEmbed()
+                .addField(":hammer: [Banned]", `**User:** ${user} **Reason:** ${entry.reason} **By:** ${entry.executor} **Date:** ${entry.createdAt}`)
+            }
+        }
+    })
+})
+
 
 bot.login(botconfig.token);

@@ -15,7 +15,7 @@ module.exports.run = async (bot, message, args) => {
 
         bot.Guild.findOne({'guildId': message.guild.id}, (err, guild) => {
 
-            if (guild.welcome === "off") return message.channel.send(`it's currently setted: **On**`)
+            if (guild.welcome === "on") return message.channel.send(`it's currently setted: **On**`)
             
             guild.welcome = "on";
             guild.welcomeChannel = channel
