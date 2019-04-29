@@ -5,7 +5,7 @@ module.exports.run = async (bot, message, args) => {
 
     //tempmute @user 1/s/m/h/d
     if(!(message.member.hasPermission("ADMINISTRATOR") || message.member.hasPermission("MUTE_MEMBERS"))) return message.channel.send("Need Permission");
-    let toMute = message.guild.member(message.mentions.users.first() || message.guild.member.get(args[0]));
+    let toMute = message.guild.member(message.mentions.users.first() || message.guild.member(args[0]));
     if(!toMute) return message.reply("Couldn't find user");
     if((message.member.highestRole < toMute.highestRole.position) || (message.member.highestRole.position === toMute.highestRole.position) || (toMute.hasPermission("ADMINISTRATOR")))
         return message.reply("Highest role or equal");

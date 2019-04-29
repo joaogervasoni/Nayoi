@@ -10,7 +10,7 @@ module.exports.run = async (bot, message, args) => {
     if(args2 === "on"){
         let channel = args.join(" ").slice(3).slice(2,20);
         let chat = message.guild.channels.find('id', channel);
-        if(!chat) return message.reply("Couldn't find the channel ``` **Exemple**: f!log on #chat ```");
+        if(!chat) return message.reply("Couldn't find the channel ``` Exemple: f!log on #chat ```");
 
         bot.Guild.findOne({'guildId': message.guild.id}, (err, guild) => {
             if(guild.log === "on") return message.channel.send("it's currently setted: **On**")

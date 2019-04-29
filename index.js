@@ -115,10 +115,9 @@ bot.on('messageDelete', async function (message) {
         if (guild.log == "on" && message.channel.type == 'text') {
 
             let channel = message.guild.channels.find('id', guild.logChannel)
-            console.log(guild.log, message.channel.type, channel)
             if (channel != null) {
                 let embed = new Discord.RichEmbed()
-                    .addField(":x: [Mensagge Delete]", `**Message:** ${message.cleanContent} **User:** ${message.member.user} **Channel:** ${message.channel}`)
+                    .addField(":x: [Message Delete]", `**Message:** ${message.cleanContent} **User:** ${message.member.user} **Channel:** ${message.channel}`)
                 channel.send(embed)
             }
         }
@@ -138,11 +137,11 @@ bot.on('guildMemberRemove', async function (member){
                 
                 if (entry != null && entry.action == "MEMBER_KICK"){
                     embed
-                    .addField(":ledger: [Kick]", `**User:** ${member.user} **Reason:** ${entry.reason} **By:** ${entry.executor} **Date:** ${entry.createdAt}`)
+                    .addField(":ledger: [Kick]", `**User:** ${member.user} **Reason:** ${entry.reason} **By:** ${entry.executor}`)
                 }
                 else{
                     embed
-                    .addField(":ledger: [Leave]", `**User:** ${member.user} **Date:** ${entry.createdAt}`)
+                    .addField(":ledger: [Leave]", `**User:** ${member.user}`)
                 }
                 channel.send(embed)
             }
@@ -160,7 +159,7 @@ bot.on('guildBanAdd', async function(guild, user){
             let channel = guild.channels.find('id', guild.logChannel)
             if(channel != null){
                 let embed = new Discord.RichEmbed()
-                .addField(":hammer: [Banned]", `**User:** ${user} **Reason:** ${entry.reason} **By:** ${entry.executor} **Date:** ${entry.createdAt}`)
+                .addField(":hammer: [Banned]", `**User:** ${user} **Reason:** ${entry.reason} **By:** ${entry.executor}`)
             }
         }
     })

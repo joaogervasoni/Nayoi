@@ -12,7 +12,8 @@ module.exports.run = async (bot, message, args) => {
         .setDescription("**Ban:** f!ban <person> <msg> _|| Ban user_\n" 
         +"**Kick:** f!kick <person> <msg> _|| Kick user_\n"
         +"**Tempmute:** f!tempmute <person> <time> _|| Mute user for a time_\n"
-        +"**Report:** f!report <person> <msg> _|| Report user_")
+        +"**Report:** f!report <person> <msg> _|| Report user_\n"
+        +"**Log:** f!log <channel> on _|| Server log_")
         return message.channel.send(embed)
     }
     else if(args2 === "automation"){
