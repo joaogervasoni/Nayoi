@@ -11,7 +11,8 @@ const guildSchema = mongoose.Schema({
     welcomeMsg: String,
     welcomeChannel: String,
     log: String,
-    logChannel: String
+    logChannel: String,
+    nsfw: String
 });
 
 module.exports = mongoose.model("Guild", guildSchema);

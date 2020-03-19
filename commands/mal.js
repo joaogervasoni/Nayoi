@@ -1,60 +1,110 @@
 const Discord = require("discord.js");
 var request = require('request');
+const mongoose = require("mongoose");
+mongoose.set('useNewUrlParser', true);
+mongoose.set('useUnifiedTopology', true);
 
 module.exports.run = async (bot, message, args) => {
 
+    let argsAdm = args.join(" ").slice(0,10).split(' ').join('')
     let args2 = args.join(" ").slice(0, 3).split(' ').join('')
     let args3 = args.join(" ").slice(3)
 
-    if (args2 === "an") {
+    if (argsAdm === "nsfwon"){
+
+        if(!message.member.hasPermission("ADMINISTRATOR")) return message.channel.send("Need Permission");
+        mongoose.connect(`${bot.mongodb}`);
+    
+        bot.Guild.findOne({'guildId': message.guild.id}, (err, guild) => {
+
+            if (guild.nsfw === "on") return message.channel.send(`it's currently setted: **On**`)
+            
+            console.log(guild.nsfw)
+            guild.nsfw = "on";
+            guild.save(function (err){
+                if(err) return message.channel.send(`Error: ${err}, contact support`)
+                if(!err) return message.channel.send("NSFW is: **On**")
+            });
+        });
+    }
+    else if (argsAdm === "nsfwoff"){
+
+        if(!message.member.hasPermission("ADMINISTRATOR")) return message.channel.send("Need Permission");
+        mongoose.connect(`${bot.mongodb}`);
+
+        bot.Guild.findOne({'guildId': message.guild.id}, (err, guild) => {
+
+            if (guild.nsfw === "off") return message.channel.send(`it's currently setted: **Off**`)
+            
+            console.log(guild.nsfw)
+            guild.nsfw = "off";
+            guild.save(function (err){
+                if(err) return message.channel.send(`Error: ${err}, contact support`)
+                if(!err) return message.channel.send("NSFW is: **Off**")
+            });
+        });
+    }
+    else if (args2 === "an") {
         
-        if (!args3.split(' ').join('') != "") return message.reply(`Exemple: _f!mal an anime_`)
+        if (!args3.split(' ').join('') != "") return message.reply(`Exemple: _f!mal an naruto_`)
         else request(`https://api.jikan.moe/v3/search/anime/?q=${args3}&page=1&limit=1`, function (err, response, body) {
             if (response.statusCode != "200") return message.reply("Couldn't find, try again!")
 
             let rAnime = JSON.parse(body).results[0];
             if(rAnime == null) return message.reply("Couldn't find, try again!")
 
-            let embed = new Discord.RichEmbed()
-                .setThumbnail(rAnime.image_url)
-                .setTitle("Anime")
-                .setDescription(rAnime.synopsis)
-                .setColor(bot.filoColor)
-                .addField("Name:", rAnime.title)
-                .addField("Score:", rAnime.score, true)
-                .addField("Rated:", rAnime.rated, true)
-                .addField("Type:", rAnime.type, true)
-                .addField("Episodes:", rAnime.episodes, true)
+            mongoose.connect(`${bot.mongodb}`);
 
-            return message.channel.send(embed)
+            bot.Guild.findOne({'guildId': message.guild.id}, (err, guild) => {
+                if(rAnime.rated == "Rx" && guild.nsfw == "off") return message.reply("Animes com Rated 'Rx' estão desabilitados _**Safradinho**_ :banana:")
+
+                let embed = new Discord.RichEmbed()
+                    .setThumbnail(rAnime.image_url)
+                    .setTitle("Anime")
+                    .setDescription(rAnime.synopsis)
+                    .setColor(bot.filoColor)
+                    .addField("Name:", rAnime.title)
+                    .addField("Score:", rAnime.score, true)
+                    .addField("Rated:", rAnime.rated, true)
+                    .addField("Type:", rAnime.type, true)
+                    .addField("Episodes:", rAnime.episodes, true)
+
+                return message.channel.send(embed)
+            });
         })
     }
     else if (args2 === "mg"){
 
-        if(!args3.split(' ').join('') != "") return message.reply(`Exemple: _f!mal mg manga_`)
+        if(!args3.split(' ').join('') != "") return message.reply(`Exemple: _f!mal mg naruto_`)
         else request(`https://api.jikan.moe/v3/search/manga/?q=${args3}&page=1&limit=1`, function (err, response, body){
             if (response.statusCode != "200") return message.reply("Couldn't find, try again!")
 
             let rManga = JSON.parse(body).results[0];
             if(rManga == null) return message.reply("Couldn't find, try again!")
 
-            let embed = new Discord.RichEmbed()
-            .setThumbnail(rManga.image_url)
-            .setTitle("Manga")
-            .setDescription(rManga.synopsis)
-            .setColor(bot.filoColor)
-            .addField("Name:", rManga.title)
-            .addField("Score:", rManga.score, true)
-            .addField("Rated:", rManga.rated, true)
-            .addField("Type:", rManga.type, true)
-            .addField("Volumes:", rManga.volumes, true)
+            mongoose.connect(`${bot.mongodb}`);
 
-            return message.channel.send(embed)
+            bot.Guild.findOne({'guildId': message.guild.id}, (err, guild) => {
+                if(rAnime.rated == "Rx" && guild.nsfw == "off") return message.reply("Mangas com Rated 'Rx' estão desabilitados _**Safradinho**_ :banana:")
+
+                let embed = new Discord.RichEmbed()
+                .setThumbnail(rManga.image_url)
+                .setTitle("Manga")
+                .setDescription(rManga.synopsis)
+                .setColor(bot.filoColor)
+                .addField("Name:", rManga.title)
+                .addField("Score:", rManga.score, true)
+                .addField("Rated:", rManga.rated, true)
+                .addField("Type:", rManga.type, true)
+                .addField("Volumes:", rManga.volumes, true)
+
+                return message.channel.send(embed)
+            });
         })
     }
-    else if (args2 === "cr"){
+    else if (args2 === "ch"){
 
-        if(!args3.split(' ').join('') != "") return message.reply(`Exemple: _f!mal cr character_`)
+        if(!args3.split(' ').join('') != "") return message.reply(`Exemple: _f!mal ch itachi_`)
         else request(`https://api.jikan.moe/v3/search/character/?q=${args3}&page=1&limit=1`, function (err, response, body){
             if (response.statusCode != "200") return message.reply("Couldn't find, try again!")
 
@@ -95,7 +145,7 @@ module.exports.run = async (bot, message, args) => {
             return message.channel.send(embed)
         })
 
-    } else return message.reply(`Need a mal prefix`)
+    } else return message.reply(`Need a mal prefix // <an,mg,ch,pf>`)
 }
 
 module.exports.help = {

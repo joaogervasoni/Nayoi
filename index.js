@@ -9,6 +9,7 @@ bot.filoColor = "#ff8ff2";
 bot.mongodb = botconfig.mongodb;
 bot.commands = new Discord.Collection();
 mongoose.set('useNewUrlParser', true);
+mongoose.set('useUnifiedTopology', true);
 
 fs.readdir("./commands/", (err, files) => {
     if(err) console.log(err);
@@ -47,7 +48,7 @@ bot.on("message", async message =>{
 
 bot.on("guildCreate", async guild =>{
 
-    mongoose.connect(`mongodb+srv://${botconfig.mongodb}@filodatabse-cfehy.gcp.mongodb.net/Database?retryWrites=true`);
+    mongoose.connect(`${botconfig.mongodb}`);
 
     const guildNew = new Guild({
         _id: mongoose.Types.ObjectId(),
@@ -60,14 +61,15 @@ bot.on("guildCreate", async guild =>{
         welcomeMsg: "Welcome {member}!!",
         welcomeChannel: "welcome",
         log: "off",
-        logChannel: ""
+        logChannel: "",
+        nsfw: "off"
     });
 
     guildNew.save().then(result => console.log(result)).catch(err => console.log(err));
 })
 
 bot.on("guildMemberAdd", async member => {
-    mongoose.connect(`mongodb+srv://${botconfig.mongodb}@filodatabse-cfehy.gcp.mongodb.net/Database?retryWrites=true`);
+    mongoose.connect(`${botconfig.mongodb}`);
 
     Guild.findOne({ 'guildId': member.guild.id }, (err, guild) => {
         try {

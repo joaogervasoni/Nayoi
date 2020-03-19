@@ -1,12 +1,13 @@
 const Discord = require("discord.js");
 const mongoose = require("mongoose");
 mongoose.set('useNewUrlParser', true);
+mongoose.set('useUnifiedTopology', true);
 
 module.exports.run = async (bot, message, args) => {
 
     let args2 = args.join(" ").slice(0,3).split(' ').join('')
     if(!message.member.hasPermission("ADMINISTRATOR")) return message.channel.send("Need Permission");
-    mongoose.connect(`mongodb+srv://${bot.mongodb}@filodatabse-cfehy.gcp.mongodb.net/Database?retryWrites=true`);
+    mongoose.connect(`${bot.mongodb}`);
   
     if (args2 === "on"){
         let channel = args.join(" ").slice(3).slice(2,20);
