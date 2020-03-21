@@ -14,6 +14,7 @@ bot.baseColor = "#ff8ff2";
 bot.prefix = prefix;
 bot.mongodb = mongodb;
 bot.commands = new Collection();
+bot.snipes = new Map();
 
 const commands = require("./structures/command");
 commands.run(bot);
@@ -24,28 +25,6 @@ events.run(bot);
 bot.on("ready", async () =>{
     console.log(`${bot.user.username} is online on ${bot.guilds.size} servers`);
     bot.user.setActivity("Lavem as mãos", {type: "STREAMING"});
-})
-
-bot.on("guildCreate", async guild =>{
-
-    mongoose.connect(`${mongodb}`);
-
-    const guildNew = new Guild({
-        _id: mongoose.Types.ObjectId(),
-        name: guild.name,
-        guildId: guild.id,
-        memberCount: guild.memberCount,
-        createdAt: guild.joinedAt,
-        channel: "none",
-        welcome: "off",
-        welcomeMsg: "Welcome {member}!!",
-        welcomeChannel: "welcome",
-        log: "off",
-        logChannel: "",
-        nsfw: "off"
-    });
-
-    guildNew.save().then(result => console.log(result)).catch(err => console.log(err));
 })
 
 bot.login(token);
