@@ -20,3 +20,4 @@ Espero conseguir exceder as expectativas de todos ❤ !!
 | [Ms]() | NPM  |
 | [Request]() | NPM  |
 | [MongoDB]() | DB  |
+| [Jikan]() | API  |
