@@ -22,3 +22,4 @@ Espero conseguir exceder as expectativas de todos ❤ !!
 | [Path]() | NPM  |
 | [MongoDB]() | DB  |
 | [Jikan]() | API  |
+| [OpenWeather]() | API  |
