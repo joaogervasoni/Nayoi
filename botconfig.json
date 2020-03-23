@@ -1,5 +1,6 @@
 {
-    "token": "Token",
+    "token": "token api discord ",
     "prefix": "f!",
-    "mongodb": "user:pass"
+    "mongodb": "user:pass",
+    "weather": " token api weather"
 }

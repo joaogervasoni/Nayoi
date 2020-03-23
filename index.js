@@ -1,4 +1,4 @@
-const { token, prefix, mongodb } = require("./botconfig.json");
+const { token, prefix, mongodb, weather } = require("./botconfig.json");
 const { Client, Collection } = require("discord.js");
 const Guild = require("./models/guild");
 const fs = require("fs");
@@ -13,6 +13,7 @@ bot.Guild = Guild;
 bot.baseColor = "#ff8ff2";
 bot.prefix = prefix;
 bot.mongodb = mongodb;
+bot.weather = weather;
 bot.commands = new Collection();
 bot.snipes = new Map();
 

@@ -25,7 +25,9 @@ module.exports.run = async (bot, message, args) => {
     else if(args2 === "fun"){
         embed
         .setTitle("Fun commands:")
-        .setDescription("**MyAnimeList:** f!mal <type> _|| Animes, mangas..._")
+        .setDescription("**MyAnimeList:** f!mal <type> _|| Animes, mangas..._\n"
+        + "**Temperatura:** f!tempo <local> _|| Ex: Curitiba, Estados unidos..._\n"
+        + "**Snipe:** f!snipe\n")
         return message.channel.send(embed)
     }
     else if(args2 === "others"){ 
@@ -42,7 +44,7 @@ module.exports.run = async (bot, message, args) => {
     .setDescription("Exemple: ```f!commands <group>```", true)
     .addField(":shield: ADM", "4 commands", true)
     .addField(":gear: Automation", "1 command", true)
-    .addField(":performing_arts: Fun", "1 command", true)
+    .addField(":performing_arts: Fun", "3 commands", true)
     .addField(":kaaba: Others", "1 command", true)
 
     return message.channel.send(embed)

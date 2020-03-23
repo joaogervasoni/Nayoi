@@ -19,5 +19,6 @@ Espero conseguir exceder as expectativas de todos ❤ !!
 | [Mongoose]() | NPM  |
 | [Ms]() | NPM  |
 | [Request]() | NPM  |
+| [Path]() | NPM  |
 | [MongoDB]() | DB  |
 | [Jikan]() | API  |
