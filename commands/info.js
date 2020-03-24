@@ -8,14 +8,14 @@ module.exports.run = async (bot, message, args) => {
         let boticon = bot.user.avatarURL;
     
         let botembed = new Discord.RichEmbed()
-        .setDescription("Bot Information")
+        .setDescription("Informação do Bot")
         .setThumbnail(boticon)
         .setColor(bot.filoColor)
-        .addField("Bot Name", bot.user.username, true)
+        .addField("Nome", bot.user.username, true)
         .addField("My master", "Zaetic#9549", true)
-        .addField("Created On", bot.user.createdAt)
-        .addField("Joined At", message.member.guild.joinedAt)
-        .addField("Ms:", message.client.ping, true)
+        .addField("Criado em", bot.user.createdAt)
+        .addField("Entrou em", message.member.guild.joinedAt)
+        .addField("Ping:", message.client.ping, true)
         
         return message.channel.send(botembed);
     }
@@ -27,15 +27,15 @@ module.exports.run = async (bot, message, args) => {
     
         let servericon = message.guild.iconURL;
         let serverembed = new Discord.RichEmbed()
-        .setTitle("Server info")
+        .setTitle("Informações do Servidor")
         .setThumbnail(servericon)
         .setColor(bot.filoColor)
-        .addField("Server name", message.guild.name)
+        .addField("Nome", message.guild.name)
         .addField("id", message.guild.id, true)
-        .addField("Region", message.guild.region, true)
-        .addField("Created on", message.guild.createdAt)
-        .addField("You joined", message.member.joinedAt)
-        .addField(`Total Members ${message.guild.memberCount}`, 
+        .addField("Região", message.guild.region, true)
+        .addField("Criado em", message.guild.createdAt)
+        .addField("Você se juntou em", message.member.joinedAt)
+        .addField(`Total de membros ${message.guild.memberCount}`, 
         `Online: ${onlineCount} | Offline: ${offlineCount} | Indle: ${idleCount} | DnD: ${dndCount}`);
     
         return message.channel.send(serverembed);
@@ -51,12 +51,12 @@ module.exports.run = async (bot, message, args) => {
         .addField("Tag", User.user.tag)
         .addField("Bot:", User.user.bot,true)
         .addField("Id:", User.user.id, true)
-        .addField("Created at:", User.user.createdAt)
-        .addField("Joined at:", User.joinedAt)
+        .addField("Criado em:", User.user.createdAt)
+        .addField("Entrou em:", User.joinedAt)
 
         return message.channel.send(embed)
     
-    }else return message.reply(`Need a info prefix`);
+    }else return message.reply(`Preciso de um prefixo _(Exemplo: bot,server,#usuario)_`);
 }
 
 

@@ -3,6 +3,7 @@ const { Client, Collection } = require("discord.js");
 const Guild = require("./models/guild");
 const fs = require("fs");
 const mongoose = require("mongoose");
+var colors = require('colors');
 
 mongoose.set('useNewUrlParser', true);
 mongoose.set('useUnifiedTopology', true);
@@ -24,7 +25,7 @@ const events = require("./structures/event");
 events.run(bot);
 
 bot.on("ready", async () =>{
-    console.log(`${bot.user.username} is online on ${bot.guilds.size} servers`);
+    console.log(`${bot.user.username} esta Online em ${bot.guilds.size} servidores`.green);
     bot.user.setActivity("Lavem as mãos", {type: "STREAMING"});
 })
 

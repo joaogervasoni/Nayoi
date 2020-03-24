@@ -9,6 +9,7 @@
   "author": "Zaetic",
   "license": "ISC",
   "dependencies": {
+    "colors": "^1.4.0",
     "discord.js": "^11.6.2",
     "mongoose": "^5.9.5",
     "ms": "^2.1.2",

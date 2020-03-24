@@ -20,6 +20,7 @@ Espero conseguir exceder as expectativas de todos ❤ !!
 | [Ms]() | NPM  |
 | [Request]() | NPM  |
 | [Path]() | NPM  |
+| [Colors]() | NPM  |
 | [MongoDB]() | DB  |
 | [Jikan]() | API  |
 | [OpenWeather]() | API  |

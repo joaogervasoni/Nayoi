@@ -1,6 +1,7 @@
 const { readdirSync } = require("fs");
 const { join } = require("path");
 const filePath = join(__dirname, "..", "commands");
+var colors = require('colors');
 
 module.exports.run = (bot) => {
     for (const cmd of readdirSync(filePath).filter(cmd => cmd.endsWith(".js"))) {
@@ -8,5 +9,5 @@ module.exports.run = (bot) => {
         bot.commands.set(prop.help.name, prop);
     }
 
-    console.log(`${bot.commands.size} comandos carregados`)
+    console.log(`${bot.commands.size} comandos carregados`.blue)
 }

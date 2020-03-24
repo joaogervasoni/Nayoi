@@ -35,13 +35,13 @@ module.exports = (bot, member) => {
                    .setThumbnail(member.user.avatarURL)
                    .setDescription("Bem-vindo")
                    .setColor(bot.baseColor)
-                   .addField("User", `<@${member.id}> with ID: ${member.id}`)
-                   .addField("Menssage", msg)
+                   .addField("User", `<@${member.id}> com ID: ${member.id}`)
+                   .addField("Mensagem", msg)
 
                return wlchat.send(welcomeEmbed)
            }
        } catch (error) {
-           console.error(`Welcome.js (guildMemberAdd) Error: ${error} , Date: ${date = new Date(Date.now())}`)
+           console.error(`Welcome.js (guildMemberAdd) Erro: ${error} , Data: ${date = new Date(Date.now())}`)
        }
    });
 

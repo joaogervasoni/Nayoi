@@ -12,46 +12,46 @@ module.exports.run = async (bot, message, args) => {
 
     if (argsAdm === "nsfwon"){
 
-        if(!message.member.hasPermission("ADMINISTRATOR")) return message.channel.send("Need Permission");
+        if(!message.member.hasPermission("ADMINISTRATOR")) return message.channel.send("Precisa de permissão");
         mongoose.connect(`${bot.mongodb}`);
     
         bot.Guild.findOne({'guildId': message.guild.id}, (err, guild) => {
 
-            if (guild.nsfw === "on") return message.channel.send(`it's currently setted: **On**`)
+            if (guild.nsfw === "on") return message.channel.send(`NSFW esta atualmente: **On**`)
             
             console.log(guild.nsfw)
             guild.nsfw = "on";
             guild.save(function (err){
-                if(err) return message.channel.send(`Error: ${err}, contact support`)
-                if(!err) return message.channel.send("NSFW is: **On**")
+                if(err) return message.channel.send(`Erro: ${err}, contate o suporte`)
+                if(!err) return message.channel.send("NSFW agora está: **On**")
             });
         });
     }
     else if (argsAdm === "nsfwoff"){
 
-        if(!message.member.hasPermission("ADMINISTRATOR")) return message.channel.send("Need Permission");
+        if(!message.member.hasPermission("ADMINISTRATOR")) return message.channel.send("Precisa de permissão");
         mongoose.connect(`${bot.mongodb}`);
 
         bot.Guild.findOne({'guildId': message.guild.id}, (err, guild) => {
 
-            if (guild.nsfw === "off") return message.channel.send(`it's currently setted: **Off**`)
+            if (guild.nsfw === "off") return message.channel.send(`NSFW esta atualmente: **Off**`)
             
             console.log(guild.nsfw)
             guild.nsfw = "off";
             guild.save(function (err){
-                if(err) return message.channel.send(`Error: ${err}, contact support`)
-                if(!err) return message.channel.send("NSFW is: **Off**")
+                if(err) return message.channel.send(`Erro: ${err}, contate o suporte`)
+                if(!err) return message.channel.send("NSFW agora está: **Off**")
             });
         });
     }
     else if (args2 === "an") {
         
-        if (!args3.split(' ').join('') != "") return message.reply(`Exemple: _f!mal an naruto_`)
+        if (!args3.split(' ').join('') != "") return message.reply(`Exemplo: _y!mal an naruto_`)
         else request(`https://api.jikan.moe/v3/search/anime/?q=${args3}&page=1&limit=1`, function (err, response, body) {
-            if (response.statusCode != "200") return message.reply("Couldn't find, try again!")
+            if (response.statusCode != "200") return message.reply("Não encontrei o anime _(Exemplo: y!mal an naruto)_")
 
             let rAnime = JSON.parse(body).results[0];
-            if(rAnime == null) return message.reply("Couldn't find, try again!")
+            if(rAnime == null) return message.reply("Parece que aconteceu um bug em meu sistema (Erro: Json sem dados)")
 
             mongoose.connect(`${bot.mongodb}`);
 
@@ -75,12 +75,12 @@ module.exports.run = async (bot, message, args) => {
     }
     else if (args2 === "mg"){
 
-        if(!args3.split(' ').join('') != "") return message.reply(`Exemple: _f!mal mg naruto_`)
+        if(!args3.split(' ').join('') != "") return message.reply(`Exemplo: _y!mal mg naruto_`)
         else request(`https://api.jikan.moe/v3/search/manga/?q=${args3}&page=1&limit=1`, function (err, response, body){
-            if (response.statusCode != "200") return message.reply("Couldn't find, try again!")
+            if (response.statusCode != "200") return message.reply("Não encontrei o manga _(Exemplo: y!mal mg naruto)_")
 
             let rManga = JSON.parse(body).results[0];
-            if(rManga == null) return message.reply("Couldn't find, try again!")
+            if(rManga == null) return message.reply("Parece que aconteceu um bug em meu sistema (Erro: Json sem dados)")
 
             mongoose.connect(`${bot.mongodb}`);
 
@@ -104,12 +104,12 @@ module.exports.run = async (bot, message, args) => {
     }
     else if (args2 === "ch"){
 
-        if(!args3.split(' ').join('') != "") return message.reply(`Exemple: _f!mal ch itachi_`)
+        if(!args3.split(' ').join('') != "") return message.reply(`Exemplo: _y!mal ch itachi_`)
         else request(`https://api.jikan.moe/v3/search/character/?q=${args3}&page=1&limit=1`, function (err, response, body){
-            if (response.statusCode != "200") return message.reply("Couldn't find, try again!")
+            if (response.statusCode != "200") return message.reply("Não encontrei o personagem _(Exemplo: y!mal ch itachi)_")
 
             let rCharacter = JSON.parse(body).results[0];
-            if(rCharacter == null) return message.reply("Couldn't find, try again!")
+            if(rCharacter == null) return message.reply("Parece que aconteceu um bug em meu sistema (Erro: Json sem dados)")
 
             let embed = new Discord.RichEmbed()
             .setThumbnail(rCharacter.image_url)
@@ -123,12 +123,12 @@ module.exports.run = async (bot, message, args) => {
     else if (args2 === "pf") {
         let profile = args.join(" ").slice(3)
 
-        if (!profile.split(' ').join('') != "") return message.reply(`Exemple: f!mal pf perfil`)
+        if (!profile.split(' ').join('') != "") return message.reply(`Exemplo: y!mal pf perfil`)
         else request(`https://api.jikan.moe/v3/user/${args3}/profile`, function (err, response, body) {
-            if (response.statusCode != "200") return message.reply("Couldn't find, try again!")
+            if (response.statusCode != "200") return message.reply("Não encontrei o perfil _(Exemplo: y!mal pf perfil)_")
 
             let rProfile = JSON.parse(body)
-            if(rProfile == null) return message.reply("Couldn't find, try again!")
+            if(rProfile == null) return message.reply("Parece que aconteceu um bug em meu sistema (Erro: Json sem dados)")
 
             let embed = new Discord.RichEmbed()
                 .setThumbnail(rProfile.image_url)
@@ -145,7 +145,7 @@ module.exports.run = async (bot, message, args) => {
             return message.channel.send(embed)
         })
 
-    } else return message.reply(`Need a mal prefix // <an,mg,ch,pf>`)
+    } else return message.reply(`Preciso de um prefixo _(Exemplo: an,mg,ch,pf)_`)
 }
 
 module.exports.help = {

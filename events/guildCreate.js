@@ -13,8 +13,8 @@ module.exports = (bot, guild) => {
         createdAt: guild.joinedAt,
         channel: "none",
         welcome: "off",
-        welcomeMsg: "Welcome {member}!!",
-        welcomeChannel: "welcome",
+        welcomeMsg: "Bem-vindo {member}!!",
+        welcomeChannel: "Bem-vindo",
         log: "off",
         logChannel: "",
         nsfw: "off"

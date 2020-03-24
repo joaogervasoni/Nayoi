@@ -1,6 +1,7 @@
 const { readdirSync } = require("fs");
 const { join } = require("path");
 const filePath = join(__dirname, "..", "events");
+var colors = require('colors');
 
 module.exports.run = (bot) => {
     const eventFiles = readdirSync(filePath);
@@ -10,5 +11,5 @@ module.exports.run = (bot) => {
         bot.on(eventName, event.bind(null, bot));
     }
 
-    console.log(`${eventFiles.length} eventos carregados`);
+    console.log(`${eventFiles.length} eventos carregados`.blue);
 }

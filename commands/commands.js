@@ -8,44 +8,44 @@ module.exports.run = async (bot, message, args) => {
     //Commands <type>
     if(args2 === "adm"){
         embed
-        .setTitle("Administration commands:")
-        .setDescription("**Ban:** f!ban <person> <msg> _|| Ban user_\n" 
-        +"**Kick:** f!kick <person> <msg> _|| Kick user_\n"
-        +"**Tempmute:** f!tempmute <person> <time> _|| Mute user for a time_\n"
-        +"**Report:** f!report <person> <msg> _|| Report user_\n"
-        +"**Log:** f!log <channel> on _|| Server log_")
+        .setTitle("Comandos administrativos:")
+        .setDescription("**Ban:** y!ban <usuário> <msg> _|| Ban usuário\n" 
+        +"**Kick:** y!kick <usuário> <msg> _|| Kick usuário\n"
+        +"**Tempmute:** y!tempmute <usuário> <time> _|| Muta por um tempo_\n"
+        +"**Report:** y!report <usuário> <msg> _|| Reportar usuário\n"
+        +"**Log:** y!log <canal> on _|| Server log_")
         return message.channel.send(embed)
     }
     else if(args2 === "automation"){
         embed
         .setTitle("Automation commands:")
-        .setDescription("**Welcome:** f!welcome <type> _|| Welcome message_")
+        .setDescription("**Welcome:** y!welcome <type> _|| Mensagem de bem-vindo_")
         return message.channel.send(embed)
     }
     else if(args2 === "fun"){
         embed
         .setTitle("Fun commands:")
-        .setDescription("**MyAnimeList:** f!mal <type> _|| Animes, mangas..._\n"
-        + "**Temperatura:** f!tempo <local> _|| Ex: Curitiba, Estados unidos..._\n"
-        + "**Snipe:** f!snipe\n")
+        .setDescription("**MyAnimeList:** y!mal <type> _|| Animes, mangas..._\n"
+        + "**Temperatura:** y!tempo <local> _|| Ex: Curitiba, Estados unidos..._\n"
+        + "**Snipe:** y!snipe\n")
         return message.channel.send(embed)
     }
-    else if(args2 === "others"){ 
+    else if(args2 === "Outros"){ 
         embed
         .setTitle("Others commands:")
-        .setDescription("**Info:** f!info <type> _|| Server, player and bot info..._")
+        .setDescription("**Info:** y!info <type> _|| Server, player and bot info..._")
         return message.channel.send(embed)
     }
 
     //Commands
     embed
-    .setTitle("Filo commands:")
-    .setColor(bot.filoColor)
-    .setDescription("Exemple: ```f!commands <group>```", true)
-    .addField(":shield: ADM", "4 commands", true)
-    .addField(":gear: Automation", "1 command", true)
-    .addField(":performing_arts: Fun", "3 commands", true)
-    .addField(":kaaba: Others", "1 command", true)
+    .setTitle(`${bot.user.username} comandos`)
+    .setColor(bot.baseColor)
+    .setDescription("Exemplo: ```y!commands <grupo>```", true)
+    .addField(":shield: ADM", "4 comandos", true)
+    .addField(":gear: Automation", "1 comando", true)
+    .addField(":performing_arts: Fun", "3 comandos", true)
+    .addField(":kaaba: Outros", "1 comando", true)
 
     return message.channel.send(embed)
 }

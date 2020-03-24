@@ -5,23 +5,23 @@ mongoose.set('useUnifiedTopology', true);
 module.exports.run = async (bot, message, args) => {
 
     let args2 = args.join(" ").slice(0,3).split(' ').join('')
-    if(!message.member.hasPermission("ADMINISTRATOR")) return message.channel.send("Need Permission");
+    if(!message.member.hasPermission("ADMINISTRATOR")) return message.channel.send("Preciso de permissão");
     mongoose.connect(`${bot.mongodb}`);
   
     if (args2 === "on"){
         let channel = args.join(" ").slice(3).slice(2,20);
         let chat = message.guild.channels.find(chat => channel, `id` )
-        if (!chat) return message.reply(`Couldn't find the channel _(Exemple: f!welcome on #chat)_`)
+        if (!chat) return message.reply(`Não encontrei o canal _(Exemplo: y!welcome on #chat)_`)
 
         bot.Guild.findOne({'guildId': message.guild.id}, (err, guild) => {
 
-            if (guild.welcome === "on") return message.channel.send(`it's currently setted: **On**`)
+            if (guild.welcome === "on") return message.channel.send(`Bem-vindo esta atualmente: **On**`)
             
             guild.welcome = "on";
             guild.welcomeChannel = channel
             guild.save(function (err){
-                if(err) return message.channel.send(`Error: ${err}, contact support`)
-                if(!err) return message.channel.send("Welcome message is: **On**")
+                if(err) return message.channel.send(`Erro: ${err}, contate o suporte`)
+                if(!err) return message.channel.send("Bem-vindo agora está: **On**")
             });
         });
     }
@@ -29,12 +29,12 @@ module.exports.run = async (bot, message, args) => {
        
         bot.Guild.findOne({'guildId': message.guild.id}, (err, guild) => {
 
-            if (guild.welcome === "off") return message.channel.send(`it's currently setted: **Off**`)
+            if (guild.welcome === "off") return message.channel.send(`Bem-vindo esta atualmente: **Off**`)
         
             guild.welcome = "off";
             guild.save(function (err){
-                if(err) return message.channel.send(`Error: ${err}, contact support`)
-                if(!err) return message.channel.send("Welcome message is: **Off**")
+                if(err) return message.channel.send(`Erro: ${err}, contate o suporte`)
+                if(!err) return message.channel.send("Bem-vindo agora está: **Off**")
             });
         });
     }
@@ -42,30 +42,30 @@ module.exports.run = async (bot, message, args) => {
         bot.Guild.findOne({'guildId': message.guild.id}, (err, guild) => {
             guild.welcomeMsg = args.join(" ").slice(3)
             guild.save(function (err){
-                if(err) return message.channel.send(`Error: ${err}, contact support`)
-                if(!err) return message.channel.send("Welcome message changed !!")
+                if(err) return message.channel.send(`Erro: ${err}, contate o suporte`)
+                if(!err) return message.channel.send("Mensagem de Bem-vindo modificada !!")
             });
         })
     }
     else if(args2 === "ch"){
         let channel = args.join(" ").slice(2).slice(3,21);
         let chat = message.guild.channels.find(`id`, channel);
-        if (!chat) return message.reply(`Couldn't find the channel`)
+        if (!chat) return message.reply(`Não encontrei este canal :C`)
 
         bot.Guild.findOne({'guildId': message.guild.id}, (err, guild) => {
             guild.welcomeChannel = channel;
             guild.save(function (err){
-                if(err) return message.channel.send(`Error: ${err}, contact support`)
-                if(!err) return message.channel.send("Channel changed !!")
+                if(err) return message.channel.send(`Erro: ${err}, contate o suporte`)
+                if(!err) return message.channel.send("Canal trocado !!")
             })
         })
     }
     else if(args2 === "sh"){
         bot.Guild.findOne({'guildId': message.guild.id}, (err, guild) => {
-            return message.channel.send(`**Actual msg:** ${guild.welcomeMsg}`)
+            return message.channel.send(`**Mensagem atual:** ${guild.welcomeMsg}`)
         })
     
-    }else return message.reply(`Need a welcome prefix`)
+    }else return message.reply(`Preciso de um prefixo (Ex: on,off,msg,ch,sh)`)
 }
 
 module.exports.help = {

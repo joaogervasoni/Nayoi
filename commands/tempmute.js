@@ -4,11 +4,11 @@ const ms = require("ms");
 module.exports.run = async (bot, message, args) => {
 
     //tempmute @user 1/s/m/h/d
-    if(!(message.member.hasPermission("ADMINISTRATOR") || message.member.hasPermission("MUTE_MEMBERS"))) return message.channel.send("Need Permission");
+    if(!(message.member.hasPermission("ADMINISTRATOR") || message.member.hasPermission("MUTE_MEMBERS"))) return message.channel.send("Precisa de permissão");
     let toMute = message.guild.member(message.mentions.users.first() || message.guild.member(args[0]));
-    if(!toMute) return message.reply("Couldn't find user");
+    if(!toMute) return message.reply("Não encontrei este Usuário");
     if((message.member.highestRole < toMute.highestRole.position) || (message.member.highestRole.position === toMute.highestRole.position) || (toMute.hasPermission("ADMINISTRATOR")))
-        return message.reply("Highest role or equal");
+        return message.reply("Cargo maior ou igual");
 
     //Create role
     let muterole = message.guild.roles.find(`name`, "Muted");
@@ -32,14 +32,14 @@ module.exports.run = async (bot, message, args) => {
     //end Create role
     
     let mutetime = args[1];
-    if(!mutetime) return message.reply("You didn't specify a time!!");
+    if(!mutetime) return message.reply("Você não escreveu um tempo!!");
 
     await(toMute.addRole(muterole.id));
-    message.reply(`<@${toMute.id}> has been muted for ${ms(ms(mutetime))}`);
+    message.reply(`<@${toMute.id}> foi mutado por ${ms(ms(mutetime))}`);
 
     setTimeout(function(){
         toMute.removeRole(muterole.id);
-        message.channel.send(`<@${toMute.id}> has been unmuted`);
+        message.channel.send(`<@${toMute.id}> foi desmutado`);
     }, ms(mutetime));
 
 }

@@ -8,7 +8,7 @@ module.exports.run = (bot, message, args) => {
         if (response.statusCode != "200") return message.reply("Não encontrei nenhuma informação de tempo :(")
 
             let tempo = JSON.parse(body);
-            if(tempo == null) return message.reply("Não encontrei nenhuma informação de tempo :(")
+            if(tempo == null) return message.reply("Parece que aconteceu um bug em meu sistema (Erro: Json sem dados)")
 
             let temp = tempo.main.temp - 273.15;
             let name = tempo.name;
