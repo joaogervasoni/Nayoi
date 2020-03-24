@@ -8,6 +8,7 @@ module.exports = (bot, member) => {
    mongoose.connect(`${bot.mongodb}`);
 
    bot.Guild.findOne({ 'guildId': member.guild.id }, (err, guild) => {
+
        try {
            if (guild.welcome === "on") {
                let wlchat = member.guild.channels.find(`id`, guild.welcomeChannel);
@@ -34,7 +35,7 @@ module.exports = (bot, member) => {
                    .setThumbnail(member.user.avatarURL)
                    .setDescription("Bem-vindo")
                    .setColor(bot.baseColor)
-                   .addField("User", `${member} with ID: ${member.id}`)
+                   .addField("User", `<@${member.id}> with ID: ${member.id}`)
                    .addField("Menssage", msg)
 
                return wlchat.send(welcomeEmbed)

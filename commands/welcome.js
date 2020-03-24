@@ -1,4 +1,3 @@
-const Discord = require("discord.js");
 const mongoose = require("mongoose");
 mongoose.set('useNewUrlParser', true);
 mongoose.set('useUnifiedTopology', true);
@@ -11,7 +10,7 @@ module.exports.run = async (bot, message, args) => {
   
     if (args2 === "on"){
         let channel = args.join(" ").slice(3).slice(2,20);
-        let chat = message.guild.channels.find(`id`, channel)
+        let chat = message.guild.channels.find(chat => channel, `id` )
         if (!chat) return message.reply(`Couldn't find the channel _(Exemple: f!welcome on #chat)_`)
 
         bot.Guild.findOne({'guildId': message.guild.id}, (err, guild) => {

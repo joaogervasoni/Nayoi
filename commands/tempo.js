@@ -15,7 +15,7 @@ module.exports.run = (bot, message, args) => {
             let country = tempo.sys.country;
             
             let embed = new Discord.RichEmbed()
-                .setThumbnail("https://github.com/Zaetic/Yani/blob/master/Imagens/YaniTempo.png?raw=true")
+                .setThumbnail("https://github.com/Zaetic/Yani/blob/master/images/YaniTempo.png?raw=true")
                 .setTitle(`Temperatura de ${name}`)
                 .addField(`Temp:`, temp.toFixed(2))
                 .addField(`Local:`, country, true)
