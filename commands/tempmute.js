@@ -1,4 +1,3 @@
-const Discord = require("discord.js");
 const ms = require("ms");
 
 module.exports.run = async (bot, message, args) => {
@@ -10,8 +9,7 @@ module.exports.run = async (bot, message, args) => {
     if((message.member.highestRole < toMute.highestRole.position) || (message.member.highestRole.position === toMute.highestRole.position) || (toMute.hasPermission("ADMINISTRATOR")))
         return message.reply("Cargo maior ou igual");
 
-    //Create role
-    let muterole = message.guild.roles.find(`name`, "Muted");
+    let muterole = message.guild.roles.find(role => role.name === "Muted");
     if(!muterole){
         try{
             muterole = await message.guild.createRole({
@@ -29,13 +27,17 @@ module.exports.run = async (bot, message, args) => {
             console.log(e.stack);
         }
     }
-    //end Create role
-    
+  
     let mutetime = args[1];
-    if(!mutetime) return message.reply("Você não escreveu um tempo!!");
+    if(!mutetime) return message.reply("Você não escreveu um tempo valido!!");
+
+    try {
+        message.reply(`<@${toMute.id}> foi mutado por ${ms(ms(mutetime))}`)
+    } catch (e) {
+        return message.reply("A escrita do comando esta errada !!");
+    }
 
     await(toMute.addRole(muterole.id));
-    message.reply(`<@${toMute.id}> foi mutado por ${ms(ms(mutetime))}`);
 
     setTimeout(function(){
         toMute.removeRole(muterole.id);
