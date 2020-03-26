@@ -24,3 +24,9 @@ module.exports.run = async (bot, message, args) => {
 module.exports.help = {
     name: "report"
 }
+
+module.exports.requirements = {
+    userPerms: [],
+    clientPerms: [],
+    ownerOnly: false
+}

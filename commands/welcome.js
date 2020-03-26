@@ -5,7 +5,6 @@ mongoose.set('useUnifiedTopology', true);
 module.exports.run = async (bot, message, args) => {
 
     let args2 = args.join(" ").slice(0,3).split(' ').join('')
-    if(!message.member.hasPermission("ADMINISTRATOR")) return message.channel.send("Preciso de permissão");
     mongoose.connect(`${bot.mongodb}`);
   
     if (args2 === "on"){
@@ -70,4 +69,10 @@ module.exports.run = async (bot, message, args) => {
 
 module.exports.help = {
     name: "welcome"
+}
+
+module.exports.requirements = {
+    userPerms: ["ADMINISTRATOR"],
+    clientPerms: ["ADMINISTRATOR"],
+    ownerOnly: false
 }

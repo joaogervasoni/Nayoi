@@ -19,7 +19,6 @@ module.exports.run = async (bot, message, args) => {
     //say #chat msg
     if(!isNaN(channelId)){
         let guildMention = message.guild.channels.get(channelId)
-        if(!message.member.hasPermission("ADMINISTRATOR") && guildMention) return message.channel.send("Precisa de permissão");
         let msgMention = args.join(" ").slice(22)
         return guildMention.send(msgMention)
     } 
@@ -30,4 +29,10 @@ module.exports.run = async (bot, message, args) => {
 
 module.exports.help = {
     name: "say"
+}
+
+module.exports.requirements = {
+    userPerms: [],
+    clientPerms: [],
+    ownerOnly: false
 }

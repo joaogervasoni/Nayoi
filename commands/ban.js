@@ -5,7 +5,6 @@ module.exports.run = async (bot, message, args) => {
     if(!bUser) return message.channel.send("Não encontrei esse usuário");
     let bReason = args.join(" ").slice(22);
     
-    if(!message.member.hasPermission("MANAGE_GUILD")) return message.channel.send("Precisa de permissão");
     if(bUser.hasPermission("MANAGE_GUILD")) return message.channel.send("Essa pessoa não pode levar Ban");
     
     let banEmbed = new Discord.RichEmbed()
@@ -28,4 +27,10 @@ module.exports.run = async (bot, message, args) => {
 
 module.exports.help = {
     name: "ban"
+}
+
+module.exports.requirements = {
+    userPerms: ["ADMINISTRATOR"],
+    clientPerms: ["ADMINISTRATOR"],
+    ownerOnly: false
 }

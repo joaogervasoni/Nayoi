@@ -5,7 +5,6 @@ module.exports.run = async (bot, message, args) => {
     if(!kUser) return message.channel.send("Não encontrei esse usuário");
     let kReason = args.join(" ").slice(22);
 
-    if(!message.member.hasPermission("MANAGE_MESSAGES")) return message.channel.send("Precisa de permissão");
     if(kUser.hasPermission("MANAGE_MESSAGES")) return message.channel.send("Essa pessoa não pode levar Kick");
 
     let kickEmbed = new Discord.RichEmbed()
@@ -28,4 +27,10 @@ module.exports.run = async (bot, message, args) => {
 
 module.exports.help = {
     name: "kick"
+}
+
+module.exports.requirements = {
+    userPerms: ["MANAGE_MESSAGES"],
+    clientPerms: [],
+    ownerOnly: false
 }

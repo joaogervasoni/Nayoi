@@ -28,3 +28,9 @@ module.exports.run = (bot, message, args) => {
 module.exports.help = {
     name: "tempo"
 }
+
+module.exports.requirements = {
+    userPerms: [],
+    clientPerms: [],
+    ownerOnly: false
+}

@@ -10,12 +10,13 @@ module.exports.run = async (bot, message, args) => {
         let botembed = new Discord.RichEmbed()
         .setDescription("Informação do Bot")
         .setThumbnail(boticon)
-        .setColor(bot.filoColor)
+        .setColor(bot.baseColor)
         .addField("Nome", bot.user.username, true)
         .addField("My master", "Zaetic#9549", true)
         .addField("Criado em", bot.user.createdAt)
         .addField("Entrou em", message.member.guild.joinedAt)
         .addField("Ping:", message.client.ping, true)
+        .addField("Link", "https://github.com/Zaetic/Yani")
         
         return message.channel.send(botembed);
     }
@@ -29,7 +30,7 @@ module.exports.run = async (bot, message, args) => {
         let serverembed = new Discord.RichEmbed()
         .setTitle("Informações do Servidor")
         .setThumbnail(servericon)
-        .setColor(bot.filoColor)
+        .setColor(bot.baseColor)
         .addField("Nome", message.guild.name)
         .addField("id", message.guild.id, true)
         .addField("Região", message.guild.region, true)
@@ -47,7 +48,7 @@ module.exports.run = async (bot, message, args) => {
         let embed = new Discord.RichEmbed()
         .setTitle(User.user.username)
         .setThumbnail(User.user.avatarURL)
-        .setColor(bot.filoColor)
+        .setColor(bot.baseColor)
         .addField("Tag", User.user.tag)
         .addField("Bot:", User.user.bot,true)
         .addField("Id:", User.user.id, true)
@@ -62,4 +63,10 @@ module.exports.run = async (bot, message, args) => {
 
 module.exports.help = {
     name: "info"
+}
+
+module.exports.requirements = {
+    userPerms: [],
+    clientPerms: [],
+    ownerOnly: false
 }

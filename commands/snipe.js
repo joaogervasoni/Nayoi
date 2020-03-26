@@ -16,3 +16,9 @@ module.exports.run = (bot, message, args) => {
 module.exports.help = {
     name: "snipe"
 }
+
+module.exports.requirements = {
+    userPerms: [],
+    clientPerms: [],
+    ownerOnly: false
+}

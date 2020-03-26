@@ -151,3 +151,9 @@ module.exports.run = async (bot, message, args) => {
 module.exports.help = {
     name: "mal"
 }
+
+module.exports.requirements = {
+    userPerms: [],
+    clientPerms: [],
+    ownerOnly: false
+}

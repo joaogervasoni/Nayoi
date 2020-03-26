@@ -9,31 +9,31 @@ module.exports.run = async (bot, message, args) => {
     if(args2 === "adm"){
         embed
         .setTitle("Comandos administrativos:")
-        .setDescription("**Ban:** y!ban <usuário> <msg> _|| Ban usuário\n" 
-        +"**Kick:** y!kick <usuário> <msg> _|| Kick usuário\n"
-        +"**Tempmute:** y!tempmute <usuário> <time> _|| Muta por um tempo_\n"
-        +"**Report:** y!report <usuário> <msg> _|| Reportar usuário\n"
-        +"**Log:** y!log <canal> on _|| Server log_")
+        .setDescription("**Ban:** y!ban <usuário> <msg> _// Ban usuário_\n" 
+        +"**Kick:** y!kick <usuário> <msg> _// Kick usuário_\n"
+        +"**Tempmute:** y!tempmute <usuário> <time> _// Muta por um tempo_\n"
+        +"**Report:** y!report <usuário> <msg> _// Reportar usuário_\n"
+        +"**Log:** y!log <canal> on _// Server log_")
         return message.channel.send(embed)
     }
     else if(args2 === "automation"){
         embed
         .setTitle("Automation commands:")
-        .setDescription("**Welcome:** y!welcome <type> _|| Mensagem de bem-vindo_")
+        .setDescription("**Welcome:** y!welcome <type> _// Mensagem de bem-vindo_")
         return message.channel.send(embed)
     }
     else if(args2 === "fun"){
         embed
         .setTitle("Fun commands:")
-        .setDescription("**MyAnimeList:** y!mal <type> _|| Animes, mangas..._\n"
-        + "**Temperatura:** y!tempo <local> _|| Ex: Curitiba, Estados unidos..._\n"
+        .setDescription("**MyAnimeList:** y!mal <type> _// Animes, mangas..._\n"
+        + "**Temperatura:** y!tempo <local> _// Ex: Curitiba, Estados unidos..._\n"
         + "**Snipe:** y!snipe\n")
         return message.channel.send(embed)
     }
-    else if(args2 === "Outros"){ 
+    else if(args2 === "outros"){ 
         embed
         .setTitle("Others commands:")
-        .setDescription("**Info:** y!info <type> _|| Server, player and bot info..._")
+        .setDescription("**Info:** y!info <type> _// Server, player and bot info..._")
         return message.channel.send(embed)
     }
 
@@ -52,4 +52,10 @@ module.exports.run = async (bot, message, args) => {
 
 module.exports.help = {
     name: "commands"
+}
+
+module.exports.requirements = {
+    userPerms: [],
+    clientPerms: [],
+    ownerOnly: false
 }
