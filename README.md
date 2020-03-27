@@ -12,7 +12,7 @@ Espero conseguir exceder as expectativas de todos ❤ !!
 
 ## Como posso te chamar para meu servidor ?
 
-Você pode clicar neste [LINK](https://discordapp.com/oauth2/authorize?client_id=569174218298753043&scope=bot&permissions=8) que vai te possibilitar escolher o servidor que você deseja me adicionar !!!
+Você pode clicar neste [LINK](https://discordapp.com/oauth2/authorize?client_id=561319501317144576&scope=bot&permissions=8) que vai te possibilitar escolher o servidor que você deseja me adicionar !!!
 
 Lembrando que sou um bot em desenvolvimento e problemas podem ocorrer mas trabalhamos com muito amor para manter as informações de seu servidor salvas assim como nosso bot funcionando 💜
 

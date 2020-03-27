@@ -3,14 +3,19 @@ const Discord = require("discord.js");
 mongoose.set('useNewUrlParser', true);
 mongoose.set('useUnifiedTopology', true);
 
-module.exports = (bot, member) => {
+module.exports = async (bot, member) => {
     
    mongoose.connect(`${bot.mongodb}`);
 
    bot.Guild.findOne({ 'guildId': member.guild.id }, (err, guild) => {
 
        try {
-           if (guild.welcome === "on") {
+            if (guild.autorole === "on") {
+                let rol = guild.autoroleRole;
+                if(rol) member.addRole(rol);
+            }
+
+            if (guild.welcome === "on") {
                let wlchat = member.guild.channels.find(`id`, guild.welcomeChannel);
                let msg = guild.welcomeMsg;
 

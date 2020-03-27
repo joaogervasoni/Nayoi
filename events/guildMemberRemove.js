@@ -3,9 +3,9 @@ const Discord = require("discord.js");
 mongoose.set('useNewUrlParser', true);
 mongoose.set('useUnifiedTopology', true);
 
-module.exports = (bot, member) => {
-    let logs = member.guild.fetchAuditLogs();
-    let entry = logs.entries.find('target',member.user);
+module.exports = async (bot, member)  => {
+    let logs = await member.guild.fetchAuditLogs();
+    let entry = logs.entries.find('target', member.user);
 
     bot.Guild.findOne({ 'guildId': member.guild.id }, (err, guild) => {
         if(guild.log == "on"){

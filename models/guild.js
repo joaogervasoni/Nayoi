@@ -12,6 +12,8 @@ const guildSchema = mongoose.Schema({
     welcomeChannel: String,
     log: String,
     logChannel: String,
+    autorole: String,
+    autoroleRole: String,
     nsfw: String
 });
 
