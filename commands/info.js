@@ -1,3 +1,4 @@
+const {formatDate} = require("../functions.js");
 const Discord = require("discord.js");
 
 module.exports.run = async (bot, message, args) => {
@@ -13,9 +14,9 @@ module.exports.run = async (bot, message, args) => {
         .setColor(bot.baseColor)
         .addField("Nome", bot.user.username, true)
         .addField("My master", "Zaetic#9549", true)
-        .addField("Criado em", bot.user.createdAt)
-        .addField("Entrou em", message.member.guild.joinedAt)
         .addField("Ping:", message.client.ping, true)
+        .addField("Criado em", formatDate(bot.user.createdAt), true)
+        .addField("Entrou em", formatDate(message.member.guild.joinedAt), true)
         .addField("Link", "https://github.com/Zaetic/Yani")
         
         return message.channel.send(botembed);
