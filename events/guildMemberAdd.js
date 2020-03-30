@@ -40,7 +40,7 @@ module.exports = async (bot, member) => {
                    .setThumbnail(member.user.avatarURL)
                    .setDescription("Bem-vindo")
                    .setColor(bot.baseColor)
-                   .addField("User", `<@${member.id}>`)
+                   .addField("User", `<@!${member.id}>`)
                    .addField("Mensagem", msg)
 
                return wlchat.send(welcomeEmbed)
