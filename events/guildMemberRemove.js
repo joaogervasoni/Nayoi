@@ -10,8 +10,8 @@ module.exports = async (bot, member, message)  => {
     bot.Guild.findOne({ 'guildId': member.guild.id }, (err, guild) => {
         try{
             if(guild.log == "on"){
-                let logs = await member.guild.fetchAuditLogs();
-                let entry = await logs.entries.find('target', member.user);
+                let logs = member.guild.fetchAuditLogs();
+                let entry = logs.entries.find('target', member.user);
     
                 let channel = member.guild.channels.find('id', guild.logChannel)
                 if(channel != null){
