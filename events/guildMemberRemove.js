@@ -4,7 +4,7 @@ mongoose.set('useNewUrlParser', true);
 mongoose.set('useUnifiedTopology', true);
 const {errorReturn} = require("../functions.js");
 
-module.exports = async (bot, member, message)  => {
+module.exports = async (bot, member)  => {
 
     //Log
     bot.Guild.findOne({ 'guildId': member.guild.id }, (err, guild) => {
@@ -29,7 +29,8 @@ module.exports = async (bot, member, message)  => {
                 }
             }
         }catch(e){
-            errorReturn(e, message)
+            let channel = member.guild.channels.find('id', guild.logChannel)
+            errorReturn(e, channel)
         }
     })
 }

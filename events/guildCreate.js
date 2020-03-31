@@ -3,7 +3,7 @@ mongoose.set('useNewUrlParser', true);
 mongoose.set('useUnifiedTopology', true);
 const {errorReturn} = require("../functions.js");
 
-module.exports = (bot, guild, message) => {
+module.exports = (bot, guild) => {
     mongoose.connect(`${bot.mongodb}`);
 
     try{
@@ -26,6 +26,6 @@ module.exports = (bot, guild, message) => {
     
         guildNew.save()
     }catch(e){
-        errorReturn(e, message)
+        errorReturn(e)
     }
 }
