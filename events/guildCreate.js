@@ -4,9 +4,9 @@ mongoose.set('useUnifiedTopology', true);
 const {errorReturn} = require("../functions.js");
 
 module.exports = (bot, guild) => {
-    mongoose.connect(`${bot.mongodb}`);
-
     try{
+        mongoose.connect(`${bot.mongodb}`);
+
         const guildNew = new bot.Guild({
             _id: mongoose.Types.ObjectId(),
             name: guild.name,
@@ -17,6 +17,7 @@ module.exports = (bot, guild) => {
             welcome: "off",
             welcomeMsg: "Bem-vindo {member}!!",
             welcomeChannel: "Bem-vindo",
+            welcomeCanvas: "off",
             log: "off",
             logChannel: "",
             autorole: "off",

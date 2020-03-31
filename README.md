@@ -27,6 +27,7 @@ Lembrando que sou um bot em desenvolvimento e problemas podem ocorrer mas trabal
 | [Request]() | NPM  |
 | [Path]() | NPM  |
 | [Colors]() | NPM  |
+| [Canvas]() | NPM  |
 | [MongoDB]() | DB  |
 | [Jikan]() | API  |
 | [OpenWeather]() | API  |

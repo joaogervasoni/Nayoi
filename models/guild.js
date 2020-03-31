@@ -10,6 +10,7 @@ const guildSchema = mongoose.Schema({
     welcome: String,
     welcomeMsg: String,
     welcomeChannel: String,
+    welcomeCanvas: String,
     log: String,
     logChannel: String,
     autorole: String,

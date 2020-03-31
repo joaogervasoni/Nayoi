@@ -64,7 +64,22 @@ module.exports.run = async (bot, message, args) => {
             return message.channel.send(`**Mensagem atual:** ${guild.welcomeMsg}`)
         })
     
-    }else return message.reply(`Preciso de um prefixo (Ex: on,off,msg,ch,sh)`)
+    }else if(args2 === "cv"){
+        bot.Guild.findOne({'guildId': message.guild.id}, (err, guild) => {
+
+            if (guild.welcomeCanvas === "off"){
+                guild.welcomeCanvas = "on";
+            }else{
+                guild.welcomeCanvas = "off";
+            }
+        
+            guild.save(function (err){
+                if(err) return message.channel.send(`Erro: ${err}, contate o suporte`)
+                if(!err) return message.channel.send(`Bem-vindo agora está: **${guild.welcomeCanvas}**`)
+            });
+        });
+    }else return message.reply(`Preciso de um prefixo (Ex: on,off,msg,ch,sh,cv)`)
+
 }
 
 module.exports.help = {
