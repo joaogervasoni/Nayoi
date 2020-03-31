@@ -12,21 +12,21 @@ module.exports = async (bot, message) => {
     });
 
     //Log
-    mongoose.connect(`${bot.mongodb}`);
-    bot.Guild.findOne({'guildId': message.guild.id }, (err, guild) => {
-        try{
-            if (guild.log == "on" && message.channel.type == 'text') {
-
-                let channel = message.guild.channels.find(channel => channel.id === guild.logChannel)
-                if (channel != null) {
-                    let embed = new RichEmbed()
-                        .addField(":x: [Mensagem Deletada]", `**Mensagem:** ${message.cleanContent} **Usuário:** ${message.member.user} **Channel:** ${message.channel}`)
-                    channel.send(embed)
-                }
-            }
-        }catch(e){
+    try{
+        mongoose.connect(`${bot.mongodb}`);
+        const guild = await bot.Guild.findOne({ 'guildId': message.guild.id });
+        
+        if (guild.log == "on" && message.channel.type == 'text') {
             let channel = message.guild.channels.find(channel => channel.id === guild.logChannel)
-            errorReturn(e, channel)
+            if (channel != null) {
+                let embed = new RichEmbed()
+                    .addField(":x: [Mensagem Deletada]", `**Mensagem:** ${message.cleanContent} **Usuário:** ${message.member.user} **Channel:** ${message.channel}`)
+                channel.send(embed)
+            }
         }
-    })
+    }catch(e){
+        let channel = message.guild.channels.find(channel => channel.id === guild.logChannel)
+        errorReturn(e, channel)
+    }
+    
 }

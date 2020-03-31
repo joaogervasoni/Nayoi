@@ -7,22 +7,22 @@ const {errorReturn} = require("../functions.js");
 module.exports = async (bot, guild, user) => {
     
     //Log
-    bot.Guild.findOne({'guildId': member.guild.id}, (err, guild) => {
-        try{
-            if(guild.log == "on"){
-                let logs = guild.fetchAuditLogs({type: 22});
-                let entry = logs.entries.find('target', user);
-    
-                let channel = guild.channels.find('id', guild.logChannel)
-                if(channel != null){
-                    let embed = new RichEmbed()
-                    .addField(":hammer: [Banido]", `**Usuário:** ${user} **Razão:** ${entry.reason} **Por:** ${entry.executor}`)
-                }
-                channel.send(embed)
+    const guild = await bot.Guild.findOne({'guildId': member.guild.id})
+    try{
+        if(guild.log == "on"){
+            let logs = await guild.fetchAuditLogs({type: 22});
+            let entry = logs.entries.find('target', user);
+
+            let channel = message.guild.channels.find(channel => channel.id === guild.logChannel)
+            if(channel != null){
+                let embed = new RichEmbed()
+                .addField(":hammer: [Banido]", `**Usuário:** ${user} **Razão:** ${entry.reason} **Por:** ${entry.executor}`)
             }
-        }catch(e){
-            let channel = guild.channels.find('id', guild.logChannel)
-            errorReturn(e, channel)
+            channel.send(embed)
         }
-    })
+    }catch(e){
+        let channel = message.guild.channels.find(channel => channel.id === guild.logChannel)
+        errorReturn(e, channel)
+    }
+    
 }

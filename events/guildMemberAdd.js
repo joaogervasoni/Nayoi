@@ -10,15 +10,16 @@ const { Attachment } = require("discord.js");
 module.exports = async (bot, member) => {  
     try {
         mongoose.connect(`${bot.mongodb}`);
-
         const guild = await bot.Guild.findOne({ 'guildId': member.guild.id });
 
+        //autorole
          if (guild.autorole === "on") {
              let rol = guild.autoroleRole;
              if(rol) member.addRole(rol);
          }
+        //welcome
          if (guild.welcome === "on") {
-             let wlchat = member.guild.channels.find(`id`, guild.welcomeChannel);
+            let wlchat = message.guild.channels.find(channel => channel.id === guild.welcomeChannel)
              let msg = guild.welcomeMsg;
              
              function parse(str) {
