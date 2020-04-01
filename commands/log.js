@@ -1,4 +1,3 @@
-const Discord = require("discord.js");
 const mongoose = require("mongoose");
 mongoose.set('useNewUrlParser', true);
 
@@ -11,7 +10,7 @@ module.exports.run = async (bot, message, args) => {
 
         if(args2 === "on"){
             let channel = args.join(" ").slice(3).slice(2,20);
-            let chat = message.guild.channels.find('id', channel);
+            let chat = message.guild.channels.find(chat => channel, `id` )
             if(!chat) return message.reply("Não encontrei o canal _(Exemplo: y!log on #chat)_");
     
             if(guild.log === "on") return message.channel.send("Log esta atualmente: **On**")
@@ -35,6 +34,8 @@ module.exports.run = async (bot, message, args) => {
         }
         else if (args2 == "ch"){
             let channel = args.join(" ").slice(3).slice(2,20);
+            let chat = message.guild.channels.find(chat => channel, `id` )
+            if(!chat) return message.reply("Não encontrei o canal _(Exemplo: y!log ch #chat)_");
             
             guild.logChannel = channel;
             guild.save(function (err){

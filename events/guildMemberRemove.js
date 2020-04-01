@@ -12,8 +12,8 @@ module.exports = async (bot, member)  => {
         const guild = await bot.Guild.findOne({ 'guildId': member.guild.id });
         if(guild.log == "on"){
             let logs = await member.guild.fetchAuditLogs();
-            let entry = logs.entries.find('target', member.user);
-
+            let entry = logs.entries.find(entry => entry.target === member.user);
+             
             let channel = member.guild.channels.find(channel => channel.id === guild.logChannel)
             if(channel != null){
                 let embed = new RichEmbed()

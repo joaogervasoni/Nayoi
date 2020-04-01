@@ -1,4 +1,4 @@
-const Discord = require("discord.js");
+const {RichEmbed} = require("discord.js");
 
 module.exports.run = async (bot, message, args) => {
     let bUser = message.guild.member(message.mentions.users.first() || message.guild.member.get(args[0]))
@@ -7,7 +7,7 @@ module.exports.run = async (bot, message, args) => {
     
     if(bUser.hasPermission("MANAGE_GUILD")) return message.channel.send("Essa pessoa não pode levar Ban");
     
-    let banEmbed = new Discord.RichEmbed()
+    let banEmbed = new RichEmbed()
     .setDescription("-Ban-")
     .setColor(bot.filoColor)
     .addField("Usuário banido", `${bUser} com id ${bUser.id}`)
@@ -16,7 +16,7 @@ module.exports.run = async (bot, message, args) => {
     .addField("Tempo", message.createdAt)
     .addField("Razão", bReason);
     
-    let incidentsChannel = message.guild.channels.find(`name`, "incidents");
+    let incidentsChannel = message.guild.channels.find(incidentsChannel => incidentsChannel.name === "incidents");
     if(!incidentsChannel) return message.channel.send("Não encontrei o canal 'incidents'");
     
     message.guild.member(bUser).ban(bReason)

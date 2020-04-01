@@ -1,4 +1,4 @@
-const Discord = require("discord.js");
+const {RichEmbed} = require("discord.js");
 var request = require('request');
 const mongoose = require("mongoose");
 mongoose.set('useNewUrlParser', true);
@@ -50,7 +50,7 @@ module.exports.run = async (bot, message, args) => {
             bot.Guild.findOne({'guildId': message.guild.id}, (err, guild) => {
                 if(rAnime.rated == "Rx" && guild.nsfw == "off") return message.reply("Animes com Rated 'Rx' estão desabilitados _**Safradinho**_ :banana:")
 
-                let embed = new Discord.RichEmbed()
+                let embed = new RichEmbed()
                     .setThumbnail(rAnime.image_url)
                     .setTitle("Anime")
                     .setDescription(rAnime.synopsis)
@@ -79,7 +79,7 @@ module.exports.run = async (bot, message, args) => {
             bot.Guild.findOne({'guildId': message.guild.id}, (err, guild) => {
                 if(rAnime.rated == "Rx" && guild.nsfw == "off") return message.reply("Mangas com Rated 'Rx' estão desabilitados _**Safradinho**_ :banana:")
 
-                let embed = new Discord.RichEmbed()
+                let embed = new RichEmbed()
                 .setThumbnail(rManga.image_url)
                 .setTitle("Manga")
                 .setDescription(rManga.synopsis)
@@ -103,7 +103,7 @@ module.exports.run = async (bot, message, args) => {
             let rCharacter = JSON.parse(body).results[0];
             if(rCharacter == null) return message.reply("Parece que aconteceu um bug em meu sistema (Erro: Json sem dados)")
 
-            let embed = new Discord.RichEmbed()
+            let embed = new RichEmbed()
             .setThumbnail(rCharacter.image_url)
             .setTitle("Character")
             .setColor(bot.filoColor)
@@ -122,7 +122,7 @@ module.exports.run = async (bot, message, args) => {
             let rProfile = JSON.parse(body)
             if(rProfile == null) return message.reply("Parece que aconteceu um bug em meu sistema (Erro: Json sem dados)")
 
-            let embed = new Discord.RichEmbed()
+            let embed = new RichEmbed()
                 .setThumbnail(rProfile.image_url)
                 .setTitle(rProfile.username)
                 .setColor(bot.filoColor)

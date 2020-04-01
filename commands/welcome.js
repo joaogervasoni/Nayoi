@@ -3,9 +3,7 @@ mongoose.set('useNewUrlParser', true);
 mongoose.set('useUnifiedTopology', true);
 
 module.exports.run = async (bot, message, args) => {
-
     let args2 = args.join(" ").slice(0,3).split(' ').join('')
-    
   
     if(args2 === "on" || args2 === "off" || args2 === "msg" || args2 === "ch" || args2 === "sh" || args2 === "cv"){
         mongoose.connect(`${bot.mongodb}`);
@@ -43,7 +41,7 @@ module.exports.run = async (bot, message, args) => {
         }
         else if(args2 === "ch"){
             let channel = args.join(" ").slice(2).slice(3,21);
-            let chat = message.guild.channels.find(`id`, channel);
+            let chat = message.guild.channels.find(chat => channel, `id` )
             if (!chat) return message.reply(`Não encontrei este canal :C`)
     
             guild.welcomeChannel = channel;
