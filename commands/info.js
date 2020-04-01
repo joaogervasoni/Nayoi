@@ -41,7 +41,6 @@ module.exports.run = async (bot, message, args) => {
         `Online: ${onlineCount} | Offline: ${offlineCount} | Indle: ${idleCount} | DnD: ${dndCount}`);
     
         return message.channel.send(serverembed);
-    
     }
     else if(message.mentions.members.first()){
         let User = message.mentions.members.first()
@@ -57,7 +56,6 @@ module.exports.run = async (bot, message, args) => {
         .addField("Entrou em:", User.joinedAt)
 
         return message.channel.send(embed)
-    
     }else return message.reply(`Preciso de um prefixo _(Exemplo: bot,server,#usuario)_`);
 }
 

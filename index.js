@@ -26,7 +26,7 @@ events.run(bot);
 
 bot.on("ready", async () =>{
     console.log(`${bot.user.username} esta Online em ${bot.guilds.size} servidores`.green);
-    bot.user.setActivity("Lavem as mãos", {type: "STREAMING"});
+    bot.user.setActivity("y!info bot", {type: "PLAYING"});
 })
 
 bot.login(token);

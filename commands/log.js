@@ -4,14 +4,16 @@ mongoose.set('useNewUrlParser', true);
 
 module.exports.run = async (bot, message, args) => {
     let args2 = args.join(" ").slice(0,3).split(' ').join('');
-    mongoose.connect(`${bot.mongodb}`);
+    
+    if(args2 === "on" || args2 === "off" || args2 === "ch"){
+        mongoose.connect(`${bot.mongodb}`);
+        const guild = await bot.Guild.findOne({'guildId': message.guild.id});
 
-    if(args2 === "on"){
-        let channel = args.join(" ").slice(3).slice(2,20);
-        let chat = message.guild.channels.find('id', channel);
-        if(!chat) return message.reply("Não encontrei o canal _(Exemplo: y!log on #chat)_");
-
-        bot.Guild.findOne({'guildId': message.guild.id}, (err, guild) => {
+        if(args2 === "on"){
+            let channel = args.join(" ").slice(3).slice(2,20);
+            let chat = message.guild.channels.find('id', channel);
+            if(!chat) return message.reply("Não encontrei o canal _(Exemplo: y!log on #chat)_");
+    
             if(guild.log === "on") return message.channel.send("Log esta atualmente: **On**")
 
             guild.log = "on";
@@ -20,11 +22,8 @@ module.exports.run = async (bot, message, args) => {
                 if(err) return message.channel.send(`Erro: ${err}, contate o suporte`)
                 if(!err) return message.channel.send("Log agora está: **On**")
             })
-        })
-    }
-    else if (args2 === "off"){
-        
-        bot.Guild.findOne({'guildId': message.guild.id}, (err, guild) => {
+        }
+        else if (args2 === "off"){   
             if(guild.log === "off") return message.channel.send("Log esta atualmente: **Off**");
 
             guild.log = "off";
@@ -33,21 +32,17 @@ module.exports.run = async (bot, message, args) => {
                 if(err) return message.channel.send(`Erro: ${err}, contate o suporte`);
                 if(!err) return message.channel.send("Log agora está: **Off**");
             })
-        })
-    }
-    else if (args2 == "ch"){
-        let channel = args.join(" ").slice(3).slice(2,20);
-        let chat = message.guild.channels.find('id', channel);
-
-        bot.Guild.findOne({'guildId': message.guild.id}, (err, guild) =>{
-
+        }
+        else if (args2 == "ch"){
+            let channel = args.join(" ").slice(3).slice(2,20);
+            
             guild.logChannel = channel;
             guild.save(function (err){
                 if(err) return message.channel.send(`Erro: ${err}, contate o suporte`);
                 if(!err) return message.channel.send(`Canal modificado !!`);
             })
-        })
-    }
+        }
+    }else return message.reply(`Preciso de um prefixo (Ex: on,off,ch)`)
 }
 
 module.exports.help = {

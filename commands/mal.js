@@ -10,13 +10,12 @@ module.exports.run = async (bot, message, args) => {
     let args2 = args.join(" ").slice(0, 3).split(' ').join('')
     let args3 = args.join(" ").slice(3)
 
-    if (argsAdm === "nsfwon"){
-
+    if(argsAdm === "nsfwon" || argsAdm === "nsfwoff"){
         if(!message.member.hasPermission("ADMINISTRATOR")) return message.channel.send("Precisa de permissão");
         mongoose.connect(`${bot.mongodb}`);
-    
-        bot.Guild.findOne({'guildId': message.guild.id}, (err, guild) => {
+        const guild = await bot.Guild.findOne({'guildId': message.guild.id});
 
+        if (argsAdm === "nsfwon"){
             if (guild.nsfw === "on") return message.channel.send(`NSFW esta atualmente: **On**`)
             
             console.log(guild.nsfw)
@@ -25,15 +24,8 @@ module.exports.run = async (bot, message, args) => {
                 if(err) return message.channel.send(`Erro: ${err}, contate o suporte`)
                 if(!err) return message.channel.send("NSFW agora está: **On**")
             });
-        });
-    }
-    else if (argsAdm === "nsfwoff"){
-
-        if(!message.member.hasPermission("ADMINISTRATOR")) return message.channel.send("Precisa de permissão");
-        mongoose.connect(`${bot.mongodb}`);
-
-        bot.Guild.findOne({'guildId': message.guild.id}, (err, guild) => {
-
+        }
+        else if (argsAdm === "nsfwoff"){
             if (guild.nsfw === "off") return message.channel.send(`NSFW esta atualmente: **Off**`)
             
             console.log(guild.nsfw)
@@ -42,7 +34,7 @@ module.exports.run = async (bot, message, args) => {
                 if(err) return message.channel.send(`Erro: ${err}, contate o suporte`)
                 if(!err) return message.channel.send("NSFW agora está: **Off**")
             });
-        });
+        }
     }
     else if (args2 === "an") {
         
