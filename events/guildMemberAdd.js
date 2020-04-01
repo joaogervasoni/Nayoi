@@ -3,7 +3,7 @@ const {RichEmbed} = require("discord.js");
 mongoose.set('useNewUrlParser', true);
 mongoose.set('useUnifiedTopology', true);
 const {errorReturn} = require("../functions.js");
-const { createCanvas, loadImage } = require("canvas");
+const { createCanvas, loadImage, registerFont } = require("canvas");
 const { join } = require("path");
 const { Attachment } = require("discord.js");
 
@@ -19,7 +19,7 @@ module.exports = async (bot, member) => {
          }
         //welcome
          if (guild.welcome === "on") {
-            let wlchat = message.guild.channels.find(channel => channel.id === guild.welcomeChannel)
+            let wlchat = member.guild.channels.find(channel => channel.id === guild.welcomeChannel)
              let msg = guild.welcomeMsg;
              
              function parse(str) {
@@ -36,6 +36,7 @@ module.exports = async (bot, member) => {
              msg = parseCount(msg, member.guild.memberCount);
              
              if (guild.welcomeCanvas === "on"){
+                 registerFont('arial.ttf', {family: 'Arial'});
                  const canvas = createCanvas(1000, 360);
                  const ctx = canvas.getContext("2d");
                  const background = await loadImage("https://github.com/Zaetic/Yani/blob/master/images/YaniBackground.png?raw=true");
@@ -80,8 +81,7 @@ module.exports = async (bot, member) => {
              }
         }
      } catch (e) {
-         let channel = member.guild.channels.find(`id`, guild.welcomeChannel);
-         errorReturn(e, channel)
+         errorReturn(e)
     }  
 }
 

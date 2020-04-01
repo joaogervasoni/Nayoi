@@ -75,7 +75,7 @@ module.exports.run = async (bot, message, args) => {
         
             guild.save(function (err){
                 if(err) return message.channel.send(`Erro: ${err}, contate o suporte`)
-                if(!err) return message.channel.send(`Bem-vindo agora está: **${guild.welcomeCanvas}**`)
+                if(!err) return message.channel.send(`Banner agora está: **${guild.welcomeCanvas}**`)
             });
         });
     }else return message.reply(`Preciso de um prefixo (Ex: on,off,msg,ch,sh,cv)`)

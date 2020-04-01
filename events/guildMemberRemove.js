@@ -8,12 +8,13 @@ module.exports = async (bot, member)  => {
 
     //Log
     try{
+        mongoose.connect(`${bot.mongodb}`);
         const guild = await bot.Guild.findOne({ 'guildId': member.guild.id });
         if(guild.log == "on"){
             let logs = await member.guild.fetchAuditLogs();
             let entry = logs.entries.find('target', member.user);
 
-            let channel = message.guild.channels.find(channel => channel.id === guild.logChannel)
+            let channel = member.guild.channels.find(channel => channel.id === guild.logChannel)
             if(channel != null){
                 let embed = new RichEmbed()
                 
@@ -29,7 +30,6 @@ module.exports = async (bot, member)  => {
             }
         }
     }catch(e){
-        let channel = message.guild.channels.find(channel => channel.id === guild.logChannel)
-        errorReturn(e, channel)
+        errorReturn(e)
     }
 }

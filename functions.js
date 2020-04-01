@@ -1,4 +1,5 @@
 const {RichEmbed} = require("discord.js");
+var colors = require('colors');
 
 module.exports = {
     errorReturn: function(error, channel) {  
@@ -12,12 +13,12 @@ module.exports = {
             
             return channel.send(embed);
         }else{
-            console.log(error);
+            console.log(`${error}`.red);
         } 
     },
 
     errorReturn: function(error){
-        console.log(error);
+        console.log(`${error}`.red);
     },
 
     formatDate: function(date) {

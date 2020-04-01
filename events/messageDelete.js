@@ -25,8 +25,6 @@ module.exports = async (bot, message) => {
             }
         }
     }catch(e){
-        let channel = message.guild.channels.find(channel => channel.id === guild.logChannel)
-        errorReturn(e, channel)
+        errorReturn(e)
     }
-    
 }
