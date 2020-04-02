@@ -25,17 +25,23 @@ module.exports.run = (bot, message, args) => {
     else if(args2 === "fun"){
         embed
         .setTitle("Fun commands:")
-        .setDescription("**MyAnimeList:** y!mal <type> _// Animes, mangas..._\n"
-        + "**Temperatura:** y!tempo <local> _// Ex: Curitiba, Estados unidos..._\n"
-        + "**Snipe:** y!snipe\n"
+        .setDescription("**Snipe:** y!snipe\n" 
         + "**HowGay:** y!howgay _//Quão gay vc é?_\n"
-        + "**Say:** y!say <frase> _//Fala o que vc escrever_\n")
+        + "**HowBoomer:** y!howboomer _//Quão boomer vc é?_\n"
+        + "**Say:** y!say <frase> _//Fala o que vc escrever_")
         return message.channel.send(embed)
     }
     else if(args2 === "outros"){ 
         embed
         .setTitle("Others commands:")
         .setDescription("**Info:** y!info <type> _// Server, player and bot info..._")
+        return message.channel.send(embed)
+    }
+    else if(args2 === "uteis"){ 
+        embed
+        .setTitle("Others commands:")
+        .setDescription("**MyAnimeList:** y!mal <type> _// Animes, mangas..._\n"
+        + "**Temperatura:** y!tempo <local> _// Ex: Curitiba, Estados unidos..._")
         return message.channel.send(embed)
     }
 
@@ -46,7 +52,8 @@ module.exports.run = (bot, message, args) => {
     .setDescription("Exemplo: ```y!commands <grupo>```", true)
     .addField(":shield: ADM", "4 comandos", true)
     .addField(":gear: Automation", "1 comando", true)
-    .addField(":performing_arts: Fun", "5 comandos", true)
+    .addField(":performing_arts: Fun", "6 comandos", true)
+    .addField(":gem: Úteis", "2 comandos", true)
     .addField(":kaaba: Outros", "1 comando", true)
 
     return message.channel.send(embed)

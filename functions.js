@@ -15,9 +15,8 @@ module.exports = {
         }else{
             console.log(`${error}`.red);
         } 
-    },
-
-    errorReturn: function(error){
+    },    
+    function(error){
         console.log(`${error}`.red);
     },
 

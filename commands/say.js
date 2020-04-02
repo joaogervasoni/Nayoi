@@ -1,19 +1,24 @@
 const mongoose = require("mongoose");
 mongoose.set('useNewUrlParser', true);
+const {errorReturn} = require("../functions.js");
 
 module.exports.run = async (bot, message, args) => {
-    let msg = args.join(" ").slice(0);
-    let channelId = msg.slice(2,20);
+    try{
+        let msg = args.join(" ").slice(0);
+        let channelId = msg.slice(2,20);
 
-    //say #chat msg
-    if(!isNaN(channelId)){
-        let guildMention = message.guild.channels.cache.get(channelId)
-        let msgMention = args.join(" ").slice(22)
-        return guildMention.send(msgMention)
-    } 
+        //say #chat msg
+        if(!isNaN(channelId)){
+            let guildMention = message.guild.channels.cache.get(channelId)
+            let msgMention = args.join(" ").slice(22)
+            return guildMention.send(msgMention)
+        } 
 
-    //say msg
-    return message.channel.send(msg)   
+        //say msg
+        return message.channel.send(msg)   
+    }catch(e){
+        errorReturn(e, message)
+    }
 }
 
 module.exports.help = {
