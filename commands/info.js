@@ -1,19 +1,19 @@
 const {formatDate} = require("../functions.js");
-const {RichEmbed} = require("discord.js");
+const {MessageEmbed} = require("discord.js");
 
 module.exports.run = async (bot, message, args) => {
     let args2 = args.join(" ").slice(0)
     
     if(args2 === "bot"){
-        let boticon = bot.user.avatarURL;
+        let boticon = bot.user.avatarURL();
     
-        let botembed = new RichEmbed()
+        let botembed = new MessageEmbed()
         .setDescription("Informação do Bot")
         .setThumbnail(boticon)
         .setColor(bot.baseColor)
         .addField("Nome", bot.user.username, true)
         .addField("My master", "Zaetic#9549", true)
-        .addField("Ping:", message.client.ping.toFixed(5), true)
+        .addField("Ping:", message.client.ws.ping.toFixed(5), true)
         .addField("Criado em", formatDate(bot.user.createdAt), true)
         .addField("Entrou em", formatDate(message.member.guild.joinedAt), true)
         .addField("Link", "https://github.com/Zaetic/Yani")
@@ -21,13 +21,13 @@ module.exports.run = async (bot, message, args) => {
         return message.channel.send(botembed);
     }
     else if(args2 === "server"){
-        var onlineCount = message.guild.members.filter(m => m.presence.status === 'online').size;
-        var offlineCount = message.guild.members.filter(m => m.presence.status === 'offline').size;
-        var idleCount = message.guild.members.filter(m => m.presence.status === 'idle').size;
-        var dndCount = message.guild.members.filter(m => m.presence.status === 'dnd').size;
+        var onlineCount = message.guild.members.cache.filter(m => m.presence.status === 'online').size;
+        var offlineCount = message.guild.members.cache.filter(m => m.presence.status === 'offline').size;
+        var idleCount = message.guild.members.cache.filter(m => m.presence.status === 'idle').size;
+        var dndCount = message.guild.members.cache.filter(m => m.presence.status === 'dnd').size;
     
-        let servericon = message.guild.iconURL;
-        let serverembed = new RichEmbed()
+        let servericon = message.guild.iconURL();
+        let serverembed = new MessageEmbed()
         .setTitle("Informações do Servidor")
         .setThumbnail(servericon)
         .setColor(bot.baseColor)
@@ -44,9 +44,9 @@ module.exports.run = async (bot, message, args) => {
     else if(message.mentions.members.first()){
         let User = message.mentions.members.first()
 
-        let embed = new RichEmbed()
+        let embed = new MessageEmbed()
         .setTitle(User.user.username)
-        .setThumbnail(User.user.avatarURL)
+        .setThumbnail(User.user.avatarURL())
         .setColor(bot.baseColor)
         .addField("Tag", User.user.tag)
         .addField("Bot:", User.user.bot,true)

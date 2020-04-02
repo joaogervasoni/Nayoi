@@ -1,4 +1,4 @@
-const {RichEmbed} = require("discord.js");
+const {MessageEmbed} = require("discord.js");
 var request = require('request');
 const {errorReturn} = require("../functions.js");
 
@@ -14,7 +14,7 @@ module.exports.run = (bot, message, args) => {
             let name = tempo.name;
             let country = tempo.sys.country;
             
-            let embed = new RichEmbed()
+            let embed = new MessageEmbed()
                 .setThumbnail("https://github.com/Zaetic/Yani/blob/master/images/YaniTempo.png?raw=true")
                 .setTitle(`Temperatura de ${name}`)
                 .addField(`Temp:`, temp.toFixed(2))

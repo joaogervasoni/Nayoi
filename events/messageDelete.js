@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const {RichEmbed} = require("discord.js");
+const {MessageEmbed} = require("discord.js");
 mongoose.set('useNewUrlParser', true);
 mongoose.set('useUnifiedTopology', true);
 const {errorReturn} = require("../functions.js");
@@ -17,9 +17,9 @@ module.exports = async (bot, message) => {
         const guild = await bot.Guild.findOne({ 'guildId': message.guild.id });
         
         if (guild.log == "on" && message.channel.type == 'text') {
-            let channel = message.guild.channels.find(channel => channel.id === guild.logChannel)
+            let channel = message.guild.channels.cache.find(channel => channel.id === guild.logChannel)
             if (channel != null) {
-                let embed = new RichEmbed()
+                let embed = new MessageEmbed()
                     .addField(":x: [Mensagem Deletada]", `**Mensagem:** ${message.cleanContent} **Usuário:** ${message.member.user} **Channel:** ${message.channel}`)
                 channel.send(embed)
             }

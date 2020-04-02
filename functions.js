@@ -1,10 +1,10 @@
-const {RichEmbed} = require("discord.js");
+const {MessageEmbed} = require("discord.js");
 var colors = require('colors');
 
 module.exports = {
     errorReturn: function(error, channel) {  
         if (channel){
-            let embed = new RichEmbed()
+            let embed = new MessageEmbed()
                 .setThumbnail("https://github.com/Zaetic/Yani/blob/master/images/YaniError404.png?raw=true")
                 .setTitle("Aconteceu um erro")
                 .setDescription(`${error}`)

@@ -11,7 +11,7 @@ module.exports.run = async (bot, message, args) => {
 
         if (args2 === "on"){
             let channel = args.join(" ").slice(3).slice(2,20);
-            let chat = message.guild.channels.find(chat => channel, `id` )
+            let chat = message.guild.channels.cache.find(chat => channel, `id` )
             if (!chat) return message.reply(`Não encontrei o canal _(Exemplo: y!welcome on #chat)_`)
     
             if (guild.welcome === "on") return message.channel.send(`Bem-vindo esta atualmente: **On**`)
@@ -41,7 +41,7 @@ module.exports.run = async (bot, message, args) => {
         }
         else if(args2 === "ch"){
             let channel = args.join(" ").slice(2).slice(3,21);
-            let chat = message.guild.channels.find(chat => channel, `id` )
+            let chat = message.guild.channels.cache.find(chat => channel, `id` )
             if (!chat) return message.reply(`Não encontrei este canal :C`)
     
             guild.welcomeChannel = channel;

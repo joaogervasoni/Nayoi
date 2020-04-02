@@ -5,10 +5,10 @@ module.exports.run = async (bot, message, args) => {
     //tempmute @user 1/s/m/h/d
     let toMute = message.guild.member(message.mentions.users.first() || message.guild.member(args[0]));
     if(!toMute) return message.reply("Não encontrei este Usuário");
-    if((message.member.highestRole < toMute.highestRole.position) || (message.member.highestRole.position === toMute.highestRole.position) || (toMute.hasPermission("ADMINISTRATOR")))
+    if((message.member.roles.highest.rawPosition < toMute.roles.highest.rawPosition) || (message.member.roles.highest.rawPosition === toMute.roles.highest.rawPosition) || (toMute.hasPermission("ADMINISTRATOR")))
         return message.reply("Cargo maior ou igual");
 
-    let muterole = message.guild.roles.find(role => role.name === "Muted");
+    let muterole = message.guild.roles.cache.find(role => role.name === "Muted");
     if(!muterole){
         try{
             muterole = await message.guild.createRole({
@@ -36,10 +36,10 @@ module.exports.run = async (bot, message, args) => {
         return message.reply("A escrita do comando esta errada !!");
     }
 
-    await(toMute.addRole(muterole.id));
+    await(toMute.roles.add(muterole.id));
 
     setTimeout(function(){
-        toMute.removeRole(muterole.id);
+        toMute.roles.remove(muterole.id);
         message.channel.send(`<@${toMute.id}> foi desmutado`);
     }, ms(mutetime));
 

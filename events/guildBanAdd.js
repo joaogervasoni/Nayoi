@@ -1,4 +1,4 @@
-const {RichEmbed} = require("discord.js");
+const {MessageEmbed} = require("discord.js");
 const mongoose = require("mongoose");
 mongoose.set('useNewUrlParser', true);
 mongoose.set('useUnifiedTopology', true);
@@ -11,11 +11,11 @@ module.exports = async (bot, user) => {
     try{
         if(guild.log == "on"){
             let logs = await guild.fetchAuditLogs({type: 22});
-            let entry = logs.entries.find('target', user);
+            let entry = logs.entries.cache.find('target', user);
 
-            let channel = user.guild.channels.find(channel => channel.id === guild.logChannel)
+            let channel = user.guild.channels.cache.find(channel => channel.id === guild.logChannel)
             if(channel != null){
-                let embed = new RichEmbed()
+                let embed = new MessageEmbed()
                 .addField(":hammer: [Banido]", `**Usuário:** ${user} **Razão:** ${entry.reason} **Por:** ${entry.executor}`)
             }
             channel.send(embed)

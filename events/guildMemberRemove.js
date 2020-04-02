@@ -1,4 +1,4 @@
-const {RichEmbed} = require("discord.js");
+const {MessageEmbed} = require("discord.js");
 const mongoose = require("mongoose");
 mongoose.set('useNewUrlParser', true);
 mongoose.set('useUnifiedTopology', true);
@@ -12,11 +12,11 @@ module.exports = async (bot, member)  => {
         const guild = await bot.Guild.findOne({ 'guildId': member.guild.id });
         if(guild.log == "on"){
             let logs = await member.guild.fetchAuditLogs();
-            let entry = logs.entries.find(entry => entry.target === member.user);
+            let entry = logs.entries.cache.find(entry => entry.target === member.user);
              
-            let channel = member.guild.channels.find(channel => channel.id === guild.logChannel)
+            let channel = member.guild.channels.cache.find(channel => channel.id === guild.logChannel)
             if(channel != null){
-                let embed = new RichEmbed()
+                let embed = new MessageEmbed()
                 
                 if (entry != null && entry.action == "MEMBER_KICK"){
                     embed

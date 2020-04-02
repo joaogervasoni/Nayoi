@@ -1,4 +1,4 @@
-const {RichEmbed} = require("discord.js");
+const {MessageEmbed} = require("discord.js");
 
 module.exports.run = (bot, message) => {
 
@@ -11,7 +11,7 @@ module.exports.run = (bot, message) => {
         msg = `Você é ${percent}% gay :rainbow_flag:`
     }
 
-    let embed = new RichEmbed()
+    let embed = new MessageEmbed()
                 .setTitle("Quão gay vc é?")
                 .setDescription(msg)
                 .setColor("pink")

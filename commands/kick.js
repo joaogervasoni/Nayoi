@@ -16,7 +16,7 @@ module.exports.run = async (bot, message, args) => {
     .addField("Tempo", message.createdAt)
     .addField("Razão", kReason);
 
-    let incidentsChannel = message.guild.channels.find(incidentsChannel => incidentsChannel.name === "incidents");
+    let incidentsChannel = message.guild.channels.cache.find(incidentsChannel => incidentsChannel.name === "incidents");
     if(!incidentsChannel) return message.channel.send("Não encontrei o canal 'incidents'");
 
     message.guild.member(kUser).kick(kReason);

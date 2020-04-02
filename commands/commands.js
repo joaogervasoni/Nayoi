@@ -1,9 +1,9 @@
-const {RichEmbed} = require("discord.js");
+const {MessageEmbed} = require("discord.js");
 
 module.exports.run = (bot, message, args) => {
 
     let args2 = args.join(" ").slice(0).toLowerCase();
-    let embed = new RichEmbed()
+    let embed = new MessageEmbed()
 
     //Commands <type>
     if(args2 === "adm"){

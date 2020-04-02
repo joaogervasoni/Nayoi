@@ -1,4 +1,4 @@
-const {RichEmbed} = require("discord.js");
+const {MessageEmbed} = require("discord.js");
 var request = require('request');
 const mongoose = require("mongoose");
 mongoose.set('useNewUrlParser', true);
@@ -50,7 +50,7 @@ module.exports.run = async (bot, message, args) => {
             bot.Guild.findOne({'guildId': message.guild.id}, (err, guild) => {
                 if(rAnime.rated == "Rx" && guild.nsfw == "off") return message.reply("Animes com Rated 'Rx' estão desabilitados _**Safradinho**_ :banana:")
 
-                let embed = new RichEmbed()
+                let embed = new MessageEmbed()
                     .setThumbnail(rAnime.image_url)
                     .setTitle("Anime")
                     .setDescription(rAnime.synopsis)

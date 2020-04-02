@@ -25,7 +25,7 @@ const events = require("./structures/event");
 events.run(bot);
 
 bot.on("ready", async () =>{
-    console.log(`${bot.user.username} esta Online em ${bot.guilds.size} servidores`.green);
+    console.log(`${bot.user.username} esta Online em ${bot.guilds.cache.size} servidores`.green);
     bot.user.setActivity("y!info bot", {type: "PLAYING"});
 })
 

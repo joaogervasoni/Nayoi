@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const {RichEmbed} = require("discord.js");
+const {MessageEmbed} = require("discord.js");
 mongoose.set('useNewUrlParser', true);
 mongoose.set('useUnifiedTopology', true);
 const {errorReturn} = require("../functions.js");
@@ -15,11 +15,11 @@ module.exports = async (bot, member) => {
         //autorole
          if (guild.autorole === "on") {
              let rol = guild.autoroleRole;
-             if(rol) member.addRole(rol);
+             if(rol) member.roles.add(rol);
          }
         //welcome
          if (guild.welcome === "on") {
-            let wlchat = member.guild.channels.find(channel => channel.id === guild.welcomeChannel)
+            let wlchat = member.guild.channels.cache.find(channel => channel.id === guild.welcomeChannel)
              let msg = guild.welcomeMsg;
              
              function parse(str) {
@@ -66,12 +66,12 @@ module.exports = async (bot, member) => {
                  ctx.stroke();
                  ctx.closePath();
                  ctx.clip();
-                 const avatar = await loadImage(member.user.avatarURL);
+                 const avatar = await loadImage(member.user.avatarURL());
                  ctx.drawImage(avatar, 370,20,250,250);
                  const attachment = new Attachment(canvas.toBuffer(),"welcome.png");
                  return wlchat.send(msg, attachment)
              }else{
-                 let welcomeEmbed = new RichEmbed()
+                 let welcomeEmbed = new MessageEmbed()
                  .setThumbnail(member.user.avatarURL)
                  .setDescription("Bem-vindo")
                  .setColor(bot.baseColor)
