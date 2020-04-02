@@ -2,6 +2,7 @@ const mongoose = require("mongoose")
 mongoose.set('useNewUrlParser', true);
 mongoose.set('useUnifiedTopology', true);
 const {errorReturn} = require("../functions.js");
+var colors = require('colors');
 
 module.exports = (bot, guild) => {
     try{
@@ -24,7 +25,7 @@ module.exports = (bot, guild) => {
             autoroleRole: "",
             nsfw: "off"
         });
-    
+        console.log(`Novo servidor !! Nome:${guild.name} id:${guild.id}`.magenta)
         guildNew.save()
     }catch(e){
         errorReturn(e)

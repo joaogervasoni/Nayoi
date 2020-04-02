@@ -1,5 +1,5 @@
 const {MessageEmbed} = require("discord.js");
-const {errorReturn} = require("../functions.js");
+const {errorReturn} = require("../../functions.js");
 
 module.exports.run = (bot, message) => {
     try{
@@ -7,15 +7,15 @@ module.exports.run = (bot, message) => {
         let percent = Math.floor(Math.random() * 101);
         let msg
         if (user){
-            msg = `${user} é ${percent}% boomer :older_man:`
+            msg = `${user} é ${percent}% gay :rainbow_flag:`
         }else{
-            msg = `Você é ${percent}% boomer :older_man:`
+            msg = `Você é ${percent}% gay :rainbow_flag:`
         }
 
         let embed = new MessageEmbed()
-                    .setTitle("Quão Boomer vc é?")
+                    .setTitle("Quão gay vc é?")
                     .setDescription(msg)
-                    .setColor("#ffff00")
+                    .setColor("pink")
         return message.channel.send(embed);
     }catch(e){
         errorReturn(e, message)
@@ -23,7 +23,7 @@ module.exports.run = (bot, message) => {
 }
 
 module.exports.help = {
-    name: "howboomer"
+    name: "howgay"
 }
 
 module.exports.requirements = {
