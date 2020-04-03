@@ -16,7 +16,7 @@ module.exports = {
             console.log(`${error}`.red);
         } 
     },    
-    function(error){
+    errorReturn: function(error){
         console.log(`${error}`.red);
     },
 

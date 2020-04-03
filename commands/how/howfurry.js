@@ -5,17 +5,20 @@ module.exports.run = (bot, message) => {
     try{
         let user = message.mentions.members.first()
         let percent = Math.floor(Math.random() * 101);
-        let msg
+        let msg;
+        var emoji = [":dog:",":cat:",":mouse:",":hamster:",":rabbit:",":fox:",":bear:",":panda_face:",":koala:",":tiger:",":lion_face:",":cow:",":pig:",":frog:",":hatched_chick:",":monkey_face:",":boar:",":wolf:"];
+        emoji = emoji[(Math.random() * emoji.length) | 0];
+        
         if (user){
-            msg = `${user} é ${percent}% gay :rainbow_flag:`
+            msg = `${user} é ${percent}% furry ${emoji}`
         }else{
-            msg = `Você é ${percent}% gay :rainbow_flag:`
+            msg = `Você é ${percent}% furry ${emoji}`
         }
 
         let embed = new MessageEmbed()
-                    .setTitle("Quão gay vc é?")
+                    .setTitle("Quão furry vc é?")
                     .setDescription(msg)
-                    .setColor("#ff3399")
+                    .setColor("#6699ff")
         return message.channel.send(embed);
     }catch(e){
         errorReturn(e, message)
@@ -23,7 +26,7 @@ module.exports.run = (bot, message) => {
 }
 
 module.exports.help = {
-    name: "howgay"
+    name: "howfurry"
 }
 
 module.exports.requirements = {

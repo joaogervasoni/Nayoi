@@ -7,15 +7,15 @@ module.exports.run = (bot, message) => {
         let percent = Math.floor(Math.random() * 101);
         let msg
         if (user){
-            msg = `${user} é ${percent}% gay :rainbow_flag:`
+            msg = `${user} é ${percent}% JoJo Fag :muscle:`
         }else{
-            msg = `Você é ${percent}% gay :rainbow_flag:`
+            msg = `Você é ${percent}% JoJo Fag :muscle:`
         }
 
         let embed = new MessageEmbed()
-                    .setTitle("Quão gay vc é?")
+                    .setTitle("Quão JoJo Fag vc é?")
                     .setDescription(msg)
-                    .setColor("#ff3399")
+                    .setColor("#99ff99")
         return message.channel.send(embed);
     }catch(e){
         errorReturn(e, message)
@@ -23,7 +23,7 @@ module.exports.run = (bot, message) => {
 }
 
 module.exports.help = {
-    name: "howgay"
+    name: "howjojo"
 }
 
 module.exports.requirements = {

@@ -72,7 +72,7 @@ module.exports = async (bot, member) => {
                  return wlchat.send(msg, attachment)
              }else{
                  let welcomeEmbed = new MessageEmbed()
-                 .setThumbnail(member.user.avatarURL)
+                 .setThumbnail(member.user.avatarURL())
                  .setDescription("Bem-vindo")
                  .setColor(bot.baseColor)
                  .addField("User", member.user)
