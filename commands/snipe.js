@@ -14,7 +14,7 @@ module.exports.run = (bot, message, args) => {
         
         message.channel.send(embed);
     }catch(e){
-        errorReturn(e, message.channel)
+        errorReturn(e, message.channel, this.help.name)
     }
 }
 

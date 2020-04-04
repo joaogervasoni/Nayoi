@@ -22,7 +22,7 @@ module.exports.run = async (bot, message, args) => {
         message.delete().catch(O_o=>{});
         reportschannel.send(reportEmbed);
     }catch(e){
-        errorReturn(e, message)
+        errorReturn(e, message, this.help.name)
     }
 }
 

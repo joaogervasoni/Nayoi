@@ -81,7 +81,7 @@ module.exports = async (bot, member) => {
              }
         }
      } catch (e) {
-        errorReturn(e)
+        errorReturn(e, "guildMemberAdd")
     }  
 }
 

@@ -22,7 +22,7 @@ module.exports.run = (bot, message, args) => {
                 .setColor(bot.baseColor)
             return message.channel.send(embed)
         }catch(e){
-            errorReturn(e, message);
+            errorReturn(e, message, "tempo");
         }
     });
 }

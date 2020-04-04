@@ -44,7 +44,7 @@ module.exports.run = async (bot, message, args) => {
             message.channel.send(`<@${toMute.id}> foi desmutado`);
         }, ms(mutetime));
     }catch(e){
-        errorReturn(e, message)
+        errorReturn(e, message, this.help.name)
     }
 }
 

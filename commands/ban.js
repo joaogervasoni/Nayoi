@@ -26,7 +26,7 @@ module.exports.run = async (bot, message, args) => {
 
         return;
     }catch(e){
-        errorReturn(e, message)
+        errorReturn(e, message, this.help.name)
     }
 }
 
