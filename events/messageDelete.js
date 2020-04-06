@@ -20,8 +20,15 @@ module.exports = async (bot, message) => {
             let channel = message.guild.channels.cache.find(channel => channel.id === guild.logChannel)
             if (channel != null) {
                 let embed = new MessageEmbed()
-                    .addField(":x: [Mensagem Deletada]", `**Mensagem:** ${message.cleanContent} **Usuário:** ${message.member.user} **Channel:** ${message.channel}`)
-                channel.send(embed)
+                    .setTitle(":x: [Mensagem Deletada]")
+                    .addField(`**Usuário:**`, message.member.user, true)
+                    .addField(`**Channel:**`, message.channel, true)
+                    .addField(`**Mensagem:**`, message.cleanContent)
+                    .addField(`**Tag:**`, message.member.user.tag, true)
+                    .addField(`**ID:**`, message.member.user.id, true)
+                    .setTimestamp()
+                    
+                return channel.send(embed)
             }
         }
     }catch(e){

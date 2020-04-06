@@ -11,12 +11,13 @@ module.exports = async (bot, user) => {
     try{
         if(guild.log == "on"){
             let logs = await guild.fetchAuditLogs({type: 22});
-            let entry = logs.entries.cache.find('target', user);
+            let entry = logs.entries.find('target', user);
 
             let channel = user.guild.channels.cache.find(channel => channel.id === guild.logChannel)
             if(channel != null){
                 let embed = new MessageEmbed()
                 .addField(":hammer: [Banido]", `**Usuário:** ${user} **Razão:** ${entry.reason} **Por:** ${entry.executor}`)
+                .setTimestamp()
             }
             channel.send(embed)
         }

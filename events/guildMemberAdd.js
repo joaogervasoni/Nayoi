@@ -5,7 +5,7 @@ mongoose.set('useUnifiedTopology', true);
 const {errorReturn} = require("../functions.js");
 const { createCanvas, loadImage, registerFont } = require("canvas");
 const { join } = require("path");
-const { Attachment } = require("discord.js");
+const { MessageAttachment } = require("discord.js");
 
 module.exports = async (bot, member) => {  
     try {
@@ -66,9 +66,9 @@ module.exports = async (bot, member) => {
                  ctx.stroke();
                  ctx.closePath();
                  ctx.clip();
-                 const avatar = await loadImage(member.user.avatarURL());
+                 const avatar = await loadImage(member.user.avatarURL({ format: 'jpg' }));
                  ctx.drawImage(avatar, 370,20,250,250);
-                 const attachment = new Attachment(canvas.toBuffer(),"welcome.png");
+                 const attachment = new MessageAttachment(canvas.toBuffer(),"welcome.png");
                  return wlchat.send(msg, attachment)
              }else{
                  let welcomeEmbed = new MessageEmbed()

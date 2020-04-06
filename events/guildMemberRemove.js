@@ -12,7 +12,7 @@ module.exports = async (bot, member)  => {
         const guild = await bot.Guild.findOne({ 'guildId': member.guild.id });
         if(guild.log == "on"){
             let logs = await member.guild.fetchAuditLogs();
-            let entry = logs.entries.cache.find(entry => entry.target === member.user);
+            let entry = logs.entries.find(entry => entry.target === member.user);
              
             let channel = member.guild.channels.cache.find(channel => channel.id === guild.logChannel)
             if(channel != null){
@@ -20,11 +20,21 @@ module.exports = async (bot, member)  => {
                 
                 if (entry != null && entry.action == "MEMBER_KICK"){
                     embed
-                    .addField(":ledger: [Kick]", `**Usuário:** ${member.user} **Razão:** ${entry.reason} **Por:** ${entry.executor}`)
+                    .setThumbnail(member.user.avatarURL())
+                    .setTitle(":ledger: [Kick]")
+                    .addField(`**Usuário:** ${member.user} **Razão:** ${entry.reason} **Por:** ${entry.executor}`)
+                    .addField(`**Tag:** ${member.user.tag}`, true)
+                    .addField(`**ID:** ${member.user.id}`, true)
+                    .setTimestamp()
                 }
                 else{
                     embed
-                    .addField(":ledger: [Leave]", `**Usuário:** ${member.user}`)
+                    .setThumbnail(member.user.avatarURL())
+                    .setTitle(":ledger: [Leave]")
+                    .addField("**Usuário:**", `${member.user}`)
+                    .addField(`**Tag:**, ${member.user.tag}`, true)
+                    .addField(`**ID:**, ${member.user.id}`, true)
+                    .setTimestamp()
                 }
                 channel.send(embed)
             }
