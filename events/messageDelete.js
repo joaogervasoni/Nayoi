@@ -5,10 +5,12 @@ mongoose.set('useUnifiedTopology', true);
 const {errorReturn} = require("../functions.js");
 
 module.exports = async (bot, message) => {
+    let imageAtt = message.attachments.first() ? message.attachments.first().proxyURL : null
+
     bot.snipes.set(message.channel.id, {
         content: message.content,
         author: message.author,
-        image: message.attachments.first() ? message.attachments.first().proxyURL : null
+        image: imageAtt
     });
 
     //Log
@@ -17,17 +19,19 @@ module.exports = async (bot, message) => {
         const guild = await bot.Guild.findOne({ 'guildId': message.guild.id });
         
         if (guild.log == "on" && message.channel.type == 'text') {
-            let channel = message.guild.channels.cache.find(channel => channel.id === guild.logChannel)
+            let channel = message.guild.channels.cache.find(channel => channel.id === guild.logChannel);
+
             if (channel != null) {
                 let embed = new MessageEmbed()
                     .setTitle(":x: [Mensagem Deletada]")
                     .addField(`**Usuário:**`, message.member.user, true)
                     .addField(`**Channel:**`, message.channel, true)
-                    .addField(`**Mensagem:**`, message.cleanContent)
+                    if(message.cleanContent) embed.addField(`**Mensagem:**`, message.cleanContent)
                     .addField(`**Tag:**`, message.member.user.tag, true)
                     .addField(`**ID:**`, message.member.user.id, true)
                     .setTimestamp()
-                    
+                    if (imageAtt) embed.setImage(imageAtt);
+                
                 return channel.send(embed)
             }
         }
