@@ -8,7 +8,7 @@ module.exports.run = async (bot, message, args) => {
         let channelId = msg.slice(2,20);
 
         //say #chat msg
-        if(!isNaN(channelId)){
+        if(channelId.length == "18"){
             let guildMention = message.guild.channels.cache.get(channelId)
             let msgMention = args.join(" ").slice(22)
             return guildMention.send(msgMention)

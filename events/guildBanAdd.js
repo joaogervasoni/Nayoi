@@ -22,6 +22,6 @@ module.exports = async (bot, user) => {
             channel.send(embed)
         }
     }catch(e){
-        errorReturn(e, "guildBanAdd")
+        errorReturn(e, null, "guildBanAdd")
     }
 }

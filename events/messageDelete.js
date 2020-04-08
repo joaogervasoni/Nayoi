@@ -36,6 +36,6 @@ module.exports = async (bot, message) => {
             }
         }
     }catch(e){
-        errorReturn(e, "messageDelete")
+        errorReturn(e, null, "messageDelete")
     }
 }

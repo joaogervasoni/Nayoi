@@ -26,6 +26,6 @@ module.exports = async (bot, oldMember, newMember) => {
             }
         }
     }catch(e){
-        errorReturn(e, "guildMemberUpdate")
+        errorReturn(e, null, "guildMemberUpdate")
     }
 }

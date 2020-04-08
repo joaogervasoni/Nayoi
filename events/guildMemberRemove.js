@@ -23,8 +23,8 @@ module.exports = async (bot, member)  => {
                     .setThumbnail(member.user.avatarURL())
                     .setTitle(":ledger: [Kick]")
                     .addField(`**Usuário:**`, `${member.user} **Razão:** ${entry.reason} **Por:** ${entry.executor}`)
-                    .addField(`**Tag:** ${member.user.tag}`, true)
-                    .addField(`**ID:** ${member.user.id}`, true)
+                    .addField(`**Tag:**`, member.user.tag, true)
+                    .addField(`**ID:**`, member.user.id, true)
                     .setTimestamp()
                 }
                 else{
@@ -40,6 +40,6 @@ module.exports = async (bot, member)  => {
             }
         }
     }catch(e){
-        errorReturn(e, "guildMemberRemove")
+        errorReturn(e, null, "guildMemberRemove")
     }
 }

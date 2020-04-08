@@ -18,16 +18,16 @@ Lembrando que sou um bot em desenvolvimento e problemas podem ocorrer mas trabal
 
 ## Dependências
 
-| Nome  | Tipo |
-| ------------- | ------------- |
-| [Node.js]() | JS  |
-| [Discord.js]() | NPM  |
-| [Mongoose]() | NPM  |
-| [Ms]() | NPM  |
-| [Request]() | NPM  |
-| [Path]() | NPM  |
-| [Colors]() | NPM  |
-| [Canvas]() | NPM  |
-| [MongoDB]() | DB  |
-| [Jikan]() | API  |
-| [OpenWeather]() | API  |
+| Nome  | Tipo | Versão |
+| ------------- | ------------- | ------------- |
+| [Node.js](https://nodejs.org/en/) | JS  |12.16.1|
+| [Discord.js](https://discord.js.org/) | NPM  |12.1.1|
+| [Mongoose](https://www.npmjs.com/package/mongoose) | NPM  |5.9.5|
+| [Ms](https://www.npmjs.com/package/ms) | NPM  |2.1.2|
+| [Request](https://www.npmjs.com/package/request) | NPM  |2.88.2|
+| [Path](https://www.npmjs.com/package/path) | NPM  |0.12.7|
+| [Colors](https://www.npmjs.com/package/colors) | NPM  |1.4.0|
+| [Canvas](https://www.npmjs.com/package/canvas) | NPM  |2.6.1|
+| [MongoDB](https://www.mongodb.com/) | DB  |4.2|
+| [Jikan](https://jikan.moe/) | API  |2.0.0|
+| [OpenWeather](https://openweathermap.org/api) | API  |2.5|

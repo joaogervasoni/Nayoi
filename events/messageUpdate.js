@@ -31,6 +31,6 @@ module.exports = async (bot, oldMessage, newMessage) => {
             }
         }
     }catch(e){
-        errorReturn(e, "messageUpdate")
+        errorReturn(e, null, "messageUpdate")
     }
 }

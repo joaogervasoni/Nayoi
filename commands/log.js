@@ -26,7 +26,6 @@ module.exports.run = async (bot, message, args) => {
             if(guild.log === "off") return message.channel.send("Log esta atualmente: **Off**");
 
             guild.log = "off";
-            guild.logChannel = channel;
             guild.save(function (err){
                 if(err) return message.channel.send(`Erro: ${err}, contate o suporte`);
                 if(!err) return message.channel.send("Log agora está: **Off**");
