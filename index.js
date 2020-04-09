@@ -8,7 +8,7 @@ var colors = require('colors');
 mongoose.set('useNewUrlParser', true);
 mongoose.set('useUnifiedTopology', true);
 
-const bot = new Client({disabledEveryone: true})
+const bot = new Client({disabledEveryone: true, partials: ['MESSAGE', 'REACTION']})
 
 bot.Guild = Guild;
 bot.baseColor = "#ff8ff2";
