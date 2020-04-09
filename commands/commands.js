@@ -13,13 +13,14 @@ module.exports.run = (bot, message, args) => {
         +"**Kick:** y!kick <usuário> <msg> _// Kick usuário_\n"
         +"**Tempmute:** y!tempmute <usuário> <time> _// Muta por um tempo_\n"
         +"**Report:** y!report <usuário> <msg> _// Reportar usuário_\n"
-        +"**Log:** y!log <canal> on _// Server log_")
+        +"**Log:** y!log on #channel _// Server log_")
         return message.channel.send(embed)
     }
     else if(args2 === "automation"){
         embed
         .setTitle("Automation commands:")
-        .setDescription("**Welcome:** y!welcome <type> _// Mensagem de bem-vindo_")
+        .setDescription("**Welcome:** y!welcome <type> _// Mensagem de bem-vindo_\n"
+        + "**Addreactions:** y!addreactions <id message> #channel _// RoleReaction_")
         return message.channel.send(embed)
     }
     else if(args2 === "fun"){
@@ -51,7 +52,7 @@ module.exports.run = (bot, message, args) => {
     .setColor(bot.baseColor)
     .setDescription("Exemplo: ```y!commands <grupo>```", true)
     .addField(":shield: ADM", "4 comandos", true)
-    .addField(":gear: Automation", "1 comando", true)
+    .addField(":gear: Automation", "2 comandos", true)
     .addField(":performing_arts: Fun", "6 comandos", true)
     .addField(":gem: Úteis", "2 comandos", true)
     .addField(":kaaba: Outros", "1 comando", true)

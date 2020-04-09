@@ -17,17 +17,17 @@ module.exports = async (bot, oldMessage, newMessage) => {
         if (guild.log == "on" && oldMessage.channel.type == 'text') {
             let channel = oldMessage.guild.channels.cache.find(channel => channel.id === guild.logChannel)
             if (channel != null) {
-                let embede = new MessageEmbed()
+                let embed = new MessageEmbed()
                     .setTitle(":grey_question: [Mensagem Editada]")
                     .addField(`**Usuário:**`, newMessage.author, true)
                     .addField(`**Channel:**`, newMessage.channel, true)
-                    .addField(`**Mensagem Antiga:**`, oldMessage.content)
-                    .addField(`**Mensagem Nova:**`, newMessage.content)
+                    if(oldMessage.cleanContent) embed.addField(`**Mensagem Antiga:**`, oldMessage.content)
+                    if(newMessage.cleanContent) embed.addField(`**Mensagem Nova:**`, newMessage.content)
                     .addField(`**Tag:**`, newMessage.author.tag, true)
                     .addField(`**ID:**`, newMessage.author.id, true)
                     .setTimestamp()
 
-                return channel.send(embede)
+                return channel.send(embed)
             }
         }
     }catch(e){

@@ -3,7 +3,6 @@ const mongoose = require("mongoose");
 mongoose.set('useNewUrlParser', true);
 mongoose.set('useUnifiedTopology', true);
 const RoleReaction = require("../../models/rolereaction.js");
-const xxx = require("../../commands/says/sayembed")
 
 let msgCollectorFilter = (newMsg, originalMsg) => newMsg.author.id === originalMsg.author.id;
 

@@ -31,9 +31,9 @@ module.exports = async (bot, member)  => {
                     embed
                     .setThumbnail(member.user.avatarURL())
                     .setTitle(":ledger: [Leave]")
-                    .addField("**Usuário:**", `${member.user}`)
-                    .addField(`**Tag:**, ${member.user.tag}`, true)
-                    .addField(`**ID:**, ${member.user.id}`, true)
+                    .addField("**Usuário:**", member.user)
+                    .addField(`**Tag:**`, member.user.tag, true)
+                    .addField(`**ID:**`, member.user.id, true)
                     .setTimestamp()
                 }
                 channel.send(embed)
