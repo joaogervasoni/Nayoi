@@ -28,6 +28,6 @@ module.exports = (bot, guild) => {
         console.log(`Novo servidor !! Nome:${guild.name} id:${guild.id}`.magenta)
         guildNew.save()
     }catch(e){
-        errorReturn(e, "guildCreate")
+        errorReturn(e, null, "guildCreate")
     }
 }
