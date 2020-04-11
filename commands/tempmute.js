@@ -10,14 +10,14 @@ module.exports.run = async (bot, message, args) => {
             return message.reply("Cargo maior ou igual");
 
         let muterole = message.guild.roles.cache.find(role => role.name === "Muted");
+
         if(!muterole){
+            return message.reply("Comando Desabilitado");
             try{
-                muterole = await message.guild.createRole({
-                    name: "Muted",
-                    color: "#000000",
-                    permissions:[]
-                })
-                message.guild.channels.forEach(async (channel, id) => {
+                muterole = await message.guild.roles.create({ data: { name: 'Muted', color: "#000000", permissions: [] } });
+  
+                await message.guild.channels.forEach(async (channel, id) => {
+ 
                     await channel.overwritePermissions(muterole, {
                         SEND_MESSAGES: false,
                         ADD_REACTIONS: false
@@ -27,7 +27,7 @@ module.exports.run = async (bot, message, args) => {
                 console.log(e.stack);
             }
         }
-    
+
         let mutetime = args[1];
         if(!mutetime) return message.reply("Você não escreveu um tempo valido!!");
 
