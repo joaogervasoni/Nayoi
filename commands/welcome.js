@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 mongoose.set('useNewUrlParser', true);
 mongoose.set('useUnifiedTopology', true);
+const { prefix } = require("../botconfig.json");
 
 module.exports.run = async (bot, message, args) => {
     let args2 = args.join(" ").slice(0,3).split(' ').join('')
@@ -68,7 +69,17 @@ module.exports.run = async (bot, message, args) => {
 }
 
 module.exports.help = {
-    name: "welcome"
+    name: "welcome",
+    description: "Gerencia toda a parte de Bem-Vindo do servidor",
+    usability: "Pode ser ativo utilizando `"+prefix+"welcome on #chat`\n"
+    +"A mesagem pode ser alterada utilizando `"+prefix+"welcome msg mensagem-aqui`\n"
+    +"**Dentro da msg podem ser utilizadas as seguintes informações:**\n"
+    +"`{member}` - Para a pessoa ser marcada\n"
+    +"`{membercount}` - Para monstrar o número de pessoas no servidor\n",
+    additional: "`"+prefix+"welcome ch #chat` - Altera o canal do bem-vindo\n"
+    +"`"+prefix+"welcome sh` - Exibe msg de bem-vindo\n"
+    +"`"+prefix+"welcome cv` - Ativa o banner de bem-vindo\n",
+    others: ""
 }
 
 module.exports.requirements = {

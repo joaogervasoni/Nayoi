@@ -1,6 +1,7 @@
 const {MessageEmbed} = require("discord.js");
 var request = require('request');
 const {errorReturn} = require("../functions.js");
+const { prefix } = require("../botconfig.json");
 
 module.exports.run = (bot, message, args) => {
     
@@ -28,7 +29,11 @@ module.exports.run = (bot, message, args) => {
 }
 
 module.exports.help = {
-    name: "tempo"
+    name: "tempo",
+    description: "Traz a temperatura atual do local requisitado",
+    usability: "Pode ser utilizado de maneira simples `"+prefix+"tempo local`\n",
+    additional: "",
+    others: "A utilização de acentos ou 'ç' na pesquisa pode não retornar dados"
 }
 
 module.exports.requirements = {

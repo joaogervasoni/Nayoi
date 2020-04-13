@@ -3,6 +3,7 @@ var request = require('request');
 const mongoose = require("mongoose");
 mongoose.set('useNewUrlParser', true);
 mongoose.set('useUnifiedTopology', true);
+const { prefix } = require("../botconfig.json");
 
 module.exports.run = async (bot, message, args) => {
 
@@ -141,7 +142,16 @@ module.exports.run = async (bot, message, args) => {
 }
 
 module.exports.help = {
-    name: "mal"
+    name: "mal",
+    description: "Puxa informações do MAL ( My Anime List )",
+    usability: "Pode se pesquisar um anime facilmente `"+prefix+"mal an naruto`\n"
+    +"Também podemos retornar mangás e outras informações `"+prefix+"mal mg naruto`\n"
+    +"**Após o mal podem ser utilizadas as seguintes informações:**\n"
+    +"`ch` - Para encontrar um personagem\n"
+    +"`pf` - Para encontrar um perfil no MAL\n",
+    additional: "`"+prefix+"mal nfswon` - Faz pesquisas +18 (padrão)\n"
+    +"`"+prefix+"mal nfswoff` - Desabilita pesquisar +18",
+    others: ""
 }
 
 module.exports.requirements = {

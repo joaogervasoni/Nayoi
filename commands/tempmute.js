@@ -49,7 +49,11 @@ module.exports.run = async (bot, message, args) => {
 }
 
 module.exports.help = {
-    name: "tempmute"
+    name: "tempmute",
+    description: "Muta a pessoa escolhida por **'x'** tempo",
+    usability: "Atualmente Desabilitado` :x:\n",
+    additional: "",
+    others: ""
 }
 
 module.exports.requirements = {

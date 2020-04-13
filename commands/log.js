@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 mongoose.set('useNewUrlParser', true);
+const { prefix } = require("../botconfig.json");
 
 module.exports.run = async (bot, message, args) => {
     let args2 = args.join(" ").slice(0,3).split(' ').join('');
@@ -46,7 +47,12 @@ module.exports.run = async (bot, message, args) => {
 }
 
 module.exports.help = {
-    name: "log"
+    name: "log",
+    description: "Gerencia toda a parte de Logs do servidor mostrando pessoas que sairam, msgs deletadas/editadas e nick alterados",
+    usability: "Pode ser ativo utilizando `"+prefix+"log on #chat`\n"
+    +"O canal pode ser alterado utilizando `"+prefix+"log ch #chat`\n",
+    additional: "`"+prefix+"log off` - Desabilita o sistema de log",
+    others: ""
 }
 
 module.exports.requirements = {

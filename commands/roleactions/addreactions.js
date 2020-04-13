@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 mongoose.set('useNewUrlParser', true);
 mongoose.set('useUnifiedTopology', true);
 const RoleReaction = require("../../models/rolereaction.js");
+const { prefix } = require("../../botconfig.json");
 
 let msgCollectorFilter = (newMsg, originalMsg) => newMsg.author.id === originalMsg.author.id;
 
@@ -59,7 +60,15 @@ module.exports = {
 }
 
 module.exports.help = {
-    name: "addreactions"
+    name: "addreactions",
+    description: "Dá cargos com reações em uma mensagem",
+    usability: "Pode utilizado desta forma: `"+prefix+"addreactions messageid`\n"
+    +"Caso a mensagem esteja em outro canal utilize `"+prefix+"addreactions messageid #channel`\n"
+    +"**Após utilizar o comando:**\n"
+    +"`emoji, cargo` - Mande uma msg com emoji e cargo para cada cargo\n"
+    +"`!!done` - Após terminar utilize o comando de done\n",
+    additional: "",
+    others: ""
 }
 
 module.exports.requirements = {

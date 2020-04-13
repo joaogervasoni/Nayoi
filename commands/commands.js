@@ -56,7 +56,7 @@ module.exports.run = (bot, message, args) => {
     .addField(":performing_arts: Fun", "6 comandos", true)
     .addField(":gem: Úteis", "2 comandos", true)
     .addField(":kaaba: Outros", "1 comando", true)
-
+    .addField(":confetti_ball: How", "5 comandos", true)
     return message.channel.send(embed)
 }
 

@@ -1,4 +1,5 @@
 const {errorReturn} = require("../../functions.js");
+const { prefix } = require("../../botconfig.json");
 
 module.exports.run = async (bot, message, args) => {
     try{
@@ -20,7 +21,13 @@ module.exports.run = async (bot, message, args) => {
 }
 
 module.exports.help = {
-    name: "say"
+    name: "say",
+    description: "Manda uma msg pelo Bot",
+    usability: "Pode ser utilizando usando `"+prefix+"say msgaqui`\n"
+    +"Também pode ser mandando em um chat diferente usando`"+prefix+"say #channel msgaqui`\n"
+    +"**Os comandos say e sayembed utilizam os mesmos parâmetros**\n",
+    additional: "",
+    others: ""
 }
 
 module.exports.requirements = {
