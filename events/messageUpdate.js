@@ -1,7 +1,4 @@
-const mongoose = require("mongoose");
 const {MessageEmbed} = require("discord.js");
-mongoose.set('useNewUrlParser', true);
-mongoose.set('useUnifiedTopology', true);
 const {errorReturn} = require("../functions.js");
 
 module.exports = async (bot, oldMessage, newMessage) => {
@@ -11,7 +8,7 @@ module.exports = async (bot, oldMessage, newMessage) => {
         return
     }
     try{
-        mongoose.connect(`${bot.mongodb}`);
+        bot.database;
         const guild = await bot.Guild.findOne({ 'guildId': oldMessage.guild.id });
         
         if (guild.log == "on" && oldMessage.channel.type == 'text') {

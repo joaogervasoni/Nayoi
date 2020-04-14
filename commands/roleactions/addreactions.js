@@ -1,7 +1,4 @@
 const {MessageCollector} = require('discord.js')
-const mongoose = require("mongoose");
-mongoose.set('useNewUrlParser', true);
-mongoose.set('useUnifiedTopology', true);
 const RoleReaction = require("../../models/rolereaction.js");
 const { prefix } = require("../../botconfig.json");
 
@@ -9,7 +6,7 @@ let msgCollectorFilter = (newMsg, originalMsg) => newMsg.author.id === originalM
 
 module.exports = {
     run: async (bot, message, args) => {
-        mongoose.connect(`${bot.mongodb}`);
+        bot.database;
 
         let args2 = args.join(" ").slice(0, 18).split(' ').join('')
         let chat = args.join(" ").slice(19).slice(2,20);

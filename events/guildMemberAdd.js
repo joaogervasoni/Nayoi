@@ -1,15 +1,11 @@
-const mongoose = require("mongoose");
 const {MessageEmbed} = require("discord.js");
-mongoose.set('useNewUrlParser', true);
-mongoose.set('useUnifiedTopology', true);
 const {errorReturn} = require("../functions.js");
 const { createCanvas, loadImage, registerFont } = require("canvas");
-const { join } = require("path");
 const { MessageAttachment } = require("discord.js");
 
 module.exports = async (bot, member) => {  
     try {
-        mongoose.connect(`${bot.mongodb}`);
+        bot.database;
         const guild = await bot.Guild.findOne({ 'guildId': member.guild.id });
 
         //autorole

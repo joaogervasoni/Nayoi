@@ -1,12 +1,10 @@
-const mongoose = require("mongoose");
-mongoose.set('useNewUrlParser', true);
 const { prefix } = require("../botconfig.json");
 
 module.exports.run = async (bot, message, args) => {
     let args2 = args.join(" ").slice(0,3).split(' ').join('');
     
     if(args2 === "on" || args2 === "off" || args2 === "ch"){
-        mongoose.connect(`${bot.mongodb}`);
+        bot.database;
         const guild = await bot.Guild.findOne({'guildId': message.guild.id});
 
         if(args2 === "on"){

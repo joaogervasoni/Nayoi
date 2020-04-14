@@ -1,10 +1,4 @@
-const mongoose = require("mongoose");
-const {MessageEmbed} = require("discord.js");
-mongoose.set('useNewUrlParser', true);
-mongoose.set('useUnifiedTopology', true);
-const {errorReturn} = require("../functions.js");
 const RoleReaction = require("../models/rolereaction.js");
-
 
 module.exports = async (bot, reaction, user) => {
     
@@ -29,7 +23,7 @@ module.exports = async (bot, reaction, user) => {
         await reaction.message.fetch();
         let { id } = reaction.message;
         try {
-            await mongoose.connect(`${bot.mongodb}`);
+            bot.database;
             let msgDocument = await RoleReaction.findOne({ messageId: id });
             if(msgDocument) {
                 let { emojiRoleMappings } = msgDocument;

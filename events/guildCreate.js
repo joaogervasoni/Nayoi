@@ -1,12 +1,9 @@
-const mongoose = require("mongoose")
-mongoose.set('useNewUrlParser', true);
-mongoose.set('useUnifiedTopology', true);
 const {errorReturn} = require("../functions.js");
 var colors = require('colors');
 
 module.exports = (bot, guild) => {
     try{
-        mongoose.connect(`${bot.mongodb}`);
+        bot.database;
 
         const guildNew = new bot.Guild({
             _id: mongoose.Types.ObjectId(),

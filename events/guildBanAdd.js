@@ -1,12 +1,10 @@
 const {MessageEmbed} = require("discord.js");
-const mongoose = require("mongoose");
-mongoose.set('useNewUrlParser', true);
-mongoose.set('useUnifiedTopology', true);
 const {errorReturn} = require("../functions.js");
 
 module.exports = async (bot, user) => {
     
     //Log
+    bot.database;
     const guild = await bot.Guild.findOne({'guildId': user.guild.id})
     try{
         if(guild.log == "on"){

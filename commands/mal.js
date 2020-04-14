@@ -1,8 +1,5 @@
 const {MessageEmbed} = require("discord.js");
 var request = require('request');
-const mongoose = require("mongoose");
-mongoose.set('useNewUrlParser', true);
-mongoose.set('useUnifiedTopology', true);
 const { prefix } = require("../botconfig.json");
 
 module.exports.run = async (bot, message, args) => {
@@ -13,7 +10,7 @@ module.exports.run = async (bot, message, args) => {
 
     if(argsAdm === "nsfwon" || argsAdm === "nsfwoff"){
         if(!message.member.hasPermission("ADMINISTRATOR")) return message.channel.send("Precisa de permissão");
-        mongoose.connect(`${bot.mongodb}`);
+        bot.database;
         const guild = await bot.Guild.findOne({'guildId': message.guild.id});
 
         if (argsAdm === "nsfwon"){
@@ -46,7 +43,7 @@ module.exports.run = async (bot, message, args) => {
             let rAnime = JSON.parse(body).results[0];
             if(rAnime == null) return message.reply("Parece que aconteceu um bug em meu sistema (Erro: Json sem dados)")
 
-            mongoose.connect(`${bot.mongodb}`);
+            bot.database;
 
             bot.Guild.findOne({'guildId': message.guild.id}, (err, guild) => {
                 if(rAnime.rated == "Rx" && guild.nsfw == "off") return message.reply("Animes com Rated 'Rx' estão desabilitados _**Safradinho**_ :banana:")
@@ -75,7 +72,7 @@ module.exports.run = async (bot, message, args) => {
             let rManga = JSON.parse(body).results[0];
             if(rManga == null) return message.reply("Parece que aconteceu um bug em meu sistema (Erro: Json sem dados)")
 
-            mongoose.connect(`${bot.mongodb}`);
+            bot.database;
 
             bot.Guild.findOne({'guildId': message.guild.id}, (err, guild) => {
                 if(rAnime.rated == "Rx" && guild.nsfw == "off") return message.reply("Mangas com Rated 'Rx' estão desabilitados _**Safradinho**_ :banana:")
