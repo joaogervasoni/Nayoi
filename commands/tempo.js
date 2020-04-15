@@ -1,13 +1,15 @@
 const {MessageEmbed} = require("discord.js");
 var request = require('request');
-const {errorReturn} = require("../functions.js");
+const {errorReturn, formatText} = require("../functions.js");
 const { prefix } = require("../botconfig.json");
 const weather = "ed901cbf6d0ca73aa44fda5632f67241";
 
 module.exports.run = (bot, message, args) => {
     
     let args2 = args.join(" ").slice(0)
-    request(`https://api.openweathermap.org/data/2.5/weather?q=${args2}&appid=${weather}`, function (err, response, body) {
+    const parsed = formatText(args2);
+
+    request(`https://api.openweathermap.org/data/2.5/weather?q=${parsed}&appid=${weather}`, function (err, response, body) {
         if (response.statusCode != "200") return message.reply("Não encontrei nenhuma informação de tempo :(")
         try{
             let tempo = JSON.parse(body);

@@ -18,7 +18,6 @@ module.exports = {
         } 
     },    
 
-
     formatDate: function(date) {
         const options = {
             year: 'numeric',
@@ -28,5 +27,10 @@ module.exports = {
             minute: 'numeric'
         };
         return new Intl.DateTimeFormat('pt-BR', options).format(date);
+    },
+
+    formatText: function(text){
+        text.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+        return text;
     }
 }
