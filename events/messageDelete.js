@@ -15,8 +15,8 @@ module.exports = async (bot, message) => {
         bot.database;
         const guild = await bot.Guild.findOne({ 'guildId': message.guild.id });
         
-        if (guild.log == "on" && message.channel.type == 'text') {
-            let channel = message.guild.channels.cache.find(channel => channel.id === guild.logChannel);
+        if (guild.log.status == "on" && message.channel.type == 'text') {
+            let channel = message.guild.channels.cache.find(channel => channel.id === guild.log.channel);
 
             if (channel != null) {
                 let embed = new MessageEmbed()

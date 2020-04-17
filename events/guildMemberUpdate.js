@@ -9,8 +9,8 @@ module.exports = async (bot, oldMember, newMember) => {
         bot.database;
         const guild = await bot.Guild.findOne({ 'guildId': newMember.guild.id });
         
-        if (guild.log == "on") {
-            let channel = newMember.guild.channels.cache.find(channel => channel.id === guild.logChannel)
+        if (guild.log.status == "on") {
+            let channel = newMember.guild.channels.cache.find(channel => channel.id === guild.log.channel)
             if (channel != null) {
                 let embed = new MessageEmbed()
                     .setTitle(":pencil2: [Nick trocado]")

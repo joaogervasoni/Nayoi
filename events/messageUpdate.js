@@ -11,8 +11,8 @@ module.exports = async (bot, oldMessage, newMessage) => {
         bot.database;
         const guild = await bot.Guild.findOne({ 'guildId': oldMessage.guild.id });
         
-        if (guild.log == "on" && oldMessage.channel.type == 'text') {
-            let channel = oldMessage.guild.channels.cache.find(channel => channel.id === guild.logChannel)
+        if (guild.log.status == "on" && oldMessage.channel.type == 'text') {
+            let channel = oldMessage.guild.channels.cache.find(channel => channel.id === guild.log.channel)
             if (channel != null) {
                 let embed = new MessageEmbed()
                     .setTitle(":grey_question: [Mensagem Editada]")

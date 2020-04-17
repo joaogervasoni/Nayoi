@@ -1,5 +1,6 @@
 const {errorReturn} = require("../functions.js");
 var colors = require('colors');
+const mongoose = require('mongoose');
 
 module.exports = (bot, guild) => {
     try{
@@ -11,16 +12,24 @@ module.exports = (bot, guild) => {
             guildId: guild.id,
             memberCount: guild.memberCount,
             createdAt: guild.joinedAt,
-            channel: "none",
-            welcome: "off",
-            welcomeMsg: "Bem-vindo {member}!!",
-            welcomeChannel: "Bem-vindo",
-            welcomeCanvas: "off",
-            log: "off",
-            logChannel: "",
-            autorole: "off",
-            autoroleRole: "",
-            nsfw: "off"
+            server: {
+                nsfw: "off"
+            },
+            welcome: {
+                status: "off",
+                msg: "Bem-vindo {member}!!",
+                channel: "",
+                canvas: "off",
+                canvasUrl: "",
+            },
+            autorole: {
+                status: "off",
+                role: "",
+            },
+            log: {
+                status: "off",
+                channel: ""
+            },
         });
         console.log(`Novo servidor !! Nome:${guild.name} id:${guild.id}`.magenta)
         guildNew.save()

@@ -20,22 +20,24 @@ module.exports.run = (bot, message, args) => {
         embed
         .setTitle("Automation commands:")
         .setDescription("**Welcome:** y!welcome <type> _// Mensagem de bem-vindo_\n"
+        + "**Autorole:** y!autorole @role _// Da cargo ao entrar\n"
         + "**Addreactions:** y!addreactions <id message> #channel _// RoleReaction_")
         return message.channel.send(embed)
     }
     else if(args2 === "fun"){
         embed
         .setTitle("Fun commands:")
-        .setDescription("**Snipe:** y!snipe\n" 
+        .setDescription("**Snipe:** y!snipe _// Pega ultima msg excluida_\n" 
         + "**HowGay:** y!howgay _//Quão gay vc é?_\n"
-        + "**HowBoomer:** y!howboomer _//Quão boomer vc é?_\n"
-        + "**Say:** y!say <frase> _//Fala o que vc escrever_")
+        + "**HowBoomer:** y!howboomer _//Quão boomer vc é?_")
         return message.channel.send(embed)
     }
     else if(args2 === "outros"){ 
         embed
         .setTitle("Others commands:")
-        .setDescription("**Info:** y!info <type> _// Server, player and bot info..._")
+        .setDescription("**Info:** y!info <type> _// Server, player and bot info..._"
+        + "**Say:** y!say (#channel opcional) <frase> _//Fala o que vc escrever_\n"
+        + "**SayEmbed:** y!sayembed (#channel opcional) <frase> _//Fala o que vc escrever_")
         return message.channel.send(embed)
     }
     else if(args2 === "uteis"){ 
@@ -51,11 +53,11 @@ module.exports.run = (bot, message, args) => {
     .setTitle(`${bot.user.username} comandos`)
     .setColor(bot.baseColor)
     .setDescription("Exemplo: ```y!commands <grupo>```", true)
-    .addField(":shield: ADM", "4 comandos", true)
-    .addField(":gear: Automation", "2 comandos", true)
-    .addField(":performing_arts: Fun", "6 comandos", true)
+    .addField(":shield: ADM", "5 comandos", true)
+    .addField(":gear: Automation", "3 comandos", true)
+    .addField(":performing_arts: Fun", "3 comandos", true)
     .addField(":gem: Úteis", "2 comandos", true)
-    .addField(":kaaba: Outros", "1 comando", true)
+    .addField(":kaaba: Outros", "3 comando", true)
     .addField(":confetti_ball: How", "5 comandos", true)
     return message.channel.send(embed)
 }

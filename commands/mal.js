@@ -14,10 +14,9 @@ module.exports.run = async (bot, message, args) => {
         const guild = await bot.Guild.findOne({'guildId': message.guild.id});
 
         if (argsAdm === "nsfwon"){
-            if (guild.nsfw === "on") return message.channel.send(`NSFW esta atualmente: **On**`)
-            
-            console.log(guild.nsfw)
-            guild.nsfw = "on";
+            if (guild.server.nsfw === "on") return message.channel.send(`NSFW esta atualmente: **On**`)
+
+            guild.server.nsfw = "on";
             guild.save(function (err){
                 if(err) return message.channel.send(`Erro: ${err}, contate o suporte`)
                 if(!err) return message.channel.send("NSFW agora está: **On**")
@@ -25,9 +24,8 @@ module.exports.run = async (bot, message, args) => {
         }
         else if (argsAdm === "nsfwoff"){
             if (guild.nsfw === "off") return message.channel.send(`NSFW esta atualmente: **Off**`)
-            
-            console.log(guild.nsfw)
-            guild.nsfw = "off";
+
+            guild.server.nsfw = "off";
             guild.save(function (err){
                 if(err) return message.channel.send(`Erro: ${err}, contate o suporte`)
                 if(!err) return message.channel.send("NSFW agora está: **Off**")

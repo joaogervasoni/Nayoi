@@ -11,19 +11,19 @@ module.exports.run = async (bot, message, args) => {
             let role = args.join(" ").slice(3).slice(3,21);
             if (!role) return message.reply(`Não encontrei esta Role _(Exemplo: y!autorole on @role)_`)
     
-            if (guild.autorole === "on") return message.channel.send(`Autorole esta atualmente: **On**`)
+            if (guild.autorole.status === "on") return message.channel.send(`Autorole esta atualmente: **On**`)
         
-            guild.autorole = "on";
-            guild.autoroleRole = role
+            guild.autorole.status = "on";
+            guild.autorole.role = role
             guild.save(function (err){
                 if(err) return message.channel.send(`Erro: ${err}, contate o suporte`)
                 if(!err) return message.channel.send("Autorole agora está: **On**")
             });
         }
         else if (args2 === "off"){
-            if (guild.autorole === "off") return message.channel.send(`Autorole esta atualmente: **Off**`)
+            if (guild.autorole.status === "off") return message.channel.send(`Autorole esta atualmente: **Off**`)
         
-            guild.autorole = "off";
+            guild.autorole.status = "off";
             guild.save(function (err){
                 if(err) return message.channel.send(`Erro: ${err}, contate o suporte`)
                 if(!err) return message.channel.send("Autorole agora está: **Off**")
@@ -32,7 +32,7 @@ module.exports.run = async (bot, message, args) => {
         else if(args2 === "rol"){
             let role = args.join(" ").slice(2).slice(3,21);
     
-            guild.autoroleRole = role
+            guild.autorole.role = role
             guild.save(function (err){
                 if(err) return message.channel.send(`Erro: ${err}, contate o suporte`)
                 if(!err) return message.channel.send("Role trocada !!")

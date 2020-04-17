@@ -12,26 +12,26 @@ module.exports.run = async (bot, message, args) => {
             let chat = message.guild.channels.cache.find(chat => channel, `id` )
             if (!chat) return message.reply(`Não encontrei o canal _(Exemplo: y!welcome on #chat)_`)
     
-            if (guild.welcome === "on") return message.channel.send(`Bem-vindo esta atualmente: **On**`)
+            if (guild.welcome.status === "on") return message.channel.send(`Bem-vindo esta atualmente: **On**`)
             
-            guild.welcome = "on";
-            guild.welcomeChannel = channel
+            guild.welcome.status = "on";
+            guild.welcome.channel = channel
             guild.save(function (err){
                 if(err) return message.channel.send(`Erro: ${err}, contate o suporte`)
                 if(!err) return message.channel.send("Bem-vindo agora está: **On**")
             });
         }
         else if (args2 === "off"){
-            if (guild.welcome === "off") return message.channel.send(`Bem-vindo esta atualmente: **Off**`)
+            if (guild.welcome.status === "off") return message.channel.send(`Bem-vindo esta atualmente: **Off**`)
         
-            guild.welcome = "off";
+            guild.welcome.status = "off";
             guild.save(function (err){
                 if(err) return message.channel.send(`Erro: ${err}, contate o suporte`)
                 if(!err) return message.channel.send("Bem-vindo agora está: **Off**")
             });
         }
         else if(args2 === "msg"){           
-            guild.welcomeMsg = args.join(" ").slice(3)
+            guild.welcome.msg = args.join(" ").slice(3)
             guild.save(function (err){
                 if(err) return message.channel.send(`Erro: ${err}, contate o suporte`)
                 if(!err) return message.channel.send("Mensagem de Bem-vindo modificada !!")
@@ -42,7 +42,7 @@ module.exports.run = async (bot, message, args) => {
             let chat = message.guild.channels.cache.find(chat => channel, `id` )
             if (!chat) return message.reply(`Não encontrei este canal :C`)
     
-            guild.welcomeChannel = channel;
+            guild.welcome.channel = channel;
             guild.save(function (err){
                 if(err) return message.channel.send(`Erro: ${err}, contate o suporte`)
                 if(!err) return message.channel.send("Canal trocado !!")
@@ -51,15 +51,15 @@ module.exports.run = async (bot, message, args) => {
         else if(args2 === "sh"){
             return message.channel.send(`**Mensagem atual:** ${guild.welcomeMsg}`)
         }else if(args2 === "cv"){
-            if (guild.welcomeCanvas === "off"){
-                guild.welcomeCanvas = "on";
+            if (guild.welcome.canvas === "off"){
+                guild.welcome.canvas = "on";
             }else{
-                guild.welcomeCanvas = "off";
+                guild.welcome.canvas = "off";
             }
         
             guild.save(function (err){
                 if(err) return message.channel.send(`Erro: ${err}, contate o suporte`)
-                if(!err) return message.channel.send(`Banner agora está: **${guild.welcomeCanvas}**`)
+                if(!err) return message.channel.send(`Banner agora está: **${guild.welcome.canvas}**`)
             });
         }
     }else return message.reply(`Preciso de um prefixo (Ex: on,off,msg,ch,sh,cv)`)

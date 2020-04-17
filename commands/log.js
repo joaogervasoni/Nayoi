@@ -12,19 +12,19 @@ module.exports.run = async (bot, message, args) => {
             let chat = message.guild.channels.cache.find(chat => channel, `id` )
             if(!chat) return message.reply("Não encontrei o canal _(Exemplo: y!log on #chat)_");
     
-            if(guild.log === "on") return message.channel.send("Log esta atualmente: **On**")
+            if(guild.log.status === "on") return message.channel.send("Log esta atualmente: **On**")
 
-            guild.log = "on";
-            guild.logChannel = channel
+            guild.log.status = "on";
+            guild.log.channel = channel
             guild.save(function (err){
                 if(err) return message.channel.send(`Erro: ${err}, contate o suporte`)
                 if(!err) return message.channel.send("Log agora está: **On**")
             })
         }
         else if (args2 === "off"){   
-            if(guild.log === "off") return message.channel.send("Log esta atualmente: **Off**");
+            if(guild.log.status === "off") return message.channel.send("Log esta atualmente: **Off**");
 
-            guild.log = "off";
+            guild.log.status = "off";
             guild.save(function (err){
                 if(err) return message.channel.send(`Erro: ${err}, contate o suporte`);
                 if(!err) return message.channel.send("Log agora está: **Off**");
@@ -35,7 +35,7 @@ module.exports.run = async (bot, message, args) => {
             let chat = message.guild.channels.cache.find(chat => channel, `id` )
             if(!chat) return message.reply("Não encontrei o canal _(Exemplo: y!log ch #chat)_");
             
-            guild.logChannel = channel;
+            guild.log.channel = channel;
             guild.save(function (err){
                 if(err) return message.channel.send(`Erro: ${err}, contate o suporte`);
                 if(!err) return message.channel.send(`Canal modificado !!`);

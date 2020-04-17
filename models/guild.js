@@ -6,16 +6,24 @@ const guildSchema = mongoose.Schema({
     guildId: String,
     memberCount: String,
     createdAt: String,
-    channel: String,
-    welcome: String,
-    welcomeMsg: String,
-    welcomeChannel: String,
-    welcomeCanvas: String,
-    log: String,
-    logChannel: String,
-    autorole: String,
-    autoroleRole: String,
-    nsfw: String
+    server: {
+        nsfw: String,
+    },
+    welcome: {
+        status: String,
+        msg: String,
+        channel: String,
+        canvas: String,
+        canvasUrl: String,
+    },
+    autorole: {
+        status: String,
+        role: String,
+    },
+    log: {
+        status: String,
+        channel: String
+    }
 });
 
 module.exports = mongoose.model("Guild", guildSchema);

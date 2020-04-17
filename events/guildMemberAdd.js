@@ -9,14 +9,14 @@ module.exports = async (bot, member) => {
         const guild = await bot.Guild.findOne({ 'guildId': member.guild.id });
 
         //autorole
-         if (guild.autorole === "on") {
-             let rol = guild.autoroleRole;
+         if (guild.autorole.status === "on") {
+             let rol = guild.autorole.role;
              if(rol) member.roles.add(rol);
          }
         //welcome
-         if (guild.welcome === "on") {
-            let wlchat = member.guild.channels.cache.find(channel => channel.id === guild.welcomeChannel)
-             let msg = guild.welcomeMsg;
+         if (guild.welcome.status === "on") {
+            let wlchat = member.guild.channels.cache.find(channel => channel.id === guild.welcome.channel)
+             let msg = guild.welcome.msg;
              
              function parse(str) {
                  var args = [].slice.call(arguments, 1),
@@ -31,7 +31,7 @@ module.exports = async (bot, member) => {
              msg = parse(msg, member);
              msg = parseCount(msg, member.guild.memberCount);
              
-             if (guild.welcomeCanvas === "on"){
+             if (guild.welcome.canvas === "on"){
                  registerFont('arial.ttf', {family: 'Arial'});
                  const canvas = createCanvas(1000, 360);
                  const ctx = canvas.getContext("2d");

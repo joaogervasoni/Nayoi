@@ -7,11 +7,11 @@ module.exports = async (bot, member)  => {
     try{
         bot.database;
         const guild = await bot.Guild.findOne({ 'guildId': member.guild.id });
-        if(guild.log == "on"){
+        if(guild.log.status == "on"){
             let logs = await member.guild.fetchAuditLogs();
             let entry = logs.entries.find(entry => entry.target === member.user);
              
-            let channel = member.guild.channels.cache.find(channel => channel.id === guild.logChannel)
+            let channel = member.guild.channels.cache.find(channel => channel.id === guild.log.channel)
             if(channel != null){
                 let embed = new MessageEmbed()
                 
