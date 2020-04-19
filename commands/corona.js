@@ -1,12 +1,9 @@
 const {MessageEmbed} = require("discord.js");
-const {errorReturn, formatText} = require("../functions.js");
-const { prefix } = require("../botconfig.json");
+const {errorReturn} = require("../functions.js");
 const fetch = require("node-fetch");
 
 module.exports.run = (bot, message, args) => {
     
-    //let args2 = args.join(" ").slice(0)
-
     try{
         fetch("https://pomber.github.io/covid19/timeseries.json").then(response => response.json()).then(data => {
             let country = data["Brazil"]
@@ -17,7 +14,8 @@ module.exports.run = (bot, message, args) => {
                 .setTitle(`Corona ( Covid-19 ) Brasil`)
                 .addField(`Confirmados:`, lastDate.confirmed, true)
                 .addField(`Mortes:`, lastDate.deaths, true)
-                .addField(`Data:`, lastDate.date)
+                .addField(`Curados:`, lastDate.recovered, true)
+                .addField(`Data:`, lastDate.date, true)
                 .setFooter("Não saia de casa !!")
             return message.channel.send(embed)
         });
