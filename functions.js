@@ -30,7 +30,12 @@ module.exports = {
     },
 
     formatText: function(text){
-        text.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+        text = text.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+        return text;
+    },
+
+    upperCaseFirst: function(text){
+        text = text.charAt(0).toUpperCase() + text.slice(1);
         return text;
     }
 }

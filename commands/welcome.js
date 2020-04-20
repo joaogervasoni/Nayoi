@@ -76,7 +76,8 @@ module.exports.help = {
     additional: "`"+prefix+"welcome ch #chat` - Altera o canal do bem-vindo\n"
     +"`"+prefix+"welcome sh` - Exibe msg de bem-vindo\n"
     +"`"+prefix+"welcome cv` - Ativa o banner de bem-vindo\n",
-    others: ""
+    others: "",
+    type: "automation"
 }
 
 module.exports.requirements = {

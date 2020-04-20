@@ -27,7 +27,8 @@ module.exports.run = async (bot, message, args) => {
 }
 
 module.exports.help = {
-    name: "report"
+    name: "report",
+    type: "adm"
 }
 
 module.exports.requirements = {

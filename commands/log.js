@@ -50,7 +50,8 @@ module.exports.help = {
     usability: "Pode ser ativo utilizando `"+prefix+"log on #chat`\n"
     +"O canal pode ser alterado utilizando `"+prefix+"log ch #chat`\n",
     additional: "`"+prefix+"log off` - Desabilita o sistema de log",
-    others: ""
+    others: "",
+    type: "adm"
 }
 
 module.exports.requirements = {

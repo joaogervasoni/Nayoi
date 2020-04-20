@@ -53,7 +53,8 @@ module.exports.help = {
     description: "Muta a pessoa escolhida por **'x'** tempo",
     usability: "Atualmente Desabilitado` :x:\n",
     additional: "",
-    others: ""
+    others: "",
+    type: "adm"
 }
 
 module.exports.requirements = {

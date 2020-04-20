@@ -1,69 +1,63 @@
 const {MessageEmbed} = require("discord.js");
+const {upperCaseFirst} = require("../functions.js");
+const { prefix } = require("../botconfig.json");
 
 module.exports.run = (bot, message, args) => {
 
     let args2 = args.join(" ").slice(0).toLowerCase();
+    let cmds = bot.commands;
     let embed = new MessageEmbed()
+    let emojisList = [["automation", ":gear:"], ["utilidade", ":gem:"], ["how", ":peach:"], ["adm", ":shield:"], ["fun", ":performing_arts:"], ["outros", ":kaaba:"], ["ajuda", ":grey_question:"]];
+    var emojis = new Map(emojisList);
 
-    //Commands <type>
-    if(args2 === "adm"){
-        embed
-        .setTitle("Comandos administrativos:")
-        .setDescription("**Ban:** y!ban <usuário> <msg> _// Ban usuário_\n" 
-        +"**Kick:** y!kick <usuário> <msg> _// Kick usuário_\n"
-        +"**Tempmute:** y!tempmute <usuário> <time> _// Muta por um tempo_\n"
-        +"**Report:** y!report <usuário> <msg> _// Reportar usuário_\n"
-        +"**Log:** y!log on #channel _// Server log_")
-        return message.channel.send(embed)
-    }
-    else if(args2 === "automation"){
-        embed
-        .setTitle("Automation commands:")
-        .setDescription("**Welcome:** y!welcome <type> _// Mensagem de bem-vindo_\n"
-        + "**Autorole:** y!autorole @role _// Da cargo ao entrar\n"
-        + "**Addreactions:** y!addreactions <id message> #channel _// RoleReaction_")
-        return message.channel.send(embed)
-    }
-    else if(args2 === "fun"){
-        embed
-        .setTitle("Fun commands:")
-        .setDescription("**Snipe:** y!snipe _// Pega ultima msg excluida_\n" 
-        + "**HowGay:** y!howgay _//Quão gay vc é?_\n"
-        + "**HowBoomer:** y!howboomer _//Quão boomer vc é?_")
-        return message.channel.send(embed)
-    }
-    else if(args2 === "outros"){ 
-        embed
-        .setTitle("Others commands:")
-        .setDescription("**Info:** y!info <type> _// Server, player and bot info..._"
-        + "**Say:** y!say (#channel opcional) <frase> _//Fala o que vc escrever_\n"
-        + "**SayEmbed:** y!sayembed (#channel opcional) <frase> _//Fala o que vc escrever_")
-        return message.channel.send(embed)
-    }
-    else if(args2 === "uteis"){ 
-        embed
-        .setTitle("Others commands:")
-        .setDescription("**MyAnimeList:** y!mal <type> _// Animes, mangas..._\n"
-        + "**Temperatura:** y!tempo <local> _// Ex: Curitiba, Estados unidos..._")
-        return message.channel.send(embed)
-    }
+    if(args2){
 
-    //Commands
-    embed
-    .setTitle(`${bot.user.username} comandos`)
-    .setColor(bot.baseColor)
-    .setDescription("Exemplo: ```y!commands <grupo>```", true)
-    .addField(":shield: ADM", "5 comandos", true)
-    .addField(":gear: Automation", "3 comandos", true)
-    .addField(":performing_arts: Fun", "3 comandos", true)
-    .addField(":gem: Úteis", "2 comandos", true)
-    .addField(":kaaba: Outros", "3 comando", true)
-    .addField(":confetti_ball: How", "5 comandos", true)
-    return message.channel.send(embed)
+        let description = ("`Para mais informações use " + prefix +"help nomedocomando`\n\n")
+        cmds.forEach(element => {
+            if(element.help.type === args2){
+                if(element.help.description !== undefined){
+                    description = `${description} **${upperCaseFirst(element.help.name)}** // ${element.help.description}\n`;
+                }else{
+                    description = `${description} **${upperCaseFirst(element.help.name)}** //\n`;
+                } 
+            }
+        });
+        embed
+        .setTitle(`${emojis.get(args2)} ${upperCaseFirst(args2)} comandos`)
+        .setDescription(description)
+        return message.channel.send(embed)
+
+    }else{
+        let types = new Map();
+
+        embed
+        .setTitle(`${bot.user.username} comandos`)
+        .setColor(bot.baseColor)
+        .setDescription("Exemplo: ```"+prefix+"commands <grupo>```", true)
+    
+        cmds.forEach(element => {
+    
+            if (types.get(element.help.type)){
+                types.set(element.help.type, types.get(element.help.type)+1)
+            }else
+            {
+                if(element.help.type !== undefined) types.set(element.help.type, +1)
+            }
+        });
+    
+        for (var [key, value] of types) {
+            let emoji = emojis.get(key);
+            embed
+            .addField(`${emoji} ${upperCaseFirst(key)}`, `${value} comandos`, true)
+        }
+
+        return message.channel.send(embed)
+    }
 }
 
 module.exports.help = {
-    name: "commands"
+    name: "commands",
+    type: "ajuda"
 }
 
 module.exports.requirements = {

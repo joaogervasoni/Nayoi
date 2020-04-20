@@ -146,7 +146,8 @@ module.exports.help = {
     +"`pf` - Para encontrar um perfil no MAL\n",
     additional: "`"+prefix+"mal nfswon` - Faz pesquisas +18 (padrão)\n"
     +"`"+prefix+"mal nfswoff` - Desabilita pesquisar +18",
-    others: ""
+    others: "",
+    type: "utilidade"
 }
 
 module.exports.requirements = {

@@ -30,7 +30,8 @@ module.exports.run = (bot, message, args) => {
 }
 
 module.exports.help = {
-    name: "help"
+    name: "help",
+    type: "ajuda"
 }
 
 module.exports.requirements = {

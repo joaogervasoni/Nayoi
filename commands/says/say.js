@@ -49,7 +49,8 @@ module.exports.help = {
     +"Utilize `"+prefix+"say 10s msgaqui`\n"
     +"No caso de ter um channel `"+prefix+"say 10s #channel msgaqui`",
     others: "O tempo deve ser expecificado com uma letra após o número para ser considerado um tempo valido\n"
-    +"**Exemplos:** `1s(seg) | 1m (min) | 1h (hora)`"
+    +"**Exemplos:** `1s(seg) | 1m (min) | 1h (hora)`",
+    type: "utilidade"
 }
 
 module.exports.requirements = {

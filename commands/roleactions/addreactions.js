@@ -65,7 +65,8 @@ module.exports.help = {
     +"`emoji, cargo` - Mande uma msg com emoji e cargo para cada cargo\n"
     +"`!!done` - Após terminar utilize o comando de done\n",
     additional: "",
-    others: ""
+    others: "",
+    type: "automation"
 }
 
 module.exports.requirements = {

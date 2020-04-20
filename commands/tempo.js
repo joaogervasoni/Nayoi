@@ -36,7 +36,8 @@ module.exports.help = {
     description: "Traz a temperatura atual do local requisitado",
     usability: "Pode ser utilizado de maneira simples `"+prefix+"tempo local`\n",
     additional: "",
-    others: "A utilização de acentos ou 'ç' na pesquisa pode não retornar dados"
+    others: "A utilização de acentos ou 'ç' na pesquisa pode não retornar dados",
+    type: "utilidade"
 }
 
 module.exports.requirements = {
