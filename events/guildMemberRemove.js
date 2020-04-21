@@ -14,11 +14,19 @@ module.exports = async (bot, member)  => {
             let channel = member.guild.channels.cache.find(channel => channel.id === guild.log.channel)
             if(channel != null){
                 let embed = new MessageEmbed()
-                
                 if (entry != null && entry.action == "MEMBER_KICK"){
                     embed
                     .setThumbnail(member.user.avatarURL())
                     .setTitle(":ledger: [Kick]")
+                    .addField(`**Usuário:**`, `${member.user} **Razão:** ${entry.reason} **Por:** ${entry.executor}`)
+                    .addField(`**Tag:**`, member.user.tag, true)
+                    .addField(`**ID:**`, member.user.id, true)
+                    .setTimestamp()
+                }
+                else if (entry != null && entry.action == "MEMBER_BAN_ADD"){
+                    embed
+                    .setThumbnail(member.user.avatarURL())
+                    .setTitle(":hammer: [Ban]")
                     .addField(`**Usuário:**`, `${member.user} **Razão:** ${entry.reason} **Por:** ${entry.executor}`)
                     .addField(`**Tag:**`, member.user.tag, true)
                     .addField(`**ID:**`, member.user.id, true)
