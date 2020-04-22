@@ -10,7 +10,10 @@ module.exports.run = (bot, message, args) => {
     let emojisList = [["automation", ":gear:"], ["utilidade", ":gem:"], ["how", ":peach:"], ["adm", ":shield:"], ["fun", ":performing_arts:"], ["outros", ":kaaba:"], ["ajuda", ":grey_question:"]];
     var emojis = new Map(emojisList);
 
-    if(args2){
+    let exist 
+    cmds.some(element => { if(element.help.type == args2) exist = 1;}); 
+
+    if(args2 && exist){
 
         let description = ("`Para mais informações use " + prefix +"help nomedocomando`\n\n")
         cmds.forEach(element => {
@@ -27,7 +30,9 @@ module.exports.run = (bot, message, args) => {
         .setDescription(description)
         return message.channel.send(embed)
 
-    }else{
+    }
+    else if(!args2 && !exist){
+
         let types = new Map();
 
         embed
@@ -52,6 +57,13 @@ module.exports.run = (bot, message, args) => {
         }
 
         return message.channel.send(embed)
+    }else{
+        embed
+        .setTitle(`Comando não encontrado :thinking:`)
+        .setColor(bot.baseColor)
+        .setDescription("**Utilize:** `"+prefix+"commands` para ver os comandos", true)
+
+        return message.channel.send(embed);
     }
 }
 
