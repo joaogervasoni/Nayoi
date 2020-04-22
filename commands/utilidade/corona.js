@@ -27,6 +27,7 @@ module.exports.run = (bot, message, args) => {
 
 module.exports.help = {
     name: "corona",
+    description: "Mostra casos de corona",
     type: "utilidade"
 }
 

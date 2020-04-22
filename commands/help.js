@@ -10,7 +10,7 @@ module.exports.run = (bot, message, args) => {
         embed
         .setTitle(`${cmds.help.name.charAt(0).toUpperCase() + cmds.help.name.slice(1)}:`)
         .setDescription(`${cmds.help.description}`)
-        .addField("Usabilidade", `${cmds.help.usability}`)
+        if(cmds.help.usability) embed.addField("Usabilidade", `${cmds.help.usability}`)
         if(cmds.help.additional) embed.addField("Comandos adicionais", `${cmds.help.additional}`)
         if(cmds.help.others) embed.addField("Outros", `${cmds.help.others}`)
         return message.channel.send(embed)
@@ -31,6 +31,7 @@ module.exports.run = (bot, message, args) => {
 
 module.exports.help = {
     name: "help",
+    description: "Traz informações sobre comandos",
     type: "ajuda"
 }
 

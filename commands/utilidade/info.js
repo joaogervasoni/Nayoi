@@ -1,5 +1,6 @@
 const {formatDate} = require("../../functions.js");
 const {MessageEmbed} = require("discord.js");
+const { prefix } = require("../../botconfig.json");
 
 module.exports.run = async (bot, message, args) => {
     let args2 = args.join(" ").slice(0)
@@ -55,12 +56,16 @@ module.exports.run = async (bot, message, args) => {
         .addField("Entrou em:", formatDate(User.joinedAt), true)
 
         return message.channel.send(embed)
-    }else return message.reply(`Preciso de um prefixo _(Exemplo: bot,server,#usuario)_`);
+    }else return message.reply(`Preciso de um prefixo _(Exemplo: bot,server,@usuário)_`);
 }
 
 
 module.exports.help = {
     name: "info",
+    description: "Traz informações sobre pessoas e servidor",
+    usability: "Para trazer informações sobre alguem digite `"+prefix+"info @usuário`\n",
+    additional: "`"+prefix+"info bot` - Exibe informações do bot\n"
+    +"`"+prefix+"info server` - Exibe informações do servidor\n",
     type: "utilidade"
 }
 

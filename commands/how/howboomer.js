@@ -24,6 +24,7 @@ module.exports.run = (bot, message) => {
 
 module.exports.help = {
     name: "howboomer",
+    description: "Quão boomer você é ?",
     type: "how"
 }
 
