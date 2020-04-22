@@ -1,6 +1,6 @@
 const {MessageEmbed} = require("discord.js");
 var request = require('request');
-const { prefix } = require("../botconfig.json");
+const { prefix } = require("../../botconfig.json");
 
 module.exports.run = async (bot, message, args) => {
 

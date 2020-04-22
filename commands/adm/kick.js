@@ -1,5 +1,5 @@
 const {RichEmbed} = require("discord.js");
-const {errorReturn} = require("../functions.js");
+const {errorReturn} = require("../../functions.js");
 
 module.exports.run = async (bot, message, args) => {
     try{

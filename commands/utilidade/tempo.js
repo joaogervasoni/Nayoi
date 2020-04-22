@@ -1,7 +1,7 @@
 const {MessageEmbed} = require("discord.js");
 var request = require('request');
-const {errorReturn, formatText} = require("../functions.js");
-const { prefix } = require("../botconfig.json");
+const {errorReturn, formatText} = require("../../functions.js");
+const { prefix } = require("../../botconfig.json");
 const weather = "ed901cbf6d0ca73aa44fda5632f67241";
 
 module.exports.run = (bot, message, args) => {

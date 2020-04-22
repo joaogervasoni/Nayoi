@@ -1,4 +1,4 @@
-const {formatDate} = require("../functions.js");
+const {formatDate} = require("../../functions.js");
 const {MessageEmbed} = require("discord.js");
 
 module.exports.run = async (bot, message, args) => {
