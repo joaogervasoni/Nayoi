@@ -4,11 +4,15 @@ module.exports = (bot, message) => {
     if (message.author.bot) return;
 
     const args = message.content.split(/ +/g);
-    const command = args.shift().slice(prefix.length).toLowerCase();
+    var command = 0;
+    if(args[0].length === prefix.length){
+        command = args[1].toLowerCase();
+        args.splice(0, 2); 
+    }else command = args.shift().slice(prefix.length).toLowerCase();
     const cmd = bot.commands.get(command);
 
     // Validações padrões
-    if (!message.content.toLowerCase().startsWith(prefix)) return;
+    if (!message.content.toLowerCase().startsWith(prefix.toLowerCase())) return;
     if (!cmd) return;
     if (!message.guild.me.permissions.has(["SEND_MESSAGES"])) return;
 
