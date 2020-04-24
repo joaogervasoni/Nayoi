@@ -12,7 +12,7 @@ module.exports = async (bot, member)  => {
             let entry = logs.entries.find(entry => entry.target === member.user);
              
             let channel = member.guild.channels.cache.find(channel => channel.id === guild.log.channel)
-            if(channel != null){
+            if(channel){
                 let embed = new MessageEmbed()
                 if (entry != null && entry.action == "MEMBER_KICK"){
                     embed

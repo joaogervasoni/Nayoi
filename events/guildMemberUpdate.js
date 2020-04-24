@@ -11,7 +11,7 @@ module.exports = async (bot, oldMember, newMember) => {
         
         if (guild.log.status == "on") {
             let channel = newMember.guild.channels.cache.find(channel => channel.id === guild.log.channel)
-            if (channel != null) {
+            if (channel) {
                 let embed = new MessageEmbed()
                     .setTitle(":pencil2: [Nick trocado]")
                     .addField(`**Usuário:**`, newMember.user, true)

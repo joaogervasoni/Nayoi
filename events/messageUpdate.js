@@ -13,7 +13,7 @@ module.exports = async (bot, oldMessage, newMessage) => {
         
         if (guild.log.status == "on" && oldMessage.channel.type == 'text') {
             let channel = oldMessage.guild.channels.cache.find(channel => channel.id === guild.log.channel)
-            if (channel != null) {
+            if (channel) {
                 let embed = new MessageEmbed()
                     .setTitle(":grey_question: [Mensagem Editada]")
                     .addField(`**Usuário:**`, newMessage.author, true)

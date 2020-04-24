@@ -21,7 +21,7 @@ events.run(bot);
 
 bot.on("ready", async () =>{
     console.log(`${bot.user.username} esta Online em ${bot.guilds.cache.size} servidores`.green);
-    bot.user.setActivity("y!help | y!commands", {type: "PLAYING"});
+    bot.user.setActivity(`${prefix}help | ${prefix}commands`, {type: "PLAYING"});
 })
 
 bot.login(token);

@@ -18,7 +18,7 @@ module.exports = async (bot, message) => {
         if (guild.log.status == "on" && message.channel.type == 'text') {
             let channel = message.guild.channels.cache.find(channel => channel.id === guild.log.channel);
 
-            if (channel != null) {
+            if (channel) {
                 let embed = new MessageEmbed()
                     .setTitle(":x: [Mensagem Deletada]")
                     .addField(`**Usuário:**`, message.member.user, true)
