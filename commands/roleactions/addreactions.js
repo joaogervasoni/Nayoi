@@ -47,6 +47,7 @@ module.exports = {
                 }
                 const roleReactionNew = new RoleReaction({
                     _id: mongoose.Types.ObjectId(),
+                    guildId: message.guild.id,
                     messageId: fetchedMessage.id,
                     emojiRoleMappings: emojiRoleMappings
                 });

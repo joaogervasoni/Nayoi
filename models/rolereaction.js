@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 
 const mapaSchema = mongoose.Schema({
+    guildId: String,
     messageId: String,
     emojiRoleMappings:{
         type: Map,
