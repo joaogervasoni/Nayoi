@@ -7,10 +7,11 @@ var colors = require('colors');
 const bot = new Client({disabledEveryone: true, partials: ['MESSAGE', 'REACTION']})
 
 bot.Guild = Guild;
-bot.baseColor = "#ff8ff2";
-bot.prefix = prefix;
-bot.commands = new Collection();
 bot.snipes = new Map();
+bot.commands = new Collection();
+bot.aliases = new Collection();
+bot.prefix = prefix;
+bot.baseColor = "#ff8ff2";
 bot.database = require('./database.js')
 
 const commands = require("./structures/command");

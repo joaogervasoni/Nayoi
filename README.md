@@ -21,7 +21,7 @@ Lembrando que sou um bot em desenvolvimento e problemas podem ocorrer mas trabal
 | Nome  | Tipo | Versão |
 | ------------- | ------------- | ------------- |
 | [Node.js](https://nodejs.org/en/) | JS  |12.16.1|
-| [Discord.js](https://discord.js.org/) | NPM  |12.1.1|
+| [Discord.js](https://discord.js.org/) | NPM  |12.2.0|
 | [Mongoose](https://www.npmjs.com/package/mongoose) | NPM  |5.9.5|
 | [Ms](https://www.npmjs.com/package/ms) | NPM  |2.1.2|
 | [Request](https://www.npmjs.com/package/request) | NPM  |2.88.2|

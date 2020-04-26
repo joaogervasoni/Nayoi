@@ -15,6 +15,10 @@ module.exports.run = (bot) => {
         for (const cmd of readdirSync(paths[i]).filter(cmd => cmd.endsWith(".js"))){
             const prop = require(`${paths[i]}/${cmd}`);
             bot.commands.set(prop.help.name, prop);
+
+            if (prop.help.aliases) for (const alias of prop.help.aliases){
+                bot.aliases.set(alias, prop);
+            }
         }
     }
     console.log(`${bot.commands.size} comandos carregados`.blue)
