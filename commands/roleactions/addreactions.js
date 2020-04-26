@@ -1,6 +1,7 @@
 const {MessageCollector} = require('discord.js')
 const RoleReaction = require("../../models/rolereaction.js");
 const { prefix } = require("../../botconfig.json");
+const mongoose = require('mongoose');
 
 let msgCollectorFilter = (newMsg, originalMsg) => newMsg.author.id === originalMsg.author.id;
 
@@ -10,7 +11,6 @@ module.exports = {
 
         let args2 = args.join(" ").slice(0, 18).split(' ').join('')
         let chat = args.join(" ").slice(19).slice(2,20);
-        
         let channel = message.guild.channels.cache.find(channel => channel.id === chat )
         let fetchedMessage = await channel.messages.fetch(args2);
         
@@ -60,8 +60,7 @@ module.exports = {
 module.exports.help = {
     name: "addreactions",
     description: "Dá cargos com reações em uma mensagem",
-    usability: "Pode utilizado desta forma: `"+prefix+"addreactions messageid`\n"
-    +"Caso a mensagem esteja em outro canal utilize `"+prefix+"addreactions messageid #channel`\n"
+    usability: "Pode utilizado desta forma: `"+prefix+"addreactions messageid #channel`\n"
     +"**Após utilizar o comando:**\n"
     +"`emoji, cargo` - Mande uma msg com emoji e cargo para cada cargo\n"
     +"`!!done` - Após terminar utilize o comando de done\n",
