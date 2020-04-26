@@ -6,10 +6,10 @@ module.exports = (bot, message) => {
     const args = message.content.split(/ +/g);
     var command = 0;
     if(args[0].length === prefix.length){
-        command = args[1].toLowerCase();
+        if (args[1] != undefined) command = args[1].toLowerCase();
         args.splice(0, 2); 
     }else command = args.shift().slice(prefix.length).toLowerCase();
-    const cmd = bot.commands.get(command);
+    const cmd = bot.commands.get(command) || bot.aliases.get(command);
 
     // Validações padrões
     if (!message.content.toLowerCase().startsWith(prefix.toLowerCase())) return;

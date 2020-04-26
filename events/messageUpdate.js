@@ -4,7 +4,7 @@ const {errorReturn} = require("../functions.js");
 module.exports = async (bot, oldMessage, newMessage) => {
     
     //Log
-    if(oldMessage.content == newMessage.content) {
+    if(oldMessage.content == newMessage.content || newMessage.content === "") {
         return
     }
     try{
