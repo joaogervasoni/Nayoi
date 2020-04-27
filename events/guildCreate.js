@@ -20,7 +20,7 @@ module.exports = (bot, guild) => {
                 msg: "Bem-vindo {member}!!",
                 channel: "",
                 canvas: "off",
-                canvasUrl: "",
+                canvasUrl: "off",
             },
             autorole: {
                 status: "off",

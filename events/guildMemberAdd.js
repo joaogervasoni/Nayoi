@@ -9,10 +9,10 @@ module.exports = async (bot, member) => {
         const guild = await bot.Guild.findOne({ 'guildId': member.guild.id });
 
         //autorole
-         if (guild.autorole.status === "on") {
-             let rol = guild.autorole.role;
-             if(rol) member.roles.add(rol);
-         }
+        if (guild.autorole.status === "on") {
+            let rol = guild.autorole.role;
+            if(rol) member.roles.add(rol);
+        }
         //welcome
          if (guild.welcome.status === "on") {
             let wlchat = member.guild.channels.cache.find(channel => channel.id === guild.welcome.channel)
@@ -32,10 +32,16 @@ module.exports = async (bot, member) => {
              msg = parseCount(msg, member.guild.memberCount);
              
              if (guild.welcome.canvas === "on"){
+                 let imagem = "https://github.com/Zaetic/Yani/blob/master/images/YaniBackground.png?raw=true";
+                 if (guild.welcome.canvasUrl != "off" || guild.welcome.canvasUrl != ""){
+                    imagem = guild.welcome.canvasUrl;
+                 }
+                 //- Linux
                  registerFont('arial.ttf', {family: 'Arial'});
+                 //
                  const canvas = createCanvas(1000, 360);
                  const ctx = canvas.getContext("2d");
-                 const background = await loadImage("https://github.com/Zaetic/Yani/blob/master/images/YaniBackground.png?raw=true");
+                 const background = await loadImage(imagem);
                  ctx.drawImage(background, 0,0, canvas.width, canvas.height);
                  ctx.beginPath();
                  ctx.lineWidth = 4;
@@ -47,15 +53,18 @@ module.exports = async (bot, member) => {
                  ctx.globalAlpha = 1;
                  ctx.strokeRect(65,280,870,65);
                  ctx.stroke();
+
                  ctx.fillStyle = "#e67e22";
                  ctx.globalAlpha = 0.6;
                  ctx.fillRect(180,216,100);
                  ctx.fill();
                  ctx.globalAlpha = 1;
+
                  ctx.font = "30px Arial";
                  ctx.textAlign = "center";
                  ctx.fillStyle = "#ffffff";
                  ctx.fillText(`Usuário: ${member.user.tag}`, 500, 325);
+
                  ctx.arc(500,140,120,0,Math.PI * 2, true);
                  ctx.lineWidth = 7;
                  ctx.strokeStyle = "#ffffff";
@@ -66,17 +75,17 @@ module.exports = async (bot, member) => {
                  ctx.drawImage(avatar, 370,20,250,250);
                  const attachment = new MessageAttachment(canvas.toBuffer(),"welcome.png");
                  return wlchat.send(msg, attachment)
-             }else{
-                 let welcomeEmbed = new MessageEmbed()
-                 .setThumbnail(member.user.avatarURL())
-                 .setDescription("Bem-vindo")
-                 .setColor(bot.baseColor)
-                 .addField("User", member.user)
-                 .addField("Mensagem", msg)
-                 return wlchat.send(welcomeEmbed)
-             }
+            }else{
+                let welcomeEmbed = new MessageEmbed()
+                .setThumbnail(member.user.avatarURL())
+                .setDescription("Bem-vindo")
+                .setColor(bot.baseColor)
+                .addField("User", member.user)
+                .addField("Mensagem", msg)
+                return wlchat.send(welcomeEmbed)
+            }
         }
-     } catch (e) {
+    } catch (e) {
         errorReturn(e, null, "guildMemberAdd")
     }  
 }

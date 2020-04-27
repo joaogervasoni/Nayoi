@@ -1,9 +1,10 @@
 const { prefix } = require("../../botconfig.json");
+const isImage = require('is-image');
 
 module.exports.run = async (bot, message, args) => {
     let args2 = args.join(" ").slice(0,3).split(' ').join('')
   
-    if(args2 === "on" || args2 === "off" || args2 === "msg" || args2 === "ch" || args2 === "sh" || args2 === "cv"){
+    if(args2 === "on" || args2 === "off" || args2 === "msg" || args2 === "ch" || args2 === "sh" || args2 === "cv" || args2 === "cvc"){
         bot.database;
         const guild = await bot.Guild.findOne({'guildId': message.guild.id});
 
@@ -61,8 +62,25 @@ module.exports.run = async (bot, message, args) => {
                 if(err) return message.channel.send(`Erro: ${err}, contate o suporte`)
                 if(!err) return message.channel.send(`Banner agora está: **${guild.welcome.canvas}**`)
             });
+        }else if(args2 === "cvc"){
+            let url = args.join(" ").slice(3);
+
+            if (isImage(url)){
+                guild.welcome.canvasUrl = url;
+                guild.save(function (err){
+                    if(err) return message.channel.send(`Erro: ${err}, contate o suporte`)
+                    if(!err) return message.channel.send("Url trocado (obs: As dimensões recomendadas são 1000x360)!!")
+                })
+            }
+            else if(!isImage(url)){
+                return message.channel.send(`Não foi encontrada uma imagem valida !!`)
+            }
+            else{
+                guild.welcome.canvasUrl = "off"
+                return message.channel.send(`Custom Canvas desabilitado`)
+            }
         }
-    }else return message.reply(`Preciso de um prefixo (Ex: on,off,msg,ch,sh,cv)`)
+    }else return message.reply(`Preciso de um prefixo (Ex: on,off,msg,ch,sh,cv,cvc)`)
 }
 
 module.exports.help = {
@@ -75,8 +93,9 @@ module.exports.help = {
     +"`{membercount}` - Para monstrar o número de pessoas no servidor\n",
     additional: "`"+prefix+"welcome ch #chat` - Altera o canal do bem-vindo\n"
     +"`"+prefix+"welcome sh` - Exibe msg de bem-vindo\n"
-    +"`"+prefix+"welcome cv` - Ativa o banner de bem-vindo\n",
-    others: "",
+    +"`"+prefix+"welcome cv` - Ativa o banner de bem-vindo\n"
+    +"`"+prefix+"welcome cvc url` - Troca imagem do banner de boas-vindas\n",
+    others: "As dimensões do banner de boas-vindas é de **1000x360**",
     type: "automation"
 }
 

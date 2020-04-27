@@ -29,6 +29,7 @@ Lembrando que sou um bot em desenvolvimento e problemas podem ocorrer mas trabal
 | [Colors](https://www.npmjs.com/package/colors) | NPM  |1.4.0|
 | [Canvas](https://www.npmjs.com/package/canvas) | NPM  |2.6.1|
 | [Node-Fetch](https://www.npmjs.com/package/node-fetch) | NPM  |2.6.0|
+| [Is-Image](https://www.npmjs.com/package/is-image) | NPM  |3.0.0|
 | [MongoDB](https://www.mongodb.com/) | DB  |4.2|
-| [Jikan](https://jikan.moe/) | API  |2.0.0|
+| [Jikan](https://jikan.moe/) | API  |v3.4.0|
 | [OpenWeather](https://openweathermap.org/api) | API  |2.5|
