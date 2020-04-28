@@ -22,7 +22,7 @@ module.exports.run = (bot, message, args) => {
         .setDescription("Aqui você pode encontrar ajuda sobre qualquer comando ou funcionalidade minha !!!")
         .addField("Usabilidade", "Para pesquisar digite `"+bot.prefix+"help nomedocomando`\n"
         +"Caso esteja buscando pela lista de comandos digite `"+bot.prefix+"commands`\n"
-        +"Espero que econtre o que procura :heart:")
+        +"Espero que encontre o que procura :heart:")
         .addField("Outros", "Para mais informações acesse: https://github.com/Zaetic/Yani")
         return message.channel.send(embed)
     }

@@ -1,34 +1,31 @@
-const {MessageEmbed} = require("discord.js");
-var request = require('request');
-const {errorReturn, formatText} = require("../../functions.js");
+const { MessageEmbed } = require("discord.js");
+const { errorReturn, formatText } = require("../../functions.js");
 const { prefix } = require("../../botconfig.json");
-const weather = "ed901cbf6d0ca73aa44fda5632f67241";
+const fetch = require("node-fetch");
+const weatherApi = "ed901cbf6d0ca73aa44fda5632f67241";
 
-module.exports.run = (bot, message, args) => {
-    
-    let args2 = args.join(" ").slice(0)
-    const parsed = formatText(args2);
+module.exports.run = async (bot, message, args) => {
+    try{
+        const local = formatText(args.join(" ").slice(0));
+        if(local === "" || local === undefined) return message.reply("Para saber informações do comando digite `"+prefix+"help "+this.help.name+"`");
 
-    request(`https://api.openweathermap.org/data/2.5/weather?q=${parsed}&appid=${weather}`, function (err, response, body) {
-        if (response.statusCode != "200") return message.reply("Não encontrei nenhuma informação de tempo :(")
-        try{
-            let tempo = JSON.parse(body);
-            if(tempo == null) return message.reply("Parece que aconteceu um bug em meu sistema (Erro: Json sem dados)")
-            let temp = tempo.main.temp - 273.15;
-            let name = tempo.name;
-            let country = tempo.sys.country;
-            
-            let embed = new MessageEmbed()
-                .setThumbnail("https://github.com/Zaetic/Yani/blob/master/images/YaniTempo.png?raw=true")
-                .setTitle(`Temperatura de ${name}`)
-                .addField(`Temp:`, temp.toFixed(2))
-                .addField(`Local:`, country, true)
-                .setColor(bot.baseColor)
-            return message.channel.send(embed)
-        }catch(e){
-            errorReturn(e, message, "tempo");
-        }
-    });
+        const weather = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${local}&appid=${weatherApi}`).then(res => res.json());
+        if(weather.cod != "200") return message.reply("Não encontrei nenhuma informação de tempo :worried:")
+        if(weather === null) return message.reply("Parece que aconteceu um bug em meu sistema :bug: (Erro: Json sem dados)")
+        
+        let temp = (weather.main.temp - 273.15).toFixed(2);
+        let feels = (weather.main.feels_like - 273.15).toFixed(2);
+        let embed = new MessageEmbed()
+            .setThumbnail("https://github.com/Zaetic/Yani/blob/master/images/YaniTempo.png?raw=true")
+            .setTitle(`Temperatura de ${weather.name}`)
+            .addField(`Temperatura:`, `${temp} °C`, true)
+            .addField(`Sensação:`, `${feels} °C`, true)
+            .addField(`Local:`, weather.sys.country)
+            .setColor(bot.baseColor)
+        return message.channel.send(embed)
+    }catch(e){
+        errorReturn(e, message, this.help.name);
+    }
 }
 
 module.exports.help = {

@@ -50,7 +50,7 @@ module.exports.run = async (bot, message, args) => {
             })
         }
         else if(args2 === "sh"){
-            return message.channel.send(`**Mensagem atual:** ${guild.welcomeMsg}`)
+            return message.channel.send(`**Mensagem atual:** ${guild.welcome.msg}`)
         }else if(args2 === "cv"){
             if (guild.welcome.canvas === "off"){
                 guild.welcome.canvas = "on";
