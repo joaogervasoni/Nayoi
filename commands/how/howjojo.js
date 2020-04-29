@@ -3,9 +3,9 @@ const {errorReturn} = require("../../functions.js");
 
 module.exports.run = (bot, message) => {
     try{
-        let user = message.mentions.members.first()
+        let user = message.mentions.members.first();
         let percent = Math.floor(Math.random() * 101);
-        let msg
+        let msg;
         if (user){
             msg = `${user} é ${percent}% JoJo Fag :muscle:`
         }else{
@@ -18,7 +18,7 @@ module.exports.run = (bot, message) => {
                     .setColor("#99ff99")
         return message.channel.send(embed);
     }catch(e){
-        errorReturn(e, message)
+        errorReturn(e, message, this.help.name)
     }
 }
 

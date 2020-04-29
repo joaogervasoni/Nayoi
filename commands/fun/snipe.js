@@ -1,6 +1,6 @@
 const {MessageEmbed} = require("discord.js");
-const {errorReturn} = require("../functions.js");
-const { prefix } = require("../botconfig.json");
+const {errorReturn} = require("../../functions.js");
+const { prefix } = require("../../botconfig.json");
 
 module.exports.run = (bot, message, args) => {
     try{
