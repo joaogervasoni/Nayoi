@@ -5,6 +5,8 @@ const fetch = require("node-fetch");
 
 module.exports.run = (bot, message, args) => {
     try{
+        if(!args[0]) return message.reply("Para saber informações do comando digite `"+prefix+"help "+this.help.name+"`") 
+
         fetch("https://pomber.github.io/covid19/timeseries.json").then(response => response.json()).then(data => {
             let country = data[upperCaseFirst(args[0])]
             if(country){
@@ -20,10 +22,9 @@ module.exports.run = (bot, message, args) => {
                     .addField("Link", "https://www.arcgis.com/apps/opsdashboard/index.html#/bda7594740fd40299423467b48e9ecf6")
                     .setFooter("Não saia de casa !!")
                 return message.channel.send(embed)
-            }else if(!country){
-                return message.channel.send("Não encontrado !! `Obs: O nome do País deve ser em inglês`")
-            }else return message.reply("Para saber informações do comando digite `"+prefix+"help "+this.help.name+"`") 
+            }else if(!country) return message.channel.send("Não encontrado !! `Obs: O nome do País deve ser em inglês`")
         });
+
     }catch(e){
         errorReturn(e, message, this.help.name);
     }
