@@ -10,8 +10,7 @@ module.exports.run = async (bot, message, args) => {
         if(local === "" || local === undefined) return message.reply("Para saber informações do comando digite `"+prefix+"help "+this.help.name+"`");
 
         const weather = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${local}&appid=${weatherApi}`).then(res => res.json());
-        if(weather.cod != "200") return message.reply("Não encontrei nenhuma informação de tempo :worried:")
-        if(weather === null) return message.reply("Parece que aconteceu um bug em meu sistema :bug: (Erro: Json sem dados)")
+        if(weather.cod != "200" || weather === null || weather === undefined) return message.reply("Não encontrei nenhuma informação de tempo :worried:")
         
         let temp = (weather.main.temp - 273.15).toFixed(2);
         let feels = (weather.main.feels_like - 273.15).toFixed(2);

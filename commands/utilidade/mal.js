@@ -1,135 +1,87 @@
-const {MessageEmbed} = require("discord.js");
+const { MessageEmbed } = require("discord.js");
+const { errorReturn } = require("../../functions.js");
 const { prefix } = require("../../botconfig.json");
 const fetch = require("node-fetch");
 
 module.exports.run = async (bot, message, args) => {
+    try{
+        const cmd = args[0];
+        let subcmd = null;
+        if(cmd != null) {subcmd = args.join("").slice(cmd.length)}
+        if(subcmd === null || subcmd === "" || subcmd === undefined) return message.reply("Para saber informações do comando digite `"+prefix+"help "+this.help.name+"`");
 
-    let argsAdm = args.join(" ").slice(0,10).split(' ').join('')
-    let args2 = args.join(" ").slice(0, 3).split(' ').join('')
-    let args3 = args.join(" ").slice(3)
+        if (cmd === "an" || cmd === "anime") {
+            
+            let anime = await fetch(`https://api.jikan.moe/v3/search/anime/?q=${subcmd}&page=1&limit=1`).then(res => res.json());
+            if(anime.status != null || anime === null || anime.results[0] === undefined) return message.reply("Não encontrei nenhum anime :worried:")
 
-    if(argsAdm === "nsfwon" || argsAdm === "nsfwoff"){
-        if(!message.member.hasPermission("ADMINISTRATOR")) return message.channel.send("Precisa de permissão");
-        bot.database;
-        const guild = await bot.Guild.findOne({'guildId': message.guild.id});
-
-        if (argsAdm === "nsfwon"){
-            if (guild.server.nsfw === "on") return message.channel.send(`NSFW esta atualmente: **On**`)
-
-            guild.server.nsfw = "on";
-            guild.save(function (err){
-                if(err) return message.channel.send(`Erro: ${err}, contate o suporte`)
-                if(!err) return message.channel.send("NSFW agora está: **On**")
-            });
-        }
-        else if (argsAdm === "nsfwoff"){
-            if (guild.nsfw === "off") return message.channel.send(`NSFW esta atualmente: **Off**`)
-
-            guild.server.nsfw = "off";
-            guild.save(function (err){
-                if(err) return message.channel.send(`Erro: ${err}, contate o suporte`)
-                if(!err) return message.channel.send("NSFW agora está: **Off**")
-            });
-        }
-    }
-    else if (args2 === "an") {
-        
-        if (!args3.split(' ').join('') != "") return message.reply(`Exemplo: _y!mal an naruto_`)
-        let rAnime = await fetch(`https://api.jikan.moe/v3/search/anime/?q=${args3}&page=1&limit=1`).then(res => res.json());
-
-        if(rAnime.status != null){
-            return message.reply("Não encontrei nenhum anime :worried:")
-        } 
-        if(rAnime === null) return message.reply("Parece que aconteceu um bug em meu sistema :bug: (Erro: Json sem dados)")
-        
-        rAnime = rAnime.results[0];
-
-        bot.database;
-        bot.Guild.findOne({'guildId': message.guild.id}, (err, guild) => {
-            if(rAnime.rated == "Rx" && guild.nsfw == "off") return message.reply("Animes com Rated 'Rx' estão desabilitados _**Safradinho**_ :banana:")
+            anime = anime.results[0];
             let embed = new MessageEmbed()
-                .setThumbnail(rAnime.image_url)
+                .setThumbnail(anime.image_url)
                 .setTitle("Anime")
-                .setDescription(rAnime.synopsis)
-                .setColor(bot.filoColor)
-                .addField("Name:", rAnime.title)
-                .addField("Score:", rAnime.score, true)
-                .addField("Rated:", rAnime.rated, true)
-                .addField("Type:", rAnime.type, true)
-                .addField("Episodes:", rAnime.episodes, true)
+                .setDescription(anime.synopsis)
+                .setColor(bot.baseColor)
+                .addField("Nome:", anime.title, true)
+                .addField("Score:", anime.score, true)
+                .addField("Rated:", anime.rated, true)
+                .addField("Tipo:", anime.type, true)
+                .addField("Airing:", anime.airing, true)
+                .addField("Episódios:", anime.episodes, true)
             return message.channel.send(embed)
-        });
-    }
-    else if (args2 === "mg"){
+        }
+        else if (cmd === "mg" || cmd === "manga"){
 
-        if(!args3.split(' ').join('') != "") return message.reply(`Exemplo: _y!mal mg naruto_`)
-
-        let rManga = await fetch(`https://api.jikan.moe/v3/search/manga/?q=${args3}&page=1&limit=1`).then(res => res.json());
-        if(rManga.status != null){
-            return rManga.reply("Não encontrei nenhum manga :worried:")
-        } 
-        if(rManga === null) return message.reply("Parece que aconteceu um bug em meu sistema :bug: (Erro: Json sem dados)")
-        
-        rManga = rManga.results[0];
-        bot.database;
-        bot.Guild.findOne({'guildId': message.guild.id}, (err, guild) => {
-            if(rManga.rated == "Rx" && guild.nsfw == "off") return message.reply("Mangas com Rated 'Rx' estão desabilitados _**Safradinho**_ :banana:")
+            let manga = await fetch(`https://api.jikan.moe/v3/search/manga/?q=${subcmd}&page=1&limit=1`).then(res => res.json());
+            if(manga.status != null || manga === null || manga.results[0] === undefined) return message.reply("Não encontrei nenhum mangá :worried:")
+            
+            manga = manga.results[0];
             let embed = new MessageEmbed()
-            .setThumbnail(rManga.image_url)
-            .setTitle("Manga")
-            .setDescription(rManga.synopsis)
-            .setColor(bot.filoColor)
-            .addField("Name:", rManga.title)
-            .addField("Score:", rManga.score, true)
-            .addField("Rated:", rManga.rated, true)
-            .addField("Type:", rManga.type, true)
-            .addField("Volumes:", rManga.volumes, true)
+            .setThumbnail(manga.image_url)
+            .setTitle("Mangá")
+            .setDescription(manga.synopsis)
+            .setColor(bot.baseColor)
+            .addField("Nome:", manga.title, true)
+            .addField("Score:", manga.score, true)
+            .addField("Tipo:", manga.type, true)
+            .addField("Volumes:", manga.volumes, true)
+            if(manga.rated != null) embed.addField("Rated:", manga.rated, true)
             return message.channel.send(embed)
-        });
+        }
+        else if (cmd === "ch" || cmd === "character"){
+
+            let character = await fetch(`https://api.jikan.moe/v3/search/character/?q=${subcmd}&page=1&limit=1`).then(res => res.json());
+            if(character.status != null || character === null || character.results[0] === undefined) return message.reply("Não encontrei nenhum personagem :worried:")
+
+            character = character.results[0];
+            let embed = new MessageEmbed()
+            .setThumbnail(character.image_url)
+            .setTitle("Character")
+            .setColor(bot.baseColor)
+            .addField("Nome:", character.name)
+            return message.channel.send(embed)
+        }
+        else if (cmd === "pf" || cmd === "perfil") {
+
+            let profile = await fetch(`https://api.jikan.moe/v3/user/${subcmd}/profile`).then(res => res.json());
+            if(profile.status != null || profile === null || profile.status === "400" )return message.reply("Não encontrei nenhum perfil :worried:")
+
+            let embed = new MessageEmbed()
+                .setThumbnail(profile.image_url)
+                .setTitle(profile.username)
+                .setColor(bot.baseColor)
+                .addField("Gênero:", profile.gender, true)
+                .addField("Local:", profile.location, true)
+                .addField(`Animes: ${profile.anime_stats.total_entries}`, `Assistindo: ${profile.anime_stats.watching} | Completos: ${profile.anime_stats.completed} | Em mãos: ${profile.anime_stats.on_hold}
+                        Dropados: ${profile.anime_stats.dropped} | Para ver: ${profile.anime_stats.plan_to_watch}`)
+                .addField(`Mangas: ${profile.manga_stats.total_entries}`, `Lendo: ${profile.manga_stats.reading} | Completos: ${profile.manga_stats.completed} | Em mãos: ${profile.manga_stats.on_hold}
+                        Dropados: ${profile.manga_stats.dropped} | Para ler: ${profile.manga_stats.plan_to_read}`)
+                .addField("Entrou em:", profile.joined)
+            return message.channel.send(embed)
+
+        }else return message.reply("Para saber informações do comando digite `"+prefix+"help "+this.help.name+"`")
+    }catch(e){
+        errorReturn(e, message, this.help.name);
     }
-    else if (args2 === "ch"){
-
-        if(!args3.split(' ').join('') != "") return message.reply(`Exemplo: _y!mal ch itachi_`)
-        let rCharacter = await fetch(`https://api.jikan.moe/v3/search/character/?q=${args3}&page=1&limit=1`).then(res => res.json());
-        if(rCharacter.status != null){
-            return message.reply("Não encontrei nenhum personagem :worried:")
-        } 
-        if(rCharacter === null) return message.reply("Parece que aconteceu um bug em meu sistema :bug: (Erro: Json sem dados)")
-        
-        rCharacter = rCharacter.results[0];
-
-        let embed = new MessageEmbed()
-        .setThumbnail(rCharacter.image_url)
-        .setTitle("Character")
-        .setColor(bot.filoColor)
-        .addField("Name:", rCharacter.name)
-        return message.channel.send(embed)
-
-    }
-    else if (args2 === "pf") {
-        let profile = args.join(" ").slice(3)
-
-        if (!profile.split(' ').join('') != "") return message.reply(`Exemplo: y!mal pf perfil`)
-        let rProfile = await fetch(`https://api.jikan.moe/v3/user/${args3}/profile`).then(res => res.json());
-        if(rProfile.status != null){
-            return message.reply("Não encontrei nenhum perfil :worried:")
-        } 
-        if(rProfile === null) return message.reply("Parece que aconteceu um bug em meu sistema :bug: (Erro: Json sem dados)")
-
-        let embed = new MessageEmbed()
-            .setThumbnail(rProfile.image_url)
-            .setTitle(rProfile.username)
-            .setColor(bot.filoColor)
-            .addField("Gender:", rProfile.gender, true)
-            .addField("Location:", rProfile.location, true)
-            .addField(`Animes: ${rProfile.anime_stats.total_entries}`, `Watching: ${rProfile.anime_stats.watching} | Completed: ${rProfile.anime_stats.completed} | On hold: ${rProfile.anime_stats.on_hold}
-                    Dropped: ${rProfile.anime_stats.dropped} | Plan to Watch: ${rProfile.anime_stats.plan_to_watch}`)
-            .addField(`Mangas: ${rProfile.manga_stats.total_entries}`, `Reading: ${rProfile.manga_stats.reading} | Completed: ${rProfile.manga_stats.completed} | On hold: ${rProfile.manga_stats.on_hold}
-                    Dropped: ${rProfile.manga_stats.dropped} | Plan to Read: ${rProfile.manga_stats.plan_to_read}`)
-            .addField("Joined:", rProfile.joined)
-        return message.channel.send(embed)
-
-    } else return message.reply(`Preciso de um prefixo _(Exemplo: an,mg,ch,pf)_`)
 }
 
 module.exports.help = {
@@ -140,8 +92,6 @@ module.exports.help = {
     +"**Após o mal podem ser utilizadas as seguintes informações:**\n"
     +"`ch` - Para encontrar um personagem\n"
     +"`pf` - Para encontrar um perfil no MAL\n",
-    additional: "`"+prefix+"mal nfswon` - Faz pesquisas +18 (padrão)\n"
-    +"`"+prefix+"mal nfswoff` - Desabilita pesquisar +18",
     others: "",
     type: "utilidade"
 }
