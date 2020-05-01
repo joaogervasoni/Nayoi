@@ -1,69 +1,102 @@
-const {MessageCollector} = require('discord.js')
-const RoleReaction = require("../../models/rolereaction.js");
+const {MessageCollector, MessageEmbed} = require('discord.js');
+const {errorReturn, formatChannelId, formatRoleId, formatEmojiId} = require("../../functions.js");
 const { prefix } = require("../../botconfig.json");
 const mongoose = require('mongoose');
+const RoleReaction = require("../../models/rolereaction.js");
 
 let msgCollectorFilter = (newMsg, originalMsg) => newMsg.author.id === originalMsg.author.id;
 
-module.exports = {
-    run: async (bot, message, args) => {
+module.exports.run = async (bot, message, args) => {
+    try{
         bot.database;
 
-        let args2 = args.join(" ").slice(0, 18).split(' ').join('')
-        let chat = args.join(" ").slice(19).slice(2,20);
-        let channel = message.guild.channels.cache.find(channel => channel.id === chat )
-        let fetchedMessage = await channel.messages.fetch(args2);
+        if(!args[0]) return message.reply("Para saber informações do comando digite `"+prefix+"help "+this.help.name+"`");
+
+        let channel = await message.guild.channels.cache.find(channel => channel.id === formatChannelId(args[0]))
+        let idmsg;
         
-        if(fetchedMessage){
-            await message.channel.send("Digite o nome do Emoji/Cargo (Ex: pepeemoji, pepecargo) ao completar todos digite '!!done'");
+        if(!channel || channel === null || channel === undefined) return message.reply("Nenhum canal encontrado :worried: !!");
+        if(channel){
+            await message.channel.send("Vamos começar !!\n"
+            + "Primeiro digite o que deseja mandar na msg, lembrando que o titulo e a msg devem ser dividos por **',' virgula** !!\n"
+            + "`Exemplo: Um Titulo legal, Escolha a reação do pepe para receber o cargo pepe !!!`");
+
             let collector = new MessageCollector(message.channel, msgCollectorFilter.bind(null, message));
             let emojiRoleMappings = new Map();
-            collector.on('collect', msg => {
+            var emojiEmoji = [];
+            var msgAenviar;
+
+            collector.on('collect', async msg => {
                 let {cache} = msg.guild.emojis;
                 if(msg.content.toLowerCase() === '!!done'){
+                    
+                    let embed = new MessageEmbed()
+                        .setTitle(msgAenviar[0])
+                        .setDescription(msgAenviar[1])
+                        .setColor(bot.baseColor)
+                    
+                    let msg = await channel.send(embed);
+                    idmsg = msg;
+
+                    emojiEmoji.forEach(element => {
+                        let emoji = cache.find(emoji => emoji.id === element);
+                        idmsg.react(emoji)    
+                    });
+
+                    await message.channel.send("Role Reaction e Msg criados no canal selecionado :man_mage: !!");
                     collector.stop('done command was issue');
                     return;
                 }
-                let [emojiName, roleName] = msg.content.split(/,\s+/);
-                if (!emojiName && !roleName) return;
-                
-                let emoji = cache.find(emoji => emoji.name.toLowerCase() === emojiName.toLowerCase());
-                if(!emoji){
-                    msg.channel.send("Emoji não existe");
-                    return ;
+                if(!msgAenviar){
+                    msgAenviar = [x, y] = msg.content.split(/,\s+/);
+                    await message.channel.send("**Mensagem salva :sunglasses:!! **\n"
+                    + "Caso não tenha gostado do que digitou, digite !!clear para poder escolher novamente a msg !!\n"
+                    + "Agora digite os emotes divididos por **',' virgula** `Ex: :emoji:, @cargo`\n"
+                    + "O emoji deve ser mandado como vc utiliza-o normalmente, já o cargo é so marcar ele !!"); 
                 }
-                let role = msg.guild.roles.cache.find(role => role.name.toLowerCase() === roleName.toLowerCase());
-                if(!role){
-                    msg.channel.send("Role não existe");
-                    return ;
+                else{
+
+                    let [emojiid, roleid] = msg.content.split(/,\s+/);
+                    if (!emojiid && !roleid) return;
+
+                    let emoji = cache.find(emoji => emoji.id === formatEmojiId(emojiid));
+                    if(!emoji){ msg.channel.send("Emoji não existe !!"); return ;}
+
+                    let role = msg.guild.roles.cache.find(role => role.id === formatRoleId(roleid));
+                    if(!role){ msg.channel.send("Role não existe !!"); return ;}
+
+                    emojiEmoji.push(emoji.id)
+                    emojiRoleMappings.set(emoji.id, role.id)
+                    await message.channel.send("Emoji e Cargo salvos !! `Caso queira finalizar digite !!done`")
                 }
-                fetchedMessage.react(emoji)
-                emojiRoleMappings.set(emoji.id, role.id)
             });
+
             collector.on('end', async(collected, reason) => {
-                let findMsgDocument = await RoleReaction.findOne({ 'messageId': fetchedMessage.id});
-                if(findMsgDocument){
-                    message.channel.send("Já existe, não foi salva");
-                }
+                let findMsgDocument = await RoleReaction.findOne({ 'messageId': idmsg.id});
+                if(findMsgDocument) message.channel.send("Já existe, não foi salva");
+
                 const roleReactionNew = new RoleReaction({
                     _id: mongoose.Types.ObjectId(),
                     guildId: message.guild.id,
-                    messageId: fetchedMessage.id,
+                    messageId: idmsg.id,
                     emojiRoleMappings: emojiRoleMappings
                 });
                 roleReactionNew.save()
             })
-        }
-    }, 
+        }  
+    }catch(e){
+        errorReturn(e, message, this.help.name);       
+    }
 }
 
 module.exports.help = {
     name: "addreactions",
     description: "Dá cargos com reações em uma mensagem",
-    usability: "Pode utilizado desta forma: `"+prefix+"addreactions messageid #channel`\n"
+    usability: "Pode utilizado desta forma: `"+prefix+"addreactions #channel`\n"
     +"**Após utilizar o comando:**\n"
-    +"`emoji, cargo` - Mande uma msg com emoji e cargo para cada cargo\n"
-    +"`!!done` - Após terminar utilize o comando de done\n",
+    +"Digite o titulo e a msg divididos por vírgula `Ex: Titulo, toda a msg`\n"
+    +"Mande uma msg com emoji e cargo para cada cargo `Ex: :emoji:, @cargo`\n"
+    +"Após terminar de mandar todos os emojis e cargos utilize o comando de done `!!done`\n",
     additional: "",
     others: "",
     type: "automation"
