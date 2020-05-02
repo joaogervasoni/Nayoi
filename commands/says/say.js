@@ -2,7 +2,7 @@ const {errorReturn} = require("../../functions.js");
 const { prefix } = require("../../botconfig.json");
 const ms = require("ms");
 
-module.exports.run = async (bot, message, args) => {
+module.exports.run = (bot, message, args) => {
     try{
         let mutetime = args[0];
         mutetime = ms(mutetime);
