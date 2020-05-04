@@ -1,7 +1,16 @@
 const { prefix } = require("../botconfig");
+const AutoDeleteMsg = require("../models/autodeletemsg");
 
-module.exports = (bot, message) => {
+module.exports = async (bot, message) => {
     if (message.author.bot) return;
+
+    let autodeletemsg = await AutoDeleteMsg.findOne({ channelId: message.channel.id });
+    if(autodeletemsg && autodeletemsg != undefined){
+        if(autodeletemsg.config.status === "on"){
+            let imageAtt = message.attachments.first() ? message.attachments.first().proxyURL : null
+            if(!imageAtt) message.delete();
+        }
+    }
 
     const args = message.content.split(/ +/g);
     var command = 0;
