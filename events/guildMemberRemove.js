@@ -7,6 +7,11 @@ module.exports = async (bot, member)  => {
     try{
         bot.database;
         const guild = await bot.Guild.findOne({ 'guildId': member.guild.id });
+
+        //Update memberCount
+        guild.memberCount = member.guild.memberCount;
+        guild.save();
+        
         if(guild.log.status == "on"){
             let logs = await member.guild.fetchAuditLogs();
             let entry = logs.entries.find(entry => entry.target === member.user);

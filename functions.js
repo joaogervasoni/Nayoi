@@ -3,7 +3,7 @@ var colors = require('colors');
 
 module.exports = {
     errorReturn: function(error, message, name) {  
-        if (message != null){
+        if (message != null && message != undefined){
             console.log(`Name: ${name} // Error: ${error} // Message: ${message}`.red);
             let embed = new MessageEmbed()
                 .setThumbnail("https://github.com/Zaetic/Yani/blob/master/images/YaniError404.png?raw=true")

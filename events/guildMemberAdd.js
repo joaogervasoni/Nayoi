@@ -8,6 +8,10 @@ module.exports = async (bot, member) => {
         bot.database;
         const guild = await bot.Guild.findOne({ 'guildId': member.guild.id });
 
+        //Update memberCount
+        guild.memberCount = member.guild.memberCount;
+        guild.save();
+        
         //autorole
         if (guild.autorole.status === "on") {
             let rol = guild.autorole.role;
