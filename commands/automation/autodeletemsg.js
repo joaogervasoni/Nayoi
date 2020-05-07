@@ -16,15 +16,18 @@ module.exports.run = async (bot, message, args) => {
         if (!chat) return message.reply("Não encontrei nenhum canal :worried:");
 
         if(cmd === "on"){
-            let findChannel = await AutoDeleteMsg.findOne({ 'channelId': subcmd});
-            if(findChannel.config.status === "on") message.channel.send("Já existe, não foi salva");
+            let findChannel = await AutoDeleteMsg.findOne({ 'channelId': subcmd });
             
-            if(findChannel.config.status === "off"){
-                findChannel.config.status = "on";
-                findChannel.save(function (err){
-                    if(err) return message.channel.send(`Erro: ${err}, contate o suporte`)
-                    if(!err) return message.channel.send("AutoDeleteMsg no canal agora está: **On**")
-                });
+            if(findChannel != null){
+                if(findChannel.config.status === "on") message.channel.send("Já existe, não foi salva");
+            
+                if(findChannel.config.status === "off"){
+                    findChannel.config.status = "on";
+                    findChannel.save(function (err){
+                        if(err) return message.channel.send(`Erro: ${err}, contate o suporte`)
+                        if(!err) return message.channel.send("AutoDeleteMsg no canal agora está: **On**")
+                    });
+                }
             }
 
             const autodeletemsg = new AutoDeleteMsg({
@@ -42,7 +45,10 @@ module.exports.run = async (bot, message, args) => {
                     dm: "off"
                 }
             });
-            autodeletemsg.save()
+            autodeletemsg.save(function (err){
+                if(err) return message.channel.send(`Erro: ${err}, contate o suporte`)
+                if(!err) return message.channel.send("AutoDeleteMsg no canal agora está: **On**")
+            });
         }
         else if (cmd === "off"){
 
