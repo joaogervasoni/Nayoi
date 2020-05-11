@@ -1,30 +1,17 @@
-const {RichEmbed} = require("discord.js");
 const {errorReturn} = require("../../functions.js");
+const { prefix } = require("../../botconfig.json");
 
-module.exports.run = async (bot, message, args) => {
+module.exports.run = (bot, message, args) => {
     try{
         let kUser = message.guild.member(message.mentions.users.first() || message.guild.member.get(args[0]))
-        if(!kUser) return message.channel.send("Não encontrei esse usuário");
-        let kReason = args.join(" ").slice(22);
+        if(!kUser) return message.channel.send("Não encontrei esse usuário :thinking:");
+        let kReason = args.join(" ").slice(args[0].length);
 
-        if(kUser.hasPermission("MANAGE_MESSAGES")) return message.channel.send("Essa pessoa não pode levar Kick");
-
-        let kickEmbed = new RichEmbed()
-        .setDescription("-Kick-")
-        .setColor(bot.filoColor)
-        .addField("Usuário kickado", `${kUser} com id ${kUser.id}`)
-        .addField("Kickado por", `<@${message.author.id}> com id ${message.author.id}`)
-        .addField("Kickado em", message.channel)
-        .addField("Tempo", message.createdAt)
-        .addField("Razão", kReason);
-
-        let incidentsChannel = message.guild.channels.cache.find(incidentsChannel => incidentsChannel.name === "incidents");
-        if(!incidentsChannel) return message.channel.send("Não encontrei o canal 'incidents'");
+        if(kUser.hasPermission("MANAGE_MESSAGES")) return message.channel.send("Essa pessoa não pode levar Kick :flushed:");
+        let msg = "Usuário kickado: `"+kUser+"` || Razão: `"+kReason+"`";
 
         message.guild.member(kUser).kick(kReason);
-        incidentsChannel.send(kickEmbed);
-        
-        return;
+        return message.channel.send(msg);
     }catch(e){
         errorReturn(e, message, this.help.name)
     }
@@ -32,6 +19,8 @@ module.exports.run = async (bot, message, args) => {
 
 module.exports.help = {
     name: "kick",
+    description: "Kicka a pessoa do servidor",
+    usability: "Pode ser utilizado digitando `"+prefix+"kick #usuario_mencionado`\n",
     type: "adm"
 }
 

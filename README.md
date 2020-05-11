@@ -24,7 +24,6 @@ Lembrando que sou um bot em desenvolvimento e problemas podem ocorrer mas trabal
 | [Discord.js](https://discord.js.org/) | NPM  |12.2.0|
 | [Mongoose](https://www.npmjs.com/package/mongoose) | NPM  |5.9.5|
 | [Ms](https://www.npmjs.com/package/ms) | NPM  |2.1.2|
-| [Path](https://www.npmjs.com/package/path) | NPM  |0.12.7|
 | [Colors](https://www.npmjs.com/package/colors) | NPM  |1.4.0|
 | [Canvas](https://www.npmjs.com/package/canvas) | NPM  |2.6.1|
 | [Node-Fetch](https://www.npmjs.com/package/node-fetch) | NPM  |2.6.0|
