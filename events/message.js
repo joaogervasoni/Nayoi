@@ -23,6 +23,7 @@ module.exports = async (bot, message) => {
     // Validações padrões
     if (!message.content.toLowerCase().startsWith(prefix.toLowerCase())) return;
     if (!cmd) return;
+    if (message.guild.me === null || message.guild.me === undefined) return;
     if (!message.guild.me.permissions.has(["SEND_MESSAGES"])) return;
 
     // Validações de cargo

@@ -1,7 +1,6 @@
-const {MessageEmbed} = require("discord.js");
-const {errorReturn} = require("../functions.js");
+const { MessageEmbed, MessageAttachment } = require("discord.js");
+const { errorReturn } = require("../functions.js");
 const { createCanvas, loadImage, registerFont } = require("canvas");
-const { MessageAttachment } = require("discord.js");
 
 module.exports = async (bot, member) => {  
     try {
