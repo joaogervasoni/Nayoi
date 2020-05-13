@@ -20,6 +20,17 @@ module.exports = async (bot, reaction, user) => {
                     
                 }
             }
+            else if (emojiRoleMappings.get(reaction.emoji.name)){
+                let roleId = emojiRoleMappings.get(reaction.emoji.name);
+
+                let role = reaction.message.guild.roles.cache.find(role => role.id === roleId);
+                let member = reaction.message.guild.members.cache.get(user.id);
+                
+                if(role && member) {
+                    member.roles.add(role);
+                    
+                }
+            }
         }
 
         if(reaction.message) {

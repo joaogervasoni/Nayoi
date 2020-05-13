@@ -3,6 +3,7 @@ const {errorReturn, formatChannelId, formatRoleId, formatEmojiId} = require("../
 const { prefix } = require("../../botconfig.json");
 const mongoose = require('mongoose');
 const RoleReaction = require("../../models/rolereaction.js");
+const emojis = require('../../node_modules/emojis-list/index.js')
 
 let msgCollectorFilter = (newMsg, originalMsg) => newMsg.author.id === originalMsg.author.id;
 
@@ -39,8 +40,15 @@ module.exports.run = async (bot, message, args) => {
                     idmsg = msg;
 
                     emojiEmoji.forEach(element => {
-                        let emoji = cache.find(emoji => emoji.id === element);
-                        idmsg.react(emoji)    
+                        let emojiN = emojis.find(em => em === element);
+                        console.log(element)
+                        console.log(emojiN)
+                        if (emojiN){
+                            idmsg.react(emojiN)
+                        }else{
+                            let emoji = cache.find(emoji => emoji.id === element);
+                            idmsg.react(emoji) 
+                        }
                     });
 
                     await message.channel.send("Role Reaction e Msg criados no canal selecionado :man_mage: !!");
@@ -60,14 +68,26 @@ module.exports.run = async (bot, message, args) => {
                     if (!emojiid && !roleid) return;
 
                     let emoji = cache.find(emoji => emoji.id === formatEmojiId(emojiid));
-                    if(!emoji){ msg.channel.send("Emoji não existe !!"); return ;}
+                    let tst = emojiid.split(/ +/g);
+                    let emojiN = emojis.find(em => em === tst[0]);
+
+                    if(!emoji && !emojiN){ 
+                        msg.channel.send("Emoji não existe !!"); 
+                        return;
+                    }
 
                     let role = msg.guild.roles.cache.find(role => role.id === formatRoleId(roleid));
                     if(!role){ msg.channel.send("Role não existe !!"); return ;}
 
-                    emojiEmoji.push(emoji.id)
-                    emojiRoleMappings.set(emoji.id, role.id)
-                    await message.channel.send("Emoji e Cargo salvos !! `Caso queira finalizar digite !!done`")
+                    if(!emoji){
+                        emojiEmoji.push(emojiN)
+                        emojiRoleMappings.set(emojiN, role.id)
+                        await message.channel.send("Emoji e Cargo salvos !! `Caso queira finalizar digite !!done`")
+                    }else{
+                        emojiEmoji.push(emoji.id)
+                        emojiRoleMappings.set(emoji.id, role.id)
+                        await message.channel.send("Emoji e Cargo salvos !! `Caso queira finalizar digite !!done`")
+                    }
                 }
             });
 
