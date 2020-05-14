@@ -20,6 +20,7 @@ module.exports = {
     },    
 
     formatDate: function(date) {
+        if (returnNull(date)) return;
         const options = {
             year: 'numeric',
             month: 'numeric',
@@ -31,28 +32,38 @@ module.exports = {
     },
 
     formatText: function(text){
+        if (returnNull(text)) return;
         text = text.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
         return text;
     },
 
     formatChannelId: function(idText){
+        if (returnNull(idText)) return;
         idText = idText.slice(2,20);
         return idText;
     },
 
     formatRoleId: function(idText){
+        if (returnNull(idText)) return;
         idText = idText.slice(3,21);
         return idText;
     },
 
     formatEmojiId: function(idText){
+        if (returnNull(idText)) return;
         idText = idText.substring(idText.indexOf(":") + 1);
         idText = idText.substring(idText.indexOf(":") + 1).slice(0,18);
         return idText;
     },
 
     upperCaseFirst: function(text){
+        if (returnNull(text)) return;
         text = text.charAt(0).toUpperCase() + text.slice(1);
         return text;
+    },
+
+    returnNull: function(text){
+        if(!text || text === null || text === undefined) return true
+        else return false
     }
 }

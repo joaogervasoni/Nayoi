@@ -6,8 +6,9 @@ module.exports.run = async (bot, message, args) => {
     try{
         let user = message.mentions.users.first()
         if (!user) return message.reply("Para saber informações do comando digite `"+prefix+"help "+this.help.name+"`");
-        let msg = await message.channel.messages.cache.find(msg => msg.author.id === user.id);
-        if (!msg) return message.reply("Você esta sem Chakra :anger: !!")
+        let msg = await message.channel.messages.cache.filter(msg => msg.author.id === user.id);
+        msg = msg.last();
+        if (!msg) return message.reply("Você esta sem Chakra :anger: !!");
         
         const embed = new MessageEmbed()
             .setDescription("**Cópia de **`"+user.tag+"` :  " +msg.content)

@@ -40,7 +40,8 @@ module.exports.run = async (bot, message, args) => {
                 guild.welcome.canvasUrl = url;
                 guild.save(function (err){
                     if(err) return errorReturn(err, message, this.help.name);
-                    if(!err) return message.channel.send("Imagem trocada `obs: As dimensões recomendadas são 1000x360!!`")
+                    if(!err) return message.channel.send("Imagem trocada `obs: As dimensões recomendadas são 1000x360!!`\n"
+                    + "`Digite"+prefix+"banner sh para ver o preview do banner`")
                 })
             }
             else if(!isImage(url)){
