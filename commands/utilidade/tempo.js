@@ -1,8 +1,7 @@
 const { MessageEmbed } = require("discord.js");
 const { errorReturn, formatText } = require("../../functions.js");
-const { prefix } = require("../../botconfig.json");
+const { prefix , weatherApi } = require("../../botconfig.json");
 const fetch = require("node-fetch");
-const weatherApi = "ed901cbf6d0ca73aa44fda5632f67241";
 
 module.exports.run = async (bot, message, args) => {
     try{
