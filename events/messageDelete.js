@@ -19,7 +19,10 @@ module.exports = async (bot, message) => {
             let channel = message.guild.channels.cache.find(channel => channel.id === guild.log.channel);
 
             if (channel) {
-                let embed = new MessageEmbed()
+                if(!user){
+                    console.log("Channel:" + message.channel +" // Message" + message.cleanContent);
+                }else{
+                    let embed = new MessageEmbed()
                     .setTitle(":x: [Mensagem Deletada]")
                     .addField(`**Usuário:**`, message.member.user, true)
                     .addField(`**Channel:**`, message.channel, true)
@@ -29,7 +32,8 @@ module.exports = async (bot, message) => {
                     .setTimestamp()
                     if (imageAtt) embed.setImage(imageAtt);
                 
-                return channel.send(embed)
+                    return channel.send(embed)
+                }
             }
         }
     }catch(e){

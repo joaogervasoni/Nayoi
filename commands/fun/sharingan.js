@@ -1,5 +1,5 @@
 const { MessageEmbed } = require("discord.js");
-const { errorReturn } = require("../../functions.js");
+const { errorReturn, randomCollection } = require("../../functions.js");
 const { prefix } = require("../../botconfig.json");
 
 module.exports.run = async (bot, message, args) => {
@@ -12,7 +12,7 @@ module.exports.run = async (bot, message, args) => {
         
         const embed = new MessageEmbed()
             .setDescription("**Cópia de **`"+user.tag+"` :  " +msg.content)
-            .setImage("https://media1.giphy.com/media/ZL2iRxhnDwtSE/giphy.gif")
+            .setImage(randomCollection(bot.lists, this.help.name))
             .setAuthor(message.member.user.tag, message.member.user.avatarURL())
     
         return message.channel.send(embed)
