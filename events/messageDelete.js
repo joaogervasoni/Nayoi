@@ -19,7 +19,7 @@ module.exports = async (bot, message) => {
             let channel = message.guild.channels.cache.find(channel => channel.id === guild.log.channel);
 
             if (channel) {
-                if(!user){
+                if(!message.member){
                     console.log("Channel:" + message.channel +" // Message" + message.cleanContent);
                 }else{
                     let embed = new MessageEmbed()

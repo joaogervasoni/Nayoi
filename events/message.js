@@ -22,7 +22,7 @@ module.exports = async (bot, message) => {
 
     // Validações padrões
     if (!message.content.toLowerCase().startsWith(prefix.toLowerCase())) return;
-    if (!cmd) return;
+    if (!cmd) return message.reply("Utilize os comandos `"+prefix+"help` e `"+prefix+"commands` para saber sobre o bot");
     if (message.guild.me === null || message.guild.me === undefined) return;
     if (!message.guild.me.permissions.has(["SEND_MESSAGES"])) return;
 
