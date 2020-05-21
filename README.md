@@ -22,7 +22,7 @@ Lembrando que sou um bot em desenvolvimento e problemas podem ocorrer mas trabal
 | ------------- | ------------- | ------------- |
 | [Node.js](https://nodejs.org/en/) | JS  |12.16.1|
 | [Discord.js](https://discord.js.org/) | NPM  |12.2.0|
-| [Mongoose](https://www.npmjs.com/package/mongoose) | NPM  |5.9.5|
+| [Mongoose](https://www.npmjs.com/package/mongoose) | NPM  |5.9.14|
 | [Ms](https://www.npmjs.com/package/ms) | NPM  |2.1.2|
 | [Path](https://www.npmjs.com/package/path) | NPM  |0.12.7|
 | [Colors](https://www.npmjs.com/package/colors) | NPM  |1.4.0|
@@ -30,6 +30,7 @@ Lembrando que sou um bot em desenvolvimento e problemas podem ocorrer mas trabal
 | [Node-Fetch](https://www.npmjs.com/package/node-fetch) | NPM  |2.6.0|
 | [Is-Image](https://www.npmjs.com/package/is-image) | NPM  |3.0.0|
 | [Emojis-list](https://www.npmjs.com/package/emojis-list) | NPM  |3.0.0|
+| [Mathjs](https://www.npmjs.com/package/mathjs) | NPM  |7.0.0|
 | [MongoDB](https://www.mongodb.com/) | DB  |4.2|
 | [Jikan](https://jikan.moe/) | API  |v3.4.0|
 | [OpenWeather](https://openweathermap.org/api) | API  |2.5|

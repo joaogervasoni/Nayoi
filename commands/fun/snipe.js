@@ -5,7 +5,7 @@ const { prefix } = require("../../botconfig.json");
 module.exports.run = (bot, message, args) => {
     try{
         const msg = bot.snipes.get(message.channel.id);
-        if (!msg) return message.reply("Sem mensagem");
+        if (!msg) return message.reply("Sem mensagem :worried:");
     
         const embed = new MessageEmbed()
             .setAuthor(`Deletada por ${msg.author.tag}`, msg.author.avatarURL())
