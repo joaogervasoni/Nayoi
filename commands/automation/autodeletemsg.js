@@ -1,39 +1,37 @@
-const { errorReturn, formatChannelId } = require("../../functions.js");
+const { errorReturn, formatChannelId, returnNull } = require("../../functions.js");
+const {MessageEmbed} = require('discord.js');
 const { prefix } = require("../../botconfig.json");
 const mongoose = require('mongoose');
 const AutoDeleteMsg = require("../../models/autodeletemsg");
 
-
 module.exports.run = async (bot, message, args) => {
     try{
-        //autodeletemsg on #channel
-        bot.database;
         const cmd = args[0];
-        let subcmd = formatChannelId(args[1]);
-        if(!cmd) return message.reply("Para saber informações do comando digite `"+prefix+"help "+this.help.name+"`");
+        let subcmd = args[1];
 
-        let chat = await message.guild.channels.cache.find(chat => subcmd, `id`);
-        if (!chat) return message.reply("Não encontrei nenhum canal :worried:");
+        if(returnNull(cmd)) return message.reply("Para saber informações do comando digite `"+prefix+"help "+this.help.name+"`");
+        if (subcmd) subcmd = formatChannelId(subcmd);
 
         if(cmd === "on"){
+            let chat = await message.guild.channels.cache.find(chat => subcmd, `id`);
+            if (!chat) return message.reply("Não encontrei nenhum canal :worried:");
+
             let findChannel = await AutoDeleteMsg.findOne({ 'channelId': subcmd });
             
             if(findChannel != null){
-                if(findChannel.config.status === "on") message.channel.send("Já existe, não foi salva");
+                if(findChannel.config.status === "on") return message.channel.send("Autorole já esta: `"+findChannel.config.status+"`");
             
-                if(findChannel.config.status === "off"){
-                    findChannel.config.status = "on";
-                    findChannel.save(function (err){
-                        if(err) return message.channel.send(`Erro: ${err}, contate o suporte`)
-                        if(!err) return message.channel.send("AutoDeleteMsg no canal agora está: **On**")
-                    });
-                }
+                findChannel.config.status = "on";
+                findChannel.save(function (err){
+                    if(err) return errorReturn(err, message, this.help.name);
+                    if(!err) return message.channel.send("AutoDeleteMsg agora esta `"+findChannel.config.status+"` :sunglasses:");
+                });
             }
 
             const autodeletemsg = new AutoDeleteMsg({
                 _id: mongoose.Types.ObjectId(),
                 guildId: message.guild.id,
-                channelId: formatChannelId(args[1]),
+                channelId: subcmd,
                 config:{
                     status: "on",
                     creator: message.member.user.tag,
@@ -45,21 +43,40 @@ module.exports.run = async (bot, message, args) => {
                     dm: "off"
                 }
             });
+            
             autodeletemsg.save(function (err){
-                if(err) return message.channel.send(`Erro: ${err}, contate o suporte`)
-                if(!err) return message.channel.send("AutoDeleteMsg no canal agora está: **On**")
+                if(err) return errorReturn(err, message, this.help.name);
+                if(!err) return message.channel.send("AutoDeleteMsg agora esta `on` :sunglasses:");
             });
         }
         else if (cmd === "off"){
+            let chat = await message.guild.channels.cache.find(chat => subcmd, `id`);
+            if (!chat) return message.reply("Não encontrei nenhum canal :worried:");
 
             let autodeletemsg = await AutoDeleteMsg.findOne({ 'channelId': subcmd });
-            if(autodeletemsg === null) return message.reply("Não existe nada atrelado a este canal !!")
-
-           
+            if(autodeletemsg === null) return message.reply("Não existe nada atrelado a este canal :worried:!!")
+     
+            autodeletemsg.config.status = "off";
             autodeletemsg.save(function (err){
-                if(err) return message.channel.send(`Erro: ${err}, contate o suporte`)
-                if(!err) return message.channel.send("AutoDeleteMsg no canal agora está: **Off**")
+                if(err) return errorReturn(err, message, this.help.name);
+                if(!err) return message.channel.send("AutoDeleteMsg agora esta `"+autodeletemsg.config.status+"` :cry:");
             });
+        }
+        else if (cmd === "show"){
+            let autodeletemsgs = await AutoDeleteMsg.find({ 'guildId': message.guild.id})
+            let description = "";
+
+            autodeletemsgs.forEach(element => {
+                description = description + "Canal: `"+element.channelId+"` - Status: `"+element.config.status+"`\n"
+            });
+
+            const embed = new MessageEmbed()
+                .setTitle("Canais com AutoDeleteMsg")
+                .setDescription(description)
+                .setTimestamp()
+                .setColor(bot.baseColor)
+
+            return message.channel.send(embed)
         }
         else return message.reply("Para saber informações do comando digite `"+prefix+"help "+this.help.name+"`")
         
@@ -74,6 +91,7 @@ module.exports.help = {
     description: "Deleta msgs para deixar apenas imagens no canal desejado",
     usability: "Pode ser ativo utilizando `"+prefix+"autodeletemsg on #chat`\n"
     +"Para desabilitar use `"+prefix+"welcome off #chat`\n",
+    additional: "`"+prefix+"autodeletemsg show` - Para mostrar todos os canais com autodeletemsg\n",
     type: "automation"
 }
 
