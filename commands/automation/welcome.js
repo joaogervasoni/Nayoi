@@ -1,14 +1,15 @@
-const { errorReturn, formatChannelId } = require("../../functions.js");
+const { errorReturn, formatChannelId, returnNull } = require("../../functions.js");
 const { prefix } = require("../../botconfig.json");
 
 module.exports.run = async (bot, message, args) => {
     try{
         const cmd = args[0];
         let subcmd = args[1];
-        bot.database;
+        
+        if(returnNull(cmd)) return message.reply("Para saber informações do comando digite `"+prefix+"help "+this.help.name+"`");
         
         if (cmd === "on" || cmd === "true"){
-            if(subcmd === null || subcmd === "" || subcmd === undefined) return message.reply("Para saber informações do comando digite `"+prefix+"help "+this.help.name+"`");
+            if(returnNull(subcmd)) return message.reply("Para saber informações do comando digite `"+prefix+"help "+this.help.name+"`");
             let channel = formatChannelId(subcmd);
             let chat = message.guild.channels.cache.find(chat => channel, `id` );
             if (!chat || chat === undefined || chat === null) return message.reply(`Não encontrei nenhum canal :crying_cat_face:`);
@@ -44,7 +45,7 @@ module.exports.run = async (bot, message, args) => {
         else if(cmd === "ch" || cmd === "channel"){
             let channel = formatChannelId(subcmd);
             let chat = message.guild.channels.cache.find(chat => channel, `id` );
-            if (!chat || chat === undefined || chat === null) return message.reply(`Não encontrei nenhum canal :crying_cat_face:`);
+            if (returnNull(chat)) return message.reply(`Não encontrei nenhum canal :crying_cat_face:`);
 
             const guild = await bot.Guild.findOne({'guildId': message.guild.id});
             guild.welcome.channel = channel;

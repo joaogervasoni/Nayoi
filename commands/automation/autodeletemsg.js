@@ -1,4 +1,4 @@
-const { errorReturn, formatChannelId, returnNull } = require("../../functions.js");
+const { errorReturn, returnNull } = require("../../functions.js");
 const {MessageEmbed} = require('discord.js');
 const { prefix } = require("../../botconfig.json");
 const mongoose = require('mongoose');
@@ -10,7 +10,6 @@ module.exports.run = async (bot, message, args) => {
         let subcmd = args[1];
 
         if(returnNull(cmd)) return message.reply("Para saber informações do comando digite `"+prefix+"help "+this.help.name+"`");
-        if (subcmd) subcmd = formatChannelId(subcmd);
 
         if(cmd === "on"){
             let chat = await message.guild.channels.cache.find(chat => subcmd, `id`);

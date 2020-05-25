@@ -1,5 +1,5 @@
 const { createCanvas, loadImage, registerFont } = require("canvas");
-const { errorReturn } = require("../../functions.js");
+const { errorReturn, returnNull } = require("../../functions.js");
 const { prefix } = require("../../botconfig.json");
 const { MessageAttachment } = require("discord.js");
 const isImage = require('is-image');
@@ -8,7 +8,8 @@ module.exports.run = async (bot, message, args) => {
     try{
         const cmd = args[0];
         let subcmd = args[1];
-        bot.database;
+        
+        if(returnNull(cmd)) return message.reply("Para saber informações do comando digite `"+prefix+"help "+this.help.name+"`");
 
         if(cmd === "on" || cmd === "true"){
             const guild = await bot.Guild.findOne({'guildId': message.guild.id});
@@ -54,7 +55,7 @@ module.exports.run = async (bot, message, args) => {
             
             imagem = guild.welcome.canvasUrl;
             //- Linux
-            registerFont('arial.ttf', {family: 'Arial'});
+            //registerFont('arial.ttf', {family: 'Arial'});
             //
             const canvas = createCanvas(1000, 360);
             const ctx = canvas.getContext("2d");

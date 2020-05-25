@@ -3,8 +3,11 @@ var colors = require('colors');
 
 module.exports = {
     errorReturn: function(error, message, name) {  
+        var today = new Date();
+        today = `${today.getDate()}/${today.getMonth()+1}/${today.getFullYear()}`
+
         if (message != null && message != undefined){
-            console.log(`Name: ${name} // Error: ${error} // Message: ${message}`.red);
+            console.log(`Name: ${name} // Error: ${error} // Guild: ${message.guild} // Horário: ${today}`.red);
             let embed = new MessageEmbed()
                 .setThumbnail("https://github.com/Zaetic/Yani/blob/master/images/YaniError404.png?raw=true")
                 .setTitle("Aconteceu um erro")
@@ -12,10 +15,11 @@ module.exports = {
                 .addField("Name", name, true)
                 .addField("Erro" ,"Parece que encontrei um erro... Entre em contato com o suporte !!", true)
                 .setColor("c23a3a")
+                .setTimestamp()
             
             return message.channel.send(embed);
         }else{
-            console.log(`Name: ${name} // Error: ${error}`.red);
+            console.log(`Name: ${name} // Error: ${error} // Guild: ${message.guild} // Horário: ${today}`.red);
         } 
     },    
 

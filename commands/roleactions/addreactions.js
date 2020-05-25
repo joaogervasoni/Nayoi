@@ -82,11 +82,15 @@ module.exports.run = async (bot, message, args) => {
                     if(!emoji){
                         emojiEmoji.push(emojiN)
                         emojiRoleMappings.set(emojiN, role.id)
-                        await message.channel.send("Emoji e Cargo salvos !! `Caso queira finalizar digite !!done`")
+                        await message.channel.send("Emoji e Cargo salvos !!\n"
+                        +"`Caso queira continuar digite + grupo de emoji/cargo !!" 
+                        +"`Caso queira finalizar digite !!done`")
                     }else{
                         emojiEmoji.push(emoji.id)
                         emojiRoleMappings.set(emoji.id, role.id)
-                        await message.channel.send("Emoji e Cargo salvos !! `Caso queira finalizar digite !!done`")
+                        await message.channel.send("Emoji e Cargo salvos !!\n"
+                        +"`Caso queira continuar digite + grupo de emoji/cargo !!" 
+                        +"`Caso queira finalizar digite !!done`")
                     }
                 }
             });
