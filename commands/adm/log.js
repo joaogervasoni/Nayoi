@@ -1,47 +1,62 @@
+const { errorReturn, formatChannelId, returnNull } = require("../../functions.js");
 const { prefix } = require("../../botconfig.json");
 
 module.exports.run = async (bot, message, args) => {
-    let args2 = args.join(" ").slice(0,3).split(' ').join('');
     
-    if(args2 === "on" || args2 === "off" || args2 === "ch"){
-        bot.database;
+    const cmd = args[0];
+    let subcmd = args[1];
+
+    
+    if(returnNull(cmd)) return message.reply("Para saber informações do comando digite `"+prefix+"help "+this.help.name+"`");
+        
+    if(cmd === "on" || cmd === "true"){
+        if(returnNull(subcmd)) return message.reply("Para saber informações do comando digite `"+prefix+"help "+this.help.name+"`");
+
+        let channel = formatChannelId(subcmd);
+        let chat = message.guild.channels.cache.find(chat => channel, `id` );
+        if(returnNull(chat)) return message.reply(`Não encontrei nenhum canal :crying_cat_face:`);
+
         const guild = await bot.Guild.findOne({'guildId': message.guild.id});
+        if(guild.log.status === "on") return message.channel.send("Log já esta `"+guild.log.status+"`");
 
-        if(args2 === "on"){
-            let channel = args.join(" ").slice(3).slice(2,20);
-            let chat = message.guild.channels.cache.find(chat => channel, `id` )
-            if(!chat) return message.reply("Não encontrei o canal _(Exemplo: y!log on #chat)_");
-    
-            if(guild.log.status === "on") return message.channel.send("Log esta atualmente: **On**")
+        guild.log.status = "on";
+        guild.log.channel = channel;
+        guild.save(function (err){
+            if(err) return errorReturn(err, message, this.help.name);
+            if(!err) return message.channel.send("Log agora esta `"+guild.log.status+"` :sunglasses:");
+        })
+    }
+    else if (cmd === "off" || cmd === "false"){
+        const guild = await bot.Guild.findOne({'guildId': message.guild.id});
+        if(guild.log.status === "off") return message.channel.send("Log já esta `"+guild.log.status+"` :cry:");
 
-            guild.log.status = "on";
-            guild.log.channel = channel
-            guild.save(function (err){
-                if(err) return message.channel.send(`Erro: ${err}, contate o suporte`)
-                if(!err) return message.channel.send("Log agora está: **On**")
-            })
-        }
-        else if (args2 === "off"){   
-            if(guild.log.status === "off") return message.channel.send("Log esta atualmente: **Off**");
+        guild.log.status = "off";
+        guild.save(function (err){
+            if(err) return errorReturn(err, message, this.help.name);
+            if(!err) return message.channel.send("Log agora esta `"+guild.log.status+"` :cry:");
+        });
+    }
+    else if (cmd === "ch" || cmd === "channel"){
+        if(returnNull(subcmd)) return message.reply("Para saber informações do comando digite `"+prefix+"help "+this.help.name+"`");
 
-            guild.log.status = "off";
-            guild.save(function (err){
-                if(err) return message.channel.send(`Erro: ${err}, contate o suporte`);
-                if(!err) return message.channel.send("Log agora está: **Off**");
-            })
-        }
-        else if (args2 == "ch"){
-            let channel = args.join(" ").slice(3).slice(2,20);
-            let chat = message.guild.channels.cache.find(chat => channel, `id` )
-            if(!chat) return message.reply("Não encontrei o canal _(Exemplo: y!log ch #chat)_");
-            
-            guild.log.channel = channel;
-            guild.save(function (err){
-                if(err) return message.channel.send(`Erro: ${err}, contate o suporte`);
-                if(!err) return message.channel.send(`Canal modificado !!`);
-            })
-        }
-    }else return message.reply(`Preciso de um prefixo (Ex: on,off,ch)`)
+        let channel = formatChannelId(subcmd);
+        let chat = message.guild.channels.cache.find(chat => channel, `id` )
+        if(returnNull(chat)) return message.reply(`Não encontrei nenhum canal :crying_cat_face:`);
+        
+        const guild = await bot.Guild.findOne({'guildId': message.guild.id});
+        guild.log.channel = channel;
+        guild.save(function (err){
+            if(err) return message.channel.send(`Erro: ${err}, contate o suporte`);
+            if(!err) return message.channel.send(`Canal trocado :face_with_monocle:!!`);
+        })
+    }
+    else if (cmd === "sh" || cmd === "show"){
+        const guild = await bot.Guild.findOne({'guildId': message.guild.id});
+        if(guild.log.status === "off") return message.channel.send("Log esta `"+guild.log.status+"` e precisa ser ativado :cry:");
+
+        return message.channel.send("`Canal de log atual é:` <#"+guild.log.channel+">")
+    }
+    else return message.reply("Para saber informações do comando digite `"+prefix+"help "+this.help.name+"`");
 }
 
 module.exports.help = {
@@ -49,7 +64,8 @@ module.exports.help = {
     description: "Gerencia toda a parte de Logs do servidor mostrando pessoas que sairam, msgs deletadas/editadas e nick alterados",
     usability: "Pode ser ativo utilizando `"+prefix+"log on #chat`\n"
     +"O canal pode ser alterado utilizando `"+prefix+"log ch #chat`\n",
-    additional: "`"+prefix+"log off` - Desabilita o sistema de log",
+    additional: "`"+prefix+"log off` - Desabilita o sistema de log"
+    + "`"+prefix+"log show` - Mistra qual o canal atual do log",
     others: "",
     type: "adm"
 }
