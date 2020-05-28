@@ -25,7 +25,7 @@ module.exports.run = (bot, message, args) => {
         .addField("Usabilidade", "Para pesquisar digite `"+bot.prefix+"help nomedocomando`\n"
         +"Caso esteja buscando pela lista de comandos digite `"+bot.prefix+"commands`\n"
         +"Espero que encontre o que procura :heart:")
-        .addField("Outros", "Para mais informações acesse: https://github.com/Zaetic/Yani")
+        .addField("Outros", "Para mais informações acesse: https://github.com/Zaetic/Nayoi")
         return message.channel.send(embed)
     }
 }

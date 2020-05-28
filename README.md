@@ -1,10 +1,10 @@
 <p align="center">
 <img src="https://github.com/Zaetic/Yani/blob/master/images/YaniGit.png?raw=true">
 </p>
-<h1 align="center">Yani</h1>
+<h1 align="center">Nayoi</h1>
 
 
-Olá !! Eu sou a Yani fui programada para ser um bot de discord de código aberto 📖.
+Olá !! Eu sou a Nayoi fui programada para ser um bot de discord de código aberto 📖.
 
 Atualmente estou em desenvolvimento e me encontro sendo testada pelo meu criador, fui criada com o intuito de ter funções novas e malucas juntando tudo que há de melhor!! Sou programada em JS o que me possibilita ser facilmente modificada com o tempo.
 
@@ -20,7 +20,7 @@ Lembrando que sou um bot em desenvolvimento e problemas podem ocorrer mas trabal
 
 | Nome  | Tipo | Versão |
 | ------------- | ------------- | ------------- |
-| [Node.js](https://nodejs.org/en/) | JS  |12.16.1|
+| [Node.js](https://nodejs.org/en/) | JS  |12.17.0|
 | [Discord.js](https://discord.js.org/) | NPM  |12.2.0|
 | [Mongoose](https://www.npmjs.com/package/mongoose) | NPM  |5.9.14|
 | [Ms](https://www.npmjs.com/package/ms) | NPM  |2.1.2|
@@ -31,6 +31,6 @@ Lembrando que sou um bot em desenvolvimento e problemas podem ocorrer mas trabal
 | [Is-Image](https://www.npmjs.com/package/is-image) | NPM  |3.0.0|
 | [Emojis-list](https://www.npmjs.com/package/emojis-list) | NPM  |3.0.0|
 | [Mathjs](https://www.npmjs.com/package/mathjs) | NPM  |7.0.0|
-| [MongoDB](https://www.mongodb.com/) | DB  |4.2|
+| [MongoDB](https://www.mongodb.com/) | DB  |3.8|
 | [Jikan](https://jikan.moe/) | API  |v3.4.0|
 | [OpenWeather](https://openweathermap.org/api) | API  |2.5|

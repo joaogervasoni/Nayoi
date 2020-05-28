@@ -16,7 +16,7 @@ module.exports.run = (bot, message, args) => {
             .addField("Ping:", message.client.ws.ping.toFixed(2), true)
             .addField("Criado em", formatDate(bot.user.createdAt), true)
             .addField("Entrou em", formatDate(message.member.guild.joinedAt), true)
-            .addField("Link", "https://github.com/Zaetic/Yani")
+            .addField("Link", "https://github.com/Zaetic/Nayoi")
             
             return message.channel.send(botembed);
         }
