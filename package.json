@@ -1,5 +1,5 @@
 {
-  "name": "yani",
+  "name": "nayoi",
   "version": "1.0.0",
   "description": "Discord bot",
   "main": "index.js",
@@ -15,7 +15,7 @@
     "emojis-list": "^3.0.0",
     "is-image": "^3.0.0",
     "mathjs": "^7.0.0",
-    "mongoose": "^5.9.14",
+    "mongoose": "^5.9.16",
     "ms": "^2.1.2",
     "node-fetch": "^2.6.0",
     "path": "^0.12.7"
