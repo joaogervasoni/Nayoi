@@ -18,7 +18,7 @@ module.exports.run = (bot, message, args) => {
     }
     else{
         embed
-        .setThumbnail("https://github.com/Zaetic/Yani/blob/master/images/YaniHelp.png?raw=true")
+        .setThumbnail("https://github.com/Zaetic/Nayoi/blob/master/images/YaniHelp.png?raw=true")
         .setTitle("Ajuda:")
         .setDescription("Aqui você pode encontrar ajuda sobre qualquer comando ou funcionalidade minha !!!")
         .setColor(bot.baseColor)

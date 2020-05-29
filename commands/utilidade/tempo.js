@@ -14,7 +14,7 @@ module.exports.run = async (bot, message, args) => {
         let temp = (weather.main.temp - 273.15).toFixed(2);
         let feels = (weather.main.feels_like - 273.15).toFixed(2);
         let embed = new MessageEmbed()
-            .setThumbnail("https://github.com/Zaetic/Yani/blob/master/images/YaniTempo.png?raw=true")
+            .setThumbnail("https://github.com/Zaetic/Nayoi/blob/master/images/YaniTempo.png?raw=true")
             .setTitle(`Temperatura de ${weather.name}`)
             .addField(`Temperatura:`, `${temp} °C`, true)
             .addField(`Sensação:`, `${feels} °C`, true)

@@ -35,7 +35,7 @@ module.exports = async (bot, member) => {
              msg = parseCount(msg, member.guild.memberCount);
              
              if (guild.welcome.canvas === "on"){
-                 let imagem = "https://github.com/Zaetic/Yani/blob/master/images/YaniBackground.png?raw=true";
+                 let imagem = "https://github.com/Zaetic/Nayoi/blob/master/images/YaniBackground.png?raw=true";
                  if (guild.welcome.canvasUrl != "off" || guild.welcome.canvasUrl != ""){
                     imagem = guild.welcome.canvasUrl;
                  }

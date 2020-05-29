@@ -1,5 +1,5 @@
 <p align="center">
-<img src="https://github.com/Zaetic/Yani/blob/master/images/YaniGit.png?raw=true">
+<img src="https://github.com/Zaetic/Nayoi/blob/master/images/YaniGit.png?raw=true">
 </p>
 <h1 align="center">Nayoi</h1>
 
@@ -33,4 +33,5 @@ Lembrando que sou um bot em desenvolvimento e problemas podem ocorrer mas trabal
 | [Mathjs](https://www.npmjs.com/package/mathjs) | NPM  |7.0.0|
 | [MongoDB](https://www.mongodb.com/) | DB  |3.8|
 | [Jikan](https://jikan.moe/) | API  |v3.4.0|
+| [Tenor](https://tenor.com/gifapi) | API  |v1.0.0|
 | [OpenWeather](https://openweathermap.org/api) | API  |2.5|

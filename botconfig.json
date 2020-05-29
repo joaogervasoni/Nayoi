@@ -2,5 +2,6 @@
     "token": "token api discord ",
     "prefix": "f!",
     "mongodb": "user:pass",
-    "weatherApi": ""
+    "weatherApi": "toke api wather",
+    "tenorApi": "token api tenor"
 }
