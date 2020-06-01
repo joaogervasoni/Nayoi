@@ -19,7 +19,7 @@ module.exports = {
             
             return message.channel.send(embed);
         }else{
-            console.log(`Name: ${name} // Error: ${error} // Guild: ${message.guild} // Data: ${today}`.red);
+            console.log(`Name: ${name} // Error: ${error} // Guild: Null // Data: ${today}`.red);
         } 
     },    
 
@@ -60,6 +60,10 @@ module.exports = {
         return idText;
     },
 
+    formatUserId: function(idText){
+        return idText;
+    },
+
     formatEmojiId: function(idText){
         idText = idText.substring(idText.indexOf(":") + 1);
         idText = idText.substring(idText.indexOf(":") + 1).slice(0,18);
@@ -69,5 +73,29 @@ module.exports = {
     upperCaseFirst: function(text){
         text = text.charAt(0).toUpperCase() + text.slice(1);
         return text;
+    },
+
+    formatId: function(idText){
+        if(module.exports.returnNull(idText)) return idText
+
+        let textFirst = idText.substr(0, 2);
+        if(textFirst === "<@"){
+            textFirst = idText.substr(0, 3);
+            if(textFirst === "<@&"){
+                return module.exports.formatRoleId(idText)
+            }
+            else{
+                return module.exports.formatUserId(idText)
+            }
+        }
+        else if (textFirst === "<#"){
+            return module.exports.formatChannelId(idText)
+        }
+        else if (textFirst === "<:"){
+            return module.exports.formatEmojiId(idText);
+        }
+        else {
+            return idText;
+        }
     }
 }

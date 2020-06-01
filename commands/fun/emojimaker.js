@@ -13,10 +13,11 @@ module.exports.run = async (bot, message, args) => {
 
         let emoji = bot.emojis.cache.get(formatEmojiId(cmd));
         let emoji2 = bot.emojis.cache.get(formatEmojiId(subcmd));
+
+        if(returnNull(emoji) || returnNull(emoji2)) return message.reply("Algum dos emojis é `inválido` ou é um `emoji padrão !!`");
         
         emoji = "https://cdn.discordapp.com/emojis/"+emoji.id;
         emoji2 = "https://cdn.discordapp.com/emojis/"+emoji2.id;
-
 
         const canvas = createCanvas(150, 150);
         const ctx = canvas.getContext("2d");
