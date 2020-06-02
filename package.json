@@ -10,6 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "canvas": "^2.6.1",
+    "check-links": "^1.1.8",
     "colors": "^1.4.0",
     "discord.js": "^12.2.0",
     "emojis-list": "^3.0.0",

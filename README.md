@@ -27,10 +27,11 @@ Lembrando que sou um bot em desenvolvimento e problemas podem ocorrer mas trabal
 | [Path](https://www.npmjs.com/package/path) | NPM  |0.12.7|
 | [Colors](https://www.npmjs.com/package/colors) | NPM  |1.4.0|
 | [Canvas](https://www.npmjs.com/package/canvas) | NPM  |2.6.1|
-| [Node-Fetch](https://www.npmjs.com/package/node-fetch) | NPM  |2.6.0|
-| [Is-Image](https://www.npmjs.com/package/is-image) | NPM  |3.0.0|
+| [Node-fetch](https://www.npmjs.com/package/node-fetch) | NPM  |2.6.0|
+| [Is-image](https://www.npmjs.com/package/is-image) | NPM  |3.0.0|
 | [Emojis-list](https://www.npmjs.com/package/emojis-list) | NPM  |3.0.0|
 | [Mathjs](https://www.npmjs.com/package/mathjs) | NPM  |7.0.0|
+| [Check-links](https://www.npmjs.com/package/check-links) | NPM  |1.1.8|
 | [MongoDB](https://www.mongodb.com/) | DB  |3.8|
 | [Jikan](https://jikan.moe/) | API  |v3.4.0|
 | [Tenor](https://tenor.com/gifapi) | API  |v1.0.0|

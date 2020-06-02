@@ -6,7 +6,6 @@ module.exports.run = async (bot, message, args) => {
     const cmd = args[0];
     let subcmd = args[1];
 
-    
     if(returnNull(cmd)) return message.reply("Para saber informações do comando digite `"+prefix+"help "+this.help.name+"`");
         
     if(cmd === "on" || cmd === "true"){
@@ -64,8 +63,8 @@ module.exports.help = {
     description: "Gerencia toda a parte de Logs do servidor mostrando pessoas que sairam, msgs deletadas/editadas e nick alterados",
     usability: "Pode ser ativo utilizando `"+prefix+"log on #chat`\n"
     +"O canal pode ser alterado utilizando `"+prefix+"log ch #chat`\n",
-    additional: "`"+prefix+"log off` - Desabilita o sistema de log"
-    + "`"+prefix+"log show` - Mistra qual o canal atual do log",
+    additional: "`"+prefix+"log off` - Desabilita o sistema de log\n"
+    + "`"+prefix+"log show` - Mostra qual o canal atual do log",
     others: "",
     type: "adm"
 }
