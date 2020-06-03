@@ -7,7 +7,7 @@ module.exports = {
         today = `${today.getDate()}/${today.getMonth()+1}/${today.getFullYear()}`
 
         if (message != null && message != undefined){
-            console.log(`Name: ${name} // Error: ${error} // Guild: ${message.guild} // Data: ${today}`.red);
+            console.log(`[Error]`.brightRed +` Name: ${name} // Error: ${error} // Guild: ${message.guild} // Data: ${today}`.red);
             let embed = new MessageEmbed()
                 .setThumbnail("https://github.com/Zaetic/Yani/blob/master/images/YaniError404.png?raw=true")
                 .setTitle("Aconteceu um erro")
@@ -19,7 +19,7 @@ module.exports = {
             
             return message.channel.send(embed);
         }else{
-            console.log(`Name: ${name} // Error: ${error} // Guild: Null // Data: ${today}`.red);
+            console.log(`[Error]`.brightRed +` Name: ${name} // Error: ${error} // Guild: Null // Data: ${today}`.red);
         } 
     },    
 

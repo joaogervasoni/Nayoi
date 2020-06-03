@@ -10,5 +10,5 @@ module.exports.run = (bot) => {
         bot.lists.set(prop.name, prop.list);
     }
 
-    console.log(`[${bot.lists.size}]`.brightBlue + ` listas carregadas`.blue);
+    console.log(`[Lists]`.brightBlue + ` ${bot.lists.size} listas carregadas`.blue);
 }

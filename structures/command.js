@@ -21,5 +21,5 @@ module.exports.run = (bot) => {
             }
         }
     }
-    console.log(`[${bot.commands.size}]`.brightBlue + ` comandos carregados`.blue)
+    console.log(`[Commands]`.brightBlue + ` ${bot.commands.size} comandos carregados`.blue)
 }

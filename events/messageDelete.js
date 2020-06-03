@@ -20,7 +20,7 @@ module.exports = async (bot, message) => {
 
             if (channel) {
                 if(!message.member){
-                    console.log("Channel:" + message.channel +" // Message" + message.cleanContent +"// Image:" + imageAtt);
+                    //console.log("Channel:" + message.channel +" // Message" + message.cleanContent +"// Image:" + imageAtt);
                 }else{
                     let embed = new MessageEmbed()
                     .setTitle(":x: [Mensagem Deletada]")
