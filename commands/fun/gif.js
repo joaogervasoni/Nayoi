@@ -28,7 +28,6 @@ module.exports.help = {
     name: "gif",
     description: "Traz o primeiro gif do tenor",
     usability: "Pode ser utilizado de maneira simples `"+prefix+"gif nomedogif`\n",
-    additional: "",
     type: "fun"
 }
 

@@ -23,7 +23,6 @@ module.exports.help = {
     name: "snipe",
     description: "Traz a ultima msg deletada do canal",
     usability: "Pode ser utilizado de maneira simples `"+prefix+"snipe`\n",
-    additional: "",
     others: "A msg retornada é referente ao canal onde foi utilizado o comando",
     type: "fun"
 }

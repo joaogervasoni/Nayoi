@@ -61,7 +61,6 @@ module.exports.help = {
     usability: "Pode ser ativo utilizando `"+prefix+"autorole on @cargo`\n"
     +"A role pode ser alterada utilizando `"+prefix+"autorole rol @cargo`\n",
     additional: "`"+prefix+"autorole off` - Desabilita o autorole\n",
-    others: "",
     type: "automation"
 }
 

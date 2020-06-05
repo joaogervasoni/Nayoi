@@ -32,7 +32,8 @@ module.exports.help = {
     usability: "Pode ser utilizado de maneira simples `"+prefix+"tempo local`\n",
     additional: "",
     others: "A utilização de acentos ou 'ç' na pesquisa pode não retornar dados",
-    type: "utilidade"
+    type: "utilidade",
+    aliases: ["temp"]
 }
 
 module.exports.requirements = {

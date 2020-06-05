@@ -65,7 +65,6 @@ module.exports.help = {
     +"O canal pode ser alterado utilizando `"+prefix+"log ch #chat`\n",
     additional: "`"+prefix+"log off` - Desabilita o sistema de log\n"
     + "`"+prefix+"log show` - Mostra qual o canal atual do log",
-    others: "",
     type: "adm"
 }
 
