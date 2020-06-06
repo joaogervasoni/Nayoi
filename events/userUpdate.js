@@ -1,5 +1,5 @@
 const { MessageAttachment } = require("discord.js");
-const { errorReturn, returnNull } = require("../functions.js");
+const { errorReturn, returnNull } = require("../utils/functions.js");
 const { createCanvas, loadImage } = require("canvas");
 const checkLinks = require('check-links')
 

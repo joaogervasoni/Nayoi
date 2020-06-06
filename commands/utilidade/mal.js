@@ -1,5 +1,5 @@
 const { MessageEmbed } = require("discord.js");
-const { errorReturn } = require("../../functions.js");
+const { errorReturn } = require("../../utils/functions.js");
 const { prefix } = require("../../botconfig.json");
 const fetch = require("node-fetch");
 

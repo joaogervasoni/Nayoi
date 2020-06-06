@@ -1,4 +1,4 @@
-const {errorReturn} = require("../../functions.js");
+const {errorReturn} = require("../../utils/functions.js");
 const { prefix } = require("../../botconfig.json");
 
 module.exports.run = (bot, message, args) => {

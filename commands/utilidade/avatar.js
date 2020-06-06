@@ -1,5 +1,5 @@
 const { prefix } = require("../../botconfig.json");
-const {errorReturn, returnNull} = require("../../functions.js");
+const {errorReturn, returnNull} = require("../../utils/functions.js");
 const { MessageEmbed } = require("discord.js");
 
 module.exports.run = async (bot, message, args) => {

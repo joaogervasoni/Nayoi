@@ -1,4 +1,4 @@
-const {errorReturn} = require("../functions.js");
+const {errorReturn} = require("../utils/functions.js");
 const RoleReaction = require("../models/rolereaction.js");
 const AutoDeleteMsg = require("../models/autodeletemsg");
 var colors = require('colors');

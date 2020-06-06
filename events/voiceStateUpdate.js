@@ -1,5 +1,5 @@
 const { MessageEmbed } = require("discord.js");
-const {errorReturn, returnNull} = require("../functions.js");
+const {errorReturn, returnNull} = require("../utils/functions.js");
 
 module.exports = async (bot, oldState, newState) => {
     if(oldState.bot === true) return

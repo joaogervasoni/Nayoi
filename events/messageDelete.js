@@ -1,5 +1,5 @@
 const {MessageEmbed} = require("discord.js");
-const {errorReturn} = require("../functions.js");
+const {errorReturn} = require("../utils/functions.js");
 
 module.exports = async (bot, message) => {
     let imageAtt = message.attachments.first() ? message.attachments.first().proxyURL : null

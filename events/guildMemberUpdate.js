@@ -1,5 +1,5 @@
 const {MessageEmbed} = require("discord.js");
-const {errorReturn} = require("../functions.js");
+const {errorReturn} = require("../utils/functions.js");
 
 module.exports = async (bot, oldMember, newMember) => {
     if(oldMember.user.tag === newMember.user.tag) return

@@ -13,7 +13,7 @@ bot.aliases = new Collection();
 bot.lists = new Collection();
 bot.prefix = prefix;
 bot.baseColor = "#ff8ff2";
-bot.database = require('./database.js')
+bot.database = require('./utils/database.js')
 
 const commands = require("./structures/command");
 commands.run(bot);

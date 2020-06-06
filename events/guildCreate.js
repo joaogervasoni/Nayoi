@@ -1,4 +1,4 @@
-const {errorReturn} = require("../functions.js");
+const {errorReturn} = require("../utils/functions.js");
 var colors = require('colors');
 const mongoose = require('mongoose');
 

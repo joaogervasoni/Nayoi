@@ -1,5 +1,5 @@
 const {MessageCollector, MessageEmbed} = require('discord.js');
-const {errorReturn, formatChannelId, formatRoleId, formatEmojiId} = require("../../functions.js");
+const {errorReturn, formatChannelId, formatRoleId, formatEmojiId} = require("../../utils/functions.js");
 const { prefix } = require("../../botconfig.json");
 const mongoose = require('mongoose');
 const RoleReaction = require("../../models/rolereaction.js");

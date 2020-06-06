@@ -1,5 +1,5 @@
 const { prefix } = require("../../botconfig.json");
-const {errorReturn, returnNull} = require("../../functions.js");
+const {errorReturn, returnNull} = require("../../utils/functions.js");
 const { evaluate } = require('mathjs')
 
 module.exports.run = async (bot, message, args) => {

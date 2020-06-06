@@ -1,5 +1,5 @@
 const { createCanvas, loadImage, registerFont } = require("canvas");
-const { errorReturn, returnNull } = require("../../functions.js");
+const { errorReturn, returnNull } = require("../../utils/functions.js");
 const { prefix } = require("../../botconfig.json");
 const { MessageAttachment } = require("discord.js");
 const isImage = require('is-image');

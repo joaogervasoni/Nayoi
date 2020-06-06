@@ -1,5 +1,5 @@
 const {MessageEmbed} = require("discord.js");
-const {upperCaseFirst} = require("../functions.js");
+const {upperCaseFirst} = require("../utils/functions.js");
 const { prefix } = require("../botconfig.json");
 
 module.exports.run = (bot, message, args) => {

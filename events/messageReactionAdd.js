@@ -1,5 +1,5 @@
 const RoleReaction = require("../models/rolereaction.js");
-const {errorReturn} = require("../functions.js");
+const {errorReturn} = require("../utils/functions.js");
 
 module.exports = async (bot, reaction, user) => {
     

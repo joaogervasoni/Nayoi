@@ -21,7 +21,7 @@ module.exports = {
         }else{
             console.log(`[Error]`.brightRed +` Name: ${name} // Error: ${error} // Guild: Null // Data: ${today}`.red);
         } 
-    },    
+    },
 
     returnNull: function(text){
         if(!text || text === null || text === undefined) return true;

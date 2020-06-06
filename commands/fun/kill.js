@@ -1,4 +1,4 @@
-const { errorReturn, randomCollection } = require("../../functions.js");
+const { errorReturn, randomCollection } = require("../../utils/functions.js");
 const { prefix } = require("../../botconfig.json");
 
 module.exports.run = async (bot, message, args) => {

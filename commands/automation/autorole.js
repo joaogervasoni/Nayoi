@@ -1,4 +1,4 @@
-const { errorReturn, formatRoleId, returnNull } = require("../../functions.js");
+const { errorReturn, formatRoleId, returnNull } = require("../../utils/functions.js");
 const { prefix } = require("../../botconfig.json");
 
 module.exports.run = async (bot, message, args) => {

@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const { mongodb } = require("./botconfig.json");
+const { mongodb } = require("../botconfig.json");
 var colors = require('colors');
 
 if(mongoose.connection.readyState === 0){

@@ -1,4 +1,4 @@
-const { formatDate, upperCaseFirst } = require("../../functions.js");
+const { formatDate, upperCaseFirst } = require("../../utils/functions.js");
 const { MessageEmbed } = require("discord.js");
 const { prefix } = require("../../botconfig.json");
 

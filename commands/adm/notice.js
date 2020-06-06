@@ -1,4 +1,4 @@
-const { errorReturn, returnNull, formatId } = require("../../functions.js");
+const { errorReturn, returnNull, formatId } = require("../../utils/functions.js");
 const { prefix } = require("../../botconfig.json");
 const ms = require("ms");
 
@@ -67,7 +67,7 @@ module.exports.help = {
     +`No caso de \`embed\` utilize desta forma: \`${prefix}anuncio embed 10s Titulo || msg\`\n`,
     others: "O tempo deve ser expecificado com uma letra após o número para ser considerado um tempo valido\n"
     +"**Exemplos:** `1s(seg) | 1m (min) | 1h (hora)`",
-    type: "utilidade"
+    type: "adm"
 }
 
 

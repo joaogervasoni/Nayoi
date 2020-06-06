@@ -1,5 +1,5 @@
 const ms = require("ms");
-const {errorReturn} = require("../../functions.js");
+const {errorReturn} = require("../../utils/functions.js");
 
 module.exports.run = async (bot, message, args) => {
     try{

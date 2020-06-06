@@ -1,4 +1,4 @@
-const { errorReturn, formatId } = require("../../functions.js");
+const { errorReturn, formatId } = require("../../utils/functions.js");
 const { MessageEmbed } = require("discord.js");
 const { prefix } = require("../../botconfig.json");
 const ms = require("ms");
