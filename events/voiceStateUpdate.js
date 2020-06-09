@@ -14,14 +14,15 @@ module.exports = async (bot, oldState, newState) => {
             .setTimestamp()
             .setColor(bot.baseColor)
 
-            if(oldState.channelID === null && newState.channelID !== null){
-                embed.setDescription(`:loud_sound: <@!${oldState.id}> entrou no voice: \`<#${newState.channelID}>\``)
+            console.log(oldState)
+            if((oldState.channelID === null || oldState.channelID === undefined) && newState.channelID !== null){
+                embed.setDescription(`:loud_sound: <@!${oldState.id}> entrou no voice: **<#${newState.channelID}>**`)
             }
             else if(oldState.channelID !== null && newState.channelID !== null){
-                embed.setDescription(`:loud_sound: <@!${oldState.id}> trocou do voice: \`<#${oldState.channelID}>\` // para o voice: \`<#${newState.channelID}>\``)
+                embed.setDescription(`:loud_sound: <@!${oldState.id}> trocou do voice: **<#${oldState.channelID}>** // para o voice: **<#${newState.channelID}>**`)
             }
             else if(oldState.channelID !== null && newState.channelID === null){
-                embed.setDescription(`:loud_sound: <@!${oldState.id}> saiu do voice: \`<#${oldState.channelID}>\``)
+                embed.setDescription(`:loud_sound: <@!${oldState.id}> saiu do voice: **<#${oldState.channelID}>**`)
             }
 
             return channel.send(embed)
