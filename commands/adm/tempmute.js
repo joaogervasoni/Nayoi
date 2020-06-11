@@ -50,8 +50,6 @@ module.exports.run = async (bot, message, args) => {
 
 module.exports.help = {
     name: "tempmute",
-    description: "Muta a pessoa escolhida por **'x'** tempo",
-    usability: "Atualmente Desabilitado` :x:\n",
     type: "adm"
 }
 

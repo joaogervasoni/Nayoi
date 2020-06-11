@@ -11,6 +11,7 @@ bot.snipes = new Map();
 bot.commands = new Collection();
 bot.aliases = new Collection();
 bot.lists = new Collection();
+bot.locales = new Collection();
 bot.prefix = prefix;
 bot.baseColor = "#ff8ff2";
 bot.database = require('./utils/database.js')
@@ -23,6 +24,9 @@ events.run(bot);
 
 const lists = require("./structures/list");
 lists.run(bot);
+
+const langs = require("./structures/lang");
+langs.run(bot);
 
 bot.on("ready", async () =>{
     console.log(`[Online]`.brightGreen +` ${bot.user.username} esta Online em ${bot.guilds.cache.size} servidores`.green);

@@ -8,7 +8,7 @@ module.exports.run = (bot, message, args) => {
 
         if(cmd === "bot"){
             let botembed = new MessageEmbed()
-            .setDescription("Informação do Bot")
+            .setTitle("Informação do Bot")
             .setThumbnail(bot.user.avatarURL())
             .setColor(bot.baseColor)
             .addField("Nome", bot.user.username, true)
@@ -77,11 +77,6 @@ module.exports.run = (bot, message, args) => {
 
 module.exports.help = {
     name: "info",
-    description: "Traz informações sobre pessoas e servidor",
-    usability: "Para trazer informações sobre você digite `"+prefix+"info`\n"
-    + "Para trazer informações sobre alguem digite `"+prefix+"info @usuário`\n",
-    additional: "`"+prefix+"info bot` - Exibe informações do bot\n"
-    +"`"+prefix+"info server` - Exibe informações do servidor\n",
     type: "utilidade"
 }
 

@@ -43,10 +43,6 @@ module.exports.run = async (bot, message, args) => {
 
 module.exports.help = {
     name: "corona",
-    description: "Mostra casos de corona",
-    utility: "Para trazer informações sobre algum Pais digite `"+prefix+"corona nomedopais`\n",
-    additional: "`"+ prefix +"corona lista` para ver a lista de países !!",
-    others: "O Nome do Pais deve ser em inglês",
     type: "utilidade",
     aliases: ["covid"]
 }

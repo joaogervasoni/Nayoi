@@ -23,9 +23,6 @@ module.exports.run = async (bot, message, args) => {
 
 module.exports.help = {
     name: "sharingan",
-    description: "Traz a ultima msg da pessoa selecionada",
-    usability: "Pode ser utilizado de maneira simples `"+prefix+"sharingan @usuário`\n",
-    others: "A msg retornada é referente ao canal onde foi utilizado o comando",
     type: "fun"
 }
 

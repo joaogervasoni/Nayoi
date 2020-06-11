@@ -37,7 +37,7 @@ module.exports.run = async (bot, message, args) => {
             manga = manga.results[0];
             let embed = new MessageEmbed()
             .setThumbnail(manga.image_url)
-            .setTitle("Mangá")
+            .setTitle("Manga")
             .setDescription(manga.synopsis)
             .setColor(bot.baseColor)
             .addField("Nome:", manga.title, true)
@@ -86,13 +86,6 @@ module.exports.run = async (bot, message, args) => {
 
 module.exports.help = {
     name: "mal",
-    description: "Puxa informações do MAL ( My Anime List )",
-    usability: "Pode se pesquisar um anime facilmente `"+prefix+"mal an naruto`\n"
-    +"Também podemos retornar mangás e outras informações `"+prefix+"mal mg naruto`\n"
-    +"**Após o mal podem ser utilizadas as seguintes informações:**\n"
-    +"`ch` - Para encontrar um personagem\n"
-    +"`pf` - Para encontrar um perfil no MAL\n",
-    others: "",
     type: "utilidade"
 }
 

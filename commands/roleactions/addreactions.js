@@ -115,14 +115,6 @@ module.exports.run = async (bot, message, args) => {
 
 module.exports.help = {
     name: "addreactions",
-    description: "Dá cargos com reações em uma mensagem",
-    usability: "Pode utilizado desta forma: `"+prefix+"addreactions #channel`\n"
-    +"**Após utilizar o comando:**\n"
-    +"Digite o titulo e a msg divididos por vírgula `Ex: Titulo, toda a msg`\n"
-    +"Mande uma msg com emoji e cargo para cada cargo `Ex: :emoji:, @cargo`\n"
-    +"Após terminar de mandar todos os emojis e cargos utilize o comando de done `!!done`\n",
-    additional: "",
-    others: "",
     type: "automation"
 }
 

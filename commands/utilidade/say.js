@@ -21,10 +21,6 @@ module.exports.run = (bot, message, args) => {
 
 module.exports.help = {
     name: "say",
-    description: "Manda uma msg pelo Bot",
-    usability: "Pode ser utilizando usando `"+prefix+"say msgaqui`\n"
-    +"Também pode ser mandando em um chat diferente usando`"+prefix+"say #channel msgaqui`\n"
-    +"**Os comandos say e sayembed utilizam os mesmos parâmetros**\n",
     type: "utilidade"
 }
 

@@ -36,8 +36,6 @@ module.exports.run = async (bot, message, args) => {
 
 module.exports.help = {
     name: "emojimaker",
-    description: "Pode ser utilizado de maneira simples `"+prefix+"gif emoji1 emoji2`\n",
-    others: "Os emojis devem ser custom, no caso adicionados ao servidor, emojis padrões como 🚀 ou de outros servidores não funcionam",
     type: "fun"
 }
 

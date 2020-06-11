@@ -59,14 +59,6 @@ module.exports.run = (bot, message, args) => {
 
 module.exports.help = {
     name: "notice", //anuncio
-    description: "Cria um anuncio de postagem pelo Bot",
-    usability: "Pode ser utilizando usando `"+prefix+"anuncio msg 10s msgaqui`\n"
-    +"Também pode ser mandando em um chat diferente usando`"+prefix+"anuncio msg 10s #channel msgaqui`\n"
-    +"**Os comandos 'msg' e 'embed' utilizam os mesmos parâmetros**\n",
-    additional: "É possivel escolher entre `msg` e `embed`\n"
-    +`No caso de \`embed\` utilize desta forma: \`${prefix}anuncio embed 10s Titulo || msg\`\n`,
-    others: "O tempo deve ser expecificado com uma letra após o número para ser considerado um tempo valido\n"
-    +"**Exemplos:** `1s(seg) | 1m (min) | 1h (hora)`",
     type: "adm"
 }
 

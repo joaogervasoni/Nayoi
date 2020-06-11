@@ -87,10 +87,6 @@ module.exports.run = async (bot, message, args) => {
 
 module.exports.help = {
     name: "autodeletemsg",
-    description: "Deleta msgs para deixar apenas imagens no canal desejado",
-    usability: "Pode ser ativo utilizando `"+prefix+"autodeletemsg on #chat`\n"
-    +"Para desabilitar use `"+prefix+"welcome off #chat`\n",
-    additional: "`"+prefix+"autodeletemsg show` - Para mostrar todos os canais com autodeletemsg\n",
     type: "automation"
 }
 

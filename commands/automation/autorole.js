@@ -57,10 +57,6 @@ module.exports.run = async (bot, message, args) => {
 
 module.exports.help = {
     name: "autorole",
-    description: "Gerencia autorole do servidor dando cargo automáticamente para quem entra",
-    usability: "Pode ser ativo utilizando `"+prefix+"autorole on @cargo`\n"
-    +"A role pode ser alterada utilizando `"+prefix+"autorole rol @cargo`\n",
-    additional: "`"+prefix+"autorole off` - Desabilita o autorole\n",
     type: "automation"
 }
 

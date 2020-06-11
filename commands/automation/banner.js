@@ -99,12 +99,6 @@ module.exports.run = async (bot, message, args) => {
 
 module.exports.help = {
     name: "banner",
-    description: "Adiciona banner para o bem-vindo",
-    usability: "Pode ser ativo utilizando `"+prefix+"banner on`\n"
-    +"`"+prefix+"banner cst urldaimg` - Troca imagem do banner de boas-vindas\n",
-    additional: "`"+prefix+"banner off` - Para desabilitar o comando\n"
-    +"`"+prefix+"banner show` - Para mostrar o preview do banner\n",
-    others: "As dimensões do banner de boas-vindas é de **1000x360**",
     type: "automation"
 }
 

@@ -16,8 +16,6 @@ module.exports.run = async (bot, message, args) => {
 
 module.exports.help = {
     name: "kill",
-    description: "Faz a pessoa morrer de alguma maneira",
-    usability: "Pode ser utilizado de maneira simples `"+prefix+"kill @usuário`\n",
     type: "fun"
 }
 

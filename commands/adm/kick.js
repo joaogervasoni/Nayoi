@@ -19,8 +19,6 @@ module.exports.run = (bot, message, args) => {
 
 module.exports.help = {
     name: "kick",
-    description: "Kicka a pessoa do servidor",
-    usability: "Pode ser utilizado digitando `"+prefix+"kick @usuario razão`\n",
     type: "adm"
 }
 

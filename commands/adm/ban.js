@@ -19,8 +19,6 @@ module.exports.run = (bot, message, args) => {
 
 module.exports.help = {
     name: "ban",
-    description: "Bane a pessoa do servidor",
-    usability: "Pode ser utilizado digitando `"+prefix+"ban @usuario razão`\n",
     type: "adm"
 }
 

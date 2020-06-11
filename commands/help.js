@@ -1,19 +1,23 @@
 const {MessageEmbed} = require("discord.js");
 
-module.exports.run = (bot, message, args) => {
+module.exports.run = (bot, message, args, lang) => {
 
     let cmd = args.join(" ").slice(0).toLowerCase();
     let embed = new MessageEmbed()
-
     let cmds = bot.commands.get(cmd)
-    if(cmds && cmds.help.description != null){
+    //if(cmds && cmds.help.description != null){
+    if(cmds){
+        const infos = this.returnCommandLang(message, cmds.help.name);
+        langParams(infos, bot.prefix, cmds.help.name)
+        console.log(infos)
+
         embed
         .setTitle(`${cmds.help.name.charAt(0).toUpperCase() + cmds.help.name.slice(1)}:`)
-        .setDescription(`${cmds.help.description}`)
+        .setDescription(`${infos.description}`)
         .setColor(bot.baseColor)
-        if(cmds.help.usability) embed.addField("Usabilidade", `${cmds.help.usability}`)
-        if(cmds.help.additional) embed.addField("Comandos adicionais", `${cmds.help.additional}`)
-        if(cmds.help.others) embed.addField("Outros", `${cmds.help.others}`)
+        if(infos.usability) embed.addField("Usabilidade", `${infos.usability}`)
+        if(infos.additional) embed.addField("Comandos adicionais", `${infos.additional}`)
+        if(infos.others) embed.addField("Outros", `${infos.others}`)
         return message.channel.send(embed)
     }
     else{
@@ -30,9 +34,22 @@ module.exports.run = (bot, message, args) => {
     }
 }
 
+const langParams = (str, prefix, command) => {
+    for (const key in str) {
+        if (str.hasOwnProperty(key)) {
+            str[key] = str[key].replace(/{prefix}/g, prefix);
+            str[key] = str[key].replace(/{cmdName}/g, command);
+        }
+    }
+}
+
+exports.returnCommandLang = function(message, name){
+    let infos = message.guild.language.commands.find(element => element.name === name).help;
+    return infos
+}
+
 module.exports.help = {
     name: "help",
-    description: "Traz informações sobre comandos",
     type: "ajuda"
 }
 

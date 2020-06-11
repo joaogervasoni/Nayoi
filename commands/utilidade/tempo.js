@@ -3,7 +3,7 @@ const { errorReturn, formatText } = require("../../utils/functions.js");
 const { prefix , weatherApi } = require("../../botconfig.json");
 const fetch = require("node-fetch");
 
-module.exports.run = async (bot, message, args) => {
+module.exports.run = async (bot, message, args, lang) => {
     try{
         const local = formatText(args.join(" ").slice(0));
         if(local === "" || local === undefined) return message.reply("Para saber informações do comando digite `"+prefix+"help "+this.help.name+"`");
@@ -15,10 +15,10 @@ module.exports.run = async (bot, message, args) => {
         let feels = (weather.main.feels_like - 273.15).toFixed(2);
         let embed = new MessageEmbed()
             .setThumbnail("https://github.com/Zaetic/Nayoi/blob/master/images/YaniTempo.png?raw=true")
-            .setTitle(`Temperatura de ${weather.name}`)
+            .setTitle(lang.tempname.replace(/{weather.name}/g, weather.name))
             .addField(`Temperatura:`, `${temp} °C`, true)
             .addField(`Sensação:`, `${feels} °C`, true)
-            .addField(`Local:`, weather.sys.country)
+            .addField(lang.local, weather.sys.country)
             .setColor(bot.baseColor)
         return message.channel.send(embed)
     }catch(e){
@@ -28,10 +28,6 @@ module.exports.run = async (bot, message, args) => {
 
 module.exports.help = {
     name: "tempo",
-    description: "Traz a temperatura atual do local requisitado",
-    usability: "Pode ser utilizado de maneira simples `"+prefix+"tempo local`\n",
-    additional: "",
-    others: "A utilização de acentos ou 'ç' na pesquisa pode não retornar dados",
     type: "utilidade",
     aliases: ["temp"]
 }

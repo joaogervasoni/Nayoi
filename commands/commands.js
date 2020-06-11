@@ -69,9 +69,6 @@ module.exports.run = (bot, message, args) => {
 
 module.exports.help = {
     name: "commands",
-    description: "Traz a lista de comandos disponíveis",
-    usability: "Para trazer a lista de comandos digite `"+prefix+"commands`\n"
-    + "Para trazer a lista de um tipo de comando digite `"+prefix+"commands tipodecomando`",
     type: "ajuda",
     aliases: ["cmd"]
 }

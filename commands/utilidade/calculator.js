@@ -21,9 +21,6 @@ module.exports.run = async (bot, message, args) => {
 
 module.exports.help = {
     name: "calculator",
-    description: "Faz o cálculo de valores",
-    utility: "Para fazer uma conta digite `"+prefix+"calc 1+1`\n",
-    others: "Para calcular um valor antes utilize () ex: `1+1/(2-1)`",
     type: "utilidade",
     aliases: ["calc"]
 }

@@ -26,6 +26,11 @@ module.exports = async (bot, message) => {
     if (message.guild.me === null || message.guild.me === undefined) return;
     if (!message.guild.me.permissions.has(["SEND_MESSAGES"])) return;
 
+    // Lang Cmd
+    const lang = Object.assign({}, message.guild.language.commands.find(element => element.name === command).cmd, 
+    message.guild.language.commands.find(element => element.name === "geral").cmd);
+    langParams(lang, prefix, command)
+
     // Validações de cargo
     if (cmd.requirements.ownerOnly && !owners.includes(message.author.id))
         return message.reply("Apenas utilizavel pelo meu mestre");
@@ -36,7 +41,7 @@ module.exports = async (bot, message) => {
     if (cmd.requirements.clientPerms && !message.guild.me.permissions.has(cmd.requirements.clientPerms))
         return message.reply(`Eu não tenho essas permissões: ${missingPerms(message.guild.me, cmd.requirements.clientPerms)}`);
 
-    cmd.run(bot, message, args);
+    cmd.run(bot, message, args, lang);
 }
 
 const missingPerms = (member, perms) => {
@@ -46,4 +51,13 @@ const missingPerms = (member, perms) => {
     return missingPerms.length > 1 ?
         `${missingPerms.slice(0, -1).join(", ")} and ${missingPerms.slice(-1)[0]}` :
         missingPerms[0];
+}
+
+const langParams = (str, prefix, command) => {
+    for (const key in str) {
+        if (str.hasOwnProperty(key)) {
+            str[key] = str[key].replace(/{prefix}/g, prefix);
+            str[key] = str[key].replace(/{cmdName}/g, command);
+        }
+    }
 }

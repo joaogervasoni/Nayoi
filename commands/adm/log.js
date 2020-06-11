@@ -60,11 +60,6 @@ module.exports.run = async (bot, message, args) => {
 
 module.exports.help = {
     name: "log",
-    description: "Gerencia toda a parte de Logs do servidor mostrando pessoas que sairam, msgs deletadas/editadas e nick alterados",
-    usability: "Pode ser ativo utilizando `"+prefix+"log on #chat`\n"
-    +"O canal pode ser alterado utilizando `"+prefix+"log ch #chat`\n",
-    additional: "`"+prefix+"log off` - Desabilita o sistema de log\n"
-    + "`"+prefix+"log show` - Mostra qual o canal atual do log",
     type: "adm"
 }
 
