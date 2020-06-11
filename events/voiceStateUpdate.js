@@ -1,5 +1,5 @@
 const { MessageEmbed } = require("discord.js");
-const {errorReturn, returnNull} = require("../utils/functions.js");
+const { errorReturn, returnNull } = require("../utils/functions.js");
 
 module.exports = async (bot, oldState, newState) => {
     if(oldState.bot === true) return
@@ -14,7 +14,6 @@ module.exports = async (bot, oldState, newState) => {
             .setTimestamp()
             .setColor(bot.baseColor)
 
-            console.log(oldState)
             if((oldState.channelID === null || oldState.channelID === undefined) && newState.channelID !== null){
                 embed.setDescription(`:loud_sound: <@!${oldState.id}> entrou no voice: **<#${newState.channelID}>**`)
             }
