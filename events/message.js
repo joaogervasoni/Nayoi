@@ -27,8 +27,9 @@ module.exports = async (bot, message) => {
     if (!message.guild.me.permissions.has(["SEND_MESSAGES"])) return;
 
     // Lang Cmd
-    const lang = Object.assign({}, message.guild.language.commands.find(element => element.name === command).cmd, 
-    message.guild.language.commands.find(element => element.name === "geral").cmd);
+    let langs = message.guild.language;
+    const lang = await Object.assign({}, langs.commands.find(element => element.name === command).cmd, 
+    langs.commands.find(element => element.name === "geral").cmd);
     langParams(lang, prefix, command)
 
     // Validações de cargo

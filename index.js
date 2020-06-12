@@ -31,6 +31,15 @@ langs.run(bot);
 bot.on("ready", async () =>{
     console.log(`[Online]`.brightGreen +` ${bot.user.username} esta Online em ${bot.guilds.cache.size} servidores`.green);
     bot.user.setActivity(`${prefix}help | ${prefix}commands`, {type: "PLAYING"});
+ 
+    for await (let guild of bot.guilds.cache.array()) {
+        let lang; // receive default lang
+        if (!lang) {
+            lang = "pt-br";
+            // save default lang
+        }
+        guild.language = bot.locales.get(lang);
+    }
 })
 
 bot.login(token);
