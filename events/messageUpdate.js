@@ -8,7 +8,6 @@ module.exports = async (bot, oldMessage, newMessage) => {
         return
     }
     try{
-        bot.database;
         const guild = await bot.Guild.findOne({ 'guildId': oldMessage.guild.id });
         
         if (guild.log.status == "on" && oldMessage.channel.type == 'text') {
@@ -22,6 +21,7 @@ module.exports = async (bot, oldMessage, newMessage) => {
                     if(newMessage.cleanContent) embed.addField(`**Mensagem Nova:**`, newMessage.content)
                     .addField(`**Tag:**`, newMessage.author.tag, true)
                     .addField(`**ID:**`, newMessage.author.id, true)
+                    .setColor(bot.baseColor)
                     .setTimestamp()
 
                 return channel.send(embed)

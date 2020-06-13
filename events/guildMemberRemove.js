@@ -1,17 +1,15 @@
-const {MessageEmbed} = require("discord.js");
-const {errorReturn} = require("../utils/functions.js");
+const { MessageEmbed } = require("discord.js");
+const { errorReturn } = require("../utils/functions.js");
 
 module.exports = async (bot, member)  => {
-
-    //Log
     try{
-        bot.database;
         const guild = await bot.Guild.findOne({ 'guildId': member.guild.id });
 
         //Update memberCount
         guild.memberCount = member.guild.memberCount;
         guild.save();
         
+        //Log
         if(guild.log.status == "on"){
             let logs = await member.guild.fetchAuditLogs();
             let entry = logs.entries.find(entry => entry.target === member.user);
@@ -26,6 +24,7 @@ module.exports = async (bot, member)  => {
                     .addField(`**Usuário:**`, `${member.user} **Razão:** ${entry.reason} **Por:** ${entry.executor}`)
                     .addField(`**Tag:**`, member.user.tag, true)
                     .addField(`**ID:**`, member.user.id, true)
+                    .setColor(bot.baseColor)
                     .setTimestamp()
                 }
                 else if (entry != null && entry.action == "MEMBER_BAN_ADD"){
@@ -35,6 +34,7 @@ module.exports = async (bot, member)  => {
                     .addField(`**Usuário:**`, `${member.user} **Razão:** ${entry.reason} **Por:** ${entry.executor}`)
                     .addField(`**Tag:**`, member.user.tag, true)
                     .addField(`**ID:**`, member.user.id, true)
+                    .setColor(bot.baseColor)
                     .setTimestamp()
                 }
                 else{
@@ -44,6 +44,7 @@ module.exports = async (bot, member)  => {
                     .addField("**Usuário:**", member.user)
                     .addField(`**Tag:**`, member.user.tag, true)
                     .addField(`**ID:**`, member.user.id, true)
+                    .setColor(bot.baseColor)
                     .setTimestamp()
                 }
                 channel.send(embed)

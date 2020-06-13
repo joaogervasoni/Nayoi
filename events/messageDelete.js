@@ -12,7 +12,6 @@ module.exports = async (bot, message) => {
 
     //Log
     try{
-        bot.database;
         const guild = await bot.Guild.findOne({ 'guildId': message.guild.id });
         
         if (guild.log.status == "on" && message.channel.type == 'text') {
@@ -29,6 +28,7 @@ module.exports = async (bot, message) => {
                     if(message.cleanContent) embed.addField(`**Mensagem:**`, message.cleanContent)
                     .addField(`**Tag:**`, message.member.user.tag, true)
                     .addField(`**ID:**`, message.member.user.id, true)
+                    .setColor(bot.baseColor)
                     .setTimestamp()
                     if (imageAtt) embed.setImage(imageAtt);
                 

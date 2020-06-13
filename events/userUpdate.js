@@ -26,6 +26,7 @@ module.exports = async (bot, oldUser, newUser) => {
                             .addField(`**Usuário:**`, newUser, true)
                             .addField(`**Nick Antigo:**`, oldUser.tag)
                             .addField(`**Nick Novo:**`, newUser.tag)
+                            .setColor(bot.baseColor)
                             .setTimestamp()
         
                             await channel.send(embed)

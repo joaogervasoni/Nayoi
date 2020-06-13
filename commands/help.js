@@ -9,7 +9,6 @@ module.exports.run = (bot, message, args, lang) => {
     if(cmds){
         const infos = this.returnCommandLang(message, cmds.help.name);
         langParams(infos, bot.prefix, cmds.help.name)
-        console.log(infos)
 
         embed
         .setTitle(`${cmds.help.name.charAt(0).toUpperCase() + cmds.help.name.slice(1)}:`)
