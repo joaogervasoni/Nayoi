@@ -6,7 +6,7 @@ const checkLinks = require('check-links')
 module.exports = async (bot, oldUser, newUser) => {
     if(oldUser.bot === true) return
     if(returnNull(oldUser) || returnNull(newUser)) return
-    if(oldUser.avatar === newUser.avatar || oldUser.tag === newUser.tag) return
+    if(oldUser.avatar === newUser.avatar && oldUser.tag === newUser.tag) return
     
     try{
         if(oldUser.tag != newUser.tag){
@@ -35,7 +35,7 @@ module.exports = async (bot, oldUser, newUser) => {
                 }
             }
         }
-        else if(oldUser.avatar != newUser.avatar){
+        if(oldUser.avatar != newUser.avatar){
             let imgOld = await oldUser.displayAvatarURL({ format: 'png' })
             let imgNew = await newUser.displayAvatarURL({ format: 'png' })
     
