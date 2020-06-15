@@ -442,6 +442,34 @@ module.exports =
                 others: "",
             }    
         },
+        {
+            name: "lang",
+            cmd: {
+                atualLang: "A language atual é:",
+                invalidLang: "Preciso de uma language valida :face_with_monocle:!!",
+                changedLang: "Language alterada para",
+                embedTitle: "Languages disponiveis:",
+                statusOk: "Lang já é"
+            },
+            help: {
+                description: "Troca a language do servidor",
+                usability: "Pode ser utilizando desta forma: `{prefix}lang change languageAqui",
+                additional: "`{prefix}lang list` - Exibe a lista de languages\n"
+                +"`{prefix}lang show` - Exibe a language atual",
+            }
+        },
+        {
+            name: "clear",
+            cmd: {
+                returnDeleted: "mensagens foram deletadas neste canal :regional_indicator_x:",
+                returnLimit: "O limite máximo é de 50 msgs por vez",
+            },
+            help: {
+                description: "Deleta mensagens no canal",
+                usability: "Pode ser utilizando desta forma: `{prefix}clear 10",
+                additional: "O número maximo de msg para serem deletadas é de 50"
+            }
+        }
         
     ]
 }
