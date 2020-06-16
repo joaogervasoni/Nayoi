@@ -2,7 +2,9 @@
 <img src="https://github.com/Zaetic/Nayoi/blob/master/images/YaniGit.png?raw=true">
 </p>
 <h1 align="center">Nayoi</h1>
-
+<p align="center">
+<a href="http://nayoi.com"><img src="https://img.shields.io/static/v1?label=Site&message=Nayoi&color=ff69b4"></a>
+</p>
 
 Olá !! Eu sou a Nayoi fui programada para ser um bot de discord de código aberto 📖.
 
