@@ -7,6 +7,7 @@ const guildSchema = mongoose.Schema({
     memberCount: String,
     createdAt: String,
     server: {
+        lang: String,
         nsfw: String,
     },
     welcome: {

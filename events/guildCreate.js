@@ -4,7 +4,6 @@ const mongoose = require('mongoose');
 
 module.exports = (bot, guild) => {
     try{
-        bot.database;
 
         const guildNew = new bot.Guild({
             _id: mongoose.Types.ObjectId(),
@@ -13,6 +12,7 @@ module.exports = (bot, guild) => {
             memberCount: guild.memberCount,
             createdAt: guild.joinedAt,
             server: {
+                lang: "pt-br",
                 nsfw: "off"
             },
             welcome: {
