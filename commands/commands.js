@@ -2,7 +2,7 @@ const {MessageEmbed} = require("discord.js");
 const {upperCaseFirst} = require("../utils/functions.js");
 const { prefix } = require("../botconfig.json");
 
-module.exports.run = (bot, message, args) => {
+module.exports.run = (bot, message, args, lang) => {
 
     let args2 = args.join(" ").slice(0).toLowerCase();
     let cmds = bot.commands;
@@ -18,8 +18,10 @@ module.exports.run = (bot, message, args) => {
         let description = ("`Para mais informações use " + prefix +"help nomedocomando`\n\n")
         cmds.forEach(element => {
             if(element.help.type === args2){
-                if(element.help.description !== undefined){
-                    description = `${description} **${upperCaseFirst(element.help.name)}** // ${element.help.description}\n`;
+                const infos = this.returnCommandLang(message, element.help.name);
+                langParams(infos, bot.prefix, element.help.name)
+                if(infos.description !== undefined){
+                    description = `${description} **${upperCaseFirst(element.help.name)}** // ${infos.description}\n`;
                 }else{
                     description = `${description} **${upperCaseFirst(element.help.name)}** //\n`;
                 } 
@@ -65,6 +67,20 @@ module.exports.run = (bot, message, args) => {
 
         return message.channel.send(embed);
     }
+}
+
+const langParams = (str, prefix, command) => {
+    for (const key in str) {
+        if (str.hasOwnProperty(key)) {
+            str[key] = str[key].replace(/{prefix}/g, prefix);
+            str[key] = str[key].replace(/{cmdName}/g, command);
+        }
+    }
+}
+
+exports.returnCommandLang = function(message, name){
+    let infos = message.guild.language.commands.find(element => element.name === name).help;
+    return infos
 }
 
 module.exports.help = {
