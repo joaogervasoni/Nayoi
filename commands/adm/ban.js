@@ -1,11 +1,15 @@
-const {errorReturn} = require("../../utils/functions.js");
+const {errorReturn, returnNull} = require("../../utils/functions.js");
 const { prefix } = require("../../botconfig.json");
 
-module.exports.run = (bot, message, args) => {
+module.exports.run = (bot, message, args, lang) => {
     try{
-        let bUser = message.guild.member(message.mentions.users.first() || message.guild.member.get(args[0]))
+        cmd = args[0];
+
+        if(returnNull(cmd) || returnNull(message.mentions.users.first())) return message.reply(lang.helpReturn)
+
+        let bUser = message.guild.member(message.mentions.users.first() || message.guild.member.get(cmd))
         if(!bUser) return message.channel.send("Não encontrei esse usuário :thinking:");
-        let bReason = args.join(" ").slice(args[0].length);
+        let bReason = args.join(" ").slice(cmd.length);
         
         if(bUser.hasPermission("MANAGE_GUILD")) return message.channel.send("Essa pessoa não pode levar Banimento :flushed:");
         let msg = "Usuário Banido: `"+bUser+"` || Razão: `"+bReason+"`";
