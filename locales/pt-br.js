@@ -342,7 +342,9 @@ module.exports =
             cmd: {
                 returnNull: "Não encontrei esse usuário :thinking:",
                 returnInvalid: "Essa pessoa não pode levar Banimento :flushed:",
-                banMsg: "Usuário Banido: `{bUser}` || Razão: `{bReason}`"
+                embedTitle: "Banido",
+                embedFieldUser: "Usuario",
+                embedFieldReason: "Razão",
             },
             help: {
                 description: "Bane a pessoa do servidor",
@@ -354,7 +356,9 @@ module.exports =
             cmd: {
                 returnNull: "Não encontrei esse usuário :thinking:",
                 returnInvalid: "Essa pessoa não pode levar Kick :flushed:",
-                banMsg: "Usuário kickado: `{kUser}` || Razão: `{kReason}`"
+                embedTitle: "Kickado",
+                embedFieldUser: "Usuario",
+                embedFieldReason: "Razão",
             },
             help: {
                 description: "Kicka a pessoa do servidor",

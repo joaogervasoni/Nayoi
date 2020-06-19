@@ -1,5 +1,5 @@
 const {errorReturn, returnNull} = require("../../utils/functions.js");
-const { prefix } = require("../../botconfig.json");
+const {MessageEmbed} = require("discord.js");
 
 module.exports.run = (bot, message, args, lang) => {
     try{
@@ -8,14 +8,22 @@ module.exports.run = (bot, message, args, lang) => {
         if(returnNull(cmd) || returnNull(message.mentions.users.first())) return message.reply(lang.helpReturn)
 
         let bUser = message.guild.member(message.mentions.users.first() || message.guild.member.get(cmd))
-        if(!bUser) return message.channel.send("Não encontrei esse usuário :thinking:");
+        if(!bUser) return message.channel.send(lang.returnNull);
         let bReason = args.join(" ").slice(cmd.length);
         
-        if(bUser.hasPermission("MANAGE_GUILD")) return message.channel.send("Essa pessoa não pode levar Banimento :flushed:");
-        let msg = "Usuário Banido: `"+bUser+"` || Razão: `"+bReason+"`";
+        if(bUser.hasPermission("MANAGE_GUILD")) return message.channel.send(lang.returnInvalid);
+
+        const embed = new MessageEmbed()
+        .setTitle(lang.embedTitle)
+        .addField(lang.embedFieldUser, bUser , true)
+        .addField(lang.embedFieldReason, bReason, true)
+        .addField("ID", bUser.id, true)
+        .setColor(bot.baseColor)
+        .setImage("https://media1.tenor.com/images/021373dfbb72d1f0572111b9ea76490d/tenor.gif?itemid=9491505")
+        .setTimestamp();
         
-        message.guild.member(bUser).ban(bReason)
-        return message.channel.send(msg);
+        await message.guild.member(bUser).ban(bReason)
+        return message.channel.send(embed);
     }catch(e){
         errorReturn(e, message, this.help.name)
     }

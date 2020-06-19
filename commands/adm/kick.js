@@ -1,5 +1,4 @@
 const {errorReturn} = require("../../utils/functions.js");
-const { prefix } = require("../../botconfig.json");
 
 module.exports.run = (bot, message, args, lang) => {
     try{
@@ -8,13 +7,20 @@ module.exports.run = (bot, message, args, lang) => {
         if(returnNull(cmd) || returnNull(message.mentions.users.first())) return message.reply(lang.helpReturn)
 
         let kUser = message.guild.member(message.mentions.users.first() || message.guild.member.get(cmd))
-        if(!kUser) return message.channel.send("Não encontrei esse usuário :thinking:");
+        if(!kUser) return message.channel.send(lang.returnNull);
         let kReason = args.join(" ").slice(cmd.length);
 
-        if(kUser.hasPermission("MANAGE_MESSAGES")) return message.channel.send("Essa pessoa não pode levar Kick :flushed:");
-        let msg = "Usuário kickado: `"+kUser+"` || Razão: `"+kReason+"`";
+        if(kUser.hasPermission("MANAGE_MESSAGES")) return message.channel.send(lang.returnInvalid);
+        
+        const embed = new MessageEmbed()
+        .setTitle(lang.embedTitle)
+        .addField(lang.embedFieldUser, kUser , true)
+        .addField(lang.embedFieldReason, kReason, true)
+        .addField("ID", bUser.id, true)
+        .setColor(bot.baseColor)
+        .setTimestamp();
 
-        message.guild.member(kUser).kick(kReason);
+        await message.guild.member(kUser).kick(kReason);
         return message.channel.send(msg);
     }catch(e){
         errorReturn(e, message, this.help.name)

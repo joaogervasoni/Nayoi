@@ -1,4 +1,3 @@
-const { prefix } = require("../../botconfig.json");
 const {errorReturn, returnNull} = require("../../utils/functions.js");
 
 module.exports.run = async (bot, message, args, lang) => {
