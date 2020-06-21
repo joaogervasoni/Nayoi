@@ -1,19 +1,19 @@
 const {MessageEmbed} = require("discord.js");
 const {errorReturn} = require("../../utils/functions.js");
 
-module.exports.run = (bot, message) => {
+module.exports.run = (bot, message, args, lang) => {
     try{
         let user = message.mentions.members.first();
         let percent = Math.floor(Math.random() * 101);
         let msg;
         if (user){
-            msg = `${user} é ${percent}% comunista :hammer_pick:`
+            msg = `${user} ${lang.userIs} ${percent}% comunista :hammer_pick:`
         }else{
-            msg = `Você é ${percent}% comunista :hammer_pick:`
+            msg = `${lang.youIs} ${percent}% ${lang.how} :hammer_pick:`
         }
 
         let embed = new MessageEmbed()
-                    .setTitle("Quão comunista vc é?")
+                    .setTitle(lang.embedTitle)
                     .setDescription(msg)
                     .setColor("#cc0000")
         return message.channel.send(embed);

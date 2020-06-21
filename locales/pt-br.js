@@ -120,7 +120,7 @@ module.exports =
             },
             help: {
                 description: "Mostra casos de corona",
-                utility: "Para trazer informações sobre algum Pais digite `{prefix}corona nomedopais`\n",
+                usability: "Para trazer informações sobre algum Pais digite `{prefix}corona nomedopais`\n",
                 additional: "`{prefix}corona lista` para ver a lista de países !!",
                 others: "O Nome do Pais deve ser em inglês",
             }    
@@ -133,7 +133,7 @@ module.exports =
             },
             help: {
                 description: "Faz o cálculo de valores",
-                utility: "Para fazer uma conta digite `{prefix}calc 1+1`\n",
+                usability: "Para fazer uma conta digite `{prefix}calc 1+1`\n",
                 others: "Para calcular um valor antes utilize () ex: `1+1/(2-1)`",
             }    
         },
@@ -145,7 +145,7 @@ module.exports =
             },
             help: {
                 description: "Mostra a imagem de avatar da pessoa",
-                utility: "Para fazer uma conta digite `{prefix}avatar @usuário`\n",
+                usability: "Para fazer uma conta digite `{prefix}avatar @usuário`\n",
             }    
         },
         {
@@ -157,6 +157,8 @@ module.exports =
             },
             help: {
                 description: "Quão boomer você é ?",
+                usability: "Para saber a porcentagem digite `{prefix}howboomer`\n",
+                additional: "`{prefix}howboomer @usuário` para ver sobre alguem especifico",
             }    
         },
         {
@@ -169,6 +171,8 @@ module.exports =
             },
             help: {
                 description: "Quão comunista você é ?",
+                usability: "Para saber a porcentagem digite `{prefix}howcommunist`\n",
+                additional: "`{prefix}howcommunist @usuário` para ver sobre alguem especifico",
             }    
         },
         {
@@ -180,6 +184,8 @@ module.exports =
             },
             help: {
                 description: "Quão furry você é ?",
+                usability: "Para saber a porcentagem digite `{prefix}howfurry`\n",
+                additional: "`{prefix}howfurry @usuário` para ver sobre alguem especifico",
             }    
         },
         {
@@ -191,6 +197,8 @@ module.exports =
             },
             help: {
                 description: "Quão gay você é ?",
+                usability: "Para saber a porcentagem digite `{prefix}howgay`\n",
+                additional: "`{prefix}howgay @usuário` para ver sobre alguem especifico",
             }    
         },
         {
@@ -202,6 +210,8 @@ module.exports =
             },
             help: {
                 description: "Quão jojofag você é ?",
+                usability: "Para saber a porcentagem digite `{prefix}howjojo`\n",
+                additional: "`{prefix}howjojo @usuário` para ver sobre alguem especifico",
             }    
         },
         {

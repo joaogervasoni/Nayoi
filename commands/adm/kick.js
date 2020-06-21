@@ -1,6 +1,6 @@
 const {errorReturn} = require("../../utils/functions.js");
 
-module.exports.run = (bot, message, args, lang) => {
+module.exports.run = async (bot, message, args, lang) => {
     try{
         cmd = args[0];
 

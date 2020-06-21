@@ -1,19 +1,19 @@
 const {MessageEmbed} = require("discord.js");
 const {errorReturn} = require("../../utils/functions.js");
 
-module.exports.run = (bot, message) => {
+module.exports.run = (bot, message, args, lang) => {
     try{
         let user = message.mentions.members.first();
         let percent = Math.floor(Math.random() * 101);
         let msg;
         if (user){
-            msg = `${user} é ${percent}% JoJo Fag :muscle:`
+            msg = `${user} ${lang.userIs} ${percent}% JoJo Fag :muscle:`
         }else{
-            msg = `Você é ${percent}% JoJo Fag :muscle:`
+            msg = `${lang.youIs} ${percent}% JoJo Fag :muscle:`
         }
 
         let embed = new MessageEmbed()
-                    .setTitle("Quão JoJo Fag vc é?")
+                    .setTitle(lang.embedTitle)
                     .setDescription(msg)
                     .setColor("#99ff99")
         return message.channel.send(embed);

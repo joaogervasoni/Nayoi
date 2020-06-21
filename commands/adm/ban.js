@@ -1,7 +1,7 @@
 const {errorReturn, returnNull} = require("../../utils/functions.js");
 const {MessageEmbed} = require("discord.js");
 
-module.exports.run = (bot, message, args, lang) => {
+module.exports.run = async (bot, message, args, lang) => {
     try{
         cmd = args[0];
 

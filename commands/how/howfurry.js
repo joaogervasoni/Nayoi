@@ -1,7 +1,7 @@
 const {MessageEmbed} = require("discord.js");
 const {errorReturn} = require("../../utils/functions.js");
 
-module.exports.run = (bot, message) => {
+module.exports.run = (bot, message, args, lang) => {
     try{
         let user = message.mentions.members.first();
         let percent = Math.floor(Math.random() * 101);
@@ -10,13 +10,13 @@ module.exports.run = (bot, message) => {
         emoji = emoji[(Math.random() * emoji.length) | 0];
         
         if (user){
-            msg = `${user} é ${percent}% furry ${emoji}`
+            msg = `${user} ${lang.userIs} ${percent}% furry ${emoji}`
         }else{
-            msg = `Você é ${percent}% furry ${emoji}`
+            msg = `${lang.youIs} ${percent}% furry ${emoji}`
         }
 
         let embed = new MessageEmbed()
-                    .setTitle("Quão furry vc é?")
+                    .setTitle(lang.embedTitle)
                     .setDescription(msg)
                     .setColor("#6699ff")
         return message.channel.send(embed);
