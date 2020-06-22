@@ -1,17 +1,16 @@
 const { MessageEmbed } = require("discord.js");
 const { errorReturn, randomCollection } = require("../../utils/functions.js");
-const { prefix } = require("../../botconfig.json");
 
-module.exports.run = async (bot, message, args) => {
+module.exports.run = async (bot, message, args, lang) => {
     try{
         let user = message.mentions.users.first()
-        if (!user) return message.reply("Para saber informações do comando digite `"+prefix+"help "+this.help.name+"`");
+        if (!user) return message.reply(lang.helpReturn);
         let msg = await message.channel.messages.cache.filter(msg => msg.author.id === user.id);
         msg = msg.last();
-        if (!msg) return message.reply("Você esta sem Chakra :anger: !!");
+        if (!msg) return message.reply(lang.returnNull);
         
         const embed = new MessageEmbed()
-            .setDescription("**Cópia de **`"+user.tag+"` :  " +msg.content)
+            .setDescription(`**${lang.embedDescription}** \`${user.tag}\` : ${msg.content}`)
             .setImage(randomCollection(bot.lists, this.help.name))
             .setAuthor(message.member.user.tag, message.member.user.avatarURL())
     

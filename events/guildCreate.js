@@ -33,6 +33,8 @@ module.exports = (bot, guild) => {
         });
         console.log(`Novo servidor !! Nome:${guild.name} id:${guild.id}`.magenta)
         guildNew.save()
+
+        guild.language = bot.locales.get("pt-br");
     }catch(e){
         errorReturn(e, null, "guildCreate")
     }

@@ -1,14 +1,13 @@
 const {MessageEmbed} = require("discord.js");
 const {errorReturn} = require("../../utils/functions.js");
-const { prefix } = require("../../botconfig.json");
 
-module.exports.run = (bot, message, args) => {
+module.exports.run = (bot, message, args, lang) => {
     try{
         const msg = bot.snipes.get(message.channel.id);
-        if (!msg) return message.reply("Sem mensagem :worried:");
+        if (!msg) return message.reply(lang.returnNull);
     
         const embed = new MessageEmbed()
-            .setAuthor(`Deletada por ${msg.author.tag}`, msg.author.avatarURL())
+            .setAuthor(`${lang.embedAuthor} ${msg.author.tag}`, msg.author.avatarURL())
             .setDescription(msg.content)
     
         if (msg.image) embed.setImage(msg.image);

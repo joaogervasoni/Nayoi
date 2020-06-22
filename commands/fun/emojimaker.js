@@ -1,20 +1,19 @@
 const { MessageAttachment } = require("discord.js");
 const { createCanvas, loadImage } = require("canvas");
 const { formatEmojiId, returnNull, errorReturn } = require("../../utils/functions.js");
-const { prefix } = require("../../botconfig.json");
 
-module.exports.run = async (bot, message, args) => {
+module.exports.run = async (bot, message, args, lang) => {
     try{
         const cmd = args[0];
         const subcmd = args[1];
 
-        if(returnNull(cmd)) return message.reply("Para saber informações do comando digite `"+prefix+"help "+this.help.name+"`");
-        if(returnNull(subcmd)) return message.reply("Os dois emojis precisam estar separados por `espaço` !!");
+        if(returnNull(cmd)) return message.reply(lang.helpReturn);
+        if(returnNull(subcmd)) return message.reply(lang.returnEspaceError);
 
         let emoji = bot.emojis.cache.get(formatEmojiId(cmd));
         let emoji2 = bot.emojis.cache.get(formatEmojiId(subcmd));
 
-        if(returnNull(emoji) || returnNull(emoji2)) return message.reply("Algum dos emojis é `inválido` ou é um `emoji padrão !!`");
+        if(returnNull(emoji) || returnNull(emoji2)) return message.reply(lang.returnInvalid);
         
         emoji = "https://cdn.discordapp.com/emojis/"+emoji.id;
         emoji2 = "https://cdn.discordapp.com/emojis/"+emoji2.id;
@@ -28,7 +27,7 @@ module.exports.run = async (bot, message, args) => {
         ctx.drawImage(avatar2, 0,0,150,150);
         const attachment = new MessageAttachment(canvas.toBuffer(),"newEmoji.png");
 
-        return message.channel.send("Novo emoji criado por: `"+message.member.user.tag+"`", attachment)
+        return message.channel.send(`${lang.returnEmoji} \`${message.member.user.tag}\``, attachment)
     }catch(e){
         errorReturn(e, message, this.help.name);
     }
