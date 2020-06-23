@@ -281,7 +281,7 @@ module.exports =
             help: {
                 description: "Deleta msgs para deixar apenas imagens no canal desejado",
                 usability: "Pode ser ativo utilizando `{prefix}autodeletemsg on #chat`\n"
-                +"Para desabilitar use `{prefix}welcome off #chat`\n",
+                +"Para desabilitar use `{prefix}autodeletemsg off #chat`\n",
                 additional: "`{prefix}autodeletemsg show` - Para mostrar todos os canais com autodeletemsg\n",
             }    
         },
@@ -292,7 +292,8 @@ module.exports =
                 statusOk: "Autorole já esta:",
                 statusNew: "Autorole agora esta",
                 roleChange: "Role trocada :sunglasses:!!",
-                roleAtual: "Role atual é:"
+                roleAtual: "Role atual é:",
+                returnNotActived: "Precisa ser ativado !!"
             },
             help: {
                 description: "Gerencia autorole do servidor dando cargo automáticamente para quem entra",

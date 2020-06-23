@@ -1,36 +1,34 @@
 const { createCanvas, loadImage, registerFont } = require("canvas");
 const { errorReturn, returnNull } = require("../../utils/functions.js");
-const { prefix } = require("../../botconfig.json");
 const { MessageAttachment } = require("discord.js");
 const isImage = require('is-image');
 
-module.exports.run = async (bot, message, args) => {
+module.exports.run = async (bot, message, args, lang) => {
     try{
         const cmd = args[0];
         let subcmd = args[1];
         
-        if(returnNull(cmd)) return message.reply("Para saber informações do comando digite `"+prefix+"help "+this.help.name+"`");
+        if(returnNull(cmd)) return message.reply(lang.helpReturn);
 
         if(cmd === "on" || cmd === "true"){
             const guild = await bot.Guild.findOne({'guildId': message.guild.id});
-            if (guild.welcome.canvas === "on") return message.channel.send("Banner já esta `"+guild.welcome.status+"`");
-            if (guild.welcome.status === "off") return message.channel.send("O Bem-vindo esta `"+guild.welcome.status+"`"
-            + "e precisa ser ativo para o banner funcionar digite`"+prefix+"welcome on`");
+            if (guild.welcome.canvas === "on") return message.channel.send(`${lang.statusOk} \`${guild.welcome.status}\``);
+            if (guild.welcome.status === "off") return message.channel.send(lang.welcomeOff.replace(/{guild.welcome.status}/g, guild.welcome.status));
 
             guild.welcome.canvas = "on";
             guild.save(function (err){
                 if(err) return errorReturn(err, message, this.help.name);
-                if(!err) return message.channel.send("Banner de bem-vindo agora esta `"+guild.welcome.canvas+"` :sunglasses:");
+                if(!err) return message.channel.send(`${lang.statusNew} \`${guild.welcome.canvas}\` :sunglasses:`);
             });
         }
         else if(cmd === "off" || cmd === "false"){
             const guild = await bot.Guild.findOne({'guildId': message.guild.id});
-            if (guild.welcome.canvas === "off") return message.channel.send("Banner já esta `"+guild.welcome.status+"`");
+            if (guild.welcome.canvas === "off") return message.channel.send(`${lang.statusOk} \`${guild.welcome.status}\``);
 
             guild.welcome.canvas = "off";
             guild.save(function (err){
                 if(err) return errorReturn(err, message, this.help.name);
-                if(!err) return message.channel.send("Banner de bem-vindo agora esta `"+guild.welcome.canvas+"` :sunglasses:");
+                if(!err) return message.channel.send(`${lang.statusNew} \`${guild.welcome.canvas}\` :cry:`);
             });
         }
         else if(cmd === "cst" || cmd === "custom"){
@@ -41,20 +39,21 @@ module.exports.run = async (bot, message, args) => {
                 guild.welcome.canvasUrl = url;
                 guild.save(function (err){
                     if(err) return errorReturn(err, message, this.help.name);
-                    if(!err) return message.channel.send("Imagem trocada `obs: As dimensões recomendadas são 1000x360!!`\n"
-                    + "`Digite"+prefix+"banner sh para ver o preview do banner`")
+                    if(!err) return message.channel.send(lang.bannerChange)
                 })
             }
             else if(!isImage(url)){
-                return message.channel.send("Não foi encontrada uma imagem valida :moyai: `A imagem deve terminar com uma extensão valida de imagem (png, jpg e outras)`!!")
+                return message.channel.send(lang.invalidImg)
             }
         }
         else if(cmd === "sh" || cmd === "show"){
             const guild = await bot.Guild.findOne({'guildId': message.guild.id});
             if(guild.welcome.canvasUrl === "off" || guild.welcome.canvasUrl === "") return message.channel.send("Nenhuma img personaliza :worried:");
-            
+            //use base preview !!!!!!!
+            //need changes !!!!!!
+
             imagem = guild.welcome.canvasUrl;
-            //- Linux
+            //- Linux 14 16 18.04
             //registerFont('arial.ttf', {family: 'Arial'});
             //
             const canvas = createCanvas(1000, 360);
@@ -79,7 +78,7 @@ module.exports.run = async (bot, message, args) => {
             ctx.font = "30px Arial";
             ctx.textAlign = "center";
             ctx.fillStyle = "#ffffff";
-            ctx.fillText(`Usuário: ${message.member.user.tag}`, 500, 325);
+            ctx.fillText(`${lang.canvasFillText} ${message.member.user.tag}`, 500, 325);
             ctx.arc(500,140,120,0,Math.PI * 2, true);
             ctx.lineWidth = 7;
             ctx.strokeStyle = "#ffffff";
@@ -89,9 +88,9 @@ module.exports.run = async (bot, message, args) => {
             const avatar = await loadImage(message.member.user.avatarURL({ format: 'jpg' }));
             ctx.drawImage(avatar, 370,20,250,250);
             const attachment = new MessageAttachment(canvas.toBuffer(),"welcome.png");
-            return message.channel.send("`Preview do banner:`", attachment)
+            return message.channel.send(`\`${lang.returnPreview}\``, attachment)
         }
-        else return message.reply("Para saber informações do comando digite `"+prefix+"help "+this.help.name+"`")
+        else return message.reply(lang.helpReturn)
     }catch(e){
         errorReturn(e, message, this.help.name);
     }

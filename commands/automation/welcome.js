@@ -1,37 +1,36 @@
 const { errorReturn, formatChannelId, returnNull } = require("../../utils/functions.js");
-const { prefix } = require("../../botconfig.json");
 
-module.exports.run = async (bot, message, args) => {
+module.exports.run = async (bot, message, args, lang) => {
     try{
         const cmd = args[0];
         let subcmd = args[1];
         
-        if(returnNull(cmd)) return message.reply("Para saber informações do comando digite `"+prefix+"help "+this.help.name+"`");
+        if(returnNull(cmd)) return message.reply(lang.helpReturn);
         
         if (cmd === "on" || cmd === "true"){
-            if(returnNull(subcmd)) return message.reply("Para saber informações do comando digite `"+prefix+"help "+this.help.name+"`");
+            if(returnNull(subcmd)) return message.reply(lang.helpReturn);
             let channel = formatChannelId(subcmd);
             let chat = message.guild.channels.cache.find(chat => channel, `id` );
-            if (!chat || chat === undefined || chat === null) return message.reply(`Não encontrei nenhum canal :crying_cat_face:`);
+            if (!chat || chat === undefined || chat === null) return message.reply(lang.returnNull);
 
             const guild = await bot.Guild.findOne({'guildId': message.guild.id});
-            if (guild.welcome.status === "on") return message.channel.send("Bem-vindo já esta `"+guild.welcome.status+"`");
+            if (guild.welcome.status === "on") return message.channel.send(`${lang.statusOk} \`${guild.welcome.status}\``);
             
             guild.welcome.status = "on";
             guild.welcome.channel = channel;
             guild.save(function (err){
                 if(err) return errorReturn(err, message, this.help.name);
-                if(!err) return message.channel.send("Bem-vindo agora esta `"+guild.welcome.status+"` :sunglasses:");
+                if(!err) return message.channel.send(`${lang.statusNew} \`${guild.welcome.status}\` :sunglasses:`);
             });
         }
         else if (cmd === "off" || cmd === "false"){
             const guild = await bot.Guild.findOne({'guildId': message.guild.id});
-            if (guild.welcome.status === "off") return message.channel.send("Bem-vindo já esta `"+guild.welcome.status+"`");
+            if (guild.welcome.status === "off") return message.channel.send(`${lang.statusOk} \`${guild.welcome.status}\``);
         
             guild.welcome.status = "off";
             guild.save(function (err){
                 if(err) return errorReturn(err, message, this.help.name);
-                if(!err) return message.channel.send("Bem-vindo agora esta `"+guild.welcome.status+"` :cry:");
+                if(!err) return message.channel.send(`${lang.statusNew} \`${guild.welcome.status}\` :cry:`);
             });
         }
         else if(cmd === "msg" || cmd === "message"){
@@ -39,26 +38,26 @@ module.exports.run = async (bot, message, args) => {
             guild.welcome.msg = args.join(" ").slice(cmd.length)
             guild.save(function (err){
                 if(err) return errorReturn(err, message, this.help.name);
-                if(!err) return message.channel.send("Mensagem de Bem-vindo modificada :face_with_monocle:!!")
+                if(!err) return message.channel.send(lang.msgChange)
             });
         }
         else if(cmd === "ch" || cmd === "channel"){
             let channel = formatChannelId(subcmd);
             let chat = message.guild.channels.cache.find(chat => channel, `id` );
-            if (returnNull(chat)) return message.reply(`Não encontrei nenhum canal :crying_cat_face:`);
+            if (returnNull(chat)) return message.reply(lang.returnNull);
 
             const guild = await bot.Guild.findOne({'guildId': message.guild.id});
             guild.welcome.channel = channel;
             guild.save(function (err){
-                if(err) return message.channel.send(`Erro: ${err}, contate o suporte`)
-                if(!err) return message.channel.send("Canal trocado :face_with_monocle:!!")
+                if(err) return message.channel.send(errorReturn(err, message, cmd))
+                if(!err) return message.channel.send(lang.channelChange)
             })
         }
         else if(cmd === "sh" || cmd === "show"){
             const guild = await bot.Guild.findOne({'guildId': message.guild.id});
-            return message.channel.send("`Mensagem atual é:` "+guild.welcome.msg)
+            return message.channel.send(`\`${returnAtual}\` ${guild.welcome.msg}`)
         }
-        else return message.reply("Para saber informações do comando digite `"+prefix+"help "+this.help.name+"`")
+        else return message.reply(lang.helpReturn)
     }catch(e){
         errorReturn(e, message, this.help.name);
     }
