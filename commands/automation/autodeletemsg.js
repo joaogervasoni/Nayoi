@@ -1,29 +1,29 @@
-const { errorReturn, returnNull } = require("../../utils/functions.js");
+const { errorReturn, returnNull, formatId } = require("../../utils/functions.js");
 const {MessageEmbed} = require('discord.js');
-const { prefix } = require("../../botconfig.json");
 const mongoose = require('mongoose');
 const AutoDeleteMsg = require("../../models/autodeletemsg");
 
-module.exports.run = async (bot, message, args) => {
+module.exports.run = async (bot, message, args, lang) => {
     try{
         const cmd = args[0];
         let subcmd = args[1];
 
-        if(returnNull(cmd)) return message.reply("Para saber informações do comando digite `"+prefix+"help "+this.help.name+"`");
+        if(returnNull(cmd)) return message.reply(lang.helpReturn);
 
         if(cmd === "on"){
+            subcmd = formatId(subcmd)
             let chat = await message.guild.channels.cache.find(chat => subcmd, `id`);
-            if (!chat) return message.reply("Não encontrei nenhum canal :worried:");
+            if (!chat) return message.reply(lang.returnNull);
 
             let findChannel = await AutoDeleteMsg.findOne({ 'channelId': subcmd });
             
             if(findChannel != null){
-                if(findChannel.config.status === "on") return message.channel.send("Autorole já esta: `"+findChannel.config.status+"`");
+                if(findChannel.config.status === "on") return message.channel.send(`${lang.statusOk} \`${findChannel.config.status}\``);
             
                 findChannel.config.status = "on";
                 findChannel.save(function (err){
                     if(err) return errorReturn(err, message, this.help.name);
-                    if(!err) return message.channel.send("AutoDeleteMsg agora esta `"+findChannel.config.status+"` :sunglasses:");
+                    if(!err) return message.channel.send(`${lang.statusNew} \`${findChannel.config.status}\` :sunglasses:`);
                 });
             }
 
@@ -45,20 +45,20 @@ module.exports.run = async (bot, message, args) => {
             
             autodeletemsg.save(function (err){
                 if(err) return errorReturn(err, message, this.help.name);
-                if(!err) return message.channel.send("AutoDeleteMsg agora esta `on` :sunglasses:");
+                if(!err) return message.channel.send(`${lang.statusNew} \`on\` :sunglasses:`);
             });
         }
         else if (cmd === "off"){
             let chat = await message.guild.channels.cache.find(chat => subcmd, `id`);
-            if (!chat) return message.reply("Não encontrei nenhum canal :worried:");
+            if (!chat) return message.reply(lang.returnNull);
 
             let autodeletemsg = await AutoDeleteMsg.findOne({ 'channelId': subcmd });
-            if(autodeletemsg === null) return message.reply("Não existe nada atrelado a este canal :worried:!!")
+            if(autodeletemsg === null) return message.reply(lang.returnNull)
      
             autodeletemsg.config.status = "off";
             autodeletemsg.save(function (err){
                 if(err) return errorReturn(err, message, this.help.name);
-                if(!err) return message.channel.send("AutoDeleteMsg agora esta `"+autodeletemsg.config.status+"` :cry:");
+                if(!err) return message.channel.send(`${lang.statusNew} \`${autodeletemsg.config.status}\` :cry:`);
             });
         }
         else if (cmd === "show"){
@@ -66,18 +66,18 @@ module.exports.run = async (bot, message, args) => {
             let description = "";
 
             autodeletemsgs.forEach(element => {
-                description = description + "Canal: `"+element.channelId+"` - Status: `"+element.config.status+"`\n"
+                description = description + "**Channel:** <#"+element.channelId+"> - Status: `"+element.config.status+"`\n"
             });
 
             const embed = new MessageEmbed()
-                .setTitle("Canais com AutoDeleteMsg")
+                .setTitle(`${lang.embedTitle} AutoDeleteMsg`)
                 .setDescription(description)
                 .setTimestamp()
                 .setColor(bot.baseColor)
 
             return message.channel.send(embed)
         }
-        else return message.reply("Para saber informações do comando digite `"+prefix+"help "+this.help.name+"`")
+        else return message.reply(lang.helpReturn)
         
     }catch(e){
         errorReturn(e, message, this.help.name)
