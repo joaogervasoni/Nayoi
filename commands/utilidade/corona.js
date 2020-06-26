@@ -1,11 +1,10 @@
 const {MessageEmbed} = require("discord.js");
 const {errorReturn, upperCaseFirst} = require("../../utils/functions.js");
-const { prefix } = require("../../botconfig.json");
 const fetch = require("node-fetch");
 
-module.exports.run = async (bot, message, args) => {
+module.exports.run = async (bot, message, args, lang) => {
     try{
-        if(!args[0]) return message.reply("Para saber informações do comando digite `"+prefix+"help "+this.help.name+"`") 
+        if(!args[0]) return message.reply(lang.helpReturn) 
 
         if(args[0] === "lista"){
             let data = await fetch(`https://pomber.github.io/covid19/timeseries.json`).then(res => res.json());
@@ -25,15 +24,14 @@ module.exports.run = async (bot, message, args) => {
                     let embed = new MessageEmbed()
                         .setThumbnail("https://github.com/Zaetic/Nayoi/blob/master/images/YaniVir.png?raw=true")
                         .setTitle(`Corona ( Covid-19 ) ${upperCaseFirst(args[0])}`)
-                        .addField(`Confirmados:`, lastDate.confirmed, true)
-                        .addField(`Mortes:`, lastDate.deaths, true)
-                        .addField(`Curados:`, lastDate.recovered, true)
-                        .addField(`Data:`, lastDate.date, true)
+                        .addField(lang.fieldConfirmed, lastDate.confirmed, true)
+                        .addField(lang.fieldDeaths, lastDate.deaths, true)
+                        .addField(lang.fieldRecovered, lastDate.recovered, true)
+                        .addField(lang.fieldDate, lastDate.date, true)
                         .addField("Link", "https://www.arcgis.com/apps/opsdashboard/index.html#/bda7594740fd40299423467b48e9ecf6")
-                        .setFooter("Não saia de casa !!")
+                        .setFooter(lang.footer)
                     return message.channel.send(embed)
-                }else if(!country) return message.channel.send("Não encontrado !! `Obs: O nome do País deve ser em inglês`\n"
-                + "Digite `"+ prefix +"corona lista` para ver a lista de países !!")
+                }else if(!country) return message.channel.send(lang.resultNull)
             });
         }
     }catch(e){

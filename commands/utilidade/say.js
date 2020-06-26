@@ -1,5 +1,4 @@
 const { errorReturn, formatId } = require("../../utils/functions.js");
-const { prefix } = require("../../botconfig.json");
 const ms = require("ms");
 
 module.exports.run = (bot, message, args) => {

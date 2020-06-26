@@ -1,21 +1,20 @@
 const { formatDate, upperCaseFirst } = require("../../utils/functions.js");
 const { MessageEmbed } = require("discord.js");
-const { prefix } = require("../../botconfig.json");
 
-module.exports.run = (bot, message, args) => {
+module.exports.run = (bot, message, args, lang) => {
     try{
         const cmd = args[0];
 
         if(cmd === "bot"){
             let botembed = new MessageEmbed()
-            .setTitle("Informação do Bot")
+            .setTitle(lang.titleBot)
             .setThumbnail(bot.user.avatarURL())
             .setColor(bot.baseColor)
-            .addField("Nome", bot.user.username, true)
-            .addField("Criador", "Zaetic#9549", true)
+            .addField(lang.fieldName, bot.user.username, true)
+            .addField(lang.fieldCreator, "Zaetic#9549", true)
             .addField("Ping:", message.client.ws.ping.toFixed(2), true)
-            .addField("Criado em", formatDate(bot.user.createdAt), true)
-            .addField("Entrou em", formatDate(message.member.guild.joinedAt), true)
+            .addField(lang.fieldCreatedAt, formatDate(bot.user.createdAt), true)
+            .addField(labg.fieldEnterAt, formatDate(message.member.guild.joinedAt), true)
             .addField("Link", "http://nayoi.com")
             
             return message.channel.send(botembed);
@@ -27,15 +26,15 @@ module.exports.run = (bot, message, args) => {
             let dndCount = message.guild.members.cache.filter(m => m.presence.status === 'dnd').size;
         
             let serverembed = new MessageEmbed()
-            .setTitle("Informações do Servidor")
+            .setTitle(lang.titleServer)
             .setThumbnail(message.guild.iconURL())
             .setColor(bot.baseColor)
-            .addField("Nome", message.guild.name, true)
+            .addField(lang.fieldName, message.guild.name, true)
             .addField("Id", message.guild.id, true)
-            .addField("Região", upperCaseFirst(message.guild.region), true)
-            .addField("Criado em", formatDate(message.guild.createdAt), true)
-            .addField("Você se juntou em", formatDate(message.member.joinedAt), true)
-            .addField("Total de membros `"+ message.guild.memberCount +"`", 
+            .addField(lang.fieldRegion, upperCaseFirst(message.guild.region), true)
+            .addField(lang.fieldCreatedAt, formatDate(message.guild.createdAt), true)
+            .addField(lang.fieldEnterAt, formatDate(message.member.joinedAt), true)
+            .addField(`${lang.fieldMemberTotal} \`${message.guild.memberCount}\``, 
             `Online: ${onlineCount} | Offline: ${offlineCount} | Indle: ${idleCount} | DnD: ${dndCount}`);
         
             return message.channel.send(serverembed);
@@ -50,8 +49,8 @@ module.exports.run = (bot, message, args) => {
             .addField("Tag", User.tag)
             .addField("Bot:", User.bot,true)
             .addField("Id:", User.id, true)
-            .addField("Criado em:", formatDate(User.createdAt))
-            .addField("Entrou em:", formatDate(User.joinedAt), true)
+            .addField(lang.fieldCreatedAt, formatDate(User.createdAt))
+            .addField(lang.fieldEnterAt, formatDate(User.joinedAt), true)
 
             return message.channel.send(userembed)
         }
@@ -65,11 +64,11 @@ module.exports.run = (bot, message, args) => {
             .addField("Tag", User.user.tag)
             .addField("Bot:", User.user.bot,true)
             .addField("Id:", User.user.id, true)
-            .addField("Criado em:", formatDate(User.user.createdAt))
-            .addField("Entrou em:", formatDate(User.joinedAt), true)
+            .addField(lang.fieldCreatedAt, formatDate(User.user.createdAt))
+            .addField(lang.fieldEnterAt, formatDate(User.joinedAt), true)
 
             return message.channel.send(mentionembed)
-        }else return message.reply("Para saber informações do comando digite `"+prefix+"help info`");
+        }else return message.reply(lang.helpReturn);
     }catch(e){
         errorReturn(e, message, this.help.name);
     }

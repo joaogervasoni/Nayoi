@@ -32,6 +32,7 @@ module.exports =
         {
             name: "tempo",
             cmd: {
+                returnNull: "Não encontrei nenhuma informação de tempo :worried:",
                 tempname: `Temperatura de {weather.name}`,
                 temp: `Temperatura:`,
                 sens: `Sensação:`,
@@ -73,7 +74,6 @@ module.exports =
                 fieldType: "Tipo:",
                 fieldVol: "Volumes:",
                 fieldRated: "Rated:",
-                fieldVol: "Volumes:",
                 titleCharacter: "Character",
                 resultNull: "Não encontrei nada :worried:"
             },
