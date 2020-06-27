@@ -28,9 +28,12 @@ module.exports = async (bot, message) => {
 
     // Lang Cmd
     let langs = message.guild.language;
-    const lang = await Object.assign({}, langs.commands.find(element => element.name === command).cmd, 
-    langs.commands.find(element => element.name === "geral").cmd);
-    langParams(lang, prefix, command)
+    if(!langs) return message.reply("Nenhuma `language` atrelada")
+
+    let langCommand = langs.commands.find(element => element.name === cmd.help.name).cmd;
+    let langGeneral = langs.commands.find(element => element.name === "geral").cmd;
+    const lang = await Object.assign({}, langCommand, langGeneral);
+    langParams(lang, prefix, cmd.help.name)
 
     // Validações de cargo
     if (cmd.requirements.ownerOnly && !owners.includes(message.author.id))
