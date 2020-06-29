@@ -9,11 +9,20 @@ module.exports =
             }
         },
         {
-            name: "test"
+            name: "test",
+            help: {
+                description: ":O"
+            }
         },
         {
             name: "commands",
             cmd: {
+                embedCtDescription: "`Para mais informações use {prefix}help nomedocomando`\n\n",
+                embedCtTitle: "comandos",
+                embedClTitle: "comandos",
+                embedClDescription: "Exemplo: ```{prefix}commands <grupo>```",
+                embedNullTitle: "Comando não encontrado :thinking:",
+                embedNullDescription: "**Utilize:** `{prefix}commands` para ver os comandos"
             },
             help: {
                 description: "Traz a lista de comandos disponíveis",
@@ -24,6 +33,17 @@ module.exports =
         {
             name: "help",
             cmd: {
+                embedUsability: "Usabilidade",
+                embedAdditional: "Comandos adicionais",
+                embedOthers: "Outros",
+                embedTitle: "Ajuda:",
+                embedDescription: "Aqui você pode encontrar ajuda sobre qualquer comando ou funcionalidade minha !!!",
+                embedField1_title: "Usabilidade",
+                embedField1_text: "Para pesquisar digite `{prefix}help nomedocomando`\n"
+                +"Caso esteja buscando pela lista de comandos digite `{prefix}commands`\n"
+                +"Espero que encontre o que procura :heart:",
+                embedField2_title: "Outros",
+                embedField2_text: "Para mais informações acesse: http://nayoi.com",
             },
             help: {
                 description: "Traz informações sobre comandos",

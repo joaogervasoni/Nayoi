@@ -1,6 +1,5 @@
 const {MessageEmbed} = require("discord.js");
 const {upperCaseFirst} = require("../utils/functions.js");
-const { prefix } = require("../botconfig.json");
 
 module.exports.run = (bot, message, args, lang) => {
 
@@ -15,7 +14,7 @@ module.exports.run = (bot, message, args, lang) => {
 
     if(args2 && exist){
 
-        let description = ("`Para mais informações use " + prefix +"help nomedocomando`\n\n")
+        let description = (lang.embedCtDescription)
         cmds.forEach(element => {
             if(element.help.type === args2){
                 const infos = this.returnCommandLang(message, element.help.name);
@@ -28,7 +27,7 @@ module.exports.run = (bot, message, args, lang) => {
             }
         });
         embed
-        .setTitle(`${emojis.get(args2)} ${upperCaseFirst(args2)} comandos`)
+        .setTitle(`${emojis.get(args2)} ${upperCaseFirst(args2)} ${lang.embedCtTitle}`)
         .setDescription(description)
         return message.channel.send(embed)
 
@@ -38,9 +37,9 @@ module.exports.run = (bot, message, args, lang) => {
         let types = new Map();
 
         embed
-        .setTitle(`${bot.user.username} comandos`)
+        .setTitle(`${bot.user.username} ${lang.embedClTitle}`)
         .setColor(bot.baseColor)
-        .setDescription("Exemplo: ```"+prefix+"commands <grupo>```", true)
+        .setDescription(lang.embedClDescription, true)
     
         cmds.forEach(element => {
     
@@ -55,15 +54,15 @@ module.exports.run = (bot, message, args, lang) => {
         for (var [key, value] of types) {
             let emoji = emojis.get(key);
             embed
-            .addField(`${emoji} ${upperCaseFirst(key)}`, `${value} comandos`, true)
+            .addField(`${emoji} ${upperCaseFirst(key)}`, `${value} ${lang.embedClTitle}`, true)
         }
 
         return message.channel.send(embed)
     }else{
         embed
-        .setTitle(`Comando não encontrado :thinking:`)
+        .setTitle(lang.embedNullTitle)
         .setColor(bot.baseColor)
-        .setDescription("**Utilize:** `"+prefix+"commands` para ver os comandos", true)
+        .setDescription(lang.embedNullDescription, true)
 
         return message.channel.send(embed);
     }
