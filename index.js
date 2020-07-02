@@ -14,7 +14,8 @@ bot.lists = new Collection();
 bot.locales = new Collection();
 bot.prefix = prefix;
 bot.baseColor = "#ff8ff2";
-bot.database = require('./utils/database.js')
+bot.database = require('./utils/database.js');
+bot.langs = require('./utils/langs');
 
 const commands = require("./structures/command");
 commands.run(bot);
@@ -29,7 +30,6 @@ const langs = require("./structures/lang");
 langs.run(bot);
 
 bot.on("ready", async () =>{
-    console.log(`[Online]`.brightGreen +` ${bot.user.username} esta Online em ${bot.guilds.cache.size} servidores`.green);
     bot.user.setActivity(`nayoi.com | n!help`, {type: "PLAYING"});
     for await (let guild of bot.guilds.cache.array()) {
 
@@ -44,6 +44,8 @@ bot.on("ready", async () =>{
         }
         guild.language = bot.locales.get(lang);
     }
+    console.log(`[Lang]`.brightGreen +` Carregadas em todos os servidores`.green);
+    console.log(`[Online]`.brightGreen +` ${bot.user.username} esta Online em ${bot.guilds.cache.size} servidores`.green);
 })
 
 bot.login(token);

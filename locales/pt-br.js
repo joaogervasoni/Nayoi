@@ -1,6 +1,14 @@
 module.exports = 
 {
     name: "pt-br",
+    events:[
+        {
+            name: "messageDelete",
+            cmd:{
+                teste: "teste",
+            }
+        }
+    ],
     commands:[
         {
             name: "geral",

@@ -2,6 +2,8 @@ const {MessageEmbed} = require("discord.js");
 const {errorReturn} = require("../utils/functions.js");
 
 module.exports = async (bot, message) => {
+    //console.log(bot.langs.langReturn(message.guild.language, "messageDelete", "event"))
+
     let imageAtt = message.attachments.first() ? message.attachments.first().proxyURL : null
 
     bot.snipes.set(message.channel.id, {

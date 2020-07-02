@@ -27,13 +27,9 @@ module.exports = async (bot, message) => {
     if (!message.guild.me.permissions.has(["SEND_MESSAGES"])) return;
 
     // Lang Cmd
-    let langs = message.guild.language;
-    if(!langs) return message.reply("Nenhuma `language` atrelada")
-
-    let langCommand = langs.commands.find(element => element.name === cmd.help.name).cmd;
-    let langGeneral = langs.commands.find(element => element.name === "geral").cmd;
-    const lang = await Object.assign({}, langCommand, langGeneral);
-    langParams(lang, prefix, cmd.help.name)
+    const lang = await bot.langs.langReturn(message.guild.language, cmd.help.name, "cmd");
+    if(!lang) return message.reply("Nenhuma `language` atrelada")
+    bot.langs.langParams(lang, prefix, cmd.help.name)
 
     // Validações de cargo
     if (cmd.requirements.ownerOnly && !owners.includes(message.author.id))
@@ -55,13 +51,4 @@ const missingPerms = (member, perms) => {
     return missingPerms.length > 1 ?
         `${missingPerms.slice(0, -1).join(", ")} and ${missingPerms.slice(-1)[0]}` :
         missingPerms[0];
-}
-
-const langParams = (str, prefix, command) => {
-    for (const key in str) {
-        if (str.hasOwnProperty(key)) {
-            str[key] = str[key].replace(/{prefix}/g, prefix);
-            str[key] = str[key].replace(/{cmdName}/g, command);
-        }
-    }
 }
