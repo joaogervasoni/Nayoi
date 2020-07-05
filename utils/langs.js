@@ -11,6 +11,7 @@ module.exports = {
         } 
         if(type === "event") langCommand = langs.events.find(element => element.name === name).cmd;
 
+        //null return default lang ??
         return langCommand;
     },
 

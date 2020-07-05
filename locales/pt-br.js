@@ -3,9 +3,77 @@ module.exports =
     name: "pt-br",
     events:[
         {
+            name: "guildCreate",
+            cmd:{
+                welcomeMsg: "msg"
+            }
+        },
+        {
+            name: "guildMemberAdd",
+            cmd:{
+                embedDescription: "Bem-Vindo",
+                fieldUser: "User",
+                fieldMsg: "Mensagem"
+            }
+        },
+        {
+            name: "guildMemberRemove",
+            cmd:{
+                titleKick: "Kick",
+                titleBan: "Ban",
+                titleLeave: "Saiu",
+                fieldUser: "Usuário:",
+                fieldReason: "Razão:",
+                fieldExecutor: "Por:",
+                fieldTag: "Tag:",
+            }
+        },
+        {
+            name: "message",
+            cmd:{
+                reqOwnerPerm: "Apenas utilizavel pelo meu mestre",
+                reqUserPerm: "Você precisa das seguites permissões:",
+                reqBotPerm: "Eu não tenho essas permissões:"
+            }
+        },
+        {
             name: "messageDelete",
             cmd:{
-                teste: "teste",
+                embedTitle: "Mensagem Deletada",
+                fieldUser: "Usuário:",
+                fieldChannel: "Channel:",
+                fieldMsg: "Mensagem:",
+                fieldTag: "Tag:"
+            }
+        },
+        {
+            name: "messageUpdate",
+            cmd:{
+                embedTitle: "Mensagem Editada",
+                fieldUser: "Usuário:",
+                fieldChannel: "Channel:",
+                fieldMsgOld: "Mensagem Antiga:",
+                fieldMsgNew: "Mensagem Nova:",
+                fieldTag: "Tag:"
+            }
+        },
+        {
+            name: "userUpdate",
+            cmd:{
+                embedNcTitle: "Nick trocado",
+                fieldUser: "Usuário:",
+                fieldOldNick: "Nick Antigo:",
+                fieldNewNick: "Nick Novo:",
+                embedImgTitle: "Imagem de perfil trocada"
+            }
+        },
+        {
+            name: "voiceStateUpdate",
+            cmd:{
+                embedEnter: "entrou no voice:",
+                embedChange1: "trocou do voice:",
+                embedChange2: "para o voice:",
+                embedExit: "saiu do voice:"
             }
         }
     ],

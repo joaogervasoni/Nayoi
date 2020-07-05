@@ -28,7 +28,7 @@ module.exports = async (bot, message) => {
 
     // Lang Cmd
     const lang = await bot.langs.langReturn(message.guild.language, cmd.help.name, "cmd");
-    if(!lang) return message.reply("Nenhuma `language` atrelada")
+    if(!lang) return message.reply("`Language Null !!`")
     bot.langs.langParams(lang, prefix, cmd.help.name)
 
     // Validações de cargo
