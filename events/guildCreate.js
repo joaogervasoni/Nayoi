@@ -4,7 +4,6 @@ const mongoose = require('mongoose');
 
 module.exports = (bot, guild) => {
     try{
-
         const guildNew = new bot.Guild({
             _id: mongoose.Types.ObjectId(),
             name: guild.name,
@@ -17,7 +16,7 @@ module.exports = (bot, guild) => {
             },
             welcome: {
                 status: "off",
-                msg: "Bem-vindo {member}!!",
+                msg: "{member}!!",
                 channel: "",
                 canvas: "off",
                 canvasUrl: "off",

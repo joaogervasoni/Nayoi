@@ -4,7 +4,7 @@ const { createCanvas, loadImage, registerFont } = require("canvas");
 
 module.exports = async (bot, member) => {  
     try {
-        bot.database;
+        const lang = await bot.langs.langReturn(member.guild.language, "guildMemberAdd", "event");
         const guild = await bot.Guild.findOne({ 'guildId': member.guild.id });
 
         //Update memberCount
@@ -81,10 +81,10 @@ module.exports = async (bot, member) => {
             }else{
                 let welcomeEmbed = new MessageEmbed()
                 .setThumbnail(member.user.avatarURL())
-                .setDescription("Bem-vindo")
+                .setDescription(lang.embedDescription)
                 .setColor(bot.baseColor)
-                .addField("User", member.user)
-                .addField("Mensagem", msg)
+                .addField(lang.fieldUser, member.user)
+                .addField(lang.fieldMsg, msg)
                 return wlchat.send(welcomeEmbed)
             }
         }
@@ -92,4 +92,3 @@ module.exports = async (bot, member) => {
         errorReturn(e, null, "guildMemberAdd")
     }  
 }
-

@@ -2,7 +2,8 @@ const {MessageEmbed} = require("discord.js");
 const {errorReturn} = require("../utils/functions.js");
 
 module.exports = async (bot, oldMessage, newMessage) => {
-    
+    const lang = await bot.langs.langReturn(oldMessage.guild.language, "messageUpdate", "event");
+
     //Log
     if(oldMessage.content == newMessage.content || newMessage.content === "") {
         return
@@ -14,12 +15,12 @@ module.exports = async (bot, oldMessage, newMessage) => {
             let channel = oldMessage.guild.channels.cache.find(channel => channel.id === guild.log.channel)
             if (channel) {
                 let embed = new MessageEmbed()
-                    .setTitle(":grey_question: [Mensagem Editada]")
-                    .addField(`**Usuário:**`, newMessage.author, true)
-                    .addField(`**Channel:**`, newMessage.channel, true)
-                    if(oldMessage.cleanContent) embed.addField(`**Mensagem Antiga:**`, oldMessage.content)
-                    if(newMessage.cleanContent) embed.addField(`**Mensagem Nova:**`, newMessage.content)
-                    .addField(`**Tag:**`, newMessage.author.tag, true)
+                    .setTitle(`:grey_question: [${lang.embedTitle}]`)
+                    .addField(`**${lang.fieldUser}**`, newMessage.author, true)
+                    .addField(`**${lang.fieldChannel}**`, newMessage.channel, true)
+                    if(oldMessage.cleanContent) embed.addField(`**${lang.fieldMsgOld}**`, oldMessage.content)
+                    if(newMessage.cleanContent) embed.addField(`**${lang.fieldMsgNew}**`, newMessage.content)
+                    .addField(`**${lang.fieldTag}**`, newMessage.author.tag, true)
                     .addField(`**ID:**`, newMessage.author.id, true)
                     .setColor(bot.baseColor)
                     .setTimestamp()

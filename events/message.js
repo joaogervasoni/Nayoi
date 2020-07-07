@@ -27,19 +27,20 @@ module.exports = async (bot, message) => {
     if (!message.guild.me.permissions.has(["SEND_MESSAGES"])) return;
 
     // Lang Cmd
+    const langEvent = await bot.langs.langReturn(message.guild.language, "message", "event");
     const lang = await bot.langs.langReturn(message.guild.language, cmd.help.name, "cmd");
     if(!lang) return message.reply("`Language Null !!`")
     bot.langs.langParams(lang, prefix, cmd.help.name)
 
     // Validações de cargo
     if (cmd.requirements.ownerOnly && !owners.includes(message.author.id))
-        return message.reply("Apenas utilizavel pelo meu mestre");
+        return message.reply(langEvent.reqOwnerPerm);
 
     if (cmd.requirements.userPerms && !message.member.permissions.has(cmd.requirements.userPerms))
-        return message.reply(`Você precisa das seguites permissões: ${missingPerms(message.member, cmd.requirements.userPerms)}`);
+        return message.reply(`${langEvent.reqUserPerm} ${missingPerms(message.member, cmd.requirements.userPerms)}`);
 
     if (cmd.requirements.clientPerms && !message.guild.me.permissions.has(cmd.requirements.clientPerms))
-        return message.reply(`Eu não tenho essas permissões: ${missingPerms(message.guild.me, cmd.requirements.clientPerms)}`);
+        return message.reply(`${langEvent.reqBotPerm} ${missingPerms(message.guild.me, cmd.requirements.clientPerms)}`);
 
     cmd.run(bot, message, args, lang);
 }

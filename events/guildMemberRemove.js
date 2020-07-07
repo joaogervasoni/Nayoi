@@ -3,6 +3,7 @@ const { errorReturn } = require("../utils/functions.js");
 
 module.exports = async (bot, member)  => {
     try{
+        const lang = await bot.langs.langReturn(member.guild.language, "guildMemberRemove", "event");
         const guild = await bot.Guild.findOne({ 'guildId': member.guild.id });
 
         //Update memberCount
@@ -20,9 +21,9 @@ module.exports = async (bot, member)  => {
                 if (entry != null && entry.action == "MEMBER_KICK"){
                     embed
                     .setThumbnail(member.user.avatarURL())
-                    .setTitle(":ledger: [Kick]")
-                    .addField(`**Usuário:**`, `${member.user} **Razão:** ${entry.reason} **Por:** ${entry.executor}`)
-                    .addField(`**Tag:**`, member.user.tag, true)
+                    .setTitle(`:ledger: [${lang.titleKick}]`)
+                    .addField(`**${lang.fieldUser}**`, `${member.user} **${lang.fieldReason}** ${entry.reason} **${lang.fieldExecutor}** ${entry.executor}`)
+                    .addField(`**${lang.fieldTag}**`, member.user.tag, true)
                     .addField(`**ID:**`, member.user.id, true)
                     .setColor(bot.baseColor)
                     .setTimestamp()
@@ -30,9 +31,9 @@ module.exports = async (bot, member)  => {
                 else if (entry != null && entry.action == "MEMBER_BAN_ADD"){
                     embed
                     .setThumbnail(member.user.avatarURL())
-                    .setTitle(":hammer: [Ban]")
-                    .addField(`**Usuário:**`, `${member.user} **Razão:** ${entry.reason} **Por:** ${entry.executor}`)
-                    .addField(`**Tag:**`, member.user.tag, true)
+                    .setTitle(`:hammer: [${lang.titleBan}]`)
+                    .addField(`**${lang.fieldUser}**`, `${member.user} **${lang.fieldReason}** ${entry.reason} **${lang.fieldExecutor}** ${entry.executor}`)
+                    .addField(`**${lang.fieldTag}**`, member.user.tag, true)
                     .addField(`**ID:**`, member.user.id, true)
                     .setColor(bot.baseColor)
                     .setTimestamp()
@@ -40,9 +41,9 @@ module.exports = async (bot, member)  => {
                 else{
                     embed
                     .setThumbnail(member.user.avatarURL())
-                    .setTitle(":ledger: [Leave]")
-                    .addField("**Usuário:**", member.user)
-                    .addField(`**Tag:**`, member.user.tag, true)
+                    .setTitle(`:ledger: [${lang.titleLeave}]`)
+                    .addField(`**${lang.fieldUser}**`, member.user)
+                    .addField(`**${lang.fieldTag}**`, member.user.tag, true)
                     .addField(`**ID:**`, member.user.id, true)
                     .setColor(bot.baseColor)
                     .setTimestamp()

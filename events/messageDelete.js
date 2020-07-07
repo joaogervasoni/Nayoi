@@ -2,7 +2,7 @@ const {MessageEmbed} = require("discord.js");
 const {errorReturn} = require("../utils/functions.js");
 
 module.exports = async (bot, message) => {
-    //console.log(bot.langs.langReturn(message.guild.language, "messageDelete", "event"))
+    const lang = await bot.langs.langReturn(message.guild.language, "messageDelete", "event");
 
     let imageAtt = message.attachments.first() ? message.attachments.first().proxyURL : null
 
@@ -24,11 +24,11 @@ module.exports = async (bot, message) => {
                     //console.log("Channel:" + message.channel +" // Message" + message.cleanContent +"// Image:" + imageAtt);
                 }else{
                     let embed = new MessageEmbed()
-                    .setTitle(":x: [Mensagem Deletada]")
-                    .addField(`**Usuário:**`, message.member.user, true)
-                    .addField(`**Channel:**`, message.channel, true)
-                    if(message.cleanContent) embed.addField(`**Mensagem:**`, message.cleanContent)
-                    .addField(`**Tag:**`, message.member.user.tag, true)
+                    .setTitle(`:x: [${lang.embedTitle}]`)
+                    .addField(`**${lang.fieldUser}**`, message.member.user, true)
+                    .addField(`**${lang.fieldChannel}**`, message.channel, true)
+                    if(message.cleanContent) embed.addField(`**${lang.fieldMsg}**`, message.cleanContent)
+                    .addField(`**${lang.fieldTag}**`, message.member.user.tag, true)
                     .addField(`**ID:**`, message.member.user.id, true)
                     .setColor(bot.baseColor)
                     .setTimestamp()

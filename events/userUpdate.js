@@ -7,6 +7,8 @@ module.exports = async (bot, oldUser, newUser) => {
     if(oldUser.bot === true) return
     if(returnNull(oldUser) || returnNull(newUser)) return
     if(oldUser.avatar === newUser.avatar && oldUser.tag === newUser.tag) return
+
+    
     
     try{
         if(oldUser.tag != newUser.tag){
@@ -16,16 +18,16 @@ module.exports = async (bot, oldUser, newUser) => {
                 for (let index = 0; index < guildDb.length; index++){
                     let guild = bot.guilds.cache.get(guildDb[index].guildId)
                     if(!returnNull(guild)){
-    
+                        const lang = await bot.langs.langReturn(guild.language, "userUpdate", "event");
                         let userFind = guild.members.cache.get(oldUser.id)
                         if(!returnNull(userFind)){
                             let channel = guild.channels.cache.get(guildDb[index].log.channel)
     
                             let embed = new MessageEmbed()
-                            .setTitle(":pencil2: [Nick trocado]")
-                            .addField(`**Usuário:**`, newUser, true)
-                            .addField(`**Nick Antigo:**`, oldUser.tag)
-                            .addField(`**Nick Novo:**`, newUser.tag)
+                            .setTitle(`:pencil2: [${lang.embedNcTitle}]`)
+                            .addField(`**${lang.fieldUser}**`, newUser, true)
+                            .addField(`**${lang.fieldOldNick}**`, oldUser.tag)
+                            .addField(`**${lang.fieldNewNick}**`, newUser.tag)
                             .setColor(bot.baseColor)
                             .setTimestamp()
         
@@ -57,15 +59,15 @@ module.exports = async (bot, oldUser, newUser) => {
                 for (let index = 0; index < guildDb.length; index++){
                     let guild = bot.guilds.cache.get(guildDb[index].guildId)
                     if(!returnNull(guild)){
-    
+                        const lang = await bot.langs.langReturn(guild.language, "userUpdate", "event");
                         let userFind = guild.members.cache.get(oldUser.id)
                         if(!returnNull(userFind)){
                             let channel = guild.channels.cache.get(guildDb[index].log.channel)
     
                             const embedPicture = new MessageEmbed()
                             .setImage("attachment://newImage.png")
-                            .setTitle(":frame_photo: [Imagem de perfil trocada]")
-                            .addField(`**Usuário:**`, userFind.user.tag, true)
+                            .setTitle(`:frame_photo: [${lang.embedImgTitle}]`)
+                            .addField(`**${lang.fieldUser}**`, userFind.user.tag, true)
                             .addField(`**ID:**`, userFind.user.id, true)
                             .setColor(bot.baseColor)
                             .setTimestamp()
