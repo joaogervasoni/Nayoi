@@ -3,12 +3,6 @@ module.exports =
     name: "pt-br",
     events:[
         {
-            name: "guildCreate",
-            cmd:{
-                welcomeMsg: "msg"
-            }
-        },
-        {
             name: "guildMemberAdd",
             cmd:{
                 embedDescription: "Bem-Vindo",
@@ -311,6 +305,20 @@ module.exports =
             }    
         },
         {
+            name: "howhappy",
+            cmd: {
+                embedTitle: "Quão Feliz vc é?",
+                userIs: "é",
+                youIs: "Você é",
+                how: "feliz"
+            },
+            help: {
+                description: "Quão Feliz você é ?",
+                usability: "Para saber a porcentagem digite `{prefix}howhappy`\n",
+                additional: "`{prefix}howhappy @usuário` para ver sobre alguem especifico",
+            }    
+        },
+        {
             name: "emojimaker",
             cmd: {
                 returnEmoji: "Novo emoji criado por:",
@@ -538,8 +546,8 @@ module.exports =
                 returnEmojiNull: "Emoji não existe !!",
                 returnRoleNull: "Role não existe !!",
                 returnSave: "Emoji e Cargo salvos !!\n"
-                +"`Caso queira continuar digite + grupo de emoji/cargo !!" 
-                +"`Caso queira finalizar digite !!done`",
+                +"`Caso queira continuar digite + grupo de emoji/cargo !!`\n" 
+                +"Caso queira finalizar digite !!done`",
                 returnExist: "Já existe, não foi salva",
             },
             help: {

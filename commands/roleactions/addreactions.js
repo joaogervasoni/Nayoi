@@ -1,8 +1,7 @@
 const {MessageCollector, MessageEmbed} = require('discord.js');
-const {errorReturn, formatChannelId, formatRoleId, formatEmojiId} = require("../../utils/functions.js");
+const {errorReturn, formatChannelId, formatRoleId, formatEmojiId, listCollection} = require("../../utils/functions.js");
 const mongoose = require('mongoose');
 const RoleReaction = require("../../models/rolereaction.js");
-const emojis = require('../../node_modules/emojis-list/index.js')
 
 let msgCollectorFilter = (newMsg, originalMsg) => newMsg.author.id === originalMsg.author.id;
 
@@ -21,6 +20,7 @@ module.exports.run = async (bot, message, args, lang) => {
             let emojiRoleMappings = new Map();
             var emojiEmoji = [];
             var msgAenviar;
+            const emojis = listCollection(bot.lists, "emojis");
 
             collector.on('collect', async msg => {
                 let {cache} = msg.guild.emojis;
@@ -36,8 +36,7 @@ module.exports.run = async (bot, message, args, lang) => {
 
                     emojiEmoji.forEach(element => {
                         let emojiN = emojis.find(em => em === element);
-                        console.log(element)
-                        console.log(emojiN)
+
                         if (emojiN){
                             idmsg.react(emojiN)
                         }else{

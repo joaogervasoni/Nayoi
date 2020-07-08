@@ -34,6 +34,11 @@ module.exports = {
         return random;
     },
 
+    listCollection: function(collection, name){
+        let list = collection.get(name);
+        return list;
+    },
+
     formatDate: function(date) {
         const options = {
             year: 'numeric',
