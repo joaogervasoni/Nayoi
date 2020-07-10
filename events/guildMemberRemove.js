@@ -13,7 +13,7 @@ module.exports = async (bot, member)  => {
         //Log
         if(guild.log.status == "on"){
             let logs = await member.guild.fetchAuditLogs();
-            let entry = logs.entries.find(entry => entry.target === member.user);
+            let entry = await logs.entries.find(entry => entry.target === member.user);
              
             let channel = member.guild.channels.cache.find(channel => channel.id === guild.log.channel)
             if(channel){

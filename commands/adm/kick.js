@@ -1,4 +1,5 @@
-const {errorReturn} = require("../../utils/functions.js");
+const {errorReturn, returnNull, mentionById} = require("../../utils/functions.js");
+const {MessageEmbed} = require("discord.js");
 
 module.exports.run = async (bot, message, args, lang) => {
     try{
@@ -14,9 +15,9 @@ module.exports.run = async (bot, message, args, lang) => {
         
         const embed = new MessageEmbed()
         .setTitle(lang.embedTitle)
-        .addField(lang.embedFieldUser, kUser , true)
+        .addField(lang.embedFieldUser, mentionById(kUser) , true)
         .addField(lang.embedFieldReason, kReason, true)
-        .addField("ID", bUser.id, true)
+        .addField("ID", kUser.id, true)
         .setColor(bot.baseColor)
         .setTimestamp();
 

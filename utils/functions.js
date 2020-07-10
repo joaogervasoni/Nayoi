@@ -102,5 +102,10 @@ module.exports = {
         else {
             return idText;
         }
+    },
+
+    mentionById: function(id){
+        user = `<@!${id}>`
+        return user;
     }
 }
