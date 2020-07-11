@@ -55,7 +55,7 @@ module.exports.run = async (bot, message, args, lang) => {
         }
         else if(cmd === "sh" || cmd === "show"){
             const guild = await bot.Guild.findOne({'guildId': message.guild.id});
-            return message.channel.send(`\`${returnAtual}\` ${guild.welcome.msg}`)
+            return message.channel.send(`\`${lang.returnAtual}\` ${guild.welcome.msg}`)
         }
         else return message.reply(lang.helpReturn)
     }catch(e){

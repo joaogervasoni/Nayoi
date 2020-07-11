@@ -415,7 +415,8 @@ module.exports =
                 + "e precisa ser ativo para o banner funcionar digite`{prefix}welcome on`",
                 bannerChange: "Imagem trocada `obs: As dimensões recomendadas são 1000x360!!`\n"
                 + "`Digite {prefix} banner sh para ver o preview do banner`",
-                invalidImg: "Não foi encontrada uma imagem valida :moyai: `A imagem deve terminar com uma extensão valida de imagem (png, jpg e outras)`!!",
+                invalidImg: "Não foi encontrada uma imagem valida :moyai:\n"
+                +"`A imagem deve terminar com uma extensão valida de imagem (png, jpg e outras) e ser acessível!!`",
                 canvasFillText: "Usuário:",
                 returnPreview: "`Preview do banner:`",
 
@@ -456,6 +457,7 @@ module.exports =
             name: "ban",
             cmd: {
                 returnNull: "Não encontrei esse usuário :thinking:",
+                reasonNull: "Razão inválida, digite uma razão",
                 returnInvalid: "Essa pessoa não pode levar Banimento :flushed:",
                 embedTitle: "Banido",
                 embedFieldUser: "Usuario",
@@ -470,6 +472,7 @@ module.exports =
             name: "kick",
             cmd: {
                 returnNull: "Não encontrei esse usuário :thinking:",
+                reasonNull: "Razão inválida, digite uma razão",
                 returnInvalid: "Essa pessoa não pode levar Kick :flushed:",
                 embedTitle: "Kickado",
                 embedFieldUser: "Usuario",
@@ -585,8 +588,17 @@ module.exports =
             },
             help: {
                 description: "Deleta mensagens no canal",
-                usability: "Pode ser utilizando desta forma: `{prefix}clear 10",
+                usability: "Pode ser utilizando desta forma: `{prefix}clear 10`",
                 additional: "O número maximo de msg para serem deletadas é de 50"
+            }
+        },
+        {
+            name: "twitch",
+            cmd:{
+
+            },
+            help:{
+
             }
         }
         

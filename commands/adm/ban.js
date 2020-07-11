@@ -10,12 +10,13 @@ module.exports.run = async (bot, message, args, lang) => {
         let bUser = message.guild.member(message.mentions.users.first() || message.guild.member.get(cmd))
         if(!bUser) return message.channel.send(lang.returnNull);
         let bReason = args.join(" ").slice(cmd.length);
+        if(!bReason) return message.channel.send(lang.reasonNull);
         
         if(bUser.hasPermission("MANAGE_GUILD")) return message.channel.send(lang.returnInvalid);
 
         const embed = new MessageEmbed()
         .setTitle(lang.embedTitle)
-        .addField(lang.embedFieldUser, mentionById(bUser) , true)
+        .addField(lang.embedFieldUser, mentionById(bUser.id) , true)
         .addField(lang.embedFieldReason, bReason, true)
         .addField("ID", bUser.id, true)
         .setColor(bot.baseColor)

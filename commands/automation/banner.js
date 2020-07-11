@@ -2,6 +2,7 @@ const { createCanvas, loadImage, registerFont } = require("canvas");
 const { errorReturn, returnNull } = require("../../utils/functions.js");
 const { MessageAttachment } = require("discord.js");
 const isImage = require('is-image');
+const checkLinks = require('check-links');
 
 module.exports.run = async (bot, message, args, lang) => {
     try{
@@ -12,7 +13,7 @@ module.exports.run = async (bot, message, args, lang) => {
 
         if(cmd === "on" || cmd === "true"){
             const guild = await bot.Guild.findOne({'guildId': message.guild.id});
-            if (guild.welcome.canvas === "on") return message.channel.send(`${lang.statusOk} \`${guild.welcome.status}\``);
+            if (guild.welcome.canvas === "on") return message.channel.send(`${lang.statusOk} \`${guild.welcome.canvas}\``);
             if (guild.welcome.status === "off") return message.channel.send(lang.welcomeOff.replace(/{guild.welcome.status}/g, guild.welcome.status));
 
             guild.welcome.canvas = "on";
@@ -33,8 +34,9 @@ module.exports.run = async (bot, message, args, lang) => {
         }
         else if(cmd === "cst" || cmd === "custom"){
             let url = subcmd;
-            
-            if (isImage(url)){
+            let check = await checkLinks([url])
+
+            if (isImage(url) && (check[url].status === "alive")){
                 const guild = await bot.Guild.findOne({'guildId': message.guild.id});
                 guild.welcome.canvasUrl = url;
                 guild.save(function (err){
@@ -42,7 +44,7 @@ module.exports.run = async (bot, message, args, lang) => {
                     if(!err) return message.channel.send(lang.bannerChange)
                 })
             }
-            else if(!isImage(url)){
+            else{
                 return message.channel.send(lang.invalidImg)
             }
         }

@@ -10,19 +10,20 @@ module.exports.run = async (bot, message, args, lang) => {
         let kUser = message.guild.member(message.mentions.users.first() || message.guild.member.get(cmd))
         if(!kUser) return message.channel.send(lang.returnNull);
         let kReason = args.join(" ").slice(cmd.length);
+        if(!kReason) return message.channel.send(lang.reasonNull);
 
         if(kUser.hasPermission("MANAGE_MESSAGES")) return message.channel.send(lang.returnInvalid);
         
         const embed = new MessageEmbed()
         .setTitle(lang.embedTitle)
-        .addField(lang.embedFieldUser, mentionById(kUser) , true)
+        .addField(lang.embedFieldUser, mentionById(kUser.id) , true)
         .addField(lang.embedFieldReason, kReason, true)
         .addField("ID", kUser.id, true)
         .setColor(bot.baseColor)
         .setTimestamp();
 
         await message.guild.member(kUser).kick(kReason);
-        return message.channel.send(msg);
+        return message.channel.send(embed);
     }catch(e){
         errorReturn(e, message, this.help.name)
     }

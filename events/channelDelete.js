@@ -13,12 +13,11 @@ module.exports = async (bot, channel) => {
         const guildLog = await bot.Guild.findOne({ 'log.channel': channel.id });
         if(guildLog){
             guildLog.log.status = "off";
-            guildWelcome.save()
+            guildLog.save()
         }
 
         await RoleReaction.deleteMany({ 'channelId': channel.id })
         await AutoDeleteMsg.findOneAndDelete({ 'channelId': channel.id });
-
     }catch(e){
         errorReturn(e, null, "channelDelete");
     }
