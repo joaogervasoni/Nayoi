@@ -16,6 +16,12 @@ module.exports = async (bot, channel) => {
             guildLog.save()
         }
 
+        const guildTwitch = await bot.Guild.findOne({ 'twitch.channel': channel.id });
+        if(guildTwitch){
+            guildTwitch.twitch.status = "off";
+            guildTwitch.save()
+        }
+
         await RoleReaction.deleteMany({ 'channelId': channel.id })
         await AutoDeleteMsg.findOneAndDelete({ 'channelId': channel.id });
     }catch(e){

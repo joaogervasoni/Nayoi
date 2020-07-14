@@ -24,6 +24,10 @@ const guildSchema = mongoose.Schema({
     log: {
         status: String,
         channel: String
+    },
+    twitch: {
+        status: String,
+        channel: String
     }
 });
 

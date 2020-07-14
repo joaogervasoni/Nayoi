@@ -33,7 +33,9 @@ Lembrando que sou um bot em desenvolvimento e problemas podem ocorrer mas trabal
 | [Is-image](https://www.npmjs.com/package/is-image) | NPM  |3.0.0|
 | [Mathjs](https://www.npmjs.com/package/mathjs) | NPM  |7.0.1|
 | [Check-links](https://www.npmjs.com/package/check-links) | NPM  |1.1.8|
+| [Twitch-Api-v5](https://www.npmjs.com/package/twitch-api-v5) | NPM  |2.0.4|
 | [MongoDB](https://www.mongodb.com/) | DB  |3.8|
 | [Jikan](https://jikan.moe/) | API  |v3.4.0|
 | [Tenor](https://tenor.com/gifapi) | API  |v1.0.0|
+| [Twitch](https://dev.twitch.tv/) | API  |v5.0.0|
 | [OpenWeather](https://openweathermap.org/api) | API  |2.5|

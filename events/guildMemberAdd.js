@@ -40,7 +40,7 @@ module.exports = async (bot, member) => {
                     imagem = guild.welcome.canvasUrl;
                  }
                  //- Linux
-                 registerFont('arial.ttf', {family: 'Arial'});
+                 //registerFont('arial.ttf', {family: 'Arial'});
                  //
                  const canvas = createCanvas(1000, 360);
                  const ctx = canvas.getContext("2d");

@@ -3,5 +3,6 @@
     "prefix": "f!",
     "mongodb": "user:pass",
     "weatherApi": "toke api weather",
-    "tenorApi": "token api tenor"
+    "tenorApi": "token api tenor",
+    "twitchID": "twitch client id"
 }

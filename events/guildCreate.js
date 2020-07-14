@@ -29,6 +29,10 @@ module.exports = (bot, guild) => {
                 status: "off",
                 channel: ""
             },
+            twitch: {
+                status: "on",
+                channel: ""
+            }
         });
         console.log(`Novo servidor !! Nome:${guild.name} id:${guild.id}`.magenta)
         guildNew.save()

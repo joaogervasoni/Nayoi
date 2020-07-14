@@ -595,10 +595,18 @@ module.exports =
         {
             name: "twitch",
             cmd:{
-
+                notFound: "Streamer não encontrado :confused:",
+                success: "Streamer registrado com sucesso :face_with_monocle:",
+                error: "Erro ao registrar streamer :cry:",
+                needChannel: "Para adicionar streamers vc precisa de um channel !!\n"
+                +"Utilize `{prefix}twitch ch #channel` para adicionar um !!",
+                channelChange: "Canal trocado :face_with_monocle:!!"
             },
             help:{
-
+                description: "Sistema para mostrar Streamers da plataforma Twitch",
+                usability: "Pode ser ativo utilizando `{prefix}twitch add stramernome`\n"
+                +"O canal pode ser alterado utilizando `{prefix}twitch ch #channel`\n",
+                others: "Será exigido um channel para poder adicionar stramers !!",
             }
         }
         
