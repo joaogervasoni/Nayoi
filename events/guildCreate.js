@@ -30,7 +30,7 @@ module.exports = (bot, guild) => {
                 channel: ""
             },
             twitch: {
-                status: "on",
+                status: "off",
                 channel: ""
             }
         });

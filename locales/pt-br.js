@@ -414,7 +414,7 @@ module.exports =
                 welcomeOff: "O Bem-vindo esta `{guild.welcome.status}`"
                 + "e precisa ser ativo para o banner funcionar digite`{prefix}welcome on`",
                 bannerChange: "Imagem trocada `obs: As dimensões recomendadas são 1000x360!!`\n"
-                + "`Digite {prefix} banner sh para ver o preview do banner`",
+                + "`Digite {prefix}banner sh para ver o preview do banner`",
                 invalidImg: "Não foi encontrada uma imagem valida :moyai:\n"
                 +"`A imagem deve terminar com uma extensão valida de imagem (png, jpg e outras) e ser acessível!!`",
                 canvasFillText: "Usuário:",
@@ -598,15 +598,36 @@ module.exports =
                 notFound: "Streamer não encontrado :confused:",
                 success: "Streamer registrado com sucesso :face_with_monocle:",
                 error: "Erro ao registrar streamer :cry:",
-                needChannel: "Para adicionar streamers vc precisa de um channel !!\n"
-                +"Utilize `{prefix}twitch ch #channel` para adicionar um !!",
-                channelChange: "Canal trocado :face_with_monocle:!!"
+                notActived: "Para adicionar streamers o comando twitch precisa estar on !!\n"
+                +"Utilize `{prefix}twitch on #channel` para habilitar !!",
+                channelChange: "Canal trocado :face_with_monocle:!!",
+                statusOk: "Twitch já esta",
+                statusNew: "Twitch agora esta",
+                returnNull: "Não encontrei nenhum canal :crying_cat_face:",
             },
             help:{
                 description: "Sistema para mostrar Streamers da plataforma Twitch",
                 usability: "Pode ser ativo utilizando `{prefix}twitch add stramernome`\n"
                 +"O canal pode ser alterado utilizando `{prefix}twitch ch #channel`\n",
                 others: "Será exigido um channel para poder adicionar stramers !!",
+            }
+        },
+        {
+            name: "busted",
+            cmd:{
+
+            },
+            help:{
+
+            }
+        },
+        {
+            name: "hack",
+            cmd:{
+
+            },
+            help:{
+
             }
         }
         

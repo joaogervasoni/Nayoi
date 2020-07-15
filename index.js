@@ -61,34 +61,36 @@ bot.on("ready", async () =>{
                 let twitchGuild = await TwitchGuild.find({ 'streamerId': streamer[index].streamerId });
 
                 for (let index = 0; index < twitchGuild.length; index++){
-                    let welcomeGuild = await bot.Guild.findOne({ 'guildId': twitchGuild[index].guildId });
-
-                    api.streams.channel({ channelID: twitchGuild[index].streamerId, stream_type: "live" }, (err, res) => {
+                    let guildT = await bot.Guild.findOne({ 'guildId': twitchGuild[index].guildId });
+                    if(guildT.twitch.status === "on"){
+                        api.streams.channel({ channelID: twitchGuild[index].streamerId, stream_type: "live" }, (err, res) => {
     
-                        if(res === undefined) {
-                            return;
-                        }
-                        else if(res !== undefined){
-                            
-                            var today = new Date();
-                            var streamerHoras = new Date();
-                
-                            streamerHoras = res.stream.created_at;
-
-                            if((new Date(today).getTime() - 60000) <= (new Date(streamerHoras).getTime())){
-                                
-                                let guild = bot.guilds.cache.get(welcomeGuild.guildId);
-                                let channel = guild.channels.cache.get(welcomeGuild.twitch.channel);
-                                
-                                let embed = `> **====== ${res.stream.channel.status} ======** \n`
-                                +`Iniciando as: ${new Date(streamerHoras).toTimeString().replace(/.*(\d{2}:\d{2}:\d{2}).*/, "$1")}\n`
-                                +`Te espero lá !! \n`
-                                +`Link para o Stream: ${res.stream.channel.url}\n`
-
-                                return channel.send(embed)
+                            if(res === undefined) {
+                                return;
                             }
-                        }  
-                    });
+                            else if(res !== undefined){
+                                
+                                var today = new Date();
+                                var streamerHoras = new Date();
+                    
+                                streamerHoras = res.stream.created_at;
+    
+                                if((new Date(today).getTime() - 60000) <= (new Date(streamerHoras).getTime())){
+                                    
+                                    let guild = bot.guilds.cache.get(guildT.guildId);
+                                    let channel = guild.channels.cache.get(guildT.twitch.channel);
+                                    
+                                    let embed = `> **====== ${res.stream.channel.status} ======** \n`
+                                    +`Iniciando as: ${new Date(streamerHoras).toTimeString().replace(/.*(\d{2}:\d{2}:\d{2}).*/, "$1")}\n`
+                                    +`Te espero lá !! \n`
+                                    +`Link para o Stream: ${res.stream.channel.url}\n`
+    
+                                    return channel.send(embed)
+                                }
+                            }  
+                        });
+                    }
+                    
                 }   
             }  
         }

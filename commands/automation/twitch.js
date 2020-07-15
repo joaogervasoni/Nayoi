@@ -15,17 +15,37 @@ module.exports.run = async (bot, message, args, lang) => {
         if(returnNull(cmd)) return message.reply(lang.helpReturn);
 
         if(cmd === "on"){
+            if(returnNull(subcmd)) return message.reply(lang.helpReturn);
+            let channel = formatChannelId(subcmd);
+            let chat = await message.guild.channels.cache.find(chat => channel, `id` );
+            if (!chat || chat === undefined || chat === null) return message.reply(lang.returnNull);
 
+            const guild = await bot.Guild.findOne({'guildId': message.guild.id});
+            if (guild.twitch.status === "on") return message.channel.send(`${lang.statusOk} \`${guild.twitch.status}\``);
+            
+            guild.twitch.status = "on";
+            guild.twitch.channel = channel;
+            guild.save(function (err){
+                if(err) return errorReturn(err, message, this.help.name);
+                if(!err) return message.channel.send(`${lang.statusNew} \`${guild.twitch.status}\` :sunglasses:`);
+            });
         }
         else if(cmd === "off"){
-
+            const guild = await bot.Guild.findOne({'guildId': message.guild.id});
+            if (guild.twitch.status === "off") return message.channel.send(`${lang.statusOk} \`${guild.twitch.status}\``);
+        
+            guild.twitch.status = "off";
+            guild.save(function (err){
+                if(err) return errorReturn(err, message, this.help.name);
+                if(!err) return message.channel.send(`${lang.statusNew} \`${guild.twitch.status}\` :cry:`);
+            });
         }
         else if(cmd === "add"){
             if(returnNull(subcmd)) return message.reply(lang.helpReturn);
             const guild = await bot.Guild.findOne({'guildId': message.guild.id});
             
             let channel = await message.guild.channels.cache.find(chat => guild.twitch.channel, `id` );
-            if (returnNull(channel)) return message.reply(lang.needChannel);
+            if (returnNull(channel) || guild.twitch.status === "off") return message.reply(lang.notActived);
 
             api.search.channels({ query: subcmd, limit:"1" }, (err, res) => {
                 if(err) {
