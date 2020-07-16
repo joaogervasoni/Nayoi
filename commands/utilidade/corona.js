@@ -17,7 +17,8 @@ module.exports.run = async (bot, message, args, lang) => {
             message.channel.send(msg + "``")
         }else{
             fetch("https://pomber.github.io/covid19/timeseries.json").then(response => response.json()).then(data => {
-                let country = data[upperCaseFirst(args[0])]
+                let country = args[0].toLowerCase();
+                country = data[upperCaseFirst(country)]
                 if(country){
                     let lastDate = country[country.length-1];
                 
