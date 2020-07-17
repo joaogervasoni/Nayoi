@@ -596,6 +596,7 @@ module.exports =
             name: "twitch",
             cmd:{
                 notFound: "Streamer não encontrado :confused:",
+                delete: "Streamer deletado :cry:",
                 success: "Streamer registrado com sucesso :face_with_monocle:",
                 error: "Erro ao registrar streamer :cry:",
                 notActived: "Para adicionar streamers o comando twitch precisa estar on !!\n"
@@ -613,12 +614,12 @@ module.exports =
             }
         },
         {
-            name: "busted",
-            cmd:{
-
-            },
+            name: "jail",
+            cmd:{},
             help:{
-
+                description: "Cria uma img da pessoa presa",
+                usability: "Pode ser utilizando desta forma: `{prefix}jail`",
+                additional: "Também pode ser utilizado marcando alguem: `{prefix}jail @user`"
             }
         },
         {

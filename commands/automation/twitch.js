@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const {MessageEmbed} = require('discord.js');
 const {errorReturn, returnNull, formatChannelId} = require("../../utils/functions.js");
 const TwitchChannel = require("../../models/twitchchannel.js");
 const TwitchGuild = require("../../models/twitchguild.js");
@@ -67,9 +68,33 @@ module.exports.run = async (bot, message, args, lang) => {
         }
         else if(cmd === "remove"){
 
+            let twitchGuild = await TwitchGuild.find({ 'streamerId': subcmd, 'guildId': message.guild.id });
+            if(!twitchGuild) return message.channel.send(lang.notFound)
+
+            await TwitchGuild.findOneAndRemove({ 'streamerId': subcmd, 'guildId': message.guild.id});
+            let twitchChannel = await TwitchChannel.findOne({ 'streamerId': subcmd});
+            twitchChannel.servers = parseInt(twitchChannel.servers) - 1;
+            twitchChannel.save(function (err){
+                if(err) return message.channel.send(errorReturn(err, message, cmd))
+                if(!err) return message.channel.send(lang.delete)
+            })
+            
         }
         else if(cmd === "show"){
+            let twitchGuild = await TwitchGuild.find({ 'guildId': message.guild.id})
+            let description = "";
 
+            twitchGuild.forEach(element =>  {
+                description = description + "**Streamer:** `"+element.name+"` - Status: `"+element.config.status+"` - ID: `"+element.streamerId+"`\n"
+            });
+
+            const embed = new MessageEmbed()
+                .setTitle(`Twitch Channels`)
+                .setDescription(description)
+                .setTimestamp()
+                .setColor(bot.baseColor)
+
+            return message.channel.send(embed)
         }
         else if(cmd === "ch" || cmd === "channel"){
             let channel = formatChannelId(subcmd);
@@ -109,6 +134,7 @@ async function twitchDB(infos, message){
         _id: mongoose.Types.ObjectId(),
         guildId: message.guild.id,
         streamerId: infos._id,
+        name: infos.name,
         config:{
             status: "on",
             creator: message.member.user.tag,
