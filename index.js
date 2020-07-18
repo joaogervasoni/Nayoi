@@ -80,9 +80,9 @@ bot.on("ready", async () =>{
                                     let guild = bot.guilds.cache.get(guildT.guildId);
                                     let channel = guild.channels.cache.get(guildT.twitch.channel);
                                     
-                                    let embed = `> **====== ${res.stream.channel.status} ======** \n`
+                                    let embed = `> **${res.stream.channel.status}** \n`
                                     +`Iniciando as: ${new Date(streamerHoras).toTimeString().replace(/.*(\d{2}:\d{2}:\d{2}).*/, "$1")}\n`
-                                    +`Te espero lá !! \n`
+                                    +`${twitchGuild[index].config.text} \n`
                                     +`Link para o Stream: ${res.stream.channel.url}\n`
     
                                     return channel.send(embed)

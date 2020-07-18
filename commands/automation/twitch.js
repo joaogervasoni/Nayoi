@@ -96,6 +96,21 @@ module.exports.run = async (bot, message, args, lang) => {
 
             return message.channel.send(embed)
         }
+        else if(cmd === "msg"){
+            if(returnNull(subcmd)) return message.reply(lang.helpReturn);
+
+            let twitchGuild2 = await TwitchGuild.findOne({ 'streamerId': subcmd, 'guildId': message.guild.id });
+            if(!twitchGuild2) return message.channel.send(lang.notFound)
+
+            let length = cmd.length + subcmd.length;
+            length = args.join(" ").slice(length+2);
+
+            twitchGuild2.config.text = length;
+            twitchGuild2.save(function (err){
+                if(err) return message.channel.send(errorReturn(err, message, cmd))
+                if(!err) return message.channel.send(lang.textChanged)
+            })
+        }
         else if(cmd === "ch" || cmd === "channel"){
             let channel = formatChannelId(subcmd);
             let chat = await message.guild.channels.cache.find(chat => channel, `id` );
@@ -151,7 +166,7 @@ module.exports.help = {
 }
 
 module.exports.requirements = {
-    userPerms: [],
-    clientPerms: [],
+    userPerms: ["ADMINISTRATOR"],
+    clientPerms: ["ADMINISTRATOR"],
     ownerOnly: false
 }

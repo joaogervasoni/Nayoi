@@ -602,14 +602,20 @@ module.exports =
                 notActived: "Para adicionar streamers o comando twitch precisa estar on !!\n"
                 +"Utilize `{prefix}twitch on #channel` para habilitar !!",
                 channelChange: "Canal trocado :face_with_monocle:!!",
+                textChanged: "Msg de live trocada :face_with_monocle:!!",
                 statusOk: "Twitch já esta",
                 statusNew: "Twitch agora esta",
                 returnNull: "Não encontrei nenhum canal :crying_cat_face:",
             },
             help:{
                 description: "Sistema para mostrar Streamers da plataforma Twitch",
-                usability: "Pode ser ativo utilizando `{prefix}twitch add stramernome`\n"
-                +"O canal pode ser alterado utilizando `{prefix}twitch ch #channel`\n",
+                usability: "Pode ser ativo utilizando `{prefix}twitch on #channel`\n"
+                +"Pode ser desligado utilizando `{prefix}twitch off`\n"
+                +"Para adicionar um streamer utilize `{prefix}twitch add stramernome`\n"
+                +"A msg de anúncio pode ser alterado utilizando `{prefix}twitch STREAMERID msg MSGAQUI`\n",
+                additional: "`{prefix}twitch show` - Para mostrar a lista de canais adicionado e IDs\n"
+                +"`{prefix}twitch remove ID` - Para remover algum streamer\n"
+                +"`{prefix}twitch ch #channel` - Para trocar o canal de lives",
                 others: "Será exigido um channel para poder adicionar stramers !!",
             }
         },
