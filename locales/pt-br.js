@@ -612,7 +612,7 @@ module.exports =
                 usability: "Pode ser ativo utilizando `{prefix}twitch on #channel`\n"
                 +"Pode ser desligado utilizando `{prefix}twitch off`\n"
                 +"Para adicionar um streamer utilize `{prefix}twitch add stramernome`\n"
-                +"A msg de anúncio pode ser alterado utilizando `{prefix}twitch STREAMERID msg MSGAQUI`\n",
+                +"A msg de anúncio pode ser alterado utilizando `{prefix}twitch msg STREAMERID MSGAQUI`\n",
                 additional: "`{prefix}twitch show` - Para mostrar a lista de canais adicionado e IDs\n"
                 +"`{prefix}twitch remove ID` - Para remover algum streamer\n"
                 +"`{prefix}twitch ch #channel` - Para trocar o canal de lives",
