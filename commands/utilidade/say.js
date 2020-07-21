@@ -1,18 +1,21 @@
-const { errorReturn, formatId } = require("../../utils/functions.js");
+const { errorReturn, formatId, returnNull } = require("../../utils/functions.js");
 const ms = require("ms");
 
-module.exports.run = (bot, message, args) => {
+module.exports.run = (bot, message, args, lang) => {
     try{
-        let mutetime = args[0];
         let channel = message.guild.channels.cache.get(formatId(args[0]))
-        mutetime = ms(mutetime);
-        
+        let msg;
+
         if(channel){
-            return channel.send(args.join(" ").slice(args[0].length));
+            msg = args.join(" ").slice(args[0].length);
         }
         else{
-            return message.channel.send(args.join(" ").slice(0));
+            channel = message.channel;
+            msg = args.join(" ").slice(0);
         }
+        if(returnNull(msg)) return message.reply(lang.helpReturn);
+
+        return channel.send(msg);
     }catch(e){
         errorReturn(e, message, this.help.name)
     }

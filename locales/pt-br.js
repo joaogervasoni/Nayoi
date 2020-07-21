@@ -137,6 +137,7 @@ module.exports =
         {
             name: "sayembed",
             cmd: {
+                undefinedDescription: "Vc precisa de um `título` e de uma `descrição` !!"
             },
             help: {
                 description: "Manda uma msg embed pelo Bot",
