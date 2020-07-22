@@ -539,16 +539,22 @@ module.exports =
             name: "addreactions",
             cmd: {
                 returnNullChannel: "Nenhum canal encontrado :worried: !!",
-                initiated: "Vamos começar !!\n"
-                + "Primeiro digite o que deseja mandar na msg, lembrando que o titulo e a msg devem ser dividos por **',' virgula** !!\n"
-                + "`Exemplo: Um Titulo legal, Escolha a reação do pepe para receber o cargo pepe !!!`",
+                embedInitiatedTitle: "Vamos começar :goat: !!",
+                embedInitiatedDescription: "Primeiro digite o que deseja mandar na msg, lembrando que o titulo e a msg devem ser dividos por `,` virgula !!",
+                embedInitiatedField1: "Exemplo",
+                embedInitiatedField1_1: "Um Titulo legal, Escolha a reação do pepe para receber o cargo pepe !!!",
                 roleMsgCreated: "Role Reaction e Msg criados no canal selecionado :man_mage: !!",
-                msgSaved: "**Mensagem salva :sunglasses:!! **\n"
-                + "Caso não tenha gostado do que digitou, digite !!clear para poder escolher novamente a msg !!\n"
-                + "Agora digite os emotes divididos por **',' virgula** `Ex: :emoji:, @cargo`\n"
-                + "O emoji deve ser mandado como vc utiliza-o normalmente, já o cargo é so marcar ele !!",
-                returnEmojiNull: "Emoji não existe !!",
-                returnRoleNull: "Role não existe !!",
+                stopMsg: "Criação cancelada :octagonal_sign:",
+                clearMsg: "Digite um novo titulo e descrição\n Exemplo: `titulo, descrição`",
+                embedSaveTitle: "Mensagem salva :sunglasses: !!",
+                embedSaveDescription: "Agora digite os emotes divididos por `,` virgula `Ex: :emoji:, @cargo`",
+                embedSaveField1: "Opções",
+                embedSaveField1_1: "`!!stop` - Para cancelar a criação\n"
+                +"`!!clear` - Para trocar o titulo e descrição da msg",
+                embedSaveField2: "Leia-me",
+                embedSaveField2_1: "O bot ficara a espera dos emojis e cargos, lembre-se se quiser usar outros comandos precisa finalizar com !!stop ou completar o addreactions !",
+                returnEmojiNull: "Emoji não existe !! Tente outro !!",
+                returnRoleNull: "Role não existe !!  Tente outro !!",
                 returnSave: "Emoji e Cargo salvos !!\n"
                 +"`Caso queira continuar digite + grupo de emoji/cargo !!`\n" 
                 +"Caso queira finalizar digite !!done`",

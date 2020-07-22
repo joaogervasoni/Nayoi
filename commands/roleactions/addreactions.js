@@ -1,5 +1,5 @@
 const {MessageCollector, MessageEmbed} = require('discord.js');
-const {errorReturn, formatChannelId, formatRoleId, formatEmojiId, listCollection} = require("../../utils/functions.js");
+const {errorReturn, formatChannelId, formatRoleId, formatEmojiId, listCollection, returnNull} = require("../../utils/functions.js");
 const mongoose = require('mongoose');
 const RoleReaction = require("../../models/rolereaction.js");
 
@@ -12,9 +12,14 @@ module.exports.run = async (bot, message, args, lang) => {
         let channel = await message.guild.channels.cache.find(channel => channel.id === formatChannelId(args[0]))
         let idmsg;
         
-        if(!channel || channel === null || channel === undefined) return message.reply(lang.returnNullChannel);
+        if(returnNull(channel)) return message.reply(lang.returnNullChannel);
         if(channel){
-            await message.channel.send(lang.initiated);
+            let embed = new MessageEmbed()
+                        .setTitle(lang.embedInitiatedTitle)
+                        .setDescription(lang.embedInitiatedDescription)
+                        .addField(lang.embedInitiatedField1, lang.embedInitiatedField1_1)
+                        .setColor(bot.baseColor)
+            await message.channel.send(embed);
 
             let collector = new MessageCollector(message.channel, msgCollectorFilter.bind(null, message));
             let emojiRoleMappings = new Map();
@@ -24,6 +29,16 @@ module.exports.run = async (bot, message, args, lang) => {
 
             collector.on('collect', async msg => {
                 let {cache} = msg.guild.emojis;
+                if(msg.content.toLowerCase() === '!!stop'){
+                    collector.stop('client stop the command');
+                    await message.channel.send(lang.stopMsg)
+                    return;
+                }
+                if(msg.content.toLowerCase() === '!!clear'){
+                    msgAenviar = null;
+                    await message.channel.send(lang.clearMsg); 
+                    return;
+                }
                 if(msg.content.toLowerCase() === '!!done'){
                     
                     let embed = new MessageEmbed()
@@ -51,7 +66,14 @@ module.exports.run = async (bot, message, args, lang) => {
                 }
                 if(!msgAenviar){
                     msgAenviar = [x, y] = msg.content.split(/,\s+/);
-                    await message.channel.send(lang.msgSaved); 
+                    let embed = new MessageEmbed()
+                        .setTitle(lang.embedSaveTitle)
+                        .setDescription(lang.embedSaveDescription)
+                        .addField(lang.embedSaveField1, lang.embedSaveField1_1)
+                        .addField(lang.embedSaveField2, lang.embedSaveField2_1)
+                        .setColor(bot.baseColor)
+                    
+                    await message.channel.send(embed);
                 }
                 else{
 
@@ -83,6 +105,7 @@ module.exports.run = async (bot, message, args, lang) => {
             });
 
             collector.on('end', async(collected, reason) => {
+                if(!idmsg) return
                 let findMsgDocument = await RoleReaction.findOne({ 'messageId': idmsg.id});
                 if(findMsgDocument) message.channel.send(lang.returnExist);
 
