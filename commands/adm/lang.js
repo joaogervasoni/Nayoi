@@ -10,6 +10,7 @@ module.exports.run = async (bot, message, args, lang) => {
 
         if(cmd === "change"){
             if(returnNull(subcmd)) return message.channel.send(lang.invalidLang)
+            if(subcmd === "en-us") return message.channel.send("`en-us` Language in progress !!")
 
             newLang = bot.locales.get(subcmd);
             if(returnNull(newLang)) return message.channel.send(lang.invalidLang)
@@ -22,7 +23,7 @@ module.exports.run = async (bot, message, args, lang) => {
             guild.server.lang = newLang.name;
             guild.save();
 
-            return message.channel.send(`${changedLang} ${newLang.name}`)
+            return message.channel.send(`${lang.changedLang} ${newLang.name}`)
         }
         else if(cmd === "show"){
             let atualLang = message.guild.language.name;

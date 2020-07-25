@@ -34,6 +34,7 @@ module.exports.run = async (bot, message, args, lang) => {
         else if(cmd === "rol" || cmd === "role"){
             let role = formatRoleId(subcmd);
             if (!role) return message.reply(lang.returnNull);
+            const guild = await bot.Guild.findOne({'guildId': message.guild.id});
     
             guild.autorole.role = role
             guild.save(function (err){

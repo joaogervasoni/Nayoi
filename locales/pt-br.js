@@ -582,7 +582,7 @@ module.exports =
             },
             help: {
                 description: "Troca a language do servidor",
-                usability: "Pode ser utilizando desta forma: `{prefix}lang change languageAqui",
+                usability: "Pode ser utilizando desta forma: `{prefix}lang change languageAqui`",
                 additional: "`{prefix}lang list` - Exibe a lista de languages\n"
                 +"`{prefix}lang show` - Exibe a language atual",
             }

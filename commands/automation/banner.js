@@ -50,9 +50,9 @@ module.exports.run = async (bot, message, args, lang) => {
         }
         else if(cmd === "sh" || cmd === "show"){
             const guild = await bot.Guild.findOne({'guildId': message.guild.id});
-            if(guild.welcome.canvasUrl === "off" || guild.welcome.canvasUrl === "") return message.channel.send("Nenhuma img personaliza :worried:");
+            if(guild.welcome.canvasUrl === "off" || guild.welcome.canvasUrl === "") return message.channel.send("Banner offline :worried:");
             let check = await checkLinks([guild.welcome.canvasUrl])
-            if(!check[guild.welcome.canvasUrl].status === "alive") return message.channel.send("Banner inválido :worried:");
+            if(!check[guild.welcome.canvasUrl].status === "alive") return message.channel.send("Banner custom inválido :worried:");
             //use base preview !!!!!!!
             //need changes !!!!!!
 
