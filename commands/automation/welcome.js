@@ -69,7 +69,7 @@ module.exports.help = {
 }
 
 module.exports.requirements = {
-    userPerms: ["ADMINISTRATOR"],
+    userPerms: ["MANAGE_CHANNELS"],
     clientPerms: ["ADMINISTRATOR"],
     ownerOnly: false
 }

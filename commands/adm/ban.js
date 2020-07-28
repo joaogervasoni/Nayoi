@@ -36,7 +36,7 @@ module.exports.help = {
 }
 
 module.exports.requirements = {
-    userPerms: ["ADMINISTRATOR"],
+    userPerms: ["BAN_MEMBERS"],
     clientPerms: ["ADMINISTRATOR"],
     ownerOnly: false
 }

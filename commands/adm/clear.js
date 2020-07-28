@@ -20,7 +20,7 @@ module.exports.help = {
 }
 
 module.exports.requirements = {
-    userPerms: ["ADMINISTRATOR"],
+    userPerms: ["MANAGE_MESSAGES"],
     clientPerms: ["ADMINISTRATOR"],
     ownerOnly: false
 }

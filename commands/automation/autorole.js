@@ -8,8 +8,11 @@ module.exports.run = async (bot, message, args, lang) => {
         if(returnNull(cmd)) return message.reply(lang.helpReturn);
 
         if (cmd === "on" || cmd === "true"){
-            let role = formatRoleId(subcmd);
+            let roleid = formatRoleId(subcmd);
+            role = message.guild.roles.cache.get(roleid);
+
             if (!role) return message.reply(lang.returnNull);
+            //if (role.rawPosition > message.member.roles.highest.rawPosition || !message.member.hasPermission("ADMINISTRATOR")) return message.reply("Role maior")
             
             const guild = await bot.Guild.findOne({'guildId': message.guild.id});
             if (guild.autorole.status === "on") return message.channel.send(`${lang.statusOk} \`${guild.autorole.status}\``);
@@ -61,7 +64,7 @@ module.exports.help = {
 }
 
 module.exports.requirements = {
-    userPerms: ["ADMINISTRATOR"],
+    userPerms: ["MANAGE_ROLES"],
     clientPerms: ["ADMINISTRATOR"],
     ownerOnly: false
 }

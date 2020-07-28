@@ -49,6 +49,7 @@ module.exports.run = async (bot, message, args, lang) => {
             });
         }
         else if (cmd === "off"){
+            subcmd = formatId(subcmd)
             let chat = await message.guild.channels.cache.find(chat => subcmd, `id`);
             if (!chat) return message.reply(lang.returnNull);
 
@@ -91,7 +92,7 @@ module.exports.help = {
 }
 
 module.exports.requirements = {
-    userPerms: ["ADMINISTRATOR"],
+    userPerms: ["MANAGE_CHANNELS", "MANAGE_MESSAGES"],
     clientPerms: ["ADMINISTRATOR"],
     ownerOnly: false
 }

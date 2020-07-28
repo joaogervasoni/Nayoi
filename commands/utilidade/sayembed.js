@@ -33,6 +33,6 @@ module.exports.help = {
 
 module.exports.requirements = {
     userPerms: ["ADMINISTRATOR"],
-    clientPerms: [],
+    clientPerms: ["MANAGE_MESSAGES", "MANAGE_CHANNELS"],
     ownerOnly: false
 }
