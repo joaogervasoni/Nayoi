@@ -50,16 +50,15 @@ module.exports.run = async (bot, message, args, lang) => {
         }
         else if(cmd === "sh" || cmd === "show"){
             const guild = await bot.Guild.findOne({'guildId': message.guild.id});
-            if(guild.welcome.canvasUrl === "off" || guild.welcome.canvasUrl === "") return message.channel.send("Banner offline :worried:");
-            let check = await checkLinks([guild.welcome.canvasUrl])
-            if(!check[guild.welcome.canvasUrl].status === "alive") return message.channel.send("Banner custom inválido :worried:");
-            //use base preview !!!!!!!
-            //need changes !!!!!!
+            let imagem = "https://github.com/Zaetic/Nayoi/blob/master/images/YaniBackground.png?raw=true";
 
-            imagem = guild.welcome.canvasUrl;
-            //- Linux 14 16 18.04
-            //registerFont('arial.ttf', {family: 'Arial'});
-            //
+            if(guild.welcome.canvasUrl === "off" || guild.welcome.canvasUrl === "") message.channel.send("Banner custom `offline`");
+            let check = await checkLinks([guild.welcome.canvasUrl])
+            if(check[guild.welcome.canvasUrl].status === "alive"){
+                imagem = guild.welcome.canvasUrl;
+                message.channel.send("Banner custom `online`");
+            } 
+
             const canvas = createCanvas(1000, 360);
             const ctx = canvas.getContext("2d");
             const background = await loadImage(imagem);

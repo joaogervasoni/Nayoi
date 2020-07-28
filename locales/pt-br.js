@@ -327,7 +327,7 @@ module.exports =
                 returnInvalid: "Algum dos emojis é `inválido` ou é um `emoji padrão !!`",
             },
             help: {
-                description: "Pode ser utilizado de maneira simples `{prefix}gif emoji1 emoji2`\n",
+                description: "Pode ser utilizado de maneira simples `{prefix}emojimaker emoji1 emoji2`\n",
                 others: "Os emojis devem ser custom, no caso adicionados ao servidor, emojis padrões como 🚀 ou de outros servidores não funcionam",
             }    
         },
@@ -412,8 +412,8 @@ module.exports =
             cmd: {
                 statusOk: "Banner já esta",
                 statusNew: "Banner de bem-vindo agora esta",
-                welcomeOff: "O Bem-vindo esta `{guild.welcome.status}`"
-                + "e precisa ser ativo para o banner funcionar digite`{prefix}welcome on`",
+                welcomeOff: "O Bem-vindo esta `{guild.welcome.status}` "
+                + "e precisa ser ativo para o banner funcionar",
                 bannerChange: "Imagem trocada `obs: As dimensões recomendadas são 1000x360!!`\n"
                 + "`Digite {prefix}banner sh para ver o preview do banner`",
                 invalidImg: "Não foi encontrada uma imagem valida :moyai:\n"
