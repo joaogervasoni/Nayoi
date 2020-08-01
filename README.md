@@ -24,14 +24,14 @@ Lembrando que sou um bot em desenvolvimento e problemas podem ocorrer mas trabal
 | ------------- | ------------- | ------------- |
 | [Node.js](https://nodejs.org/en/) | JS  |12.17.0|
 | [Discord.js](https://discord.js.org/) | NPM  |12.2.0|
-| [Mongoose](https://www.npmjs.com/package/mongoose) | NPM  |5.9.16|
+| [Mongoose](https://www.npmjs.com/package/mongoose) | NPM  |5.9.27|
 | [Ms](https://www.npmjs.com/package/ms) | NPM  |2.1.2|
 | [Path](https://www.npmjs.com/package/path) | NPM  |0.12.7|
 | [Colors](https://www.npmjs.com/package/colors) | NPM  |1.4.0|
 | [Canvas](https://www.npmjs.com/package/canvas) | NPM  |2.6.1|
 | [Node-fetch](https://www.npmjs.com/package/node-fetch) | NPM  |2.6.0|
 | [Is-image](https://www.npmjs.com/package/is-image) | NPM  |3.0.0|
-| [Mathjs](https://www.npmjs.com/package/mathjs) | NPM  |7.0.1|
+| [Mathjs](https://www.npmjs.com/package/mathjs) | NPM  |7.1.0|
 | [Check-links](https://www.npmjs.com/package/check-links) | NPM  |1.1.8|
 | [Twitch-Api-v5](https://www.npmjs.com/package/twitch-api-v5) | NPM  |2.0.4|
 | [MongoDB](https://www.mongodb.com/) | DB  |3.8|

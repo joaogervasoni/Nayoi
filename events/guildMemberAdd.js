@@ -39,12 +39,10 @@ module.exports = async (bot, member) => {
              if (guild.welcome.canvas === "on"){
                 let check = await checkLinks([guild.welcome.canvasUrl])
                  let imagem = "https://github.com/Zaetic/Nayoi/blob/master/images/YaniBackground.png?raw=true";
-                 if ((guild.welcome.canvasUrl != "off" || guild.welcome.canvasUrl != "") && (check[guild.welcome.canvasUrl].status === "alive")){
+                 if ((guild.welcome.canvasUrl != "off") && (check[guild.welcome.canvasUrl].status === "alive")){
                     imagem = guild.welcome.canvasUrl;
                  }
-                 //- Linux
-                 //registerFont('arial.ttf', {family: 'Arial'});
-                 //
+
                  const canvas = createCanvas(1000, 360);
                  const ctx = canvas.getContext("2d");
                  const background = await loadImage(imagem);

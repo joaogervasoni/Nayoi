@@ -9,8 +9,7 @@ module.exports.run = async (bot, message, args, lang) => {
         if (returnNull(user)) user = message.member.user;
 
         userAvatar = user.avatarURL({ format: 'jpg' });
-        jailImage = "images/jail.png";
-        //Add jail img to folder "images"
+        jailImage = "https://github.com/Zaetic/Nayoi/blob/master/images/YaniJail.png?raw=true";
 
         const canvas = createCanvas(300, 300);
         const ctx = canvas.getContext("2d");

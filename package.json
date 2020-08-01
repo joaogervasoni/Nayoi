@@ -15,7 +15,7 @@
     "discord.js": "^12.2.0",
     "is-image": "^3.0.0",
     "mathjs": "^7.1.0",
-    "mongoose": "^5.9.24",
+    "mongoose": "^5.9.27",
     "ms": "^2.1.2",
     "node-fetch": "^2.6.0",
     "path": "^0.12.7",
