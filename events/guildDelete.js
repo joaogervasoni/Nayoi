@@ -21,7 +21,7 @@ module.exports = async (bot, guild) => {
             }
         }
         
-        console.log(`Servidor saiu !! Nome:${guild.name} id:${guild.id}`.yellow)
+        console.log(`[Left]`.brightYellow + ` Name:${guild.name} Users:${guild.memberCount} id:${guild.id} Date:${new Date()}`.yellow)
     }catch(e){
         errorReturn(e, null, "guildDelete")
     }

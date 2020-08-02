@@ -1,6 +1,6 @@
-const {errorReturn} = require("../utils/functions.js");
-var colors = require('colors');
+const { errorReturn } = require("../utils/functions.js");
 const mongoose = require('mongoose');
+var colors = require('colors');
 
 module.exports = (bot, guild) => {
     try{
@@ -34,7 +34,7 @@ module.exports = (bot, guild) => {
                 channel: ""
             }
         });
-        console.log(`Novo servidor !! Nome:${guild.name} id:${guild.id}`.magenta)
+        console.log(`[Join]`.brightMagenta + ` Name:${guild.name} Users:${guild.memberCount} id:${guild.id} Date:${new Date()}`.magenta)
         guildNew.save()
 
         guild.language = bot.locales.get("pt-br");
