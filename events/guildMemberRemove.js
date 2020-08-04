@@ -14,7 +14,7 @@ module.exports = async (bot, member)  => {
         if(guild.log.status == "on"){
             let logs = await member.guild.fetchAuditLogs();
             let entry = await logs.entries.find(entry => entry.target === member.user);
-            let channel = member.guild.channels.get(guild.log.channel)
+            let channel = member.guild.channels.cache.get(guild.log.channel)
 
             if(!returnNull(channel)){
                 let embed = new MessageEmbed()

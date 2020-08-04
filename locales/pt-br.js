@@ -25,6 +25,7 @@ module.exports =
         {
             name: "message",
             cmd:{
+                nullCommand: "Utilize os comandos `{prefix}help` e `{prefix}commands` para saber sobre o bot",
                 reqOwnerPerm: "Apenas utilizavel pelo meu mestre",
                 reqUserPerm: "Você precisa das seguites permissões:",
                 reqBotPerm: "Eu não tenho essas permissões:"

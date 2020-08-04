@@ -8,35 +8,34 @@ module.exports = async (bot, oldUser, newUser) => {
     if(returnNull(oldUser) || returnNull(newUser)) return
     if(oldUser.avatar === newUser.avatar && oldUser.tag === newUser.tag) return
 
-    
-    
     try{
+        let guildDb = await bot.Guild.find({ 'log.status': "on" });
+        if(returnNull(guildDb)) return;
+        const embedAll = new MessageEmbed()
+        .setColor(bot.baseColor)
+        .setTimestamp()
+
+        //Tag
         if(oldUser.tag != newUser.tag){
-            let guildDb = await bot.Guild.find({ 'log.status': "on" });
-            
-            if(!returnNull(guildDb)){
-                for (let index = 0; index < guildDb.length; index++){
-                    let guild = bot.guilds.cache.get(guildDb[index].guildId)
-                    if(!returnNull(guild)){
-                        const lang = await bot.langs.langReturn(guild.language, "userUpdate", "event");
-                        let userFind = guild.members.cache.get(oldUser.id)
-                        if(!returnNull(userFind)){
-                            let channel = guild.channels.cache.get(guildDb[index].log.channel)
-    
-                            let embed = new MessageEmbed()
-                            .setTitle(`:pencil2: [${lang.embedNcTitle}]`)
-                            .addField(`**${lang.fieldUser}**`, newUser, true)
-                            .addField(`**${lang.fieldOldNick}**`, oldUser.tag)
-                            .addField(`**${lang.fieldNewNick}**`, newUser.tag)
-                            .setColor(bot.baseColor)
-                            .setTimestamp()
-        
-                            await channel.send(embed)
-                        }
+            for (let index = 0; index < guildDb.length; index++){
+                let guild = bot.guilds.cache.get(guildDb[index].guildId)
+                if(!returnNull(guild)){
+                    const lang = await bot.langs.langReturn(guild.language, "userUpdate", "event");
+                    let userFind = guild.members.cache.get(oldUser.id)
+                    if(!returnNull(userFind)){
+                        let channel = guild.channels.cache.get(guildDb[index].log.channel)
+                        embedAll
+                        .setTitle(`:pencil2: [${lang.embedNcTitle}]`)
+                        .addField(`**${lang.fieldUser}**`, newUser, true)
+                        .addField(`**${lang.fieldOldNick}**`, oldUser.tag)
+                        .addField(`**${lang.fieldNewNick}**`, newUser.tag)
+
+                        await channel.send(embedAll)
                     }
                 }
             }
         }
+        //Avatar
         if(oldUser.avatar != newUser.avatar){
             let imgOld = await oldUser.displayAvatarURL({ format: 'png' })
             let imgNew = await newUser.displayAvatarURL({ format: 'png' })
@@ -53,27 +52,21 @@ module.exports = async (bot, oldUser, newUser) => {
             ctx.drawImage(avatar2, 150,0,150,150);
             let attachment = new MessageAttachment(canvas.toBuffer(),"newImage.png");
             
-            let guildDb = await bot.Guild.find({ 'log.status': "on" });
-            
-            if(!returnNull(guildDb)){
-                for (let index = 0; index < guildDb.length; index++){
-                    let guild = bot.guilds.cache.get(guildDb[index].guildId)
-                    if(!returnNull(guild)){
-                        const lang = await bot.langs.langReturn(guild.language, "userUpdate", "event");
-                        let userFind = guild.members.cache.get(oldUser.id)
-                        if(!returnNull(userFind)){
-                            let channel = guild.channels.cache.get(guildDb[index].log.channel)
-    
-                            const embedPicture = new MessageEmbed()
-                            .setImage("attachment://newImage.png")
-                            .setTitle(`:frame_photo: [${lang.embedImgTitle}]`)
-                            .addField(`**${lang.fieldUser}**`, userFind.user.tag, true)
-                            .addField(`**ID:**`, userFind.user.id, true)
-                            .setColor(bot.baseColor)
-                            .setTimestamp()
-    
-                            await channel.send({ files: [attachment], embed: embedPicture})
-                        }
+            for (let index = 0; index < guildDb.length; index++){
+                let guild = bot.guilds.cache.get(guildDb[index].guildId)
+                if(!returnNull(guild)){
+                    const lang = await bot.langs.langReturn(guild.language, "userUpdate", "event");
+                    let userFind = guild.members.cache.get(oldUser.id)
+                    if(!returnNull(userFind)){
+                        let channel = guild.channels.cache.get(guildDb[index].log.channel)
+
+                        embedAll
+                        .setImage("attachment://newImage.png")
+                        .setTitle(`:frame_photo: [${lang.embedImgTitle}]`)
+                        .addField(`**${lang.fieldUser}**`, userFind.user.tag, true)
+                        .addField(`**ID:**`, userFind.user.id, true)
+
+                        await channel.send({ files: [attachment], embed: embedAll})
                     }
                 }
             }

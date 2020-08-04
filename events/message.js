@@ -12,6 +12,7 @@ module.exports = async (bot, message) => {
         }
     }
 
+    //cmd
     const args = message.content.split(/ +/g);
     var command = 0;
     if(args[0].length === prefix.length){
@@ -20,19 +21,19 @@ module.exports = async (bot, message) => {
     }else command = args.shift().slice(prefix.length).toLowerCase();
     const cmd = bot.commands.get(command) || bot.aliases.get(command);
 
-    // Validações padrões
-    if (!message.content.toLowerCase().startsWith(prefix.toLowerCase())) return;
-    if (!cmd) return message.reply("Utilize os comandos `"+prefix+"help` e `"+prefix+"commands` para saber sobre o bot");
-    if (message.guild.me === null || message.guild.me === undefined) return;
-    if (!message.guild.me.permissions.has(["SEND_MESSAGES"])) return;
-
-    // Lang Cmd
+    //Base validations
     const langEvent = await bot.langs.langReturn(message.guild.language, "message", "event");
+    if (!message.content.toLowerCase().startsWith(prefix.toLowerCase())) return;
+    if (message.member.permissions.missing(["SEND_MESSAGES"])) return message.member.user.send(`${langEvent.reqBotPerm} \`SEND_MESSAGES\``);
+    if (!cmd) return message.reply(langEvent.nullCommand);
+    if (message.guild.me === null || message.guild.me === undefined) return;
+    
+    //Lang Cmd
     const lang = await bot.langs.langReturn(message.guild.language, cmd.help.name, "cmd");
     if(!lang) return message.reply("`Language Null !!`")
     bot.langs.langParams(lang, prefix, cmd.help.name)
 
-    // Validações de cargo
+    //Perms validations
     if (cmd.requirements.ownerOnly && !owners.includes(message.author.id))
         return message.reply(langEvent.reqOwnerPerm);
 

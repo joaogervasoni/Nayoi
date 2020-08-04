@@ -4,6 +4,7 @@ const { errorReturn, returnNull } = require("../utils/functions.js");
 module.exports = async (bot, oldState, newState) => {
     if(oldState.bot === true) return
     if(returnNull(oldState.channelID) && returnNull(newState.channelID)) return
+    if(oldState.channelID === newState.channelID) return
 
     const lang = await bot.langs.langReturn(oldState.guild.language, "voiceStateUpdate", "event");
 
