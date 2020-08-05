@@ -24,7 +24,6 @@ module.exports = async (bot, message) => {
     //Base validations
     const langEvent = await bot.langs.langReturn(message.guild.language, "message", "event");
     if (!message.content.toLowerCase().startsWith(prefix.toLowerCase())) return;
-    if (message.member.permissions.missing(["SEND_MESSAGES"])) return message.member.user.send(`${langEvent.reqBotPerm} \`SEND_MESSAGES\``);
     if (!cmd) return message.reply(langEvent.nullCommand);
     if (message.guild.me === null || message.guild.me === undefined) return;
     

@@ -63,6 +63,7 @@ module.exports.run = async (bot, message, args, lang) => {
             const ctx = canvas.getContext("2d");
             const background = await loadImage(imagem);
             ctx.drawImage(background, 0,0, canvas.width, canvas.height);
+            //
             ctx.beginPath();
             ctx.lineWidth = 4;
             ctx.strokeStyle = "#ffffff";
@@ -73,23 +74,28 @@ module.exports.run = async (bot, message, args, lang) => {
             ctx.globalAlpha = 1;
             ctx.strokeRect(65,280,870,65);
             ctx.stroke();
+            //
             ctx.fillStyle = "#e67e22";
             ctx.globalAlpha = 0.6;
             ctx.fillRect(180,216,100);
             ctx.fill();
             ctx.globalAlpha = 1;
+            //
             ctx.font = "30px Arial";
             ctx.textAlign = "center";
             ctx.fillStyle = "#ffffff";
             ctx.fillText(`${lang.canvasFillText} ${message.member.user.tag}`, 500, 325);
+            //
             ctx.arc(500,140,120,0,Math.PI * 2, true);
             ctx.lineWidth = 7;
             ctx.strokeStyle = "#ffffff";
             ctx.stroke();
+            //
             ctx.closePath();
             ctx.clip();
             const avatar = await loadImage(message.member.user.avatarURL({ format: 'jpg' }));
             ctx.drawImage(avatar, 370,20,250,250);
+            
             const attachment = new MessageAttachment(canvas.toBuffer(),"welcome.png");
             return message.channel.send(`\`${lang.returnPreview}\``, attachment)
         }

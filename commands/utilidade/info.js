@@ -81,6 +81,6 @@ module.exports.help = {
 
 module.exports.requirements = {
     userPerms: [],
-    clientPerms: ["SEND_MESSAGES"],
+    clientPerms: [],
     ownerOnly: false
 }
