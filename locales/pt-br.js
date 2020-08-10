@@ -558,7 +558,7 @@ module.exports =
                 returnRoleNull: "Role não existe !!  Tente outro !!",
                 returnSave: "Emoji e Cargo salvos !!\n"
                 +"`Caso queira continuar digite + grupo de emoji/cargo !!`\n" 
-                +"Caso queira finalizar digite !!done`",
+                +"Caso queira finalizar digite `!!done`",
                 returnExist: "Já existe, não foi salva",
             },
             help: {

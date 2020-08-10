@@ -12,7 +12,7 @@ module.exports = async (bot, message) => {
         }
     }
 
-    //cmd
+    //Cmd
     const args = message.content.split(/ +/g);
     var command = 0;
     if(args[0].length === prefix.length){
