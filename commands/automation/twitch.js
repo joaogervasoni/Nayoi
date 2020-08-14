@@ -48,7 +48,7 @@ module.exports.run = async (bot, message, args, lang) => {
             let channel = await message.guild.channels.cache.find(chat => guild.twitch.channel, `id` );
             if (returnNull(channel) || guild.twitch.status === "off") return message.reply(lang.notActived);
 
-            api.search.channels({ query: subcmd, limit:"1" }, (err, res) => {
+            api.search.channels({ query: subcmd, limit:"100" }, (err, res) => {
                 if(err) {
                     console.log(err);
                 } else {
@@ -56,11 +56,19 @@ module.exports.run = async (bot, message, args, lang) => {
                         return message.channel.send(lang.notFound)
                     }
                     else if (!returnNull(res)){
-                        infos = res.channels[0];
-        
-                        if(twitchDB(infos, message)){
-                            return message.channel.send(lang.success);
+                        infos = res.channels.find(channel => channel.display_name.toLowerCase() === subcmd.toLowerCase())
                         
+                        if(twitchDB(infos, message)){
+                            message.channel.send(lang.success);
+                            const embed = new MessageEmbed()
+                            .setThumbnail(infos.logo)
+                            .setTitle(infos.display_name)
+                            .addField("Url:" , infos.url)
+                            .addField("Followers:" , infos.followers)
+                            .setColor(bot.baseColor)
+                            .setTimestamp()
+
+                            return message.channel.send(embed);
                         }else return message.channel.send(lang.error);
                     }
                 }
