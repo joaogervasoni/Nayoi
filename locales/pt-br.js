@@ -644,6 +644,19 @@ module.exports =
             help:{
 
             }
+        },
+        {
+            name: "invite",
+            cmd:{
+                embedTitle: "Bot invite",
+                embedDescription: "Obrigado por me escolher !!\n"
+                +"Fico muito feliz de poder ser útil para você em seu servidor :heart:\n"
+                +"[Clique aqui]({avatarURL}) para me convidar"
+            },
+            help:{
+                description: "Cria um invite do bot para outro servidor",
+                usability: "Pode ser utilizando desta forma: `{prefix}invite`"
+            }
         }
         
     ]

@@ -9,6 +9,7 @@ module.exports.run = (bot, message, args, lang) => {
         const embed = new MessageEmbed()
             .setAuthor(`${lang.embedAuthor} ${msg.author.tag}`, msg.author.avatarURL())
             .setDescription(msg.content)
+            .setColor(bot.baseColor)
     
         if (msg.image) embed.setImage(msg.image);
         
