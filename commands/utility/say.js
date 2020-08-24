@@ -23,7 +23,7 @@ module.exports.run = (bot, message, args, lang) => {
 
 module.exports.help = {
     name: "say",
-    type: "utilidade"
+    type: "utility"
 }
 
 module.exports.requirements = {

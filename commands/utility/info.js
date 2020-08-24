@@ -76,7 +76,7 @@ module.exports.run = (bot, message, args, lang) => {
 
 module.exports.help = {
     name: "info",
-    type: "utilidade"
+    type: "utility"
 }
 
 module.exports.requirements = {

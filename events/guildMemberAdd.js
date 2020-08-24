@@ -28,7 +28,7 @@ module.exports = async (bot, member) => {
             
             if (guild.welcome.canvas === "on"){
                 let check = await checkLinks([guild.welcome.canvasUrl])
-                let imagem = "https://github.com/Zaetic/Nayoi/blob/master/images/YaniBackground.png?raw=true";
+                let imagem = "https://github.com/Zaetic/Nayoi/blob/master/images/others/background.png?raw=true";
 
                 if ((guild.welcome.canvasUrl != "off") && (check[guild.welcome.canvasUrl].status === "alive")){
                    imagem = guild.welcome.canvasUrl;

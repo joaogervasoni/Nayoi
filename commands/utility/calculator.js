@@ -20,7 +20,7 @@ module.exports.run = async (bot, message, args, lang) => {
 
 module.exports.help = {
     name: "calculator",
-    type: "utilidade",
+    type: "utility",
     aliases: ["calc"]
 }
 

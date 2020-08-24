@@ -1,5 +1,5 @@
 <p align="center">
-<img src="https://github.com/Zaetic/Nayoi/blob/master/images/YaniGit.png?raw=true">
+<img src="https://github.com/Zaetic/Nayoi/blob/master/images/nayoi/nayoiGit.png?raw=true">
 </p>
 <h1 align="center">Nayoi</h1>
 <p align="center">

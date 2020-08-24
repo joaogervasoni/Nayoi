@@ -23,7 +23,7 @@ module.exports.run = async (bot, message, args, lang) => {
                     let lastDate = country[country.length-1];
                 
                     let embed = new MessageEmbed()
-                        .setThumbnail("https://github.com/Zaetic/Nayoi/blob/master/images/YaniVir.png?raw=true")
+                        .setThumbnail("https://github.com/Zaetic/Nayoi/blob/master/images/others/vir.png?raw=true")
                         .setTitle(`Corona ( Covid-19 ) ${upperCaseFirst(args[0])}`)
                         .addField(lang.fieldConfirmed, lastDate.confirmed, true)
                         .addField(lang.fieldDeaths, lastDate.deaths, true)
@@ -42,7 +42,7 @@ module.exports.run = async (bot, message, args, lang) => {
 
 module.exports.help = {
     name: "corona",
-    type: "utilidade",
+    type: "utility",
     aliases: ["covid"]
 }
 

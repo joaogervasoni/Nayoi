@@ -85,7 +85,7 @@ module.exports.run = async (bot, message, args, lang) => {
 
 module.exports.help = {
     name: "mal",
-    type: "utilidade"
+    type: "utility"
 }
 
 module.exports.requirements = {

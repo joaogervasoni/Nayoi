@@ -50,7 +50,7 @@ module.exports.run = async (bot, message, args, lang) => {
         }
         else if(cmd === "sh" || cmd === "show"){
             const guild = await bot.Guild.findOne({'guildId': message.guild.id});
-            let imagem = "https://github.com/Zaetic/Nayoi/blob/master/images/YaniBackground.png?raw=true";
+            let imagem = "https://github.com/Zaetic/Nayoi/blob/master/images/others/background.png?raw=true";
 
             if(guild.welcome.canvasUrl === "off" || guild.welcome.canvasUrl === "") message.channel.send("Banner custom `offline`");
             let check = await checkLinks([guild.welcome.canvasUrl])

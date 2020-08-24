@@ -14,7 +14,7 @@ module.exports.run = async (bot, message, args, lang) => {
         let temp = (weather.main.temp - 273.15).toFixed(2);
         let feels = (weather.main.feels_like - 273.15).toFixed(2);
         let embed = new MessageEmbed()
-            .setThumbnail("https://github.com/Zaetic/Nayoi/blob/master/images/YaniTempo.png?raw=true")
+            .setThumbnail("https://github.com/Zaetic/Nayoi/blob/master/images/others/weather.png?raw=true")
             .setTitle(lang.tempname.replace(/{weather.name}/g, weather.name))
             .addField(lang.temp, `${temp} °C`, true)
             .addField(lang.sens, `${feels} °C`, true)
@@ -27,9 +27,9 @@ module.exports.run = async (bot, message, args, lang) => {
 }
 
 module.exports.help = {
-    name: "tempo",
-    type: "utilidade",
-    aliases: ["temp"]
+    name: "weather",
+    type: "utility",
+    aliases: ["temp","tempo"]
 }
 
 module.exports.requirements = {

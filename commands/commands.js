@@ -6,7 +6,7 @@ module.exports.run = (bot, message, args, lang) => {
     let args2 = args.join(" ").slice(0).toLowerCase();
     let cmds = bot.commands;
     let embed = new MessageEmbed()
-    let emojisList = [["automation", ":gear:"], ["utilidade", ":gem:"], ["how", ":peach:"], ["adm", ":shield:"], ["fun", ":performing_arts:"], ["outros", ":kaaba:"], ["ajuda", ":grey_question:"]];
+    let emojisList = [["automation", ":gear:"], ["utility", ":gem:"], ["how", ":peach:"], ["adm", ":shield:"], ["fun", ":performing_arts:"], ["others", ":kaaba:"], ["help", ":grey_question:"]];
     var emojis = new Map(emojisList);
 
     let exist 
@@ -84,7 +84,7 @@ exports.returnCommandLang = function(message, name){
 
 module.exports.help = {
     name: "commands",
-    type: "ajuda",
+    type: "help",
     aliases: ["cmd"]
 }
 

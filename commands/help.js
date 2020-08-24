@@ -21,7 +21,7 @@ module.exports.run = (bot, message, args, lang) => {
     }
     else{
         embed
-        .setThumbnail("https://github.com/Zaetic/Nayoi/blob/master/images/YaniHelp.png?raw=true")
+        .setThumbnail("https://github.com/Zaetic/Nayoi/blob/master/images/nayoi/nayoiHelp.png?raw=true")
         .setTitle(lang.embedTitle)
         .setDescription(lang.embedDescription)
         .setColor(bot.baseColor)
@@ -47,7 +47,7 @@ exports.returnCommandLang = function(message, name){
 
 module.exports.help = {
     name: "help",
-    type: "ajuda"
+    type: "help"
 }
 
 module.exports.requirements = {

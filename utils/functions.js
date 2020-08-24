@@ -9,7 +9,7 @@ module.exports = {
         if (message != null && message != undefined){
             console.log(`[Error]`.brightRed +` Name: ${name} // Error: ${error} // Guild: ${message.guild} // Data: ${today}`.red);
             let embed = new MessageEmbed()
-                .setThumbnail("https://github.com/Zaetic/Yani/blob/master/images/YaniError404.png?raw=true")
+                .setThumbnail("https://github.com/Zaetic/Nayoi/blob/master/images/nayoi/nayoiError404.png?raw=true")
                 .setTitle("Aconteceu um erro")
                 .setDescription(`${error}`)
                 .addField("Name", name, true)

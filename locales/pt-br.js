@@ -121,7 +121,7 @@ module.exports =
             }    
         },
         {
-            name: "tempo",
+            name: "weather",
             cmd: {
                 returnNull: "Não encontrei nenhuma informação de tempo :worried:",
                 tempname: `Temperatura de {weather.name}`,
