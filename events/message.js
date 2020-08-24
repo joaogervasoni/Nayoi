@@ -1,4 +1,5 @@
 const { prefix } = require("../botconfig");
+const { mentionById } = require("../utils/functions.js");
 const AutoDeleteMsg = require("../models/autodeletemsg");
 
 module.exports = async (bot, message) => {
@@ -13,17 +14,20 @@ module.exports = async (bot, message) => {
     }
 
     //Cmd
+    if (!message.content.toLowerCase().startsWith(prefix.toLowerCase()) && !message.content.toLowerCase().startsWith(mentionById(bot.user.id))) return;
+
     const args = message.content.split(/ +/g);
     var command = 0;
-    if(args[0].length === prefix.length){
+    if(args[0].length === prefix.length || args[0] === mentionById(bot.user.id)){
         if (args[1] != undefined) command = args[1].toLowerCase();
         args.splice(0, 2); 
-    }else command = args.shift().slice(prefix.length).toLowerCase();
+    }
+    else command = args.shift().slice(prefix.length).toLowerCase();
     const cmd = bot.commands.get(command) || bot.aliases.get(command);
 
     //Base validations
     const langEvent = await bot.langs.langReturn(message.guild.language, "message", "event");
-    if (!message.content.toLowerCase().startsWith(prefix.toLowerCase())) return;
+    bot.langs.langParams(langEvent, prefix, "message")
     if (!cmd) return message.reply(langEvent.nullCommand);
     if (message.guild.me === null || message.guild.me === undefined) return;
     
