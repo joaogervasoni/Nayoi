@@ -11,9 +11,6 @@ module.exports = async (bot, oldUser, newUser) => {
     try{
         let guildDb = await bot.Guild.find({ 'log.status': "on" });
         if(returnNull(guildDb)) return;
-        const embedAll = new MessageEmbed()
-        .setColor(bot.baseColor)
-        .setTimestamp()
 
         //Tag
         if(oldUser.tag != newUser.tag){
@@ -24,11 +21,14 @@ module.exports = async (bot, oldUser, newUser) => {
                     let userFind = guild.members.cache.get(oldUser.id)
                     if(!returnNull(userFind)){
                         let channel = guild.channels.cache.get(guildDb[index].log.channel)
-                        embedAll
+
+                        const embedAll = new MessageEmbed()
                         .setTitle(`:pencil2: [${lang.embedNcTitle}]`)
                         .addField(`**${lang.fieldUser}**`, newUser, true)
                         .addField(`**${lang.fieldOldNick}**`, oldUser.tag)
                         .addField(`**${lang.fieldNewNick}**`, newUser.tag)
+                        .setColor(bot.baseColor)
+                        .setTimestamp()
 
                         await channel.send(embedAll)
                     }
@@ -60,11 +60,13 @@ module.exports = async (bot, oldUser, newUser) => {
                     if(!returnNull(userFind)){
                         let channel = guild.channels.cache.get(guildDb[index].log.channel)
 
-                        embedAll
+                        const embedAll = new MessageEmbed()
                         .setImage("attachment://newImage.png")
                         .setTitle(`:frame_photo: [${lang.embedImgTitle}]`)
                         .addField(`**${lang.fieldUser}**`, userFind.user.tag, true)
                         .addField(`**ID:**`, userFind.user.id, true)
+                        .setColor(bot.baseColor)
+                        .setTimestamp()
 
                         await channel.send({ files: [attachment], embed: embedAll})
                     }

@@ -1,16 +1,17 @@
 const { MessageEmbed } = require("discord.js");
-const { errorReturn, randomCollection } = require("../../utils/functions.js");
+const { errorReturn, randomCollection, returnNull } = require("../../utils/functions.js");
 
 module.exports.run = async (bot, message, args, lang) => {
     try{
         let user = message.mentions.users.first()
         if (!user) return message.reply(lang.helpReturn);
-        let msg = await message.channel.messages.cache.filter(msg => msg.author.id === user.id);
-        msg = msg.last();
+        if (returnNull(user.lastMessage)) return message.reply(lang.returnNull);
+        
+        msg = user.lastMessage.content;
         if (!msg) return message.reply(lang.returnNull);
         
         const embed = new MessageEmbed()
-            .setDescription(`**${lang.embedDescription}** \`${user.tag}\` : ${msg.content}`)
+            .setDescription(`**${lang.embedDescription}** \`${user.tag}\` : ${msg}`)
             .setImage(randomCollection(bot.lists, this.help.name))
             .setAuthor(message.member.user.tag, message.member.user.avatarURL())
     
