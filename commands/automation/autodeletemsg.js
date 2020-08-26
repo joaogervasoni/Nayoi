@@ -12,7 +12,7 @@ module.exports.run = async (bot, message, args, lang) => {
 
         if(cmd === "on"){
             subcmd = formatId(subcmd)
-            let chat = await message.guild.channels.cache.find(chat => subcmd, `id`);
+            let chat = await message.guild.channels.cache.find(chat => chat.id === subcmd);
             if (!chat) return message.reply(lang.returnNull);
 
             let findChannel = await AutoDeleteMsg.findOne({ 'channelId': subcmd });
@@ -50,7 +50,7 @@ module.exports.run = async (bot, message, args, lang) => {
         }
         else if (cmd === "off"){
             subcmd = formatId(subcmd)
-            let chat = await message.guild.channels.cache.find(chat => subcmd, `id`);
+            let chat = await message.guild.channels.cache.find(chat => chat.id === subcmd);
             if (!chat) return message.reply(lang.returnNull);
 
             let autodeletemsg = await AutoDeleteMsg.findOne({ 'channelId': subcmd });

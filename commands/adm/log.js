@@ -11,7 +11,7 @@ module.exports.run = async (bot, message, args, lang) => {
         if(returnNull(subcmd)) return message.reply(lang.helpReturn);
 
         let channel = formatChannelId(subcmd);
-        let chat = message.guild.channels.cache.find(chat => channel, `id` );
+        let chat = message.guild.channels.cache.find(chat => chat.id === channel);
         if(returnNull(chat)) return message.reply(lang.returnNull);
 
         const guild = await bot.Guild.findOne({'guildId': message.guild.id});
@@ -38,7 +38,7 @@ module.exports.run = async (bot, message, args, lang) => {
         if(returnNull(subcmd)) return message.reply(lang.helpReturn);
 
         let channel = formatChannelId(subcmd);
-        let chat = message.guild.channels.cache.find(chat => channel, `id` )
+        let chat = message.guild.channels.cache.find(chat => chat.id === channel);
         if(returnNull(chat)) return message.reply(lang.returnNull);
         
         const guild = await bot.Guild.findOne({'guildId': message.guild.id});

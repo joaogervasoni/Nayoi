@@ -18,7 +18,7 @@ module.exports.run = async (bot, message, args, lang) => {
         if(cmd === "on"){
             if(returnNull(subcmd)) return message.reply(lang.helpReturn);
             let channel = formatChannelId(subcmd);
-            let chat = await message.guild.channels.cache.find(chat => channel, `id` );
+            let chat = await message.guild.channels.cache.find(chat => chat.id === channel);
             if (!chat || chat === undefined || chat === null) return message.reply(lang.returnNull);
 
             const guild = await bot.Guild.findOne({'guildId': message.guild.id});
@@ -45,7 +45,7 @@ module.exports.run = async (bot, message, args, lang) => {
             if(returnNull(subcmd)) return message.reply(lang.helpReturn);
             const guild = await bot.Guild.findOne({'guildId': message.guild.id});
             
-            let channel = await message.guild.channels.cache.find(chat => guild.twitch.channel, `id` );
+            let channel = await message.guild.channels.cache.find(chat => chat.id === guild.twitch.channel);
             if (returnNull(channel) || guild.twitch.status === "off") return message.reply(lang.notActived);
 
             api.search.channels({ query: subcmd, limit:"100" }, (err, res) => {
@@ -121,7 +121,7 @@ module.exports.run = async (bot, message, args, lang) => {
         }
         else if(cmd === "ch" || cmd === "channel"){
             let channel = formatChannelId(subcmd);
-            let chat = await message.guild.channels.cache.find(chat => channel, `id` );
+            let chat = await message.guild.channels.cache.find(chat => chat.id === channel);
             if (returnNull(chat)) return message.reply(lang.returnNull);
 
             const guild = await bot.Guild.findOne({'guildId': message.guild.id});
