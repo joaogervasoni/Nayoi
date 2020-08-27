@@ -21,7 +21,7 @@ module.exports.run = async (bot, message, args, lang) => {
                         .setColor(bot.baseColor)
             await message.channel.send(embed);
 
-            let collector = new MessageCollector(message.channel, msgCollectorFilter.bind(null, message));
+            let collector = new MessageCollector(message.channel, msgCollectorFilter.bind(null, message), {time: 60000 , errors: ['time']});
             let emojiRoleMappings = new Map();
             var emojiEmoji = [];
             var msgAenviar;
@@ -105,7 +105,9 @@ module.exports.run = async (bot, message, args, lang) => {
             });
 
             collector.on('end', async(collected, reason) => {
+                if(reason === "time") return message.channel.send(lang.limitTime)
                 if(!idmsg) return
+                
                 let findMsgDocument = await RoleReaction.findOne({ 'messageId': idmsg.id});
                 if(findMsgDocument) message.channel.send(lang.returnExist);
 

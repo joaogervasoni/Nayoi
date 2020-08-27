@@ -1,4 +1,4 @@
-const { formatDate, upperCaseFirst } = require("../../utils/functions.js");
+const { errorReturn, formatDate, upperCaseFirst } = require("../../utils/functions.js");
 const { MessageEmbed } = require("discord.js");
 
 module.exports.run = (bot, message, args, lang) => {
@@ -40,17 +40,17 @@ module.exports.run = (bot, message, args, lang) => {
             return message.channel.send(serverembed);
         }
         else if(cmd === undefined){
-            let User = message.member.user;
-
+            let User = message.member;
+            console.log(User)
             let userembed = new MessageEmbed()
-            .setTitle(User.username)
-            .setThumbnail(User.avatarURL())
+            .setTitle(User.user.username)
+            .setThumbnail(User.user.avatarURL())
             .setColor(bot.baseColor)
-            .addField("Tag", User.tag)
-            .addField("Bot:", User.bot,true)
-            .addField("Id:", User.id, true)
-            .addField(lang.fieldCreatedAt, formatDate(User.createdAt))
-            .addField(lang.fieldEnterAt, formatDate(User.joinedAt), true)
+            .addField("Tag", User.user.tag)
+            .addField("Bot:", User.user.bot,true)
+            .addField("Id:", User.user.id, true)
+            .addField(lang.fieldCreatedAt, formatDate(User.user.createdAt))
+            .addField(lang.fieldEnterAt, formatDate(User.joinedTimestamp), true)
 
             return message.channel.send(userembed)
         }
@@ -65,7 +65,7 @@ module.exports.run = (bot, message, args, lang) => {
             .addField("Bot:", User.user.bot,true)
             .addField("Id:", User.user.id, true)
             .addField(lang.fieldCreatedAt, formatDate(User.user.createdAt))
-            .addField(lang.fieldEnterAt, formatDate(User.joinedAt), true)
+            .addField(lang.fieldEnterAt, formatDate(User.joinedTimestamp), true)
 
             return message.channel.send(mentionembed)
         }else return message.reply(lang.helpReturn);

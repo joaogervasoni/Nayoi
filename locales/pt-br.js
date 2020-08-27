@@ -560,6 +560,7 @@ module.exports =
                 +"`Caso queira continuar digite + grupo de emoji/cargo !!`\n" 
                 +"Caso queira finalizar digite `!!done`",
                 returnExist: "Já existe, não foi salva",
+                limitTime: "O tempo limite de espera foi atingido, criação cancelada! :knife:"
             },
             help: {
                 description: "Dá cargos com reações em uma mensagem",
