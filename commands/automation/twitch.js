@@ -48,6 +48,9 @@ module.exports.run = async (bot, message, args, lang) => {
             let channel = await message.guild.channels.cache.find(chat => chat.id === guild.twitch.channel);
             if (returnNull(channel) || guild.twitch.status === "off") return message.reply(lang.notActived);
 
+            let twitchGuild = await TwitchGuild.find({ 'streamerId': subcmd, 'guildId': message.guild.id });
+            if(!returnNull(twitchGuild)) return message.channel.send(lang.exist);
+
             api.search.channels({ query: subcmd, limit:"100" }, (err, res) => {
                 if(err) {
                     console.log(err);
@@ -57,6 +60,7 @@ module.exports.run = async (bot, message, args, lang) => {
                     }
                     else if (!returnNull(res)){
                         infos = res.channels.find(channel => channel.display_name.toLowerCase() === subcmd.toLowerCase())
+                        if(returnNull(infos)) return message.channel.send(lang.notFound)
                         
                         if(twitchDB(infos, message)){
                             message.channel.send(lang.success);
@@ -92,9 +96,13 @@ module.exports.run = async (bot, message, args, lang) => {
             let twitchGuild = await TwitchGuild.find({ 'guildId': message.guild.id})
             let description = "";
 
-            twitchGuild.forEach(element =>  {
-                description = description + "**Streamer:** `"+element.name+"` - Status: `"+element.config.status+"` - ID: `"+element.streamerId+"`\n"
-            });
+            if(!returnNull(twitchGuild)) {
+                twitchGuild.forEach(element =>  {
+                    description = description + "**Streamer:** `"+element.name+"` - Status: `"+element.config.status+"` - ID: `"+element.streamerId+"`\n"
+                });
+            }else{
+                description = lang.nullStreamers;
+            }
 
             const embed = new MessageEmbed()
                 .setTitle(`Twitch Channels`)

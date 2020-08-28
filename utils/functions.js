@@ -24,6 +24,9 @@ module.exports = {
     },
 
     returnNull: function(text){
+        if(Array.isArray(text)){
+            if(text.length === 0) return true;
+        } 
         if(!text || text === null || text === undefined) return true;
         else return false;
     },

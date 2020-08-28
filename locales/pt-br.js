@@ -606,8 +606,10 @@ module.exports =
             cmd:{
                 notFound: "Streamer não encontrado :confused:",
                 delete: "Streamer deletado :cry:",
-                success: "Streamer registrado com sucesso `Lembre de colocar o nome corretamente !! Alguns streamers podem ter nomes com letras e caracteres diferentes`",
+                success: "Streamer registrado com sucesso `Lembre de colocar o nome corretamente !! Alguns streamers podem ter nomes com letras e caracteres diferentes ou podem não aparecer nas primeiras 100 pesquisas na twitch`",
                 error: "Erro ao registrar streamer :cry:",
+                exist: "Streamer já está adicionado :flushed:",
+                nullStreamers: "Nenhum streamer adicionado :disappointed_relieved:",
                 notActived: "Para adicionar streamers o comando twitch precisa estar on !!\n"
                 +"Utilize `{prefix}twitch on #channel` para habilitar !!",
                 channelChange: "Canal trocado :face_with_monocle:!!",
