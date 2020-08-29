@@ -660,7 +660,21 @@ module.exports =
                 description: "Cria um invite do bot para outro servidor",
                 usability: "Pode ser utilizando desta forma: `{prefix}invite`"
             }
+        },
+        {
+            name: "stats",
+            cmd:{
+                stats: "Status",
+                servers: "Servidores",
+                channels: "Channels",
+                users: "Usuários",
+                memory: "Memória Utilizada",
+                uptime: "Tempo Ligada"
+            },
+            help:{
+                description: "Mostra os status do bot",
+                usability: "Pode ser utilizando desta forma: `{prefix}stats`",
+            }
         }
-        
     ]
 }
