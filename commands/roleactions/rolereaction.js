@@ -126,7 +126,7 @@ module.exports.run = async (bot, message, args, lang) => {
 }
 
 module.exports.help = {
-    name: "addreactions",
+    name: "rolereaction",
     type: "automation"
 }
 

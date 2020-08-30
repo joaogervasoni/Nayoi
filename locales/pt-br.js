@@ -512,11 +512,11 @@ module.exports =
             },
             help: {
                 description: "Cria um anuncio de postagem pelo Bot",
-                usability: "Pode ser utilizando usando `{prefix}anuncio msg 10s msgaqui`\n"
-                +"Também pode ser mandando em um chat diferente usando`{prefix}anuncio msg 10s #channel msgaqui`\n"
+                usability: "Pode ser utilizando usando `{prefix}notice msg 10s msgaqui`\n"
+                +"Também pode ser mandando em um chat diferente usando`{prefix}notice msg 10s #channel msgaqui`\n"
                 +"**Os comandos 'msg' e 'embed' utilizam os mesmos parâmetros**\n",
                 additional: "É possivel escolher entre `msg` e `embed`\n"
-                +`No caso de \`embed\` utilize desta forma: \`{prefix}anuncio embed 10s Titulo || msg\`\n`,
+                +`No caso de \`embed\` utilize desta forma: \`{prefix}notice embed 10s Titulo || msg\`\n`,
                 others: "O tempo deve ser expecificado com uma letra após o número para ser considerado um tempo valido\n"
                 +"**Exemplos:** `1s(seg) | 1m (min) | 1h (hora)`",
             }    
@@ -537,7 +537,7 @@ module.exports =
             }    
         },
         {
-            name: "addreactions",
+            name: "rolereaction",
             cmd: {
                 returnNullChannel: "Nenhum canal encontrado :worried: !!",
                 embedInitiatedTitle: "Vamos começar :goat: !!",
@@ -553,7 +553,7 @@ module.exports =
                 embedSaveField1_1: "`!!stop` - Para cancelar a criação\n"
                 +"`!!clear` - Para trocar o titulo e descrição da msg",
                 embedSaveField2: "Leia-me",
-                embedSaveField2_1: "O bot ficara a espera dos emojis e cargos, lembre-se se quiser usar outros comandos precisa finalizar com !!stop ou completar o addreactions !",
+                embedSaveField2_1: "O bot ficara a espera dos emojis e cargos, lembre-se se quiser usar outros comandos precisa finalizar com !!stop ou completar o rolereaction !",
                 returnEmojiNull: "Emoji não existe !! Tente outro !!",
                 returnRoleNull: "Role não existe !!  Tente outro !!",
                 returnSave: "Emoji e Cargo salvos !!\n"
@@ -564,7 +564,7 @@ module.exports =
             },
             help: {
                 description: "Dá cargos com reações em uma mensagem",
-                usability: "Pode utilizado desta forma: `{prefix}addreactions #channel`\n"
+                usability: "Pode utilizado desta forma: `{prefix}rolereaction #channel`\n"
                 +"**Após utilizar o comando:**\n"
                 +"Digite o titulo e a msg divididos por vírgula `Ex: Titulo, toda a msg`\n"
                 +"Mande uma msg com emoji e cargo para cada cargo `Ex: :emoji:, @cargo`\n"
