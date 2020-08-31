@@ -675,6 +675,17 @@ module.exports =
                 description: "Mostra os status do bot",
                 usability: "Pode ser utilizando desta forma: `{prefix}stats`",
             }
+        },
+        {
+            name: "nickname",
+            cmd:{
+                returnSuccess: "Apelido no Servidor trocado !! :face_with_monocle:"
+            },
+            help:{
+                description: "Troca o nickname da pessoa mencionada ou de si mesmo",
+                usability: "Pode ser utilizando desta forma: `{prefix}nickname`",
+                additional: "Também pode ser utilizado marcando alguem: `{prefix}nickname @user`"
+            }
         }
     ]
 }

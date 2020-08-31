@@ -21,7 +21,7 @@ module.exports.run = async (bot, message, args, lang) => {
                         .setColor(bot.baseColor)
             await message.channel.send(embed);
 
-            let collector = new MessageCollector(message.channel, msgCollectorFilter.bind(null, message), {time: 60000 , errors: ['time']});
+            let collector = new MessageCollector(message.channel, msgCollectorFilter.bind(null, message), {time: 200000 , errors: ['time']});
             let emojiRoleMappings = new Map();
             var emojiEmoji = [];
             var msgAenviar;
