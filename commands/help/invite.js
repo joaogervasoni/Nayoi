@@ -1,4 +1,4 @@
-const {errorReturn} = require("../utils/functions.js");
+const {errorReturn} = require("../../utils/functions");
 const {MessageEmbed} = require("discord.js");
 
 module.exports.run = (bot, message, args, lang) => {
