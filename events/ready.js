@@ -1,6 +1,7 @@
 const { MessageEmbed } = require("discord.js");
 const TwitchChannel = require("../models/twitchchannel.js");
 const TwitchGuild = require("../models/twitchguild.js");
+const Notice = require("../models/notice.js");
 var colors = require('colors');
 var api = require('twitch-api-v5');
 const { twitchID } = require("../botconfig.json");
@@ -24,6 +25,35 @@ module.exports = async (bot) => {
     console.log(`[Lang]`.brightGreen +` Carregadas em todos os servidores`.green);
     console.log(`[Online]`.brightGreen +` ${bot.user.username} esta Online em ${bot.guilds.cache.size} servidores`.green);
   
+    async function notices(){
+        let notices = await Notice.find({});
+
+        for (let index = 0; index < notices.length; index++) {
+            const element = notices[index];
+            let time = element.date - new Date().getTime();
+
+            setTimeout(async function(){
+                let guild = bot.guilds.cache.get(element.guildId);
+                let channel = guild.channels.cache.get(element.channelId);
+
+                if (element.textType === "embed"){
+                    let msgSplit = element.text.split("||");
+
+                    let text = new MessageEmbed()
+                    .setTitle(msgSplit[0])
+                    .setDescription(msgSplit[1])
+                    .setColor(bot.baseColor)
+
+                    channel.send(text)
+                }else{
+                    channel.send(element.text)
+                }
+    
+                await Notice.findOneAndRemove({ 'channelId': element.channelId, 'guildId': element.guildId, 'text': element.text});
+            }, time);
+        }
+    }
+
     async function twitch() {
         while (true) {
             await new Promise(resolve => setTimeout(resolve, 60000));
@@ -68,5 +98,6 @@ module.exports = async (bot) => {
             }  
         }
     }
+    notices();
     twitch();
 }

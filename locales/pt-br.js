@@ -509,6 +509,7 @@ module.exports =
                 invalidTime: "Preciso de um tempo valido !! :timer:",
                 returnNull: "Preciso de uma mensagem :disappointed:",
                 returnTime: "Seu anúncio sera enviado as:",
+                nullNotice: "Nenhuma notícia programada :disappointed_relieved:",
             },
             help: {
                 description: "Cria um anuncio de postagem pelo Bot",
@@ -685,6 +686,15 @@ module.exports =
                 description: "Troca o nickname da pessoa mencionada ou de si mesmo",
                 usability: "Pode ser utilizando desta forma: `{prefix}nickname`",
                 additional: "Também pode ser utilizado marcando alguem: `{prefix}nickname @user`"
+            }
+        },
+        {
+            name: "work",
+            cmd:{
+
+            },
+            help:{
+
             }
         }
     ]
