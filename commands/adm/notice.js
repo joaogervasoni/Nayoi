@@ -1,4 +1,4 @@
-const { errorReturn, returnNull, formatId } = require("../../utils/functions.js");
+const { errorReturn, returnNull, formatId, limitLength } = require("../../utils/functions.js");
 const { MessageEmbed } = require("discord.js");
 const mongoose = require('mongoose');
 const Notice = require("../../models/notice.js");
@@ -52,7 +52,7 @@ module.exports.run = async (bot, message, args, lang) => {
                 let msgSplit = text.split("||");
                 
                 text = new MessageEmbed()
-                .setTitle(msgSplit[0])
+                .setTitle(limitLength(msgSplit[0], "title"))
                 .setDescription(msgSplit[1])
                 .setColor(bot.baseColor)
             }

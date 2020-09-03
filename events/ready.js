@@ -1,4 +1,5 @@
 const { MessageEmbed } = require("discord.js");
+const { limitLength } = require("../utils/functions.js");
 const TwitchChannel = require("../models/twitchchannel.js");
 const TwitchGuild = require("../models/twitchguild.js");
 const Notice = require("../models/notice.js");
@@ -40,7 +41,7 @@ module.exports = async (bot) => {
                     let msgSplit = element.text.split("||");
 
                     let text = new MessageEmbed()
-                    .setTitle(msgSplit[0])
+                    .setTitle(limitLength(msgSplit[0], "title"))
                     .setDescription(msgSplit[1])
                     .setColor(bot.baseColor)
 

@@ -1,6 +1,5 @@
-const { errorReturn, formatId, returnNull } = require("../../utils/functions.js");
+const { errorReturn, formatId, returnNull, limitLength } = require("../../utils/functions.js");
 const { MessageEmbed } = require("discord.js");
-const ms = require("ms");
 
 module.exports.run = (bot, message, args, lang) => {
     try{
@@ -17,7 +16,7 @@ module.exports.run = (bot, message, args, lang) => {
         if(returnNull(msgSplit[1])) return message.reply(lang.undefinedDescription);
 
         let embed = new MessageEmbed()
-        .setTitle(msgSplit[0])
+        .setTitle(limitLength(msgSplit[0], "title"))
         .setDescription(msgSplit[1])
         .setColor(bot.baseColor)
         return channel.send(embed)

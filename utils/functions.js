@@ -31,6 +31,21 @@ module.exports = {
         else return false;
     },
     
+	limitLength: function(text, limit){
+        limit = limit.toLowerCase();
+        console.log(limit)
+        if(limit === "title") limit = 256;
+        if(limit === "field") limit = 1024;
+        else return;
+
+        if(text.length > limit){
+            text = text.substring(0, (limit-3));
+            text = `${text}...`;
+            return text
+        } 
+        else return text
+    },
+
     randomCollection: function(collection, name){
         let random = collection.get(name);
         random = random[Math.floor(Math.random() * random.length)]

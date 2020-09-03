@@ -1,5 +1,5 @@
 const {MessageCollector, MessageEmbed} = require('discord.js');
-const {errorReturn, formatChannelId, formatRoleId, formatEmojiId, listCollection, returnNull} = require("../../utils/functions.js");
+const {errorReturn, formatChannelId, formatRoleId, formatEmojiId, listCollection, returnNull, limitLength} = require("../../utils/functions.js");
 const mongoose = require('mongoose');
 const RoleReaction = require("../../models/rolereaction.js");
 
@@ -42,7 +42,7 @@ module.exports.run = async (bot, message, args, lang) => {
                 if(msg.content.toLowerCase() === '!!done'){
                     
                     let embed = new MessageEmbed()
-                        .setTitle(msgAenviar[0])
+                        .setTitle(limitLength(msgAenviar[0], "title"))
                         .setDescription(msgAenviar[1])
                         .setColor(bot.baseColor)
                     

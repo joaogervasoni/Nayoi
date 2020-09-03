@@ -17,7 +17,7 @@ module.exports.run = async (bot, message, args, lang) => {
         const embed = new MessageEmbed()
         .setTitle(lang.embedTitle)
         .addField(lang.embedFieldUser, mentionById(kUser.id) , true)
-        .addField(lang.embedFieldReason, kReason, true)
+        .addField(lang.embedFieldReason, limitLength(kReason, "field"), true)
         .addField("ID", kUser.id, true)
         .setColor(bot.baseColor)
         .setTimestamp();

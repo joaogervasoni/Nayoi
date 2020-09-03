@@ -1,4 +1,4 @@
-const {errorReturn, returnNull, mentionById} = require("../../utils/functions.js");
+const {errorReturn, returnNull, mentionById, limitLength} = require("../../utils/functions.js");
 const {MessageEmbed} = require("discord.js");
 
 module.exports.run = async (bot, message, args, lang) => {
@@ -17,7 +17,7 @@ module.exports.run = async (bot, message, args, lang) => {
         const embed = new MessageEmbed()
         .setTitle(lang.embedTitle)
         .addField(lang.embedFieldUser, mentionById(bUser.id) , true)
-        .addField(lang.embedFieldReason, bReason, true)
+        .addField(lang.embedFieldReason, limitLength(bReason, "field"), true)
         .addField("ID", bUser.id, true)
         .setColor(bot.baseColor)
         .setImage("https://media1.tenor.com/images/021373dfbb72d1f0572111b9ea76490d/tenor.gif?itemid=9491505")
