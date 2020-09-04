@@ -380,7 +380,7 @@ module.exports =
             name: "autodeletemsg",
             cmd: {
                 returnNull: "Não encontrei nenhum canal :worried:",
-                statusOk: "Autorole já esta:",
+                statusOk: "AutoDeleteMsg já esta:",
                 statusNew: "AutoDeleteMsg agora esta",
                 embedTitle: "Canais com",
             },
@@ -397,6 +397,7 @@ module.exports =
                 returnNull: "Não encontrei esta `Role` :cry:",
                 statusOk: "Autorole já esta:",
                 statusNew: "Autorole agora esta",
+                roleHigh: "Role de maior grau que a sua !!",
                 roleChange: "Role trocada :sunglasses:!!",
                 roleAtual: "Role atual é:",
                 returnNotActived: "Precisa ser ativado !!"
@@ -527,7 +528,6 @@ module.exports =
             cmd: {
                 returnNull: "Não encontrei este Usuário",
                 highRole: "Cargo maior ou igual",
-                returnDisabled: "Comando Desabilitado",
                 returnInvalid: "Você não escreveu um tempo valido!!",
                 returnMuted: "foi mutado por",
                 returnRemoveMute: "foi desmutado",
@@ -557,6 +557,7 @@ module.exports =
                 embedSaveField2_1: "O bot ficara a espera dos emojis e cargos, lembre-se se quiser usar outros comandos precisa finalizar com !!stop ou completar o rolereaction !",
                 returnEmojiNull: "Emoji não existe !! Tente outro !!",
                 returnRoleNull: "Role não existe !!  Tente outro !!",
+                returnRoleHigh: "Role de maior grau que a sua !!  Tente outro !!",
                 returnSave: "Emoji e Cargo salvos !!\n"
                 +"`Caso queira continuar digite + grupo de emoji/cargo !!`\n" 
                 +"Caso queira finalizar digite `!!done`",
@@ -695,6 +696,19 @@ module.exports =
             },
             help:{
 
+            }
+        },
+        {
+            name: "bug",
+            cmd:{
+                returnNull: "Preciso de uma mensagem explicando o bug/erro :face_with_raised_eyebrow:",
+                embedTitle: "Bug",
+                embedDescription: "Seu bug foi enviado para o desenvolvedor e será resolvido o mais rápido possível !!!",
+                embedFooter: "Obrigado por me ajudar ❤️"
+            },
+            help:{
+                description: "Envia um bug para o desenvolvedor",
+                usability: "Pode ser utilizado desta forma: `{prefix}bug bug-ou-erro-escrito-aqui`"
             }
         }
     ]
