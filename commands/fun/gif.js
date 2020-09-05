@@ -1,4 +1,4 @@
-const { errorReturn, returnNull, formatText } = require("../../utils/functions.js");
+const { errorReturn, returnNull, formatText, limitLength } = require("../../utils/functions.js");
 const { tenorApi } = require("../../botconfig.json");
 const fetch = require("node-fetch");
 const {MessageEmbed} = require("discord.js");
