@@ -33,9 +33,9 @@ module.exports = {
     
 	limitLength: function(text, limit){
         limit = limit.toLowerCase();
-        console.log(limit)
+
         if(limit === "title") limit = 256;
-        if(limit === "field") limit = 1024;
+        else if(limit === "field") limit = 1024;
         else return;
 
         if(text.length > limit){
