@@ -12,13 +12,13 @@ module.exports.run = async (bot, message, args, lang) => {
             role = message.guild.roles.cache.get(roleid);
 
             if (!role) return message.reply(lang.returnNull);
-            //if (role.rawPosition > message.member.roles.highest.rawPosition || !message.member.hasPermission("ADMINISTRATOR")) return message.reply("Role maior")
+            if (role.rawPosition > message.member.roles.highest.rawPosition || !message.member.hasPermission("ADMINISTRATOR")) return message.reply(lang.roleHigh)
             
             const guild = await bot.Guild.findOne({'guildId': message.guild.id});
             if (guild.autorole.status === "on") return message.channel.send(`${lang.statusOk} \`${guild.autorole.status}\``);
-        
+
             guild.autorole.status = "on";
-            guild.autorole.role = role;
+            guild.autorole.role = role.id;
             guild.save(function (err){
                 if(err) return errorReturn(err, message, this.help.name);
                 if(!err) return message.channel.send(`${lang.statusNew} \`${guild.autorole.status}\` :sunglasses:`);
@@ -36,10 +36,12 @@ module.exports.run = async (bot, message, args, lang) => {
         }
         else if(cmd === "rol" || cmd === "role"){
             let role = formatRoleId(subcmd);
+            role = message.guild.roles.cache.get(role);
+
             if (!role) return message.reply(lang.returnNull);
             const guild = await bot.Guild.findOne({'guildId': message.guild.id});
-    
-            guild.autorole.role = role
+            
+            guild.autorole.role = role.id;
             guild.save(function (err){
                 if(err) return errorReturn(err, message, this.help.name);
                 if(!err) return message.channel.send(lang.roleChange)

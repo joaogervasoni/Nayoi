@@ -91,6 +91,10 @@ module.exports.run = async (bot, message, args, lang) => {
 
                     let role = msg.guild.roles.cache.find(role => role.id === formatRoleId(roleid));
                     if(!role){ msg.channel.send(lang.returnRoleNull); return ;}
+                    if(role.rawPosition > message.member.roles.highest.rawPosition || !message.member.hasPermission("ADMINISTRATOR")) {
+                        msg.channel.send(lang.returnRoleHigh); 
+                        return
+                    }
 
                     if(!emoji){
                         emojiEmoji.push(emojiN)
