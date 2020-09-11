@@ -46,8 +46,14 @@ module.exports = {
         else return text
     },
 
-    randomCollection: function(collection, name){
+	randomCollection: function(collection, name){
         let random = collection.get(name);
+        if(!Array.isArray(random)){
+            let keys = Object.keys(random);
+            let randomIndex = keys[Math.floor(Math.random() * keys.length)]
+            random = random[randomIndex];
+            return random;
+        } 
         random = random[Math.floor(Math.random() * random.length)]
         return random;
     },
