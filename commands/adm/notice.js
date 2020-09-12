@@ -10,12 +10,12 @@ module.exports.run = async (bot, message, args, lang) => {
         if(returnNull(cmd)) return message.reply(lang.helpReturn);
     
         if(cmd === "show"){
-            let notices = await Notice.find({ 'guildId': message.guild.id})
+            let notices = await Notice.find({ 'guildId': message.guild.id});
             let description = "";
     
             if(!returnNull(notices)) {
                 notices.forEach(element => {
-                    description = description + `**Channel:** <#${element.channelId}> - **TextType:** \`${element.textType}\` - **Date:** \`${new Date(element.date * 1)}\`\n`
+                    description = description + `**ID:** \`${element._id}\` - **Channel:** <#${element.channelId}> - **TextType:** \`${element.textType}\` - **Date:** \`${new Date(element.date * 1)}\`\n`
                 });
             }else description = lang.nullNotice;
     
@@ -26,6 +26,15 @@ module.exports.run = async (bot, message, args, lang) => {
             .setColor(bot.baseColor);
     
             return message.channel.send(embed);
+        }
+        else if(cmd === "remove"){
+            let id = args[1];
+            if((returnNull(id)) || (!mongoose.Types.ObjectId.isValid(id))) return message.reply(lang.returnFalseId);
+
+            let noticeDel = await Notice.findOneAndRemove({ '_id': id, 'guildId': message.guild.id })
+            if(returnNull(noticeDel)) return message.reply(lang.returnFalseId);
+            
+            return message.channel.send(lang.delNotice);
         }
         else if(cmd === "msg" || cmd === "embed"){
     
@@ -62,7 +71,9 @@ module.exports.run = async (bot, message, args, lang) => {
             setTimeout(async function(){
                 let channelExist = message.guild.channels.cache.get(channel.id)
                 if(returnNull(channelExist)) return
-    
+                let noticeCheck = await Notice.findOne({ 'channelId': channel.id, 'guildId': message.guild.id, 'text': textDB });
+                if(returnNull(noticeCheck)) return
+
                 channel.send(text)
                 await Notice.findOneAndRemove({ 'channelId': channel.id, 'guildId': message.guild.id, 'text': textDB});
             }, time);

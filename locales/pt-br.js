@@ -511,6 +511,8 @@ module.exports =
                 returnNull: "Preciso de uma mensagem :disappointed:",
                 returnTime: "Seu anúncio sera enviado as:",
                 nullNotice: "Nenhuma notícia programada :disappointed_relieved:",
+                delNotice: "Sua notícia foi deletada e não será mais enviada !! :envelope: :gun:",
+                returnFalseId: "Preciso de um ID de notice valido :face_with_monocle: !!"
             },
             help: {
                 description: "Cria um anuncio de postagem pelo Bot",

@@ -1,5 +1,5 @@
 const { MessageEmbed } = require("discord.js");
-const { limitLength } = require("../utils/functions.js");
+const { limitLength, returnNull } = require("../utils/functions.js");
 const TwitchChannel = require("../models/twitchchannel.js");
 const TwitchGuild = require("../models/twitchguild.js");
 const Notice = require("../models/notice.js");
@@ -32,8 +32,11 @@ module.exports = async (bot) => {
         for (let index = 0; index < notices.length; index++) {
             const element = notices[index];
             let time = element.date - new Date().getTime();
-
+            
             setTimeout(async function(){
+                let noticeCheck = await Notice.findOne({ 'channelId': element.channelId, 'guildId': element.guildId, 'text': element.text });
+                if(returnNull(noticeCheck)) return
+
                 let guild = bot.guilds.cache.get(element.guildId);
                 let channel = guild.channels.cache.get(element.channelId);
 
