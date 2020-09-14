@@ -29,10 +29,12 @@ module.exports = async (bot, member) => {
             if (guild.welcome.canvas === "on"){
                 let check = await checkLinks([guild.welcome.canvasUrl])
                 let imagem = "https://github.com/Zaetic/Nayoi/blob/master/images/others/background.png?raw=true";
+                let profileImage = "https://github.com/Zaetic/Nayoi/blob/master/images/others/default.png?raw=true";
 
                 if ((guild.welcome.canvasUrl != "off") && (check[guild.welcome.canvasUrl].status === "alive")){
                    imagem = guild.welcome.canvasUrl;
                 }
+                if(member.user.avatar != null) profileImage = member.user.avatarURL({ format: 'jpg' });
 
                 const canvas = createCanvas(1000, 360);
                 const ctx = canvas.getContext("2d");
@@ -68,7 +70,7 @@ module.exports = async (bot, member) => {
                 //
                 ctx.closePath();
                 ctx.clip();
-                const avatar = await loadImage(member.user.avatarURL({ format: 'jpg' }));
+                const avatar = await loadImage(profileImage);
                 ctx.drawImage(avatar, 370,20,250,250);
                 const attachment = new MessageAttachment(canvas.toBuffer(),"welcome.png");
                 return wlchat.send(msg, attachment)
