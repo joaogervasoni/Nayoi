@@ -533,6 +533,9 @@ module.exports =
                 returnInvalid: "Você não escreveu um tempo valido!!",
                 returnMuted: "foi mutado por",
                 returnRemoveMute: "foi desmutado",
+                mutesNull: "Não há ninguem mutado :shushing_face:",
+                muteFalse: "Este usuário não esta mutado",
+                unmuted: "foi desmutado !! :grin:"
             },
             help: {
                 description: "Muta a pessoa escolhida por **'x'** tempo",

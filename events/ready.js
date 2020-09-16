@@ -3,6 +3,7 @@ const { limitLength, returnNull } = require("../utils/functions.js");
 const TwitchChannel = require("../models/twitchchannel.js");
 const TwitchGuild = require("../models/twitchguild.js");
 const Notice = require("../models/notice.js");
+const Mute = require("../models/mute.js");
 var colors = require('colors');
 var api = require('twitch-api-v5');
 const { twitchID } = require("../botconfig.json");
@@ -26,6 +27,27 @@ module.exports = async (bot) => {
     console.log(`[Lang]`.brightGreen +` Carregadas em todos os servidores`.green);
     console.log(`[Online]`.brightGreen +` ${bot.user.username} esta Online em ${bot.guilds.cache.size} servidores`.green);
   
+    async function mutes(){
+        let mutes = await Mute.find({});
+
+        for (let index = 0; index < mutes.length; index++){
+            const element = mutes[index];
+            let time = element.date - new Date().getTime();
+
+            setTimeout(async function(){
+                let guild = bot.guilds.cache.get(element.guildId);
+                let member = guild.members.cache.get(element.userId);
+                let muterole = guild.roles.cache.find(role => role.name === "Muted");
+                if(!muterole) return
+
+                member.roles.remove(muterole.id);
+                await Mute.findOneAndRemove({ 'guildId': guild.id, 'userId': member.user.id })
+                
+                member.send(`<@${member.user.id}> Unmuted`);
+            }, time)
+        }
+    }
+
     async function notices(){
         let notices = await Notice.find({});
 
@@ -102,6 +124,7 @@ module.exports = async (bot) => {
             }  
         }
     }
+    mutes();
     notices();
     twitch();
 }
