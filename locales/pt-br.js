@@ -526,7 +526,7 @@ module.exports =
             }    
         },
         {
-            name: "tempmute",
+            name: "mute",
             cmd: {
                 returnNull: "Não encontrei este Usuário",
                 highRole: "Cargo maior ou igual",
@@ -535,11 +535,16 @@ module.exports =
                 returnRemoveMute: "foi desmutado",
                 mutesNull: "Não há ninguem mutado :shushing_face:",
                 muteFalse: "Este usuário não esta mutado",
-                unmuted: "foi desmutado !! :grin:"
+                unmuted: "foi desmutado !! :grin:",
+                isMuted: "Este usuário já esta mutado !!"
             },
             help: {
                 description: "Muta a pessoa escolhida por **'x'** tempo",
-                usability: "Atualmente Desabilitado` :x:\n",
+                usability: "Pode ser utilizando usando `{prefix}mute @usuário 10m(tempo)`\n",
+                additional: "`{prefix}mute show` - Exibe a lista de mutados\n"
+                +"`{prefix}mute remove @usuário` - Remove um mute antes da hora programada",
+                others: "O tempo deve ser expecificado com uma letra após o número para ser considerado um tempo valido\n"
+                +"**Exemplos:** `1s(seg) | 1m (min) | 1h (hora)`",
             }    
         },
         {

@@ -2,7 +2,7 @@ const { token, prefix } = require("./botconfig.json");
 const { Client, Collection } = require("discord.js");
 const Guild = require("./models/guild");
 
-const bot = new Client({disabledEveryone: true, partials: ['MESSAGE', 'REACTION']})
+const bot = new Client({disableMentions: "everyone", partials: ['MESSAGE', 'REACTION']})
 
 bot.Guild = Guild;
 bot.snipes = new Map();

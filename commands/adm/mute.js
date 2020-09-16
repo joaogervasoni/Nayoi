@@ -5,7 +5,7 @@ const Mute = require("../../models/mute.js");
 const ms = require("ms");
 
 module.exports.run = async (bot, message, args, lang) => {
-    try{
+    
 
         let cmd = args[0];
         if(cmd === "show"){
@@ -50,11 +50,14 @@ module.exports.run = async (bot, message, args, lang) => {
             return message.reply(lang.highRole);
         }
    
-        let mutetime = args[1];
-        mutetime = ms(mutetime);
-        if(!isNaN(mutetime) && !isNaN(args[1].charAt(args[1].length-1))) return message.reply(lang.returnInvalid)
-
         let muterole = message.guild.roles.cache.find(role => role.name === "Muted");
+        if (toMute.roles.cache.find(role => role.name === "Muted")) return message.channel.send(lang.isMuted)
+
+        let mutetime = args[1];
+        if(returnNull(mutetime)) return message.reply(lang.returnInvalid)
+        if(isNaN(args[1].substring(0, args[1].length-1)) && isNaN(args[1].charAt(args[1].length-1))) return message.reply(lang.returnInvalid)
+        mutetime = ms(mutetime);
+
         if(!muterole) muterole = await message.guild.roles.create({ data: { name: 'Muted', color: "#000000", permissions: [] } });
 
         await message.guild.channels.cache.forEach(async (channel, id) => {
@@ -77,9 +80,7 @@ module.exports.run = async (bot, message, args, lang) => {
 
             message.channel.send(`<@${toMute.id}> ${lang.returnRemoveMute}`);
         }, mutetime);
-    }catch(e){
-        errorReturn(e, message, this.help.name)
-    }
+
 }
 
 async function muteDB(mutetime, idGuild, idUser, idExecutor){
@@ -99,7 +100,7 @@ async function muteDB(mutetime, idGuild, idUser, idExecutor){
 }
 
 module.exports.help = {
-    name: "tempmute",
+    name: "mute",
     type: "adm"
 }
 
