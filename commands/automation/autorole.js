@@ -1,4 +1,4 @@
-const { errorReturn, formatRoleId, returnNull } = require("../../utils/functions.js");
+const { errorReturn, returnNull, formatId } = require("../../utils/functions.js");
 
 module.exports.run = async (bot, message, args, lang) => {
     try{
@@ -8,7 +8,7 @@ module.exports.run = async (bot, message, args, lang) => {
         if(returnNull(cmd)) return message.reply(lang.helpReturn);
 
         if (cmd === "on" || cmd === "true"){
-            let roleid = formatRoleId(subcmd);
+            let roleid = formatId(subcmd);
             role = message.guild.roles.cache.get(roleid);
 
             if (!role) return message.reply(lang.returnNull);
@@ -35,7 +35,7 @@ module.exports.run = async (bot, message, args, lang) => {
             });
         }
         else if(cmd === "rol" || cmd === "role"){
-            let role = formatRoleId(subcmd);
+            let role = formatId(subcmd);
             role = message.guild.roles.cache.get(role);
 
             if (!role) return message.reply(lang.returnNull);

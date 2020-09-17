@@ -6,7 +6,7 @@ const ms = require("ms");
 
 module.exports.run = async (bot, message, args, lang) => {
     
-
+    try{
         let cmd = args[0];
         if(cmd === "show"){
             let mutes = await Mute.find({ 'guildId': message.guild.id });
@@ -80,7 +80,9 @@ module.exports.run = async (bot, message, args, lang) => {
 
             message.channel.send(`<@${toMute.id}> ${lang.returnRemoveMute}`);
         }, mutetime);
-
+    }catch(e){
+        errorReturn(e, message, this.help.name)
+    }
 }
 
 async function muteDB(mutetime, idGuild, idUser, idExecutor){

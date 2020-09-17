@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const {MessageEmbed} = require('discord.js');
-const {errorReturn, returnNull, formatChannelId} = require("../../utils/functions.js");
+const {errorReturn, returnNull, formatId} = require("../../utils/functions.js");
 const TwitchChannel = require("../../models/twitchchannel.js");
 const TwitchGuild = require("../../models/twitchguild.js");
 const { twitchID } = require("../../botconfig.json");
@@ -17,7 +17,7 @@ module.exports.run = async (bot, message, args, lang) => {
 
         if(cmd === "on"){
             if(returnNull(subcmd)) return message.reply(lang.helpReturn);
-            let channel = formatChannelId(subcmd);
+            let channel = formatId(subcmd);
             let chat = await message.guild.channels.cache.find(chat => chat.id === channel);
             if (!chat || chat === undefined || chat === null) return message.reply(lang.returnNull);
 
@@ -128,7 +128,7 @@ module.exports.run = async (bot, message, args, lang) => {
             })
         }
         else if(cmd === "ch" || cmd === "channel"){
-            let channel = formatChannelId(subcmd);
+            let channel = formatId(subcmd);
             let chat = await message.guild.channels.cache.find(chat => chat.id === channel);
             if (returnNull(chat)) return message.reply(lang.returnNull);
 

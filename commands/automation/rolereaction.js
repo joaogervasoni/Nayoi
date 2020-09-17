@@ -1,5 +1,5 @@
 const {MessageCollector, MessageEmbed} = require('discord.js');
-const {errorReturn, formatChannelId, formatRoleId, formatEmojiId, listCollection, returnNull, limitLength} = require("../../utils/functions.js");
+const {errorReturn, listCollection, returnNull, limitLength, formatId, formatEmojiId} = require("../../utils/functions.js");
 const mongoose = require('mongoose');
 const RoleReaction = require("../../models/rolereaction.js");
 
@@ -9,7 +9,7 @@ module.exports.run = async (bot, message, args, lang) => {
     try{
         if(!args[0]) return message.reply(lang.helpReturn);
 
-        let channel = await message.guild.channels.cache.find(channel => channel.id === formatChannelId(args[0]))
+        let channel = await message.guild.channels.cache.find(channel => channel.id === formatId(args[0]))
         let idmsg;
         
         if(returnNull(channel)) return message.reply(lang.returnNullChannel);
@@ -89,7 +89,7 @@ module.exports.run = async (bot, message, args, lang) => {
                         return;
                     }
 
-                    let role = msg.guild.roles.cache.find(role => role.id === formatRoleId(roleid));
+                    let role = msg.guild.roles.cache.find(role => role.id === formatId(roleid));
                     if(!role){ msg.channel.send(lang.returnRoleNull); return ;}
                     if(role.rawPosition > message.member.roles.highest.rawPosition || !message.member.hasPermission("ADMINISTRATOR")) {
                         msg.channel.send(lang.returnRoleHigh); 

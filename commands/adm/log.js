@@ -1,4 +1,4 @@
-const { errorReturn, formatChannelId, returnNull } = require("../../utils/functions.js");
+const { errorReturn, returnNull, formatId } = require("../../utils/functions.js");
 
 module.exports.run = async (bot, message, args, lang) => {
     
@@ -10,7 +10,7 @@ module.exports.run = async (bot, message, args, lang) => {
     if(cmd === "on" || cmd === "true"){
         if(returnNull(subcmd)) return message.reply(lang.helpReturn);
 
-        let channel = formatChannelId(subcmd);
+        let channel = formatId(subcmd);
         let chat = message.guild.channels.cache.find(chat => chat.id === channel);
         if(returnNull(chat)) return message.reply(lang.returnNull);
 
@@ -37,7 +37,7 @@ module.exports.run = async (bot, message, args, lang) => {
     else if (cmd === "ch" || cmd === "channel"){
         if(returnNull(subcmd)) return message.reply(lang.helpReturn);
 
-        let channel = formatChannelId(subcmd);
+        let channel = formatId(subcmd);
         let chat = message.guild.channels.cache.find(chat => chat.id === channel);
         if(returnNull(chat)) return message.reply(lang.returnNull);
         

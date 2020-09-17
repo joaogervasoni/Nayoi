@@ -79,20 +79,6 @@ module.exports = {
         return text;
     },
 
-    formatChannelId: function(idText){
-        idText = idText.slice(2,20);
-        return idText;
-    },
-
-    formatRoleId: function(idText){
-        idText = idText.slice(3,21);
-        return idText;
-    },
-
-    formatUserId: function(idText){
-        return idText;
-    },
-
     formatEmojiId: function(idText){
         idText = idText.substring(idText.indexOf(":") + 1);
         idText = idText.substring(idText.indexOf(":") + 1).slice(0,18);
@@ -106,26 +92,8 @@ module.exports = {
 
     formatId: function(idText){
         if(module.exports.returnNull(idText)) return idText
-
-        let textFirst = idText.substr(0, 2);
-        if(textFirst === "<@"){
-            textFirst = idText.substr(0, 3);
-            if(textFirst === "<@&"){
-                return module.exports.formatRoleId(idText)
-            }
-            else{
-                return module.exports.formatUserId(idText)
-            }
-        }
-        else if (textFirst === "<#"){
-            return module.exports.formatChannelId(idText)
-        }
-        else if (textFirst === "<:"){
-            return module.exports.formatEmojiId(idText);
-        }
-        else {
-            return idText;
-        }
+        idText = idText.replace(/\D+/g, '');
+        return idText;
     },
 
     mentionById: function(id){

@@ -28,6 +28,7 @@ module.exports.run = (bot, message, args, lang) => {
         });
         embed
         .setTitle(`${emojis.get(args2)} ${upperCaseFirst(args2)} ${lang.embedCtTitle}`)
+        .setColor(bot.baseColor)
         .setDescription(description)
         return message.channel.send(embed)
 

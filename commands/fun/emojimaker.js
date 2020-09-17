@@ -1,6 +1,6 @@
 const { MessageAttachment } = require("discord.js");
 const { createCanvas, loadImage } = require("canvas");
-const { formatEmojiId, returnNull, errorReturn } = require("../../utils/functions.js");
+const { returnNull, errorReturn, formatEmojiId } = require("../../utils/functions.js");
 
 module.exports.run = async (bot, message, args, lang) => {
     try{
