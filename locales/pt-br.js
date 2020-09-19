@@ -720,6 +720,22 @@ module.exports =
                 description: "Envia um bug para o desenvolvedor",
                 usability: "Pode ser utilizado desta forma: `{prefix}bug bug-ou-erro-escrito-aqui`"
             }
+        },
+        {
+            name: "dice",
+            cmd:{
+                returnNull: "Preciso receber um parametro de número maior que `1` :anger: !!",
+                diceSolo: "O dado rolou",
+                dice1: "O dado **1** rolou",
+                dice2: "O dado **2** rolou ",
+                embedTitle: "Dado"
+            },
+            help:{
+                description: "Rola um dado com o número desejado",
+                usability: "Pode ser utilizado desta forma: `{prefix}dice 20`",
+                additional: "Também pode ser utilizado dois dados: `{prefix}dice 20 15`",
+                others: "O número dos dados é escolhido pela pessoa ao digitar o comando",
+            }
         }
     ]
 }
