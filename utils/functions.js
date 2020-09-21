@@ -64,18 +64,20 @@ module.exports = {
     },
 
     formatDate: function(date) {
-        const options = {
+        /*const options = {
             year: 'numeric',
             month: 'numeric',
             day: 'numeric',
             hour: 'numeric',
             minute: 'numeric'
-        };
-        return new Intl.DateTimeFormat('pt-BR', options).format(date);
+        };*/
+        let newDate = new Intl.DateTimeFormat('en-GB').format(date);
+        return newDate;
     },
 
     formatText: function(text){
-        text = text.normalize('NFD').replace(/([\u0300-\u036f]|[^0-9a-zA-Z])/g, ' ');
+        text = text.normalize('NFD').replace(/([\u0300-\u036f])/g, '');
+        text = text.replace(/([^0-9a-zA-Z])/g, ' ');
         return text;
     },
 

@@ -167,6 +167,11 @@ module.exports =
                 fieldVol: "Volumes:",
                 fieldRated: "Rated:",
                 titleCharacter: "Character",
+                fieldAiring: "Airing:",
+                fieldEpisodes: "Episódios:",
+                fieldGender: "Gênero:",
+                fieldLocal: "Local:",
+                fieldJoined: "Entrou em:",
                 resultNull: "Não encontrei nada :worried:"
             },
             help: {

@@ -1,5 +1,5 @@
 const { MessageEmbed } = require("discord.js");
-const { errorReturn } = require("../../utils/functions.js");
+const { errorReturn, formatText, formatDate } = require("../../utils/functions.js");
 const fetch = require("node-fetch");
 
 module.exports.run = async (bot, message, args, lang) => {
@@ -9,6 +9,7 @@ module.exports.run = async (bot, message, args, lang) => {
         if(cmd != null) {subcmd = args.join("").slice(cmd.length)}
         if(subcmd === null || subcmd === "" || subcmd === undefined) return message.reply(lang.helpReturn);
 
+        subcmd = formatText(subcmd);
         if (cmd === "an" || cmd === "anime") {
             
             let anime = await fetch(`https://api.jikan.moe/v3/search/anime/?q=${subcmd}&page=1&limit=1`).then(res => res.json());
@@ -24,8 +25,8 @@ module.exports.run = async (bot, message, args, lang) => {
                 .addField(lang.fieldScore, anime.score, true)
                 .addField(lang.fieldRated, anime.rated, true)
                 .addField(lang.fieldType, anime.type, true)
-                .addField("Airing:", anime.airing, true)
-                .addField("Episódios:", anime.episodes, true)
+                .addField(lang.fieldAiring, anime.airing, true)
+                .addField(lang.fieldEpisodes, anime.episodes, true)
             return message.channel.send(embed)
         }
         else if (cmd === "mg" || cmd === "manga"){
@@ -59,7 +60,7 @@ module.exports.run = async (bot, message, args, lang) => {
             .addField(lang.fieldName, character.name)
             return message.channel.send(embed)
         }
-        else if (cmd === "pf" || cmd === "perfil") {
+        else if (cmd === "pf" || cmd === "profile") {
 
             let profile = await fetch(`https://api.jikan.moe/v3/user/${subcmd}/profile`).then(res => res.json());
             if(profile.status != null || profile === null || profile.status === "400" )return message.reply(lang.resultNull)
@@ -67,14 +68,17 @@ module.exports.run = async (bot, message, args, lang) => {
             let embed = new MessageEmbed()
                 .setThumbnail(profile.image_url)
                 .setTitle(profile.username)
-                .setColor(bot.baseColor)
-                .addField("Gênero:", profile.gender, true)
-                .addField("Local:", profile.location, true)
-                .addField(`Animes: ${profile.anime_stats.total_entries}`, `Assistindo: ${profile.anime_stats.watching} | Completos: ${profile.anime_stats.completed} | Em mãos: ${profile.anime_stats.on_hold}
+                
+                .setDescription(`[${profile.url}](${profile.url})`)
+                .addField(lang.fieldGender, profile.gender, true)
+                .addField(lang.fieldLocal, profile.location, true)
+                .addField(lang.fieldJoined, formatDate(new Date(profile.joined)))
+                .addField(`Animes: \`${profile.anime_stats.total_entries}\``, `Assistindo: ${profile.anime_stats.watching} | Completos: ${profile.anime_stats.completed} | Em mãos: ${profile.anime_stats.on_hold}
                         Dropados: ${profile.anime_stats.dropped} | Para ver: ${profile.anime_stats.plan_to_watch}`)
-                .addField(`Mangas: ${profile.manga_stats.total_entries}`, `Lendo: ${profile.manga_stats.reading} | Completos: ${profile.manga_stats.completed} | Em mãos: ${profile.manga_stats.on_hold}
+                .addField(`Mangas: \`${profile.manga_stats.total_entries}\``, `Lendo: ${profile.manga_stats.reading} | Completos: ${profile.manga_stats.completed} | Em mãos: ${profile.manga_stats.on_hold}
                         Dropados: ${profile.manga_stats.dropped} | Para ler: ${profile.manga_stats.plan_to_read}`)
-                .addField("Entrou em:", profile.joined)
+                .setColor(bot.baseColor);
+
             return message.channel.send(embed)
 
         }else return message.reply(lang.helpReturn)

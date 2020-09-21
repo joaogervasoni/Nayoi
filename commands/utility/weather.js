@@ -5,9 +5,9 @@ const fetch = require("node-fetch");
 
 module.exports.run = async (bot, message, args, lang) => {
     try{
-        const local = formatText(args.join(" ").slice(0));
+        let local = args.join(" ").slice(0);
+        local = formatText(local);
         if(local === "" || local === undefined) return message.reply(lang.helpReturn);
-
         const weather = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${local}&appid=${weatherApi}`).then(res => res.json());
         if(weather.cod != "200" || weather === null || weather === undefined) return message.reply(lang.returnNull)
         
