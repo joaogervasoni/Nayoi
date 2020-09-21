@@ -3,15 +3,15 @@ const { errorReturn, randomCollection, returnNull } = require("../../utils/funct
 
 module.exports.run = async (bot, message, args, lang) => {
     try{
-        let user = message.mentions.users.first()
-        if (!user) return message.reply(lang.helpReturn);
-        if (returnNull(user.lastMessage)) return message.reply(lang.returnNull);
-        
-        msg = user.lastMessage.content;
+        let member = message.guild.member(message.mentions.users.first() || message.guild.member(args[1]));
+        if (!member) return message.reply(lang.helpReturn);
+        let msg = await message.channel.messages.cache.filter(msg => msg.author.id === member.id);
+        msg = msg.last();
+
         if (!msg) return message.reply(lang.returnNull);
         
         const embed = new MessageEmbed()
-            .setDescription(`**${lang.embedDescription}** \`${user.tag}\` : ${msg}`)
+            .setDescription(`**${lang.embedDescription}** \`${member.user.tag}\` : ${msg.content}`)
             .setImage(randomCollection(bot.lists, this.help.name))
             .setAuthor(message.member.user.tag, message.member.user.avatarURL())
     
