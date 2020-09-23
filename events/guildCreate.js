@@ -12,6 +12,7 @@ module.exports = (bot, guild) => {
             createdAt: guild.joinedAt,
             server: {
                 lang: "pt-br",
+                prefix: "n!",
                 nsfw: "off"
             },
             welcome: {

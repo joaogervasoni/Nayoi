@@ -8,18 +8,19 @@ const guildSchema = mongoose.Schema({
     createdAt: String,
     server: {
         lang: String,
-        nsfw: String,
+        prefix: String,
+        nsfw: String
     },
     welcome: {
         status: String,
         msg: String,
         channel: String,
         canvas: String,
-        canvasUrl: String,
+        canvasUrl: String
     },
     autorole: {
         status: String,
-        role: String,
+        role: String
     },
     log: {
         status: String,

@@ -1,9 +1,9 @@
-const { prefix } = require("../botconfig");
 const { mentionById } = require("../utils/functions.js");
 const AutoDeleteMsg = require("../models/autodeletemsg");
 
 module.exports = async (bot, message) => {
     if (message.author.bot) return;
+    const prefix = message.guild.prefix;
 
     let autodeletemsg = await AutoDeleteMsg.findOne({ channelId: message.channel.id });
     if(autodeletemsg && autodeletemsg != undefined){

@@ -6,7 +6,7 @@ const Notice = require("../models/notice.js");
 const Mute = require("../models/mute.js");
 var colors = require('colors');
 var api = require('twitch-api-v5');
-const { twitchID } = require("../botconfig.json");
+const { twitchID, prefix } = require("../botconfig.json");
 api.clientID = twitchID;
 
 module.exports = async (bot) => {
@@ -14,15 +14,21 @@ module.exports = async (bot) => {
     for await (let guild of bot.guilds.cache.array()) {
 
         let lang = undefined;
+        let prefixDb = prefix;
         let guildDb = await bot.Guild.findOne({ 'guildId': guild.id });
-        if(guildDb) lang = guildDb.server.lang;
+        if(guildDb){
+            lang = guildDb.server.lang;
+            prefixDb = guildDb.server.prefix;
+        } 
         
-        if (!lang || lang === undefined) {
+        if(!prefixDb) prefixDb = prefix;
+        if(!lang) {
             lang = "pt-br";
             guildDb.server.lang = lang;
             guildDb.save();
         }
         guild.language = bot.locales.get(lang);
+        guild.prefix = prefixDb;
     }
     console.log(`[Lang]`.brightGreen +` Carregadas em todos os servidores`.green);
     console.log(`[Online]`.brightGreen +` ${bot.user.username} esta Online em ${bot.guilds.cache.size} servidores`.green);
@@ -104,7 +110,7 @@ module.exports = async (bot) => {
                     
                                 streamerHoras = res.stream.created_at;
     
-                                if((new Date(today).getTime() - 60000) <= (new Date(streamerHoras).getTime())){
+                                if((new Date(today).getTime() - 65000) <= (new Date(streamerHoras).getTime())){
                                     
                                     let guild = bot.guilds.cache.get(guildT.guildId);
                                     let channel = guild.channels.cache.get(guildT.twitch.channel);

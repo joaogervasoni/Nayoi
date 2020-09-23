@@ -741,6 +741,19 @@ module.exports =
                 additional: "Também pode ser utilizado dois dados: `{prefix}dice 20 15`",
                 others: "O número dos dados é escolhido pela pessoa ao digitar o comando",
             }
+        },
+        {
+            name: "prefix",
+            cmd:{
+                prefixAtual: "O prefix atual é",
+                prefixLength: "O prefix deve conter `2` characteres (_letras_)",
+                prefixChanged: "O prefix foi alterado para"
+            },
+            help:{
+                description: "Troca o prefix para chamar os comandos da Nayoi",
+                usability: "Pode ser utilizado desta forma: `{prefix}prefix ch NOVOPREFIX`",
+                additional: "`{prefix}prefix show` para mostrar o prefix atual"
+            }
         }
     ]
 }

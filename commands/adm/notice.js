@@ -41,7 +41,7 @@ module.exports.run = async (bot, message, args, lang) => {
             let time = args[1];
             let channel = message.guild.channels.cache.get(formatId(args[2]))
            
-            if(returnNull(mutetime)) return message.reply(lang.invalidTime)
+            if(returnNull(time)) return message.reply(lang.invalidTime)
             if(isNaN(args[1].substring(0, args[1].length-1)) && isNaN(args[1].charAt(args[1].length-1))) return message.reply(lang.invalidTime)
             time = ms(time);
             
