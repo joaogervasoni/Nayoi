@@ -101,5 +101,11 @@ module.exports = {
     mentionById: function(id){
         user = `<@!${id}>`
         return user;
+    },
+
+    formatFileName: function(__filename){
+        let filename = __filename.replace(/^.*[\\\/]/, '');
+        filename = filename.substring(0, (filename.length-3));
+        return filename;
     }
 }

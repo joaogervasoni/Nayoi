@@ -114,7 +114,7 @@ module.exports =
                 +"Caso esteja buscando pela lista de comandos digite `{prefix}commands`\n"
                 +"Espero que encontre o que procura :heart:",
                 embedField2_title: "Outros",
-                embedField2_text: "Para mais informações acesse: http://nayoi.com",
+                embedField2_text: "Para mais informações acesse: https://nayoi.com",
             },
             help: {
                 description: "Traz informações sobre comandos",
@@ -323,6 +323,19 @@ module.exports =
                 description: "Quão Feliz você é ?",
                 usability: "Para saber a porcentagem digite `{prefix}howhappy`\n",
                 additional: "`{prefix}howhappy @usuário` para ver sobre alguem especifico",
+            }    
+        },
+        {
+            name: "howotaku",
+            cmd: {
+                embedTitle: "Quão Otaku vc é?",
+                userIs: "é",
+                youIs: "Você é"
+            },
+            help: {
+                description: "Quão Otaku você é ?",
+                usability: "Para saber a porcentagem digite `{prefix}howotaku`\n",
+                additional: "`{prefix}howotaku @usuário` para ver sobre alguem especifico",
             }    
         },
         {

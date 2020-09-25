@@ -15,7 +15,7 @@ module.exports.run = (bot, message, args, lang) => {
             .addField("Ping:", message.client.ws.ping.toFixed(2), true)
             .addField(lang.fieldCreatedAt, formatDate(bot.user.createdAt), true)
             .addField(labg.fieldEnterAt, formatDate(message.member.guild.joinedAt), true)
-            .addField("Link", "http://nayoi.com")
+            .addField("Link", "https://nayoi.com")
             
             return message.channel.send(botembed);
         }
@@ -41,7 +41,6 @@ module.exports.run = (bot, message, args, lang) => {
         }
         else if(cmd === undefined){
             let User = message.member;
-            console.log(User)
             let userembed = new MessageEmbed()
             .setTitle(User.user.username)
             .setThumbnail(User.user.avatarURL())
