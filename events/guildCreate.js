@@ -39,6 +39,7 @@ module.exports = (bot, guild) => {
         guildNew.save()
 
         guild.language = bot.locales.get("pt-br");
+        guild.prefix = "n!";
     }catch(e){
         errorReturn(e, null, "guildCreate")
     }

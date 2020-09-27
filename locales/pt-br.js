@@ -767,6 +767,15 @@ module.exports =
                 usability: "Pode ser utilizado desta forma: `{prefix}prefix ch NOVOPREFIX`",
                 additional: "`{prefix}prefix show` para mostrar o prefix atual"
             }
+        },
+        {
+            name: "google",
+            cmd:{
+            },
+            help:{
+                description: "Gera um link de pesquisa no google",
+                usability: "Pode ser utilizado desta forma: `{prefix}google PESQUISA AQUI`",
+            }
         }
     ]
 }

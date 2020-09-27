@@ -17,8 +17,9 @@ module.exports.run = async (bot, message, args, lang) => {
             const guild = await bot.Guild.findOne({'guildId': message.guild.id});
             guild.server.prefix = subcmd;
             await guild.save();
+            message.guild.prefix = subcmd;
 
-            message.channel.send(`${lang.prefixChanged} \`${cmd}\``);
+            message.channel.send(`${lang.prefixChanged} \`${subcmd}\``);
         }
         else return message.reply(lang.helpReturn)
     }catch(e){
