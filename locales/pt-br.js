@@ -436,6 +436,7 @@ module.exports =
                 + "e precisa ser ativo para o banner funcionar",
                 bannerChange: "Imagem trocada `obs: As dimensões recomendadas são 1000x360!!`\n"
                 + "`Digite {prefix}banner sh para ver o preview do banner`",
+                bannerNull: "Preciso de um `URL` de imagem !!",
                 invalidImg: "Não foi encontrada uma imagem valida :moyai:\n"
                 +"`A imagem deve terminar com uma extensão valida de imagem (png, jpg e outras) e ser acessível!!`",
                 canvasFillText: "Usuário:",

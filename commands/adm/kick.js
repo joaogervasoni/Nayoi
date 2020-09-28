@@ -1,4 +1,4 @@
-const {errorReturn, returnNull, mentionById} = require("../../utils/functions.js");
+const {errorReturn, returnNull, mentionById, limitLength} = require("../../utils/functions.js");
 const {MessageEmbed} = require("discord.js");
 
 module.exports.run = async (bot, message, args, lang) => {

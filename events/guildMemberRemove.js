@@ -7,7 +7,7 @@ module.exports = async (bot, member)  => {
         const guild = await bot.Guild.findOne({ 'guildId': member.guild.id });
 
         //MemberCount
-        guild.memberCount = member.guild.memberCount;
+        guild.memberCount = member.guild.memberCount ? member.guild.memberCount : guild.memberCount;
         guild.save();
         
         //Log
@@ -25,14 +25,14 @@ module.exports = async (bot, member)  => {
                 if (entry != null && entry.action == "MEMBER_KICK"){
                     embed
                     .setTitle(`:ledger: [${lang.titleKick}]`)
-                    .addField(`**${lang.fieldUser}**`, `${member.user} **${lang.fieldReason}** ${entry.reason} **${lang.fieldExecutor}** ${entry.executor}`)
+                    .addField(`**${lang.fieldUser}**`, limitLength(`${member.user} **${lang.fieldReason}** ${entry.reason} **${lang.fieldExecutor}** ${entry.executor}`, "field"))
                     .addField(`**${lang.fieldTag}**`, member.user.tag, true)
                     .addField(`**ID:**`, member.user.id, true)
                 }
                 else if (entry != null && entry.action == "MEMBER_BAN_ADD"){
                     embed
                     .setTitle(`:hammer: [${lang.titleBan}]`)
-                    .addField(`**${lang.fieldUser}**`, `${member.user} **${lang.fieldReason}** ${entry.reason} **${lang.fieldExecutor}** ${entry.executor}`)
+                    .addField(`**${lang.fieldUser}**`, limitLength(`${member.user} **${lang.fieldReason}** ${entry.reason} **${lang.fieldExecutor}** ${entry.executor}`, "field"))
                     .addField(`**${lang.fieldTag}**`, member.user.tag, true)
                     .addField(`**ID:**`, member.user.id, true)
                 }

@@ -34,7 +34,8 @@ module.exports.run = async (bot, message, args, lang) => {
         }
         else if(cmd === "cst" || cmd === "custom"){
             let url = subcmd;
-            let check = await checkLinks([url])
+            if(!url) return message.reply(lang.bannerNull);
+            let check = await checkLinks([url]);
 
             if (isImage(url) && (check[url].status === "alive")){
                 const guild = await bot.Guild.findOne({'guildId': message.guild.id});
