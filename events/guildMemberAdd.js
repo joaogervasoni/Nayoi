@@ -9,8 +9,10 @@ module.exports = async (bot, member) => {
         const guild = await bot.Guild.findOne({ 'guildId': member.guild.id });
 
         //MemberCount
-        guild.memberCount = member.guild.memberCount ? member.guild.memberCount : guild.memberCount;
-        guild.save();
+        if(member.guild.memberCount){
+            guild.memberCount = member.guild.memberCount;
+            guild.save();
+        }
         
         //Autorole
         if (guild.autorole.status === "on") {

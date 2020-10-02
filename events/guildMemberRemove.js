@@ -1,5 +1,5 @@
 const { MessageEmbed } = require("discord.js");
-const { errorReturn, returnNull } = require("../utils/functions.js");
+const { errorReturn, returnNull, limitLength } = require("../utils/functions.js");
 
 module.exports = async (bot, member)  => {
     try{
@@ -7,9 +7,11 @@ module.exports = async (bot, member)  => {
         const guild = await bot.Guild.findOne({ 'guildId': member.guild.id });
 
         //MemberCount
-        guild.memberCount = member.guild.memberCount ? member.guild.memberCount : guild.memberCount;
-        guild.save();
-        
+        if(member.guild.memberCount){
+            guild.memberCount = member.guild.memberCount;
+            guild.save();
+        }
+
         //Log
         if(guild.log.status == "on"){
             let logs = await member.guild.fetchAuditLogs();

@@ -2,7 +2,7 @@ const { token, prefix } = require("./botconfig.json");
 const { Client, Collection } = require("discord.js");
 const Guild = require("./models/guild");
 
-const bot = new Client({disableMentions: "everyone", partials: ['MESSAGE', 'REACTION']})
+const bot = new Client({disableMentions: "everyone", partials: ['MESSAGE', 'REACTION']});
 
 bot.Guild = Guild;
 bot.snipes = new Map();
@@ -13,7 +13,8 @@ bot.locales = new Collection();
 bot.prefix = prefix;
 bot.baseColor = "#ff8ff2";
 bot.database = require('./utils/database.js');
-bot.langs = require('./utils/langs');
+bot.langs = require('./utils/langs.js');
+bot.error = require('./utils/error.js');
 
 const commands = require("./structures/command");
 commands.run(bot);
