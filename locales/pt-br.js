@@ -75,7 +75,7 @@ module.exports =
             name: "error",
             cmd:{
                 errorField: "Parece que encontrei um erro... Entre em contato com o suporte !!",
-                error50034: "Não é possivel apagar uma mensagem mais antiga que `14` dias :persevere:!!"
+                error50034: "Não é possivel apagar uma mensagem mais antiga que `14` dias :persevere: !!"
             }
         }
     ],

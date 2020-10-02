@@ -3,7 +3,7 @@ var colors = require('colors');
 
 module.exports = {
     
-    async discordAPIError (error, obj, lang){
+    discordAPIError (error, obj, lang){
         if(error.code === 50034){
             return obj.channel.send(lang.error50034);
         }
@@ -20,14 +20,14 @@ module.exports = {
         }
     },
 
-    errorReturn(error, obj, name) {   
+    async errorReturn(error, obj, name) {   
         this.consoleLog(error, obj, name)
         let typeObj = obj.constructor.name.toLowerCase();
 
         if (obj && typeObj === "message"){
             const lang = await obj.client.langs.langReturn(obj.guild.language, "error", "event");
             
-            if(error.name === "DiscordAPIError") this.discordAPIError(error, obj, lang);
+            if(error.name === "DiscordAPIError") return this.discordAPIError(error, obj, lang);
             
             let embed = new MessageEmbed()
                 .setThumbnail("https://github.com/Zaetic/Nayoi/blob/master/images/nayoi/nayoiError404.png?raw=true")
