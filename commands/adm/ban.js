@@ -23,7 +23,7 @@ module.exports.run = async (bot, message, args, lang) => {
         .setImage("https://media1.tenor.com/images/021373dfbb72d1f0572111b9ea76490d/tenor.gif?itemid=9491505")
         .setTimestamp();
         
-        await message.guild.member(bUser).ban(bReason)
+        await message.guild.member(bUser).ban({ days: 0, reason: bReason })
         return message.channel.send(embed);
     }catch(e){
         bot.error.errorReturn(e, message, this.help.name)

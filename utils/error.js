@@ -38,7 +38,7 @@ class Error {
                 .setColor("c23a3a")
                 .setTimestamp()
             
-            return message.channel.send(embed);
+            return obj.channel.send(embed);
         }
         
     }

@@ -14,8 +14,8 @@ module.exports.run = async (bot, message, args, lang) => {
             
             const guild = await bot.Guild.findOne({'guildId': message.guild.id});
             guild.server.prefix = subcmd;
-            await guild.save();
             message.guild.prefix = subcmd;
+            await guild.save();
 
             message.channel.send(`${lang.prefixChanged} \`${subcmd}\``);
         }
