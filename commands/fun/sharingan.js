@@ -1,5 +1,5 @@
 const { MessageEmbed } = require("discord.js");
-const { errorReturn, randomCollection, returnNull } = require("../../utils/functions.js");
+const { randomCollection } = require("../../utils/functions.js");
 
 module.exports.run = async (bot, message, args, lang) => {
     try{
@@ -17,7 +17,7 @@ module.exports.run = async (bot, message, args, lang) => {
     
         return message.channel.send(embed)
     }catch(e){
-        errorReturn(e, message, this.help.name);
+        bot.error.errorReturn(e, message, this.help.name);
     }
 }
 

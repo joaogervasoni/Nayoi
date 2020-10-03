@@ -1,4 +1,4 @@
-const {errorReturn, returnNull} = require("../../utils/functions.js");
+const {returnNull} = require("../../utils/functions.js");
 
 module.exports.run = async (bot, message, args, lang) => {
     try{
@@ -13,7 +13,7 @@ module.exports.run = async (bot, message, args, lang) => {
     
         return message.channel.send(lang.returnSuccess);
     }catch(e){
-        errorReturn(e, message, this.help.name)
+        bot.error.errorReturn(e, message, this.help.name)
     }
 }
 

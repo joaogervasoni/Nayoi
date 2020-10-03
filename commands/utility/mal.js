@@ -1,5 +1,5 @@
 const { MessageEmbed } = require("discord.js");
-const { errorReturn, formatText, formatDate } = require("../../utils/functions.js");
+const { formatText, formatDate } = require("../../utils/functions.js");
 const fetch = require("node-fetch");
 
 module.exports.run = async (bot, message, args, lang) => {
@@ -83,7 +83,7 @@ module.exports.run = async (bot, message, args, lang) => {
 
         }else return message.reply(lang.helpReturn)
     }catch(e){
-        errorReturn(e, message, this.help.name);
+        bot.error.errorReturn(e, message, this.help.name);
     }
 }
 

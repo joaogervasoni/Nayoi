@@ -1,5 +1,4 @@
 const {MessageEmbed} = require("discord.js");
-const {errorReturn} = require("../../utils/functions.js");
 
 module.exports.run = (bot, message, args, lang) => {
     try{
@@ -18,7 +17,7 @@ module.exports.run = (bot, message, args, lang) => {
                     .setColor("#ffff00")
         return message.channel.send(embed);
     }catch(e){
-        errorReturn(e, message, this.help.name)
+        bot.error.errorReturn(e, message, this.help.name)
     }
 }
 

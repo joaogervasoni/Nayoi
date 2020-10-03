@@ -1,5 +1,4 @@
 const RoleReaction = require("../models/rolereaction.js");
-const { errorReturn } = require("../utils/functions.js");
 
 module.exports = async (bot, reaction, user) => { 
     if(user.bot == true) return
@@ -26,6 +25,6 @@ module.exports = async (bot, reaction, user) => {
             }
         }
     }catch(e){
-        errorReturn(e, null, "messageReactionAdd");
+        bot.error.errorReturn(e, null, "messageReactionAdd");
     }
 }

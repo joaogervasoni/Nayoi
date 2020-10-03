@@ -1,4 +1,4 @@
-const { errorReturn, returnNull, formatText, limitLength } = require("../../utils/functions.js");
+const { returnNull, formatText, limitLength } = require("../../utils/functions.js");
 const { tenorApi } = require("../../botconfig.json");
 const fetch = require("node-fetch");
 const {MessageEmbed} = require("discord.js");
@@ -21,7 +21,7 @@ module.exports.run = async (bot, message, args, lang) => {
 
         return message.channel.send(embed)
     }catch(e){
-        errorReturn(e, message, this.help.name);
+        bot.error.errorReturn(e, message, this.help.name);
     }
 }
 

@@ -1,5 +1,5 @@
-const { createCanvas, loadImage, registerFont } = require("canvas");
-const { errorReturn, returnNull } = require("../../utils/functions.js");
+const { createCanvas, loadImage } = require("canvas");
+const { returnNull } = require("../../utils/functions.js");
 const { MessageAttachment } = require("discord.js");
 const isImage = require('is-image');
 const checkLinks = require('check-links');
@@ -18,7 +18,7 @@ module.exports.run = async (bot, message, args, lang) => {
 
             guild.welcome.canvas = "on";
             guild.save(function (err){
-                if(err) return errorReturn(err, message, this.help.name);
+                if(err) return bot.error.errorReturn(err, message, this.help.name);
                 if(!err) return message.channel.send(`${lang.statusNew} \`${guild.welcome.canvas}\` :sunglasses:`);
             });
         }
@@ -28,7 +28,7 @@ module.exports.run = async (bot, message, args, lang) => {
 
             guild.welcome.canvas = "off";
             guild.save(function (err){
-                if(err) return errorReturn(err, message, this.help.name);
+                if(err) return bot.error.errorReturn(err, message, this.help.name);
                 if(!err) return message.channel.send(`${lang.statusNew} \`${guild.welcome.canvas}\` :cry:`);
             });
         }
@@ -41,7 +41,7 @@ module.exports.run = async (bot, message, args, lang) => {
                 const guild = await bot.Guild.findOne({'guildId': message.guild.id});
                 guild.welcome.canvasUrl = url;
                 guild.save(function (err){
-                    if(err) return errorReturn(err, message, this.help.name);
+                    if(err) return bot.error.errorReturn(err, message, this.help.name);
                     if(!err) return message.channel.send(lang.bannerChange)
                 })
             }
@@ -102,7 +102,7 @@ module.exports.run = async (bot, message, args, lang) => {
         }
         else return message.reply(lang.helpReturn)
     }catch(e){
-        errorReturn(e, message, this.help.name);
+        bot.error.errorReturn(e, message, this.help.name);
     }
 }
 

@@ -1,4 +1,4 @@
-const {errorReturn, returnNull, mentionById} = require("../../utils/functions.js");
+const {returnNull, mentionById} = require("../../utils/functions.js");
 const {MessageEmbed} = require("discord.js");
 const mongoose = require("mongoose");
 const Mute = require("../../models/mute.js");
@@ -81,7 +81,7 @@ module.exports.run = async (bot, message, args, lang) => {
             message.channel.send(`<@${toMute.id}> ${lang.returnRemoveMute}`);
         }, mutetime);
     }catch(e){
-        errorReturn(e, message, this.help.name)
+        bot.error.errorReturn(e, message, this.help.name)
     }
 }
 

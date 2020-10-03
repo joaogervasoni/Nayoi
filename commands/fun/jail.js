@@ -1,7 +1,6 @@
 const { MessageAttachment } = require("discord.js");
 const { createCanvas, loadImage } = require("canvas");
-const { returnNull, errorReturn } = require("../../utils/functions");
-const path = require("path")
+const { returnNull } = require("../../utils/functions");
 
 module.exports.run = async (bot, message, args, lang) => {
     try{
@@ -33,7 +32,7 @@ module.exports.run = async (bot, message, args, lang) => {
 
         return message.channel.send(attachment)
     }catch(e){
-        errorReturn(e, message, this.help.name);
+        bot.error.errorReturn(e, message, this.help.name);
     }
 }
 

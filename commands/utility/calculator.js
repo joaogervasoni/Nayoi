@@ -1,4 +1,4 @@
-const {errorReturn, returnNull} = require("../../utils/functions.js");
+const {returnNull} = require("../../utils/functions.js");
 const { evaluate } = require('mathjs')
 
 module.exports.run = async (bot, message, args, lang) => {
@@ -14,7 +14,7 @@ module.exports.run = async (bot, message, args, lang) => {
         
         return message.reply(`${lang.returnResult} ${result}`);
     }catch(e){
-        errorReturn(e, message, this.help.name)
+        bot.error.errorReturn(e, message, this.help.name)
     }
 }
 

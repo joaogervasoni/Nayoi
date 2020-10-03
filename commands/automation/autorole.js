@@ -1,4 +1,4 @@
-const { errorReturn, returnNull, formatId } = require("../../utils/functions.js");
+const { returnNull, formatId } = require("../../utils/functions.js");
 
 module.exports.run = async (bot, message, args, lang) => {
     try{
@@ -20,7 +20,7 @@ module.exports.run = async (bot, message, args, lang) => {
             guild.autorole.status = "on";
             guild.autorole.role = role.id;
             guild.save(function (err){
-                if(err) return errorReturn(err, message, this.help.name);
+                if(err) return bot.error.errorReturn(err, message, this.help.name);
                 if(!err) return message.channel.send(`${lang.statusNew} \`${guild.autorole.status}\` :sunglasses:`);
             });
         }
@@ -30,7 +30,7 @@ module.exports.run = async (bot, message, args, lang) => {
         
             guild.autorole.status = "off";
             guild.save(function (err){
-                if(err) return errorReturn(err, message, this.help.name);
+                if(err) return bot.error.errorReturn(err, message, this.help.name);
                 if(!err) return message.channel.send(`${lang.statusNew} \`${guild.autorole.status}\` :cry:`);
             });
         }
@@ -43,7 +43,7 @@ module.exports.run = async (bot, message, args, lang) => {
             
             guild.autorole.role = role.id;
             guild.save(function (err){
-                if(err) return errorReturn(err, message, this.help.name);
+                if(err) return bot.error.errorReturn(err, message, this.help.name);
                 if(!err) return message.channel.send(lang.roleChange)
             })
         }
@@ -55,7 +55,7 @@ module.exports.run = async (bot, message, args, lang) => {
         }
         else return message.reply(lang.helpReturn);
     }catch(e){
-        errorReturn(e, message, this.help.name);
+        bot.error.errorReturn(e, message, this.help.name);
     }
     
 }

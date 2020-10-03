@@ -1,13 +1,13 @@
 const {MessageEmbed} = require("discord.js");
 var colors = require('colors');
 
-module.exports = {
-    
+class Error { 
     discordAPIError (error, obj, lang){
         if(error.code === 50034){
             return obj.channel.send(lang.error50034);
         }
-    },
+        return
+    }
 
     consoleLog(error, obj, name) {
         var today = new Date();
@@ -18,15 +18,15 @@ module.exports = {
         }else{
             console.log(`[Error]`.brightRed +` Name: ${name} // Error: ${error} // Guild: Null // Data: ${today}`.red);
         }
-    },
+    }
 
-    async errorReturn(error, obj, name) {   
+    async errorReturn(error, obj, name) {  
         this.consoleLog(error, obj, name)
         let typeObj = obj.constructor.name.toLowerCase();
 
         if (obj && typeObj === "message"){
             const lang = await obj.client.langs.langReturn(obj.guild.language, "error", "event");
-            
+
             if(error.name === "DiscordAPIError") return this.discordAPIError(error, obj, lang);
             
             let embed = new MessageEmbed()
@@ -43,3 +43,5 @@ module.exports = {
         
     }
 }
+
+module.exports = new Error();

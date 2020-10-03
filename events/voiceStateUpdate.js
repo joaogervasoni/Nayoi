@@ -1,5 +1,5 @@
 const { MessageEmbed } = require("discord.js");
-const { errorReturn, returnNull } = require("../utils/functions.js");
+const { returnNull } = require("../utils/functions.js");
 
 module.exports = async (bot, oldState, newState) => {
     if(oldState.bot === true) return
@@ -30,6 +30,6 @@ module.exports = async (bot, oldState, newState) => {
             return channel.send(embed)
         }
     }catch(e){
-        errorReturn(e, null, "voiceStateUpdate")
+        bot.error.errorReturn(e, null, "voiceStateUpdate")
     }
 }

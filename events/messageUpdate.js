@@ -1,5 +1,4 @@
 const { MessageEmbed } = require("discord.js");
-const { errorReturn } = require("../utils/functions.js");
 
 module.exports = async (bot, oldMessage, newMessage) => {
     //Log
@@ -30,6 +29,6 @@ module.exports = async (bot, oldMessage, newMessage) => {
             }
         }
     }catch(e){
-        errorReturn(e, null, "messageUpdate")
+        bot.error.errorReturn(e, null, "messageUpdate")
     }
 }

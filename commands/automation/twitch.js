@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const {MessageEmbed} = require('discord.js');
-const {errorReturn, returnNull, formatId} = require("../../utils/functions.js");
+const {returnNull, formatId} = require("../../utils/functions.js");
 const TwitchChannel = require("../../models/twitchchannel.js");
 const TwitchGuild = require("../../models/twitchguild.js");
 const { twitchID } = require("../../botconfig.json");
@@ -27,7 +27,7 @@ module.exports.run = async (bot, message, args, lang) => {
             guild.twitch.status = "on";
             guild.twitch.channel = channel;
             guild.save(function (err){
-                if(err) return errorReturn(err, message, this.help.name);
+                if(err) return bot.error.errorReturn(err, message, this.help.name);
                 if(!err) return message.channel.send(`${lang.statusNew} \`${guild.twitch.status}\` :sunglasses:`);
             });
         }
@@ -37,7 +37,7 @@ module.exports.run = async (bot, message, args, lang) => {
         
             guild.twitch.status = "off";
             guild.save(function (err){
-                if(err) return errorReturn(err, message, this.help.name);
+                if(err) return bot.error.errorReturn(err, message, this.help.name);
                 if(!err) return message.channel.send(`${lang.statusNew} \`${guild.twitch.status}\` :cry:`);
             });
         }
@@ -87,7 +87,7 @@ module.exports.run = async (bot, message, args, lang) => {
             let twitchChannel = await TwitchChannel.findOne({ 'streamerId': subcmd});
             twitchChannel.servers = parseInt(twitchChannel.servers) - 1;
             twitchChannel.save(function (err){
-                if(err) return message.channel.send(errorReturn(err, message, cmd))
+                if(err) return bot.error.errorReturn(err, message, cmd)
                 if(!err) return message.channel.send(lang.delete)
             })
             
@@ -123,7 +123,7 @@ module.exports.run = async (bot, message, args, lang) => {
 
             twitchGuild2.config.text = length;
             twitchGuild2.save(function (err){
-                if(err) return message.channel.send(errorReturn(err, message, cmd))
+                if(err) return bot.error.errorReturn(err, message, cmd)
                 if(!err) return message.channel.send(lang.textChanged)
             })
         }
@@ -135,14 +135,14 @@ module.exports.run = async (bot, message, args, lang) => {
             const guild = await bot.Guild.findOne({'guildId': message.guild.id});
             guild.twitch.channel = channel;
             guild.save(function (err){
-                if(err) return message.channel.send(errorReturn(err, message, cmd))
+                if(err) return bot.error.errorReturn(err, message, cmd)
                 if(!err) return message.channel.send(lang.channelChange)
             })
         }
         else return message.reply(lang.helpReturn);
 
     }catch(e){
-        errorReturn(e, message, this.help.name);
+        bot.error.errorReturn(e, message, this.help.name);
     }
 }
 

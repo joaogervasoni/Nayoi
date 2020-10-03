@@ -1,4 +1,4 @@
-const { errorReturn, returnNull, formatId } = require("../../utils/functions.js");
+const { returnNull, formatId } = require("../../utils/functions.js");
 const {MessageEmbed} = require('discord.js');
 const mongoose = require('mongoose');
 const AutoDeleteMsg = require("../../models/autodeletemsg");
@@ -81,7 +81,7 @@ module.exports.run = async (bot, message, args, lang) => {
         else return message.reply(lang.helpReturn)
         
     }catch(e){
-        errorReturn(e, message, this.help.name)
+        bot.error.errorReturn(e, message, this.help.name)
     }
 
 }

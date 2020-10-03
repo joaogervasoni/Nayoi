@@ -1,4 +1,4 @@
-const {errorReturn, returnNull, mentionById, limitLength} = require("../../utils/functions.js");
+const {returnNull, mentionById, limitLength} = require("../../utils/functions.js");
 const {MessageEmbed} = require("discord.js");
 
 module.exports.run = async (bot, message, args, lang) => {
@@ -25,7 +25,7 @@ module.exports.run = async (bot, message, args, lang) => {
         await message.guild.member(kUser).kick(kReason);
         return message.channel.send(embed);
     }catch(e){
-        errorReturn(e, message, this.help.name)
+        bot.error.errorReturn(e, message, this.help.name)
     }
 }
 

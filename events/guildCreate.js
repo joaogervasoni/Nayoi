@@ -1,4 +1,3 @@
-const { errorReturn } = require("../utils/functions.js");
 const mongoose = require('mongoose');
 var colors = require('colors');
 
@@ -41,6 +40,6 @@ module.exports = (bot, guild) => {
         guild.language = bot.locales.get("pt-br");
         guild.prefix = "n!";
     }catch(e){
-        errorReturn(e, null, "guildCreate")
+        bot.error.errorReturn(e, null, "guildCreate")
     }
 }

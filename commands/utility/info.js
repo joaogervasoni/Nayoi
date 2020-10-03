@@ -1,4 +1,4 @@
-const { errorReturn, formatDate, upperCaseFirst } = require("../../utils/functions.js");
+const { formatDate, upperCaseFirst } = require("../../utils/functions.js");
 const { MessageEmbed } = require("discord.js");
 
 module.exports.run = (bot, message, args, lang) => {
@@ -69,7 +69,7 @@ module.exports.run = (bot, message, args, lang) => {
             return message.channel.send(mentionembed)
         }else return message.reply(lang.helpReturn);
     }catch(e){
-        errorReturn(e, message, this.help.name);
+        bot.error.errorReturn(e, message, this.help.name);
     }
 }
 

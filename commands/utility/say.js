@@ -1,5 +1,4 @@
-const { errorReturn, formatId, returnNull } = require("../../utils/functions.js");
-const ms = require("ms");
+const { formatId, returnNull } = require("../../utils/functions.js");
 
 module.exports.run = (bot, message, args, lang) => {
     try{
@@ -17,7 +16,7 @@ module.exports.run = (bot, message, args, lang) => {
 
         return channel.send(msg);
     }catch(e){
-        errorReturn(e, message, this.help.name)
+        bot.error.errorReturn(e, message, this.help.name)
     }
 }
 

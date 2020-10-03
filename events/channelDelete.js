@@ -1,4 +1,3 @@
-const { errorReturn } = require("../utils/functions.js");
 const AutoDeleteMsg = require("../models/autodeletemsg");
 const RoleReaction = require("../models/rolereaction.js");
 
@@ -25,6 +24,6 @@ module.exports = async (bot, channel) => {
         await RoleReaction.deleteMany({ 'channelId': channel.id })
         await AutoDeleteMsg.findOneAndDelete({ 'channelId': channel.id });
     }catch(e){
-        errorReturn(e, null, "channelDelete");
+        bot.error.errorReturn(e, null, "channelDelete");
     }
 }

@@ -1,4 +1,4 @@
-const { errorReturn, returnNull, formatId } = require("../../utils/functions.js");
+const { returnNull, formatId } = require("../../utils/functions.js");
 
 module.exports.run = async (bot, message, args, lang) => {
     try{
@@ -19,7 +19,7 @@ module.exports.run = async (bot, message, args, lang) => {
             guild.welcome.status = "on";
             guild.welcome.channel = channel;
             guild.save(function (err){
-                if(err) return errorReturn(err, message, this.help.name);
+                if(err) return bot.error.errorReturn(err, message, this.help.name);
                 if(!err) return message.channel.send(`${lang.statusNew} \`${guild.welcome.status}\` :sunglasses:`);
             });
         }
@@ -29,7 +29,7 @@ module.exports.run = async (bot, message, args, lang) => {
         
             guild.welcome.status = "off";
             guild.save(function (err){
-                if(err) return errorReturn(err, message, this.help.name);
+                if(err) return bot.error.errorReturn(err, message, this.help.name);
                 if(!err) return message.channel.send(`${lang.statusNew} \`${guild.welcome.status}\` :cry:`);
             });
         }
@@ -37,7 +37,7 @@ module.exports.run = async (bot, message, args, lang) => {
             const guild = await bot.Guild.findOne({'guildId': message.guild.id});
             guild.welcome.msg = args.join(" ").slice(cmd.length)
             guild.save(function (err){
-                if(err) return errorReturn(err, message, this.help.name);
+                if(err) return bot.error.errorReturn(err, message, this.help.name);
                 if(!err) return message.channel.send(lang.msgChange)
             });
         }
@@ -49,7 +49,7 @@ module.exports.run = async (bot, message, args, lang) => {
             const guild = await bot.Guild.findOne({'guildId': message.guild.id});
             guild.welcome.channel = channel;
             guild.save(function (err){
-                if(err) return message.channel.send(errorReturn(err, message, cmd))
+                if(err) return bot.error.errorReturn(err, message, cmd)
                 if(!err) return message.channel.send(lang.channelChange)
             })
         }
@@ -59,7 +59,7 @@ module.exports.run = async (bot, message, args, lang) => {
         }
         else return message.reply(lang.helpReturn)
     }catch(e){
-        errorReturn(e, message, this.help.name);
+        bot.error.errorReturn(e, message, this.help.name);
     }
 }
 

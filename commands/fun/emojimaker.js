@@ -1,6 +1,6 @@
 const { MessageAttachment } = require("discord.js");
 const { createCanvas, loadImage } = require("canvas");
-const { returnNull, errorReturn, formatEmojiId } = require("../../utils/functions.js");
+const { returnNull, formatEmojiId } = require("../../utils/functions.js");
 
 module.exports.run = async (bot, message, args, lang) => {
     try{
@@ -29,7 +29,7 @@ module.exports.run = async (bot, message, args, lang) => {
 
         return message.channel.send(`${lang.returnEmoji} \`${message.member.user.tag}\``, attachment)
     }catch(e){
-        errorReturn(e, message, this.help.name);
+        bot.error.errorReturn(e, message, this.help.name);
     }
 }
 

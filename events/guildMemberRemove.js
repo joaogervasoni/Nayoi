@@ -1,5 +1,5 @@
 const { MessageEmbed } = require("discord.js");
-const { errorReturn, returnNull, limitLength } = require("../utils/functions.js");
+const { returnNull, limitLength } = require("../utils/functions.js");
 
 module.exports = async (bot, member)  => {
     try{
@@ -49,6 +49,6 @@ module.exports = async (bot, member)  => {
             }
         }
     }catch(e){
-        errorReturn(e, null, "guildMemberRemove")
+        bot.error.errorReturn(e, null, "guildMemberRemove")
     }
 }

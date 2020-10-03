@@ -1,5 +1,5 @@
 const { MessageEmbed } = require("discord.js");
-const { errorReturn, returnNull } = require("../../utils/functions.js");
+const { returnNull } = require("../../utils/functions.js");
 
 module.exports.run = async (bot, message, args, lang) => {
     try{
@@ -45,7 +45,7 @@ module.exports.run = async (bot, message, args, lang) => {
         else return message.reply(lang.helpReturn);
 
     }catch(e){
-        errorReturn(e, message, this.help.name)
+        bot.error.errorReturn(e, message, this.help.name)
     }
 }
 

@@ -1,5 +1,5 @@
 const { MessageAttachment, MessageEmbed } = require("discord.js");
-const { errorReturn, returnNull } = require("../utils/functions.js");
+const { returnNull } = require("../utils/functions.js");
 const { createCanvas, loadImage } = require("canvas");
 const checkLinks = require('check-links')
 
@@ -76,6 +76,6 @@ module.exports = async (bot, oldUser, newUser) => {
 
         return;
     }catch(e){
-        errorReturn(e, null, "userUpdate")
+        bot.error.errorReturn(e, null, "userUpdate")
     }
 }

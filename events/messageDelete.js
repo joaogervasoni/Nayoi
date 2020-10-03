@@ -1,5 +1,4 @@
 const { MessageEmbed } = require("discord.js");
-const { errorReturn } = require("../utils/functions.js");
 
 module.exports = async (bot, message) => {
     if(!message.author) return
@@ -37,6 +36,6 @@ module.exports = async (bot, message) => {
             }
         }
     }catch(e){
-        errorReturn(e, null, "messageDelete")
+        bot.error.errorReturn(e, null, "messageDelete")
     }
 }

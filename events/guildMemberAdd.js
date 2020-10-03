@@ -1,5 +1,4 @@
 const { MessageAttachment } = require("discord.js");
-const { errorReturn } = require("../utils/functions.js");
 const { createCanvas, loadImage } = require("canvas");
 const checkLinks = require('check-links');
 
@@ -81,6 +80,6 @@ module.exports = async (bot, member) => {
            }
         }
     } catch (e) {
-        errorReturn(e, null, "guildMemberAdd")
+        bot.error.errorReturn(e, null, "guildMemberAdd")
     }  
 }

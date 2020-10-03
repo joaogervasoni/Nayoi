@@ -1,4 +1,3 @@
-const { errorReturn } = require("../utils/functions.js");
 const RoleReaction = require("../models/rolereaction.js");
 const AutoDeleteMsg = require("../models/autodeletemsg");
 const TwitchGuild = require("../models/twitchguild.js")
@@ -23,6 +22,6 @@ module.exports = async (bot, guild) => {
         
         console.log(`[Left]`.brightYellow + ` Name:${guild.name} Users:${guild.memberCount} id:${guild.id} Date:${new Date()}`.yellow)
     }catch(e){
-        errorReturn(e, null, "guildDelete")
+        bot.error.errorReturn(e, null, "guildDelete")
     }
 }

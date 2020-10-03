@@ -1,5 +1,5 @@
 const { MessageEmbed } = require("discord.js");
-const { errorReturn, formatText } = require("../../utils/functions.js");
+const { formatText } = require("../../utils/functions.js");
 const { weatherApi } = require("../../botconfig.json");
 const fetch = require("node-fetch");
 
@@ -22,7 +22,7 @@ module.exports.run = async (bot, message, args, lang) => {
             .setColor(bot.baseColor)
         return message.channel.send(embed)
     }catch(e){
-        errorReturn(e, message, this.help.name);
+        bot.error.errorReturn(e, message, this.help.name);
     }
 }
 

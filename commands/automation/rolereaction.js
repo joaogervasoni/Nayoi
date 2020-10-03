@@ -1,5 +1,5 @@
 const {MessageCollector, MessageEmbed} = require('discord.js');
-const {errorReturn, listCollection, returnNull, limitLength, formatId, formatEmojiId} = require("../../utils/functions.js");
+const {listCollection, returnNull, limitLength, formatId, formatEmojiId} = require("../../utils/functions.js");
 const mongoose = require('mongoose');
 const RoleReaction = require("../../models/rolereaction.js");
 
@@ -125,7 +125,7 @@ module.exports.run = async (bot, message, args, lang) => {
             })
         }  
     }catch(e){
-        errorReturn(e, message, this.help.name);       
+        bot.error.errorReturn(e, message, this.help.name);       
     }
 }
 

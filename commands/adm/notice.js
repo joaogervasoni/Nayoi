@@ -1,4 +1,4 @@
-const { errorReturn, returnNull, formatId, limitLength } = require("../../utils/functions.js");
+const { returnNull, formatId, limitLength } = require("../../utils/functions.js");
 const { MessageEmbed } = require("discord.js");
 const mongoose = require('mongoose');
 const Notice = require("../../models/notice.js");
@@ -88,7 +88,7 @@ module.exports.run = async (bot, message, args, lang) => {
         }
         else return message.reply(lang.helpReturn);
     }catch(e){
-        errorReturn(e, message, this.help.name);
+        bot.error.errorReturn(e, message, this.help.name);
     }
 }
 

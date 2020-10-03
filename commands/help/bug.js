@@ -1,5 +1,5 @@
 const {MessageEmbed} = require("discord.js");
-const {errorReturn, returnNull} = require("../../utils/functions.js")
+const { returnNull } = require("../../utils/functions.js")
 const mongoose = require("mongoose");
 const Bug = require("../../models/bug");
 
@@ -27,7 +27,7 @@ module.exports.run = async (bot, message, args, lang) =>  {
     
         return message.channel.send(embed);
     }catch(e){
-        errorReturn(e, message, this.help.name);
+        bot.error.errorReturn(e, message, this.help.name);
     }
 }
 

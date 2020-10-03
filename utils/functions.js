@@ -1,28 +1,6 @@
-const {MessageEmbed} = require("discord.js");
 var colors = require('colors');
 
 module.exports = {
-    errorReturn: function(error, message, name) {  
-        var today = new Date();
-        today = `${today.getDate()}/${today.getMonth()+1}/${today.getFullYear()}`
-
-        if (message != null && message != undefined){
-            console.log(`[Error]`.brightRed +` Name: ${name} // Error: ${error} // Guild: ${message.guild} // Data: ${today}`.red);
-            let embed = new MessageEmbed()
-                .setThumbnail("https://github.com/Zaetic/Nayoi/blob/master/images/nayoi/nayoiError404.png?raw=true")
-                .setTitle("Aconteceu um erro")
-                .setDescription(`${error}`)
-                .addField("Name", name, true)
-                .addField("Erro" ,"Parece que encontrei um erro... Entre em contato com o suporte !!", true)
-                .setColor("c23a3a")
-                .setTimestamp()
-            
-            return message.channel.send(embed);
-        }else{
-            console.log(`[Error]`.brightRed +` Name: ${name} // Error: ${error} // Guild: Null // Data: ${today}`.red);
-        } 
-    },
-
     returnNull: function(text){
         if(Array.isArray(text)){
             if(text.length === 0) return true;
