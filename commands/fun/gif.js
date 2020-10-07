@@ -7,7 +7,8 @@ module.exports.run = async (bot, message, args, lang) => {
     try{
         let cmd = args[0]
         
-        if(!returnNull(cmd)) cmd = formatText(cmd);
+        if(returnNull(cmd)) return message.reply(lang.helpReturn)
+        cmd = formatText(cmd);
         const gif = await fetch(`https://api.tenor.com/v1/search?q=${cmd}&key=${tenorApi}&limit=1`).then(res => res.json());
         if(returnNull(gif.results[0]) || returnNull(gif)) return message.reply(lang.returnNull)
 

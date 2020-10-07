@@ -50,7 +50,7 @@ module.exports.run = async (bot, message, args, lang) => {
             return message.reply(lang.highRole);
         }
    
-        let muterole = message.guild.roles.cache.find(role => role.name === "Muted");
+        let muterole = await message.guild.roles.cache.find(role => role.name === "Muted");
         if (toMute.roles.cache.find(role => role.name === "Muted")) return message.channel.send(lang.isMuted)
 
         let mutetime = args[1];

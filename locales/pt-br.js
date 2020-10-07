@@ -728,10 +728,18 @@ module.exports =
         {
             name: "work",
             cmd:{
-
+                textNull: "Digite um texto para ser colocado no card !!",
+                embedTitle: "Closed",
+                embedFooter: "❌ Atualmente este chat esta bloqueado via comando por um administrador, para ter acesso converse com um administrador !!",
+                workSucess: "Work criado com sucesso :blush:!!",
+                workNull: "Nenhuma msg de work neste canal !!",
+                workDisabled: "Work foi desabilitado !!"
             },
             help:{
-
+                description: "Bloqueia um canal e envia uma msg explicando",
+                usability: "Pode ser utilizando desta forma: `{prefix}work on #channel MSGAQUI`"
+                +"Para desabilitar use `{prefix}work off #channel`\n",
+                others: "O comando apenas bloqueia a role `Everyone` de enviar msg e envia uma msg de aviso!!",
             }
         },
         {
