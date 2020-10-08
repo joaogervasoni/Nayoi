@@ -28,7 +28,8 @@ module.exports =
                 nullCommand: "Utilize os comandos `{prefix}help` e `{prefix}commands` para saber sobre o bot",
                 reqOwnerPerm: "Apenas utilizavel pelo meu mestre",
                 reqUserPerm: "Você precisa das seguites permissões:",
-                reqBotPerm: "Eu não tenho essas permissões:"
+                reqBotPerm: "Eu não tenho essas permissões:",
+                reqPerm: "Preciso de permissão para falar !!! Me habilite de mandar mensagens no servidor ou no canal :rage:!!"
             }
         },
         {

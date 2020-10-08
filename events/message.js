@@ -37,6 +37,9 @@ module.exports = async (bot, message) => {
     bot.langs.langParams(lang, prefix, cmd.help.name)
 
     //Perms validations
+    if ((!message.guild.me.permissions.has(["SEND_MESSAGES"], true)) || !message.channel.permissionsFor(message.guild.me).has(["SEND_MESSAGES"], true))
+        return message.member.send(langEvent.reqPerm)
+
     if (cmd.requirements.ownerOnly && !owners.includes(message.author.id))
         return message.reply(langEvent.reqOwnerPerm);
 
