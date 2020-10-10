@@ -12,7 +12,7 @@ module.exports.run = async (bot, message, args, lang) => {
             if(returnNull(subcmd)) return message.channel.send(lang.invalidLang)
             if(subcmd === "en-us") return message.channel.send("`en-us` Language in progress !!")
 
-            newLang = bot.locales.get(subcmd);
+            newLang = bot.langs.getLang(subcmd);
             if(returnNull(newLang)) return message.channel.send(lang.invalidLang)
  
             message.guild.language = newLang;
@@ -31,7 +31,7 @@ module.exports.run = async (bot, message, args, lang) => {
         }
         else if(cmd === "list"){
             let langs = "";
-            bot.locales.forEach(element => {
+            bot.langs.getLang().forEach(element => {
                 langs = `${langs + element.name}\n`;
             });
 

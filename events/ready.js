@@ -27,7 +27,7 @@ module.exports = async (bot) => {
             guildDb.server.lang = lang;
             guildDb.save();
         }
-        guild.language = bot.locales.get(lang);
+        guild.language = bot.langs.getLang(lang);
         guild.prefix = prefixDb;
     }
     console.log(`[Lang]`.brightGreen +` Carregadas em todos os servidores`.green);

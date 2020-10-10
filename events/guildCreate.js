@@ -37,7 +37,7 @@ module.exports = (bot, guild) => {
         console.log(`[Join]`.brightMagenta + ` Name:${guild.name} Users:${guild.memberCount} id:${guild.id} Date:${new Date()}`.magenta)
         guildNew.save()
 
-        guild.language = bot.locales.get("pt-br");
+        guild.language = bot.langs.getLang("pt-br");
         guild.prefix = "n!";
     }catch(e){
         bot.error.errorReturn(e, null, "guildCreate")
