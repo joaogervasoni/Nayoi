@@ -18,6 +18,7 @@ module.exports.run = (bot, message, args, lang) => {
         .addField(lang.users, bot.users.cache.size, true)
         .addField(lang.memory, `${Math.round(used * 100) / 100} MB`, true)
         .addField(lang.uptime, `${days}D ${hours}H ${min}M`, true)
+        .addField("Ping", message.client.ws.ping.toFixed(2))
         .setTimestamp()
         .setColor(bot.baseColor)
     

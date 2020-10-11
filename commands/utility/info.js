@@ -14,7 +14,7 @@ module.exports.run = (bot, message, args, lang) => {
             .addField(lang.fieldCreator, "Zaetic#9549", true)
             .addField("Ping:", message.client.ws.ping.toFixed(2), true)
             .addField(lang.fieldCreatedAt, formatDate(bot.user.createdAt), true)
-            .addField(labg.fieldEnterAt, formatDate(message.member.guild.joinedAt), true)
+            .addField(lang.fieldEnterAt, formatDate(message.member.guild.joinedAt), true)
             .addField("Link", "https://nayoi.com")
             
             return message.channel.send(botembed);
