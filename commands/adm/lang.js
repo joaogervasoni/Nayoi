@@ -17,11 +17,11 @@ module.exports.run = async (bot, message, args, lang) => {
  
             message.guild.language = newLang;
         
-            const guild = await bot.Guild.findOne({'guildId': message.guild.id});
+            const guild = await bot.database.findOne("guild", {'guildId': message.guild.id});
             if(guild.server.lang === newLang.name) return message.channel.send(`${lang.statusOk} \`${guild.server.lang}\``);
 
             guild.server.lang = newLang.name;
-            guild.save();
+            await bot.database.save(guild);
 
             return message.channel.send(`${lang.changedLang} ${newLang.name}`)
         }

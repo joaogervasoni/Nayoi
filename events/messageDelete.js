@@ -13,7 +13,7 @@ module.exports = async (bot, message) => {
 
     //Log
     try{
-        const guild = await bot.Guild.findOne({ 'guildId': message.guild.id });
+        const guild = await bot.database.findOne("guild", { 'guildId': message.guild.id });
         
         if (guild.log.status == "on") {
             let channel = message.guild.channels.cache.find(channel => channel.id === guild.log.channel);

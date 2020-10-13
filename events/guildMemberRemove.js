@@ -4,12 +4,12 @@ const { returnNull, limitLength } = require("../utils/functions.js");
 module.exports = async (bot, member)  => {
     try{
         const lang = await bot.langs.langReturn(member.guild.language, "guildMemberRemove", "event");
-        const guild = await bot.Guild.findOne({ 'guildId': member.guild.id });
+        const guild = await bot.database.findOne("guild", { 'guildId': member.guild.id });
 
         //MemberCount
         if(member.guild.memberCount){
             guild.memberCount = member.guild.memberCount;
-            guild.save();
+            bot.database.save(guild);
         }
 
         //Log

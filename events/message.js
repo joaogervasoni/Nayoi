@@ -1,11 +1,10 @@
 const { mentionById } = require("../utils/functions.js");
-const AutoDeleteMsg = require("../models/autodeletemsg");
 
 module.exports = async (bot, message) => {
     if (message.author.bot) return;
     const prefix = message.guild.prefix;
 
-    let autodeletemsg = await AutoDeleteMsg.findOne({ channelId: message.channel.id });
+    let autodeletemsg = await bot.database.findOne("autodeletemsg", { channelId: message.channel.id });
     if(autodeletemsg && autodeletemsg != undefined){
         if(autodeletemsg.config.status === "on"){
             let imageAtt = message.attachments.first() ? message.attachments.first().proxyURL : null

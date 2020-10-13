@@ -12,25 +12,23 @@ module.exports.run = async (bot, message, args, lang) => {
         if(returnNull(cmd)) return message.reply(lang.helpReturn);
 
         if(cmd === "on" || cmd === "true"){
-            const guild = await bot.Guild.findOne({'guildId': message.guild.id});
+            const guild = await bot.database.findOne("guild", {'guildId': message.guild.id});
             if (guild.welcome.canvas === "on") return message.channel.send(`${lang.statusOk} \`${guild.welcome.canvas}\``);
             if (guild.welcome.status === "off") return message.channel.send(lang.welcomeOff.replace(/{guild.welcome.status}/g, guild.welcome.status));
 
             guild.welcome.canvas = "on";
-            guild.save(function (err){
-                if(err) return bot.error.errorReturn(err, message, this.help.name);
-                if(!err) return message.channel.send(`${lang.statusNew} \`${guild.welcome.canvas}\` :sunglasses:`);
-            });
+            await bot.database.save(guild);
+
+            return message.channel.send(`${lang.statusNew} \`${guild.welcome.canvas}\` :sunglasses:`);
         }
         else if(cmd === "off" || cmd === "false"){
-            const guild = await bot.Guild.findOne({'guildId': message.guild.id});
+            const guild = await bot.database.findOne("guild", {'guildId': message.guild.id});
             if (guild.welcome.canvas === "off") return message.channel.send(`${lang.statusOk} \`${guild.welcome.status}\``);
 
             guild.welcome.canvas = "off";
-            guild.save(function (err){
-                if(err) return bot.error.errorReturn(err, message, this.help.name);
-                if(!err) return message.channel.send(`${lang.statusNew} \`${guild.welcome.canvas}\` :cry:`);
-            });
+            await bot.database.save(guild);
+            
+            return message.channel.send(`${lang.statusNew} \`${guild.welcome.canvas}\` :cry:`);
         }
         else if(cmd === "cst" || cmd === "custom"){
             let url = subcmd;
@@ -38,19 +36,18 @@ module.exports.run = async (bot, message, args, lang) => {
             let check = await checkLinks([url]);
 
             if (isImage(url) && (check[url].status === "alive")){
-                const guild = await bot.Guild.findOne({'guildId': message.guild.id});
+                const guild = await bot.database.findOne("guild", {'guildId': message.guild.id});
                 guild.welcome.canvasUrl = url;
-                guild.save(function (err){
-                    if(err) return bot.error.errorReturn(err, message, this.help.name);
-                    if(!err) return message.channel.send(lang.bannerChange)
-                })
+                await bot.database.save(guild);
+
+                return message.channel.send(lang.bannerChange)
             }
             else{
                 return message.channel.send(lang.invalidImg)
             }
         }
         else if(cmd === "sh" || cmd === "show"){
-            const guild = await bot.Guild.findOne({'guildId': message.guild.id});
+            const guild = await bot.database.findOne("guild", {'guildId': message.guild.id});
             let imagem = "https://github.com/Zaetic/Nayoi/blob/master/images/others/background.png?raw=true";
 
             if(guild.welcome.canvasUrl === "off" || guild.welcome.canvasUrl === "") message.channel.send("Banner custom `offline`");

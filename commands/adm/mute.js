@@ -1,7 +1,5 @@
 const {returnNull, mentionById} = require("../../utils/functions.js");
 const {MessageEmbed} = require("discord.js");
-const mongoose = require("mongoose");
-const Mute = require("../../models/mute.js");
 const ms = require("ms");
 
 module.exports.run = async (bot, message, args, lang) => {
@@ -9,7 +7,7 @@ module.exports.run = async (bot, message, args, lang) => {
     try{
         let cmd = args[0];
         if(cmd === "show"){
-            let mutes = await Mute.find({ 'guildId': message.guild.id });
+            let mutes = await bot.database.find("mute", { 'guildId': message.guild.id });
             let description = "";
 
             if(!returnNull(mutes)) {
@@ -37,7 +35,7 @@ module.exports.run = async (bot, message, args, lang) => {
             let muterole = message.guild.roles.cache.find(role => role.name === "Muted");
             if (!mutedUser.roles.cache.find(role => role.name === "Muted")) return message.channel.send(lang.muteFalse)
 
-            await Mute.findOneAndRemove({ 'guildId': message.guild.id, 'userId': mutedUser.user.id })
+            await bot.database.findOneAndRemove("mute", { 'guildId': message.guild.id, 'userId': mutedUser.user.id })
             mutedUser.roles.remove(muterole);
             
             return message.reply(`${mutedUser} ${lang.unmuted}`);
@@ -70,13 +68,13 @@ module.exports.run = async (bot, message, args, lang) => {
         })
 
         await(toMute.roles.add(muterole.id));
-        muteDB(mutetime, message.guild.id, toMute.user.id, message.member.user.id);
+        muteDB(bot, mutetime, message.guild.id, toMute.user.id, message.member.user.id);
 
         message.reply(`<@${toMute.id}> ${lang.returnMuted} ${ms(mutetime)}`)
 
         setTimeout(async function(){
             toMute.roles.remove(muterole.id);
-            await Mute.findOneAndRemove({ 'guildId': message.guild.id, 'userId': toMute.user.id })
+            await bot.database.findOneAndRemove("mute", { 'guildId': message.guild.id, 'userId': toMute.user.id })
 
             message.channel.send(`<@${toMute.id}> ${lang.returnRemoveMute}`);
         }, mutetime);
@@ -85,12 +83,11 @@ module.exports.run = async (bot, message, args, lang) => {
     }
 }
 
-async function muteDB(mutetime, idGuild, idUser, idExecutor){
+async function muteDB(bot, mutetime, idGuild, idUser, idExecutor){
     let time = new Date().getTime();
     time = time + mutetime;
 
-    const mute = new Mute({
-        _id: mongoose.Types.ObjectId(),
+    const model = await bot.database.create("mute", {
         guildId: idGuild,
         userId: idUser,
         date: time,
@@ -98,7 +95,7 @@ async function muteDB(mutetime, idGuild, idUser, idExecutor){
         reason: "null"
     })
 
-    mute.save();
+    bot.database.save(model);
 }
 
 module.exports.help = {

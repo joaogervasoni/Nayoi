@@ -8,7 +8,7 @@ const colors = require('colors');
 class Database {
     #options
 
-    constructor(mongodb){    
+    constructor(mongodb){
         this.models = new Collection();
         this.#options = {
             useNewUrlParser: true,
@@ -54,10 +54,27 @@ class Database {
             return new Error(e.stack);
         }
     }
+
+    async getModel(name){
+        let model = this.models.get(name.toLowerCase());
+        return model;
+    }
+
+    async create(modelName, options){
+        let model = this.getModel(modelName);
+        
+        model = await model.then(result => {
+            const Model = result;
+            const newModel = new Model(options);
+            return newModel;
+        })
+
+        return model;
+    }
     
     async findOne(modelName, options){
         try{
-            let model = this.models.get(modelName.toLowerCase());
+            let model = await this.getModel(modelName);
             model = await model.findOne(options);
             return model;
         }catch(e){
@@ -67,7 +84,7 @@ class Database {
 
     async find(modelName, options){
         try{
-            let model = this.models.get(modelName.toLowerCase());
+            let model = await this.getModel(modelName);
             model = await model.find(options);
             return model;
         }catch(e){
@@ -77,7 +94,7 @@ class Database {
 
     async findOneAndRemove(modelName, options){
         try{
-            let model = this.models.get(modelName.toLowerCase());
+            let model = await this.getModel(modelName);
             model = await model.findOneAndRemove(options);
             return model;
         }catch(e){
@@ -87,7 +104,7 @@ class Database {
 
     async deleteMany(modelName, options){
         try{
-            let model = this.models.get(modelName.toLowerCase());
+            let model = await this.getModel(modelName);
             model = await model.deleteMany(options);
             return model;
         }catch(e){
@@ -97,7 +114,7 @@ class Database {
 
     async findOneAndDelete(modelName, options){
         try{
-            let model = this.models.get(modelName.toLowerCase());
+            let model = await this.getModel(modelName);
             model = await model.findOneAndDelete(options);
             return model;
         }catch(e){

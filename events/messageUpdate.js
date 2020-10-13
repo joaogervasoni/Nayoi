@@ -6,7 +6,7 @@ module.exports = async (bot, oldMessage, newMessage) => {
     if(!oldMessage.author || !newMessage.author) return
 
     try{
-        const guild = await bot.Guild.findOne({ 'guildId': oldMessage.guild.id });
+        const guild = await bot.database.findOne("guild", { 'guildId': oldMessage.guild.id });
         
         if (guild.log.status == "on") {
             let channel = oldMessage.guild.channels.cache.find(channel => channel.id === guild.log.channel)

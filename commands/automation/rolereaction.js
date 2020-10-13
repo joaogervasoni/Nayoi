@@ -1,7 +1,5 @@
 const {MessageCollector, MessageEmbed} = require('discord.js');
 const {listCollection, returnNull, limitLength, formatId, formatEmojiId} = require("../../utils/functions.js");
-const mongoose = require('mongoose');
-const RoleReaction = require("../../models/rolereaction.js");
 
 let msgCollectorFilter = (newMsg, originalMsg) => newMsg.author.id === originalMsg.author.id;
 
@@ -112,16 +110,15 @@ module.exports.run = async (bot, message, args, lang) => {
                 if(reason === "time") return message.channel.send(lang.limitTime)
                 if(!idmsg) return
                 
-                let findMsgDocument = await RoleReaction.findOne({ 'messageId': idmsg.id});
+                let findMsgDocument = await bot.database.findOne("rolereaction", { 'messageId': idmsg.id});
                 if(findMsgDocument) message.channel.send(lang.returnExist);
 
-                const roleReactionNew = new RoleReaction({
-                    _id: mongoose.Types.ObjectId(),
+                const roleReactionNew = await bot.database.create("rolereaction", {
                     guildId: message.guild.id,
                     messageId: idmsg.id,
                     emojiRoleMappings: emojiRoleMappings
                 });
-                roleReactionNew.save()
+                await bot.database.save(roleReactionNew);
             })
         }  
     }catch(e){

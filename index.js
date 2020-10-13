@@ -1,12 +1,10 @@
 const { mongodb, token, prefix } = require("./botconfig.json");
 const { Client, Collection } = require("discord.js");
-const Guild = require("./models/guild");
 const Langs = require('./structures/langs.js');
 const Database = require('./structures/database.js');
 
 const bot = new Client({disableMentions: "everyone", partials: ['MESSAGE', 'REACTION']});
 
-bot.Guild = Guild;
 bot.snipes = new Map();
 bot.commands = new Collection();
 bot.aliases = new Collection();

@@ -1,5 +1,3 @@
-const RoleReaction = require("../models/rolereaction.js");
-
 module.exports = async (bot, reaction, user) => {
     if(user.bot == true) return
 
@@ -8,7 +6,7 @@ module.exports = async (bot, reaction, user) => {
             await reaction.message.fetch();
             let { id } = reaction.message;
 
-            let roleReaction = await RoleReaction.findOne({ messageId: id });
+            let roleReaction = await bot.database.findOne("rolereaction", { messageId: id });
             if(roleReaction) {
                 let { emojiRoleMappings } = roleReaction;
                 let roleId;

@@ -1,7 +1,6 @@
 const { returnNull, formatId, limitLength } = require("../../utils/functions.js");
 const { MessageEmbed } = require("discord.js");
 const mongoose = require('mongoose');
-const Notice = require("../../models/notice.js");
 const ms = require("ms");
 
 module.exports.run = async (bot, message, args, lang) => {
@@ -10,7 +9,7 @@ module.exports.run = async (bot, message, args, lang) => {
         if(returnNull(cmd)) return message.reply(lang.helpReturn);
     
         if(cmd === "show"){
-            let notices = await Notice.find({ 'guildId': message.guild.id});
+            let notices = await bot.database.find("notice", { 'guildId': message.guild.id});
             let description = "";
     
             if(!returnNull(notices)) {
@@ -31,7 +30,7 @@ module.exports.run = async (bot, message, args, lang) => {
             let id = args[1];
             if((returnNull(id)) || (!mongoose.Types.ObjectId.isValid(id))) return message.reply(lang.returnFalseId);
 
-            let noticeDel = await Notice.findOneAndRemove({ '_id': id, 'guildId': message.guild.id })
+            let noticeDel = await bot.database.findOneAndRemove("notice", { '_id': id, 'guildId': message.guild.id })
             if(returnNull(noticeDel)) return message.reply(lang.returnFalseId);
             
             return message.channel.send(lang.delNotice);
@@ -73,11 +72,11 @@ module.exports.run = async (bot, message, args, lang) => {
             setTimeout(async function(){
                 let channelExist = message.guild.channels.cache.get(channel.id)
                 if(returnNull(channelExist)) return
-                let noticeCheck = await Notice.findOne({ 'channelId': channel.id, 'guildId': message.guild.id, 'text': textDB });
+                let noticeCheck = await bot.database.findOne("notice", { 'channelId': channel.id, 'guildId': message.guild.id, 'text': textDB });
                 if(returnNull(noticeCheck)) return
 
                 channel.send(text)
-                await Notice.findOneAndRemove({ 'channelId': channel.id, 'guildId': message.guild.id, 'text': textDB});
+                await bot.database.findOneAndRemove("notice", { 'channelId': channel.id, 'guildId': message.guild.id, 'text': textDB});
             }, time);
     
             let thisDate = new Date();
@@ -96,8 +95,7 @@ async function noticeDB(time, channel, textDB, cmd, idGuild){
     let newTime = new Date().getTime();
     time = newTime + time;
 
-    const notice = new Notice({
-        _id: mongoose.Types.ObjectId(),
+    const notice = await bot.database.create("notice", {
         guildId: idGuild,
         channelId: channel.id,
         date: time,
@@ -105,7 +103,7 @@ async function noticeDB(time, channel, textDB, cmd, idGuild){
         textType: cmd
     });
 
-    await notice.save();
+    await bot.database.save(notice);
 }
 
 module.exports.help = {

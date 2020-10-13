@@ -1,10 +1,8 @@
-const mongoose = require('mongoose');
-var colors = require('colors');
+const colors = require('colors');
 
-module.exports = (bot, guild) => {
+module.exports = async (bot, guild) => {
     try{
-        const guildNew = new bot.Guild({
-            _id: mongoose.Types.ObjectId(),
+        const guildNew = bot.database.create("guild", {
             name: guild.name,
             guildId: guild.id,
             memberCount: guild.memberCount,
@@ -35,7 +33,7 @@ module.exports = (bot, guild) => {
             }
         });
         console.log(`[Join]`.brightMagenta + ` Name:${guild.name} Users:${guild.memberCount} id:${guild.id} Date:${new Date()}`.magenta)
-        guildNew.save()
+        await bot.database.save(guildNew);
 
         guild.language = bot.langs.getLang("pt-br");
         guild.prefix = "n!";

@@ -5,12 +5,12 @@ const checkLinks = require('check-links');
 module.exports = async (bot, member) => {  
     try {
         const lang = await bot.langs.langReturn(member.guild.language, "guildMemberAdd", "event");
-        const guild = await bot.Guild.findOne({ 'guildId': member.guild.id });
+        const guild = await bot.database.findOne("guild", { 'guildId': member.guild.id });
 
         //MemberCount
         if(member.guild.memberCount){
             guild.memberCount = member.guild.memberCount;
-            guild.save();
+            await bot.database.save(guild);
         }
         
         //Autorole

@@ -1,10 +1,6 @@
 const { MessageEmbed } = require("discord.js");
 const { limitLength, returnNull } = require("../utils/functions.js");
-const TwitchChannel = require("../models/twitchchannel.js");
-const TwitchGuild = require("../models/twitchguild.js");
-const Notice = require("../models/notice.js");
-const Mute = require("../models/mute.js");
-var colors = require('colors');
+const colors = require('colors');
 var api = require('twitch-api-v5');
 const { twitchID, prefix } = require("../botconfig.json");
 api.clientID = twitchID;
@@ -15,7 +11,7 @@ module.exports = async (bot) => {
 
         let lang = undefined;
         let prefixDb = prefix;
-        let guildDb = await bot.Guild.findOne({ 'guildId': guild.id });
+        let guildDb = await bot.database.findOne("guild", { 'guildId': guild.id });
         if(guildDb){
             lang = guildDb.server.lang;
             prefixDb = guildDb.server.prefix;
@@ -25,7 +21,7 @@ module.exports = async (bot) => {
         if(!lang) {
             lang = "pt-br";
             guildDb.server.lang = lang;
-            guildDb.save();
+            await bot.database.save(guildDb);
         }
         guild.language = bot.langs.getLang(lang);
         guild.prefix = prefixDb;
@@ -34,7 +30,7 @@ module.exports = async (bot) => {
     console.log(`[Online]`.brightGreen +` ${bot.user.username} esta Online em ${bot.guilds.cache.size} servidores`.green);
   
     async function mutes(){
-        let mutes = await Mute.find({});
+        let mutes = await bot.database.find("mute", {});
 
         for (let index = 0; index < mutes.length; index++){
             const element = mutes[index];
@@ -47,7 +43,7 @@ module.exports = async (bot) => {
                 if(!muterole) return
 
                 member.roles.remove(muterole.id);
-                await Mute.findOneAndRemove({ 'guildId': guild.id, 'userId': member.user.id })
+                await bot.database.findOneAndRemove("mute", { 'guildId': guild.id, 'userId': member.user.id })
                 
                 member.send(`<@${member.user.id}> Unmuted`);
             }, time)
@@ -55,14 +51,14 @@ module.exports = async (bot) => {
     }
 
     async function notices(){
-        let notices = await Notice.find({});
+        let notices = await bot.database.find("notice", {});
 
         for (let index = 0; index < notices.length; index++) {
             const element = notices[index];
             let time = element.date - new Date().getTime();
             
             setTimeout(async function(){
-                let noticeCheck = await Notice.findOne({ 'channelId': element.channelId, 'guildId': element.guildId, 'text': element.text });
+                let noticeCheck = await bot.database.findOne("notice", { 'channelId': element.channelId, 'guildId': element.guildId, 'text': element.text });
                 if(returnNull(noticeCheck)) return
 
                 let guild = bot.guilds.cache.get(element.guildId);
@@ -81,7 +77,7 @@ module.exports = async (bot) => {
                     channel.send(element.text)
                 }
     
-                await Notice.findOneAndRemove({ 'channelId': element.channelId, 'guildId': element.guildId, 'text': element.text});
+                await bot.database.findOneAndRemove("notice", { 'channelId': element.channelId, 'guildId': element.guildId, 'text': element.text});
             }, time);
         }
     }
@@ -90,13 +86,13 @@ module.exports = async (bot) => {
         while (true) {
             await new Promise(resolve => setTimeout(resolve, 60000));
             
-            let streamer = await TwitchChannel.find({});
+            let streamer = await bot.database.find("twitchchannel", {});
             
             for (let index = 0; index < streamer.length; index++){
-                let twitchGuild = await TwitchGuild.find({ 'streamerId': streamer[index].streamerId });
+                let twitchGuild = await bot.database.find("twitchguild", { 'streamerId': streamer[index].streamerId });
 
                 for (let index = 0; index < twitchGuild.length; index++){
-                    let guildT = await bot.Guild.findOne({ 'guildId': twitchGuild[index].guildId });
+                    let guildT = await bot.database.findOne("guild", { 'guildId': twitchGuild[index].guildId });
                     if(guildT.twitch.status === "on"){
                         api.streams.channel({ channelID: twitchGuild[index].streamerId, stream_type: "live" }, (err, res) => {
     

@@ -1,21 +1,18 @@
 const {MessageEmbed} = require("discord.js");
-const { returnNull } = require("../../utils/functions.js")
-const mongoose = require("mongoose");
-const Bug = require("../../models/bug");
+const { returnNull } = require("../../utils/functions.js");
 
 module.exports.run = async (bot, message, args, lang) =>  {
     try{
         const bug = args.join(" ");
         if(returnNull(bug)) return message.reply(lang.returnNull)
     
-        const bugDB = new Bug({
-            _id: mongoose.Types.ObjectId(),
+        const bugDB = await bot.database.create("bug", {
             guildId: message.guild.id,
             user: message.member.user.id,
             date: new Date().getTime(),
             bug: bug
         })
-        await bugDB.save();
+        await bot.database.save(bugDB);
     
         const embed = new MessageEmbed()
         .setThumbnail("https://github.com/Zaetic/Nayoi/blob/master/images/nayoi/nayoiHappy.gif?raw=true")

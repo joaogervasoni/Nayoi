@@ -9,7 +9,7 @@ module.exports = async (bot, oldState, newState) => {
     const lang = await bot.langs.langReturn(oldState.guild.language, "voiceStateUpdate", "event");
 
     try{
-        const guild = await bot.Guild.findOne({ 'guildId': oldState.guild.id });
+        const guild = await bot.database.findOne("guild", { 'guildId': oldState.guild.id });
         
         if (guild.log.status === "on") {
             let channel = oldState.guild.channels.cache.find(channel => channel.id === guild.log.channel);

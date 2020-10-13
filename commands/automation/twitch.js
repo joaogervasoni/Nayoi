@@ -1,8 +1,5 @@
-const mongoose = require('mongoose');
 const {MessageEmbed} = require('discord.js');
 const {returnNull, formatId} = require("../../utils/functions.js");
-const TwitchChannel = require("../../models/twitchchannel.js");
-const TwitchGuild = require("../../models/twitchguild.js");
 const { twitchID } = require("../../botconfig.json");
 var api = require('twitch-api-v5');
 api.clientID = twitchID;
@@ -21,34 +18,32 @@ module.exports.run = async (bot, message, args, lang) => {
             let chat = await message.guild.channels.cache.find(chat => chat.id === channel);
             if (!chat || chat === undefined || chat === null) return message.reply(lang.returnNull);
 
-            const guild = await bot.Guild.findOne({'guildId': message.guild.id});
+            const guild = await bot.database.findOne("guild", {'guildId': message.guild.id});
             if (guild.twitch.status === "on") return message.channel.send(`${lang.statusOk} \`${guild.twitch.status}\``);
             
             guild.twitch.status = "on";
             guild.twitch.channel = channel;
-            guild.save(function (err){
-                if(err) return bot.error.errorReturn(err, message, this.help.name);
-                if(!err) return message.channel.send(`${lang.statusNew} \`${guild.twitch.status}\` :sunglasses:`);
-            });
+            await bot.database.save(guild);
+            
+            return message.channel.send(`${lang.statusNew} \`${guild.twitch.status}\` :sunglasses:`);
         }
         else if(cmd === "off"){
-            const guild = await bot.Guild.findOne({'guildId': message.guild.id});
+            const guild = await bot.database.findOne("guild", {'guildId': message.guild.id});
             if (guild.twitch.status === "off") return message.channel.send(`${lang.statusOk} \`${guild.twitch.status}\``);
         
             guild.twitch.status = "off";
-            guild.save(function (err){
-                if(err) return bot.error.errorReturn(err, message, this.help.name);
-                if(!err) return message.channel.send(`${lang.statusNew} \`${guild.twitch.status}\` :cry:`);
-            });
+            await bot.database.save(guild);
+
+            return message.channel.send(`${lang.statusNew} \`${guild.twitch.status}\` :cry:`);
         }
         else if(cmd === "add"){
             if(returnNull(subcmd)) return message.reply(lang.helpReturn);
-            const guild = await bot.Guild.findOne({'guildId': message.guild.id});
+            const guild = await bot.database.findOne("guild", {'guildId': message.guild.id});
             
             let channel = await message.guild.channels.cache.find(chat => chat.id === guild.twitch.channel);
             if (returnNull(channel) || guild.twitch.status === "off") return message.reply(lang.notActived);
 
-            let twitchGuild = await TwitchGuild.find({ 'streamerId': subcmd, 'guildId': message.guild.id });
+            let twitchGuild = await bot.database.find("twitchguild", { 'streamerId': subcmd, 'guildId': message.guild.id });
             if(!returnNull(twitchGuild)) return message.channel.send(lang.exist);
 
             api.search.channels({ query: subcmd, limit:"100" }, (err, res) => {
@@ -80,20 +75,18 @@ module.exports.run = async (bot, message, args, lang) => {
         }
         else if(cmd === "remove"){
 
-            let twitchGuild = await TwitchGuild.find({ 'streamerId': subcmd, 'guildId': message.guild.id });
+            let twitchGuild = await bot.database.find("twitchguild", { 'streamerId': subcmd, 'guildId': message.guild.id });
             if(!twitchGuild) return message.channel.send(lang.notFound)
 
-            await TwitchGuild.findOneAndRemove({ 'streamerId': subcmd, 'guildId': message.guild.id});
-            let twitchChannel = await TwitchChannel.findOne({ 'streamerId': subcmd});
+            await bot.database.findOneAndRemove("twitchguild", { 'streamerId': subcmd, 'guildId': message.guild.id});
+            let twitchChannel = await bot.database.findOne("twitchchannel", { 'streamerId': subcmd});
             twitchChannel.servers = parseInt(twitchChannel.servers) - 1;
-            twitchChannel.save(function (err){
-                if(err) return bot.error.errorReturn(err, message, cmd)
-                if(!err) return message.channel.send(lang.delete)
-            })
             
+            await bot.database.save(twitchChannel)
+            return message.channel.send(lang.delete)
         }
         else if(cmd === "show"){
-            let twitchGuild = await TwitchGuild.find({ 'guildId': message.guild.id})
+            let twitchGuild = await bot.database.find("twitchguild", { 'guildId': message.guild.id})
             let description = "";
 
             if(!returnNull(twitchGuild)) {
@@ -115,54 +108,49 @@ module.exports.run = async (bot, message, args, lang) => {
         else if(cmd === "msg"){
             if(returnNull(subcmd)) return message.reply(lang.helpReturn);
 
-            let twitchGuild2 = await TwitchGuild.findOne({ 'streamerId': subcmd, 'guildId': message.guild.id });
+            let twitchGuild2 = await bot.database.findOne("twitchguild", { 'streamerId': subcmd, 'guildId': message.guild.id });
             if(!twitchGuild2) return message.channel.send(lang.notFound)
 
             let length = cmd.length + subcmd.length;
             length = args.join(" ").slice(length+2);
 
             twitchGuild2.config.text = length;
-            twitchGuild2.save(function (err){
-                if(err) return bot.error.errorReturn(err, message, cmd)
-                if(!err) return message.channel.send(lang.textChanged)
-            })
+            await bot.database.save(twitchGuild2);
+                
+            return message.channel.send(lang.textChanged)
         }
         else if(cmd === "ch" || cmd === "channel"){
             let channel = formatId(subcmd);
             let chat = await message.guild.channels.cache.find(chat => chat.id === channel);
             if (returnNull(chat)) return message.reply(lang.returnNull);
 
-            const guild = await bot.Guild.findOne({'guildId': message.guild.id});
+            const guild = await bot.database.findOne("guild", {'guildId': message.guild.id});
             guild.twitch.channel = channel;
-            guild.save(function (err){
-                if(err) return bot.error.errorReturn(err, message, cmd)
-                if(!err) return message.channel.send(lang.channelChange)
-            })
+            await bot.database.save(guild);
+            
+            return message.channel.send(lang.channelChange)
         }
         else return message.reply(lang.helpReturn);
-
     }catch(e){
         bot.error.errorReturn(e, message, this.help.name);
     }
 }
 
 async function twitchDB(infos, message){
-    const twitchChannelCheck = await TwitchChannel.findOne({ 'streamerId': infos._id});
+    const twitchChannelCheck = await bot.database.findOne("twitchchannel", { 'streamerId': infos._id});
     if(!returnNull(twitchChannelCheck)){
         twitchChannelCheck.servers = parseInt(twitchChannelCheck.servers) + 1;
-        twitchChannelCheck.save();
+        await bot.database.save(twitchChannelCheck);
     }else{
-        const twitchChannel = new TwitchChannel({
-            _id: mongoose.Types.ObjectId(),
+        const twitchChannel = await bot.database.create("twitchchannel", {
             name: infos.name,
             streamerId: infos._id,
             servers: 1
         });
-        twitchChannel.save();
+        await bot.database.save(twitchChannel);
     }
 
-    const twitchGuild = new TwitchGuild({
-        _id: mongoose.Types.ObjectId(),
+    const twitchGuild = bot.database.create("twitchguild", {
         guildId: message.guild.id,
         streamerId: infos._id,
         name: infos.name,
@@ -172,7 +160,7 @@ async function twitchDB(infos, message){
             text: "Live On"
         }
     });
-    twitchGuild.save()
+    await bot.database.save(twitchGuild)
     return true;
 }
 

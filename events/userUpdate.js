@@ -9,7 +9,7 @@ module.exports = async (bot, oldUser, newUser) => {
     if(oldUser.avatar === newUser.avatar && oldUser.tag === newUser.tag) return
 
     try{
-        let guildDb = await bot.Guild.find({ 'log.status': "on" });
+        let guildDb = await bot.database.find("guild", { 'log.status': "on" });
         if(returnNull(guildDb)) return;
 
         //Tag

@@ -1,7 +1,5 @@
 const { returnNull, formatId } = require("../../utils/functions.js");
 const {MessageEmbed} = require('discord.js');
-const mongoose = require('mongoose');
-const AutoDeleteMsg = require("../../models/autodeletemsg");
 
 module.exports.run = async (bot, message, args, lang) => {
     try{
@@ -15,20 +13,17 @@ module.exports.run = async (bot, message, args, lang) => {
             let chat = await message.guild.channels.cache.find(chat => chat.id === subcmd);
             if (!chat) return message.reply(lang.returnNull);
 
-            let findChannel = await AutoDeleteMsg.findOne({ 'channelId': subcmd });
+            let findChannel = await bot.database.findOne("autodeletemsg", { 'channelId': subcmd });
             
             if(findChannel != null){
                 if(findChannel.config.status === "on") return message.channel.send(`${lang.statusOk} \`${findChannel.config.status}\``);
             
                 findChannel.config.status = "on";
-                findChannel.save(function (err){
-                    if(err) return errorReturn(err, message, this.help.name);
-                    if(!err) return message.channel.send(`${lang.statusNew} \`${findChannel.config.status}\` :sunglasses:`);
-                });
+                bot.database.save(findChannel);
+                return message.channel.send(`${lang.statusNew} \`${findChannel.config.status}\` :sunglasses:`);
             }
 
-            const autodeletemsg = new AutoDeleteMsg({
-                _id: mongoose.Types.ObjectId(),
+            const autodeletemsg = await bot.database.create("autodeletemsg", {
                 guildId: message.guild.id,
                 channelId: subcmd,
                 config:{
@@ -43,27 +38,24 @@ module.exports.run = async (bot, message, args, lang) => {
                 }
             });
             
-            autodeletemsg.save(function (err){
-                if(err) return errorReturn(err, message, this.help.name);
-                if(!err) return message.channel.send(`${lang.statusNew} \`on\` :sunglasses:`);
-            });
+            await bot.database.save(autodeletemsg)
+            return message.channel.send(`${lang.statusNew} \`on\` :sunglasses:`);
         }
         else if (cmd === "off"){
             subcmd = formatId(subcmd)
             let chat = await message.guild.channels.cache.find(chat => chat.id === subcmd);
             if (!chat) return message.reply(lang.returnNull);
 
-            let autodeletemsg = await AutoDeleteMsg.findOne({ 'channelId': subcmd });
+            let autodeletemsg = await bot.database.findOne("autodeletemsg", { 'channelId': subcmd });
             if(autodeletemsg === null) return message.reply(lang.returnNull)
      
             autodeletemsg.config.status = "off";
-            autodeletemsg.save(function (err){
-                if(err) return errorReturn(err, message, this.help.name);
-                if(!err) return message.channel.send(`${lang.statusNew} \`${autodeletemsg.config.status}\` :cry:`);
-            });
+            await bot.database.save(autodeletemsg);
+
+            return message.channel.send(`${lang.statusNew} \`${autodeletemsg.config.status}\` :cry:`);
         }
         else if (cmd === "show"){
-            let autodeletemsgs = await AutoDeleteMsg.find({ 'guildId': message.guild.id})
+            let autodeletemsgs = await bot.database.find("autodeletemsg", { 'guildId': message.guild.id})
             let description = "";
 
             autodeletemsgs.forEach(element => {
