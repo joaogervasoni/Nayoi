@@ -17,8 +17,8 @@ module.exports.run = (bot, message, args, lang) => {
         let description = (lang.embedCtDescription)
         cmds.forEach(element => {
             if(element.help.type === args2){
-                const infos = this.returnCommandLang(message, element.help.name);
-                langParams(infos, bot.prefix, element.help.name)
+                const infos = bot.langs.langHelp(message.guild.language.name, element.help.name);
+                bot.langs.langParams(infos, bot.prefix, element.help.name)
                 if(infos.description !== undefined){
                     description = `${description} **${upperCaseFirst(element.help.name)}** // ${infos.description}\n`;
                 }else{
@@ -67,20 +67,6 @@ module.exports.run = (bot, message, args, lang) => {
 
         return message.channel.send(embed);
     }
-}
-
-const langParams = (str, prefix, command) => {
-    for (const key in str) {
-        if (str.hasOwnProperty(key)) {
-            str[key] = str[key].replace(/{prefix}/g, prefix);
-            str[key] = str[key].replace(/{cmdName}/g, command);
-        }
-    }
-}
-
-exports.returnCommandLang = function(message, name){
-    let infos = message.guild.language.commands.find(element => element.name === name).help;
-    return infos
 }
 
 module.exports.help = {

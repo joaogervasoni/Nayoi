@@ -32,6 +32,12 @@ class Langs {
         return langCommand;
     }
 
+    langHelp(locale, name){
+        let lang = this.getLang(locale)
+        let infos = lang.commands.find(element => element.name === name).help;
+        return infos
+    }
+
     langParams(str, prefix, command){
         for (const key in str) {
             if (str.hasOwnProperty(key)) {

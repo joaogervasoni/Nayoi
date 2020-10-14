@@ -7,8 +7,8 @@ module.exports.run = (bot, message, args, lang) => {
     let embed = new MessageEmbed()
     
     if(cmds){
-        const infos = this.returnCommandLang(message, cmds.help.name);
-        langParams(infos, bot.prefix, cmds.help.name)
+        const infos = bot.langs.langHelp(message.guild.language.name, cmds.help.name);
+        bot.langs.langParams(infos, bot.prefix, cmds.help.name)
 
         embed
         .setTitle(`${cmds.help.name.charAt(0).toUpperCase() + cmds.help.name.slice(1)}:`)
@@ -29,20 +29,6 @@ module.exports.run = (bot, message, args, lang) => {
         .addField(lang.embedField2_title, lang.embedField2_text)
         return message.channel.send(embed)
     }
-}
-
-const langParams = (str, prefix, command) => {
-    for (const key in str) {
-        if (str.hasOwnProperty(key)) {
-            str[key] = str[key].replace(/{prefix}/g, prefix);
-            str[key] = str[key].replace(/{cmdName}/g, command);
-        }
-    }
-}
-
-exports.returnCommandLang = function(message, name){
-    let infos = message.guild.language.commands.find(element => element.name === name).help;
-    return infos
 }
 
 module.exports.help = {

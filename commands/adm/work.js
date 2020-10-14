@@ -56,9 +56,7 @@ module.exports.run = async (bot, message, args, lang) => {
         
         return message.reply(lang.workNull)
     }
-    else return message.reply(lang.helpReturn)
-
-    
+    else return message.reply(lang.helpReturn)  
 }
 
 module.exports.help = {
