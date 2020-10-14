@@ -1,7 +1,6 @@
 const {MessageEmbed} = require("discord.js");
 
 module.exports.run = (bot, message, args, lang) => {
-
     try{
         const used = process.memoryUsage().heapUsed / 1024 / 1024;
         const uptime = parseInt(process.uptime(), 10);
