@@ -2,7 +2,10 @@ const {MessageEmbed} = require("discord.js");
 var colors = require('colors');
 
 class Error { 
-    constructor(){}
+    constructor(logConsole = true){
+        this.log = logConsole;
+    }
+
     discordAPIError (error, obj, lang){
         if(error.code === 50034){
             return obj.channel.send(lang.error50034);
@@ -48,4 +51,4 @@ class Error {
     }
 }
 
-module.exports = new Error();
+module.exports = Error;

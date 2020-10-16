@@ -1,5 +1,3 @@
-var colors = require('colors');
-
 module.exports = {
     returnNull: function(text){
         if(Array.isArray(text)){

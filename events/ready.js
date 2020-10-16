@@ -25,10 +25,24 @@ module.exports = async (bot) => {
         }
         guild.language = bot.langs.getLang(lang);
         guild.prefix = prefixDb;
+        await clearFalseRole(guild, guildDb);
     }
     console.log(`[Lang]`.brightGreen +` Carregadas em todos os servidores`.green);
     console.log(`[Online]`.brightGreen +` ${bot.user.username} esta Online em ${bot.guilds.cache.size} servidores`.green);
   
+    async function clearFalseRole(guild, guildDb){
+        let role = guildDb.autorole.role;
+        
+        if(role){
+            roleGuild = await guild.roles.cache.get(role);
+            if(!roleGuild){
+                guildDb.autorole.status = "off",
+                guildDb.autorole.role = "",
+                bot.database.save(guildDb);
+            }
+        }
+    }
+
     async function mutes(){
         let mutes = await bot.database.find("mute", {});
 
