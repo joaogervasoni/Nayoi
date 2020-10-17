@@ -2,7 +2,7 @@ const colors = require('colors');
 
 module.exports = async (bot, guild) => {
     try{
-        const guildNew = bot.database.create("guild", {
+        const guildNew = await bot.database.create("guild", {
             name: guild.name,
             guildId: guild.id,
             memberCount: guild.memberCount,

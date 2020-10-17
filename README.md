@@ -34,6 +34,7 @@ Lembrando que sou um bot em desenvolvimento e problemas podem ocorrer mas trabal
 | [Mathjs](https://www.npmjs.com/package/mathjs) | NPM  |7.3.0|
 | [Check-links](https://www.npmjs.com/package/check-links) | NPM  |1.1.8|
 | [Twitch-Api-v5](https://www.npmjs.com/package/twitch-api-v5) | NPM  |2.0.4|
+| [Is-color](https://www.npmjs.com/package/is-color) | NPM  |1.0.2|
 | [MongoDB](https://www.mongodb.com/) | DB  |3.8|
 | [Jikan](https://jikan.moe/) | API  |v3.4.0|
 | [Tenor](https://tenor.com/gifapi) | API  |v1.0.0|

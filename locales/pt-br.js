@@ -579,22 +579,29 @@ module.exports =
             cmd: {
                 returnNullChannel: "Nenhum canal encontrado :worried: !!",
                 embedInitiatedTitle: "Vamos começar :goat: !!",
-                embedInitiatedDescription: "Primeiro digite o que deseja mandar na msg, lembrando que o titulo e a msg devem ser dividos por `,` virgula !!",
+                embedInitiatedDescription: "Primeiro digite o que deseja mandar na msg, lembrando que o titulo e a msg devem ser dividos por `||` !!",
                 embedInitiatedField1: "Exemplo",
-                embedInitiatedField1_1: "Um Titulo legal, Escolha a reação do pepe para receber o cargo pepe !!!",
+                embedInitiatedField1_1: "Um Titulo legal **||** Escolha a reação do pepe para receber o cargo pepe !!!",
                 roleMsgCreated: "Role Reaction e Msg criados no canal selecionado :man_mage: !!",
                 stopMsg: "Criação cancelada :octagonal_sign:",
                 clearMsg: "Digite um novo titulo e descrição\n Exemplo: `titulo, descrição`",
-                embedSaveTitle: "Mensagem salva :sunglasses: !!",
-                embedSaveDescription: "Agora digite os emotes divididos por `,` virgula `Ex: :emoji:, @cargo`",
+                embedSaveTitle: "Mesagem salva :sunglasses: !!",
+                embedSaveDescription: "Agora digite uma cor para o embed",
                 embedSaveField1: "Opções",
-                embedSaveField1_1: "`!!stop` - Para cancelar a criação\n"
+                embedSaveField1_1: "A cor precisa ser em hex, exemplo: `#ffcce6` !!",
+                colorSaveTitle: "Cor salva :sunglasses: !!",
+                colorSaveDescription: "Agora digite os emotes divididos por `,` virgula `Ex: :emoji:, @cargo`",
+                colorSaveField1: "Opções",
+                colorSaveField1_1: "`!!stop` - Para cancelar a criação\n"
                 +"`!!clear` - Para trocar o titulo e descrição da msg",
-                embedSaveField2: "Leia-me",
-                embedSaveField2_1: "O bot ficara a espera dos emojis e cargos, lembre-se se quiser usar outros comandos precisa finalizar com !!stop ou completar o rolereaction !",
+                colorSaveField2: "Leia-me",
+                colorSaveField2_1: "O bot ficara a espera dos emojis e cargos, lembre-se se quiser usar outros comandos precisa finalizar com !!stop ou completar o rolereaction !",
+
                 returnEmojiNull: "Emoji não existe !! Tente outro !!",
                 returnRoleNull: "Role não existe !!  Tente outro !!",
                 returnRoleHigh: "Role de maior grau que a sua !!  Tente outro !!",
+                ColorFalseTitle: "Escolha uma cor",
+                ColorFalseDescription: "A cor precisa ser no formato hex como no exemplo: #ffcce6",
                 returnSave: "Emoji e Cargo salvos !!\n"
                 +"`Caso queira continuar digite + grupo de emoji/cargo !!`\n" 
                 +"Caso queira finalizar digite `!!done`",
@@ -603,9 +610,10 @@ module.exports =
             },
             help: {
                 description: "Dá cargos com reações em uma mensagem",
-                usability: "Pode utilizado desta forma: `{prefix}rolereaction #channel`\n"
+                usability: "Pode utilizado desta forma: `{prefix}rolereaction create #channel`\n"
                 +"**Após utilizar o comando:**\n"
-                +"Digite o titulo e a msg divididos por vírgula `Ex: Titulo, toda a msg`\n"
+                +"Digite o titulo e a msg divididos por vírgula Ex: `Titulo || toda a msg`\n"
+                +"Escolha uma cor hex após digitar a mensagem Ex: `#ffcce6`\n"
                 +"Mande uma msg com emoji e cargo para cada cargo `Ex: :emoji:, @cargo`\n"
                 +"Após terminar de mandar todos os emojis e cargos utilize o comando de done `!!done`\n",
                 additional: "",
