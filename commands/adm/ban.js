@@ -11,8 +11,8 @@ module.exports.run = async (bot, message, args, lang) => {
         }
 
         if(returnNull(cmd)) return message.reply(lang.helpReturn)
-
-        if(isNaN(cmd)) bUser.user = message.guild.member(message.mentions.users.first() || message.guild.member.get(cmd))
+        
+        if(isNaN(cmd)) bUser.user = message.guild.member(message.mentions.users.first() || message.guild.members.cache.get(cmd))
         if(bUser.user) {
             bUser.type = "get";
             bUser.id = bUser.user.id;

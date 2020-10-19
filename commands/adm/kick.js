@@ -7,7 +7,7 @@ module.exports.run = async (bot, message, args, lang) => {
 
         if(returnNull(cmd) || returnNull(message.mentions.users.first())) return message.reply(lang.helpReturn)
 
-        let kUser = message.guild.member(message.mentions.users.first() || message.guild.member.get(cmd))
+        let kUser = message.guild.member(message.mentions.users.first() || message.guild.members.cache.get(cmd))
         if(!kUser) return message.channel.send(lang.returnNull);
         let kReason = args.join(" ").slice(cmd.length);
         if(!kReason) return message.channel.send(lang.reasonNull);
