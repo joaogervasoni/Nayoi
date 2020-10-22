@@ -1,10 +1,11 @@
 const { MessageEmbed } = require("discord.js");
 const { formatText } = require("../../utils/functions.js");
-const { weatherApi } = require("../../botconfig.json");
 const fetch = require("node-fetch");
 
 module.exports.run = async (bot, message, args, lang) => {
     try{
+        let { weatherApi } = bot.apis;
+
         let local = args.join(" ").slice(0);
         local = formatText(local);
         if(local === "" || local === undefined) return message.reply(lang.helpReturn);

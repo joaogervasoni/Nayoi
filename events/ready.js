@@ -2,10 +2,12 @@ const { MessageEmbed } = require("discord.js");
 const { limitLength, returnNull } = require("../utils/functions.js");
 const colors = require('colors');
 var api = require('twitch-api-v5');
-const { twitchID, prefix } = require("../botconfig.json");
-api.clientID = twitchID;
 
 module.exports = async (bot) => {
+    const { twitchID } = bot.apis;
+    const { prefix } = bot.prefix;
+    api.clientID = twitchID;
+
     bot.user.setActivity(`nayoi.com | n!help`, {type: "PLAYING"});
     for await (let guild of bot.guilds.cache.array()) {
 

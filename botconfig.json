@@ -1,8 +1,10 @@
 {
-    "token": "token api discord ",
-    "prefix": "f!",
+    "token": "token api discord",
+    "prefix": "n!",
     "mongodb": "user:pass",
-    "weatherApi": "toke api weather",
-    "tenorApi": "token api tenor",
-    "twitchID": "twitch client id"
+    "apis":{
+        "weatherApi": "token api weather",
+        "tenorApi": "token api tenor",
+        "twitchID": "twitch client id"
+    }
 }
