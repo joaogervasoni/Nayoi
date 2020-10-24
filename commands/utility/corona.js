@@ -6,7 +6,7 @@ module.exports.run = async (bot, message, args, lang) => {
     try{
         if(!args[0]) return message.reply(lang.helpReturn) 
 
-        if(args[0] === "lista"){
+        if(args[0] === "list"){
             let data = await fetch(`https://pomber.github.io/covid19/timeseries.json`).then(res => res.json());
             let msg = "``";
             var keys = Object.keys(data);
@@ -30,6 +30,7 @@ module.exports.run = async (bot, message, args, lang) => {
                         .addField(lang.fieldRecovered, lastDate.recovered, true)
                         .addField(lang.fieldDate, lastDate.date, true)
                         .addField("Link", "https://www.arcgis.com/apps/opsdashboard/index.html#/bda7594740fd40299423467b48e9ecf6")
+                        .setColor(bot.baseColor)
                         .setFooter(lang.footer)
                     return message.channel.send(embed)
                 }else if(!country) return message.channel.send(lang.resultNull)

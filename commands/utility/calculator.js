@@ -12,7 +12,7 @@ module.exports.run = async (bot, message, args, lang) => {
             return message.reply(lang.validResult);
         }
         
-        return message.reply(`${lang.returnResult} ${result}`);
+        return message.reply(`:scales: ${lang.returnResult} \`${result}\``);
     }catch(e){
         bot.error.errorReturn(e, message, this.help.name)
     }

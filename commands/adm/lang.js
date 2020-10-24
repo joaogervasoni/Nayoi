@@ -31,7 +31,7 @@ module.exports.run = async (bot, message, args, lang) => {
         }
         else if(cmd === "list"){
             let langs = "";
-            bot.langs.getLang().forEach(element => {
+            bot.langs.getLangs().forEach(element => {
                 langs = `${langs + element.name}\n`;
             });
 

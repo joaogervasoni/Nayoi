@@ -57,7 +57,7 @@ module.exports.run = async (bot, message, args, lang) => {
                         infos = res.channels.find(channel => channel.display_name.toLowerCase() === subcmd.toLowerCase())
                         if(returnNull(infos)) return message.channel.send(lang.notFound)
                         
-                        if(twitchDB(infos, message)){
+                        if(twitchDB(infos, message, bot)){
                             message.channel.send(lang.success);
                             const embed = new MessageEmbed()
                             .setThumbnail(infos.logo)
@@ -136,7 +136,7 @@ module.exports.run = async (bot, message, args, lang) => {
     }
 }
 
-async function twitchDB(infos, message){
+async function twitchDB(infos, message, bot){
     const twitchChannelCheck = await bot.database.findOne("twitchchannel", { 'streamerId': infos._id});
     if(!returnNull(twitchChannelCheck)){
         twitchChannelCheck.servers = parseInt(twitchChannelCheck.servers) + 1;
@@ -150,7 +150,7 @@ async function twitchDB(infos, message){
         await bot.database.save(twitchChannel);
     }
 
-    const twitchGuild = bot.database.create("twitchguild", {
+    const twitchGuild = await bot.database.create("twitchguild", {
         guildId: message.guild.id,
         streamerId: infos._id,
         name: infos.name,

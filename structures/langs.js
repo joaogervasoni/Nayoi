@@ -50,6 +50,10 @@ class Langs {
     getLang(locale){
         return this.locales.get(locale.toLowerCase());
     }
+
+    getLangs(){
+        return this.locales;
+    }
 }
 
 module.exports = Langs;

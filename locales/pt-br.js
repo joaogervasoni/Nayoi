@@ -221,12 +221,12 @@ module.exports =
                 fieldDate: "Data:",
                 footer: "Não saia de casa !!",
                 resultNull: "Não encontrado !! `Obs: O nome do País deve ser em inglês`\n"
-                + "Digite `{prefix}corona lista` para ver a lista de países !!"
+                + "Digite `{prefix}corona list` para ver a lista de países !!"
             },
             help: {
                 description: "Mostra casos de corona",
                 usability: "Para trazer informações sobre algum Pais digite `{prefix}corona nomedopais`\n",
-                additional: "`{prefix}corona lista` para ver a lista de países !!",
+                additional: "`{prefix}corona list` para ver a lista de países !!",
                 others: "O Nome do Pais deve ser em inglês",
             }    
         },

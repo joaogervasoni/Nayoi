@@ -29,7 +29,6 @@ module.exports.run = async (bot, message, args, lang) => {
             
             const baseEmojis = listCollection(bot.lists, "emojis");
             let rolereaction = await createRR();
-            console.log(rolereaction)
 
             collector.on('collect', async msg =>{
 

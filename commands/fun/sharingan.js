@@ -14,7 +14,8 @@ module.exports.run = async (bot, message, args, lang) => {
             .setDescription(`**${lang.embedDescription}** \`${member.user.tag}\` : ${msg.content}`)
             .setImage(randomCollection(bot.lists, this.help.name))
             .setAuthor(message.member.user.tag, message.member.user.avatarURL())
-    
+            .setColor("#990000");
+
         return message.channel.send(embed)
     }catch(e){
         bot.error.errorReturn(e, message, this.help.name);
