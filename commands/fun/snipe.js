@@ -6,10 +6,10 @@ module.exports.run = (bot, message, args, lang) => {
         if (!msg) return message.reply(lang.returnNull);
     
         const embed = new MessageEmbed()
-            .setAuthor(`${lang.embedAuthor} ${msg.author.tag}`, msg.author.avatarURL())
-            .setDescription(msg.content)
-            .setColor(bot.baseColor)
-    
+        .setAuthor(`${lang.embedAuthor} ${msg.author.tag}`, msg.author.avatarURL())
+        .setDescription(msg.content)
+        .setColor(bot.baseColor);
+        if (msg.embed) embed.addField(`**Embed:**`, `\`Title:\` ${msg.embed.description} || \`Description:\` ${msg.embed.title}`);
         if (msg.image) embed.setImage(msg.image);
         
         message.channel.send(embed);
