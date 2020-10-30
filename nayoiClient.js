@@ -2,6 +2,7 @@ const { Client, Collection } = require("discord.js");
 const Langs = require('./structures/langs.js');
 const Database = require('./structures/database.js');
 const Error = require('./utils/error.js');
+const { readdir } = require("fs");
 
 /** 
 * @extends Discord.Client
@@ -28,11 +29,10 @@ class NayoiClient extends Client {
         this.aliases = new Collection();
         this.lists = new Collection();
 
+        this.loadEvents("./events");
+
         const commands = require("./structures/command");
         commands.run(this);
-
-        const events = require("./structures/event");
-        events.run(this);
 
         const lists = require("./structures/list");
         lists.run(this);
@@ -43,6 +43,22 @@ class NayoiClient extends Client {
     */
     login(token) {
         super.login(token);
+        return this;
+    }
+
+    /**
+    * @param {String} path Events path 
+    */
+    loadEvents(path) {
+        readdir(path, (err, files) => {
+            if (err) console.log(err);
+            files.forEach(evt => {
+                const event = new (require(`${path}/${evt}`))(this);
+                super.on(evt.split(".")[0], (...args) => event.run(...args));
+            });
+            
+            console.log(`[Events]`.brightBlue + ` ${files.length} eventos carregados`.blue);
+        });
         return this;
     }
 }
