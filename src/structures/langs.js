@@ -1,6 +1,6 @@
 const { readdirSync } = require("fs");
 const { join } = require("path");
-const filePath = join(__dirname, "..", "locales");
+const filePath = join(__dirname, "../../", "locales");
 const { Collection } = require("discord.js");
 let colors = require('colors');
 

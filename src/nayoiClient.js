@@ -1,7 +1,8 @@
 const { Client, Collection } = require("discord.js");
 const Langs = require('./structures/langs.js');
 const Database = require('./structures/database.js');
-const Error = require('./utils/error.js');
+const Error = require('./structures/error.js');
+const Canvas = require('./structures/canvas');
 const { readdir } = require("fs");
 
 /** 
@@ -53,7 +54,7 @@ class NayoiClient extends Client {
         readdir(path, (err, files) => {
             if (err) console.log(err);
             files.forEach(evt => {
-                const event = new (require(`${path}/${evt}`))(this);
+                const event = new (require(`.${path}/${evt}`))(this);
                 super.on(evt.split(".")[0], (...args) => event.run(...args));
             });
             

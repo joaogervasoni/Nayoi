@@ -1,13 +1,13 @@
 const { readdirSync } = require("fs");
 const { join } = require("path");
-const filePath = join(__dirname, "..", "commands");
+const filePath = join(__dirname, "../../", "commands");
 var colors = require('colors');
 
 module.exports.run = (bot) => {
     var paths = [filePath];
 
     for (const cmd of readdirSync(filePath).filter(cmd => !cmd.endsWith(".js"))){
-        let subfilePath = join(__dirname, "..", "commands", cmd);
+        let subfilePath = join(__dirname, "../../", "commands", cmd);
         paths.push(subfilePath);
     }
 

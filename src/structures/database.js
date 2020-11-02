@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const { readdirSync } = require("fs");
 const { join } = require("path");
-const filePath = join(__dirname, "..", "models");
+const filePath = join(__dirname, "../../", "models");
 const { Collection } = require("discord.js");
 const colors = require('colors');
 

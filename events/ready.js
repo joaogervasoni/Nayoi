@@ -47,7 +47,7 @@ module.exports = class {
         let role = guildDb.autorole.role;
         
         if(role){
-            roleGuild = await guild.roles.cache.get(role);
+            let roleGuild = await guild.roles.cache.get(role);
             if(!roleGuild){
                 guildDb.autorole.status = "off",
                 guildDb.autorole.role = "",

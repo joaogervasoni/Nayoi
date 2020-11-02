@@ -1,6 +1,6 @@
 const { readdirSync } = require("fs");
 const { join } = require("path");
-const filePath = join(__dirname, "..", "lists");
+const filePath = join(__dirname, "../../", "lists");
 var colors = require('colors');
 
 module.exports.run = (bot) => {

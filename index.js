@@ -1,5 +1,5 @@
 const config = require("./botconfig.json");
-const NayoiClient = require("./nayoiClient.js");
+const NayoiClient = require("./src/nayoiClient");
 
 const bot = new NayoiClient(options = {
     clientOption: {
