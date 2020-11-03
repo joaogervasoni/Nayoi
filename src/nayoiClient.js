@@ -47,6 +47,10 @@ class NayoiClient extends Client {
         return this;
     }
 
+    canvas(){
+        return new Canvas();
+    }
+
     /**
     * @param {String} path Events path 
     */
