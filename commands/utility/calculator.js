@@ -1,13 +1,19 @@
 const {returnNull} = require("../../utils/functions.js");
-const { evaluate } = require('mathjs')
+const { create, evaluateDependencies } = require('mathjs')
+const add = (a, b) => a + b
+const subtract = (a, b) => a - b
+const multiply = (a, b) => a * b
+const divide = (a, b) => a / b
 
 module.exports.run = async (bot, message, args, lang) => {
     try{
         const calc = args.join("");
         if(returnNull(calc) || !isNaN(calc)) return message.reply(lang.helpReturn);
         let result;
-        try{
-            result = evaluate(args.join(""));
+        try{  
+            const math = create(evaluateDependencies)
+            math.import({ add, subtract, multiply, divide }, { override: true })
+            result = math.evaluate(args.join(""));
         }catch{
             return message.reply(lang.validResult);
         }
