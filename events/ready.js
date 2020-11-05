@@ -10,7 +10,7 @@ module.exports = class {
 
     async run() {
         const { twitchID } = this.bot.apis;
-        const { prefix } = this.bot.prefix;
+        const prefix = this.bot.prefix;
         api.clientID = twitchID;
     
         this.bot.user.setActivity(`nayoi.com | n!help`, {type: "PLAYING"});

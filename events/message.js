@@ -7,7 +7,9 @@ module.exports = class {
 
     async run(message) {
         if (message.author.bot) return;
-        const prefix = message.guild.prefix;
+        
+        let prefix = null;
+        message.guild.prefix ? prefix = message.guild.prefix : prefix = this.bot.prefix;
     
         let autodeletemsg = await this.bot.database.findOne("autodeletemsg", { channelId: message.channel.id });
         if(autodeletemsg && autodeletemsg != undefined){
