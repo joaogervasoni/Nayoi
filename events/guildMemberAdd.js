@@ -7,7 +7,6 @@ module.exports = class {
 
     async run(member) {
         try {
-            const lang = await this.bot.langs.langReturn(member.guild.language, "guildMemberAdd", "event");
             const guild = await this.bot.database.findOne("guild", { 'guildId': member.guild.id });
 
             //MemberCount
@@ -40,7 +39,7 @@ module.exports = class {
                     }
                     if (member.user.avatar != null) profileImage = member.user.avatarURL({ format: 'jpg' });
 
-                    const attachment = await bot.canvas().welcomeBanner(imagem, profileImage, member.user.tag)
+                    const attachment = await this.bot.canvas().welcomeBanner(imagem, profileImage, member.user.tag)
                     return wlchat.send(msg, attachment)
                 } else {
                     return wlchat.send(msg);

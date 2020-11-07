@@ -5,8 +5,7 @@ module.exports = class {
     }
 
     async run(reaction, user){
-        if(user.bot == true) return
-
+        if(user.bot === true) return
         try{
             if(reaction.message) {
                 await reaction.message.fetch();

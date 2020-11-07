@@ -29,7 +29,8 @@ class Error {
 
     async errorReturn(error, obj, name) {  
         this.consoleLog(error, obj, name)
-        let typeObj = obj.constructor.name.toLowerCase();
+        let typeObj = null;
+        if(obj) typeObj = obj.constructor.name.toLowerCase();
 
         if (obj && typeObj === "message"){
             const lang = await obj.client.langs.langReturn(obj.guild.language, "error", "event");

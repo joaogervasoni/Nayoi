@@ -2,9 +2,9 @@ const config = require("./botconfig.json");
 const NayoiClient = require("./src/nayoiClient");
 
 const bot = new NayoiClient(options = {
-    clientOption: {
+    clientOptions: {
         disableMentions: "everyone",
-        ws: { intents: ['GUILD_PRESENCES', 'GUILD_MEMBERS'] }
+        partials: ['USER', 'GUILD_MEMBER', 'CHANNEL', 'MESSAGE', 'REACTION']
     },
     config: config
 });
