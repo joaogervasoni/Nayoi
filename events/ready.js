@@ -1,7 +1,8 @@
 const { MessageEmbed } = require("discord.js");
 const { limitLength, returnNull } = require("../utils/functions.js");
 const colors = require('colors');
-var api = require('twitch-api-v5');
+const api = require('twitch-api-v5');
+const Checks = require("../src/structures/checks");
 
 module.exports = class {
     constructor(client) {
@@ -32,28 +33,15 @@ module.exports = class {
             }
             guild.language = this.bot.langs.getLang(lang);
             guild.prefix = prefixDb;
-            await this.clearFalseRole(guild, guildDb);
         }
-        console.log(`[Lang]`.brightGreen +` Carregadas em todos os servidores`.green);
-        console.log(`[Online]`.brightGreen +` ${this.bot.user.username} esta Online em ${this.bot.guilds.cache.size} servidores`.green);
-      
-        
+        await new Checks(this.bot, {clear: false}).init();
+
+        console.log(`✔️ [Lang]`.brightGreen +` Carregadas em todos os servidores`.green);
+        console.log(`✔️ [Online]`.brightGreen +` ${this.bot.user.username} esta Online em ${this.bot.guilds.cache.size} servidores`.green);
+
         this.mutes();
         this.notices();
         this.twitch();
-    }
-
-    async clearFalseRole(guild, guildDb){
-        let role = guildDb.autorole.role;
-        
-        if(role){
-            let roleGuild = await guild.roles.cache.get(role);
-            if(!roleGuild){
-                guildDb.autorole.status = "off",
-                guildDb.autorole.role = "",
-                this.bot.database.save(guildDb);
-            }
-        }
     }
 
     async mutes(){
