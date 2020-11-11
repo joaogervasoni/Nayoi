@@ -1,12 +1,13 @@
 const {MessageEmbed} = require("discord.js");
 var colors = require('colors');
+const chalk = require("chalk");
 
 class Error { 
-    constructor(logConsole = true){
+    constructor(logConsole = true) {
         this.log = logConsole;
     }
 
-    discordAPIError (error, obj, lang){
+    discordAPIError (error, obj, lang) {
         if(error.code === 50034){
             return obj.channel.send(lang.error50034);
         }
@@ -16,14 +17,11 @@ class Error {
     consoleLog(error, obj, name) {
         var today = new Date();
         today = `${today.getDate()}/${today.getMonth()+1}/${today.getFullYear()}`
-        let color = `[Error]`.brightRed;
-
-        if (error.name === "DiscordAPIError") color = `[Error]`.brightCyan;
 
         if(obj){
-            console.log(color +` Name: ${name} // Error: ${error} // Guild: ${obj.guild} // Data: ${today}`.red);
+            console.log(chalk.red(chalk.redBright('[Error]'), `Name: ${name} // Error: ${error} // Guild: ${obj.guild} // Data: ${today}`));
         }else{
-            console.log(color +` Name: ${name} // Error: ${error} // Guild: Null // Data: ${today}`.red);
+            console.log(chalk.red(chalk.redBright('[Error]'), `Name: ${name} // Error: ${error} // Guild: objNull // Data: ${today}`));
         }
     }
 
@@ -32,7 +30,7 @@ class Error {
         let typeObj = null;
         if(obj) typeObj = obj.constructor.name.toLowerCase();
 
-        if (obj && typeObj === "message"){
+        if (obj && typeObj === "message") {
             const lang = await obj.client.langs.langReturn(obj.guild.language, "error", "event");
 
             if(error.name === "DiscordAPIError") return this.discordAPIError(error, obj, lang);

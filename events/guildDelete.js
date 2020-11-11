@@ -1,4 +1,4 @@
-const colors = require('colors');
+const chalk = require('chalk');
 
 module.exports = class{
     constructor(client){
@@ -21,7 +21,7 @@ module.exports = class{
                 }
             }
             
-            console.log(`[Left]`.brightYellow + ` Name:${guild.name} Users:${guild.memberCount} id:${guild.id} Date:${new Date()}`.yellow)
+            console.log(chalk.yellow(chalk.yellowBright('[Left]'), `Name:${guild.name} Users:${guild.memberCount} id:${guild.id} Date:${new Date()}`));
         }catch(e){
             this.bot.error.errorReturn(e, null, "guildDelete")
         }

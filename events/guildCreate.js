@@ -1,4 +1,4 @@
-const colors = require('colors');
+const chalk = require('chalk');
 
 module.exports = class{
     constructor(client){
@@ -37,7 +37,7 @@ module.exports = class{
                     channel: ""
                 }
             });
-            console.log(`[Join]`.brightMagenta + ` Name:${guild.name} Users:${guild.memberCount} id:${guild.id} Date:${new Date()}`.magenta)
+            console.log(chalk.magenta(chalk.magentaBright('[Join]'), `Name:${guild.name} Users:${guild.memberCount} id:${guild.id} Date:${new Date()}`));
             await this.bot.database.save(guildNew);
     
             guild.language = this.bot.langs.getLang("pt-br");

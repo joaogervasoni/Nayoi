@@ -1,3 +1,4 @@
+const chalk = require('chalk');
 const colors = require('colors');
 
 class Checks {
@@ -6,8 +7,8 @@ class Checks {
         this.options = options;
     }
 
-    async init(){
-        if(this.options.clear === false) return console.log(`[Checks]`.brightRed + ` Limpeza de lixos desabilitada`.red);
+    async init() {
+        if(this.options.clear === false) return console.log(chalk.red(chalk.redBright('[Checks]'), 'Limpeza de lixos desabilitada'));
 
         /*
         !!!! CAUTION !!!! CAUTION !!!! CAUTION !!!! CAUTION !!!!
@@ -21,7 +22,7 @@ class Checks {
             this.clearFalseRoleReaction(guild);
         }
 
-        return console.log(`[Checks]`.brightRed + ` Limpeza de lixos feita`.red);
+        return console.log(chalk.red(chalk.redBright('[Checks]'), 'Limpeza de lixos feita'));
 
         /*
         !!!! CAUTION !!!! CAUTION !!!! CAUTION !!!! CAUTION !!!!

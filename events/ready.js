@@ -1,6 +1,6 @@
 const { MessageEmbed } = require("discord.js");
 const { limitLength, returnNull } = require("../utils/functions.js");
-const colors = require('colors');
+const chalk = require('chalk');
 const api = require('twitch-api-v5');
 const Checks = require("../src/structures/checks");
 
@@ -36,8 +36,8 @@ module.exports = class {
         }
         await new Checks(this.bot, {clear: false}).init();
 
-        console.log(`✔️ [Lang]`.brightGreen +` Carregadas em todos os servidores`.green);
-        console.log(`✔️ [Online]`.brightGreen +` ${this.bot.user.username} esta Online em ${this.bot.guilds.cache.size} servidores`.green);
+        console.log(chalk.green(chalk.greenBright('✔️ [Lang]'), 'Carregadas em todos os servidores'));
+        console.log(chalk.green(chalk.greenBright('✔️ [Online]'), `${this.bot.user.username} esta Online em ${this.bot.guilds.cache.size} servidores`));
 
         this.mutes();
         this.notices();

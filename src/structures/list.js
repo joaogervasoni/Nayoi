@@ -1,7 +1,7 @@
 const { readdirSync } = require("fs");
 const { join } = require("path");
 const filePath = join(__dirname, "../../", "lists");
-var colors = require('colors');
+const chalk = require('chalk');
 
 module.exports.run = (bot) => {
     
@@ -10,5 +10,5 @@ module.exports.run = (bot) => {
         bot.lists.set(prop.name, prop.list);
     }
 
-    console.log(`[Lists]`.brightBlue + ` ${bot.lists.size} listas carregadas`.blue);
+    console.log(chalk.blue(chalk.blueBright('[Lists]'), bot.lists.size, 'listas carregadas'));
 }

@@ -2,7 +2,7 @@ const { readdirSync } = require("fs");
 const { join } = require("path");
 const filePath = join(__dirname, "../../", "locales");
 const { Collection } = require("discord.js");
-let colors = require('colors');
+const chalk = require('chalk');
 
 class Langs {
     constructor(){
@@ -13,7 +13,7 @@ class Langs {
             this.locales.set(prop.name, prop);
         }
 
-        console.log(`[Lang]`.brightBlue + ` ${this.locales.size} langs carregadas`.blue);
+        console.log(chalk.blue(chalk.blueBright('[Lang]'), this.locales.size, 'langs carregadas'));
     }
 
     async langReturn(guildLang, name, type) {
