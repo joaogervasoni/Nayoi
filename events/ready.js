@@ -51,14 +51,14 @@ module.exports = class {
             const element = mutes[index];
             let time = element.date - new Date().getTime();
 
+            let bot = this.bot;
             setTimeout(async function(){
-                let guild = this.bot.guilds.cache.get(element.guildId);
+                let guild = bot.guilds.cache.get(element.guildId);
                 let member = guild.members.cache.get(element.userId);
                 let muterole = guild.roles.cache.find(role => role.name === "Muted");
-                if(!muterole) return
 
                 member.roles.remove(muterole.id);
-                await this.bot.database.findOneAndRemove("mute", { 'guildId': guild.id, 'userId': member.user.id })
+                await bot.database.findOneAndRemove("mute", { 'guildId': guild.id, 'userId': member.user.id })
                 
                 member.send(`<@${member.user.id}> Unmuted`);
             }, time)
@@ -72,11 +72,12 @@ module.exports = class {
             const element = notices[index];
             let time = element.date - new Date().getTime();
             
+            let bot = this.bot;
             setTimeout(async function(){
-                let noticeCheck = await this.bot.database.findOne("notice", { 'channelId': element.channelId, 'guildId': element.guildId, 'text': element.text });
+                let noticeCheck = await bot.database.findOne("notice", { 'channelId': element.channelId, 'guildId': element.guildId, 'text': element.text });
                 if(returnNull(noticeCheck)) return
 
-                let guild = this.bot.guilds.cache.get(element.guildId);
+                let guild = bot.guilds.cache.get(element.guildId);
                 let channel = guild.channels.cache.get(element.channelId);
 
                 if (element.textType === "embed"){
@@ -85,7 +86,7 @@ module.exports = class {
                     let text = new MessageEmbed()
                     .setTitle(limitLength(msgSplit[0], "title"))
                     .setDescription(msgSplit[1])
-                    .setColor(this.bot.baseColor)
+                    .setColor(bot.baseColor)
 
                     channel.send(text)
                 }else{

@@ -67,7 +67,7 @@ module.exports.run = async (bot, message, args, lang) => {
                 .setColor(bot.baseColor)
             }
     
-            noticeDB(time, channel, textDB, cmd, message.guild.id);
+            noticeDB(bot, time, channel, textDB, cmd, message.guild.id);
     
             setTimeout(async function(){
                 let channelExist = message.guild.channels.cache.get(channel.id)
@@ -91,7 +91,7 @@ module.exports.run = async (bot, message, args, lang) => {
     }
 }
 
-async function noticeDB(time, channel, textDB, cmd, idGuild){
+async function noticeDB(bot, time, channel, textDB, cmd, idGuild){
     let newTime = new Date().getTime();
     time = newTime + time;
 
