@@ -1,5 +1,4 @@
 const chalk = require('chalk');
-const colors = require('colors');
 
 class Checks {
     constructor(client, options = {clear: false}){

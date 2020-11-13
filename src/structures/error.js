@@ -1,5 +1,4 @@
 const {MessageEmbed} = require("discord.js");
-var colors = require('colors');
 const chalk = require("chalk");
 
 class Error { 
@@ -9,7 +8,12 @@ class Error {
 
     discordAPIError (error, obj, lang) {
         if(error.code === 50034){
-            return obj.channel.send(lang.error50034);
+            console.log(chalk.red(chalk.redBright('[Error-Check]'), 'Erro 50034 tratado'));
+            return obj.reply(lang.error50034);
+        }
+        if(error.code === 50013){
+            console.log(chalk.red(chalk.redBright('[Error-Check]'), 'Erro 50013 tratado'));
+            return obj.reply(lang.error50013);
         }
         return
     }

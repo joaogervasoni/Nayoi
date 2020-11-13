@@ -1,16 +1,13 @@
-const {returnNull} = require("../../utils/functions.js");
-
 module.exports.run = async (bot, message, args, lang) => {
     try{
         let user = message.mentions.members.first();
         let nick = args[1];
-        if (returnNull(user)){
+        if (!user){
             user = message.member;
             nick = args[0];
         }
-    
-        user.setNickname(nick);
-    
+        
+        await user.setNickname(nick)
         return message.channel.send(lang.returnSuccess);
     }catch(e){
         bot.error.errorReturn(e, message, this.help.name)

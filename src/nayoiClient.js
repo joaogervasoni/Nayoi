@@ -1,9 +1,10 @@
-const { Client, Collection } = require("discord.js");
+const { Client, Collection } = require('discord.js');
 const Langs = require('./structures/langs.js');
 const Database = require('./structures/database.js');
 const Error = require('./structures/error.js');
-const Canvas = require('./structures/canvas');
-const { readdir } = require("fs");
+const Canvas = require('./structures/canvas.js');
+const { readdir } = require('fs');
+const chalk = require('chalk');
 
 /** 
 * @extends Discord.Client
@@ -62,7 +63,7 @@ class NayoiClient extends Client {
                 super.on(evt.split(".")[0], (...args) => event.run(...args));
             });
             
-            console.log(`[Events]`.brightBlue + ` ${files.length} eventos carregados`.blue);
+            console.log(chalk.blue(chalk.blueBright('[Events]'), `${files.length} eventos carregados`));
         });
         return this;
     }

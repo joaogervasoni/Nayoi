@@ -76,7 +76,11 @@ module.exports =
             name: "error",
             cmd:{
                 errorField: "Parece que encontrei um erro... Entre em contato com o suporte !!",
-                error50034: "Não é possivel apagar uma mensagem mais antiga que `14` dias :persevere: !!"
+                error50034: "Não é possivel apagar uma mensagem mais antiga que `14` dias :persevere: !!",
+                error50013: 'Não tenho permissão para fazer isso !! Isso pode acontecer devido a 3 fatores:\n'
+                +'`Cargo maior` - Caso o cargo seja maior que o do bot ou seja Owner\n'
+                +'`Falta de permissão` - O bot não detem alguma permissão\n'
+                +'`Role abaixo` - O bot esta uma role a baixo da pessoa que ele ira executar uma ação\n'
             }
         }
     ],
