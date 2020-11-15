@@ -1,11 +1,11 @@
-const { returnNull, formatId } = require("../../utils/functions.js");
+const { formatId } = require("../../utils/functions.js");
 
 module.exports.run = async (bot, message, args, lang) => {
     try{
         const cmd = args[0];
         let subcmd = args[1];
 
-        if(returnNull(cmd)) return message.reply(lang.helpReturn);
+        if(!cmd) return message.reply(lang.helpReturn);
 
         if (cmd === "on" || cmd === "true"){
             let roleid = formatId(subcmd);

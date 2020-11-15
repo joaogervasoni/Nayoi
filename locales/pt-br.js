@@ -412,6 +412,7 @@ module.exports =
                 returnNull: "Não encontrei nenhum canal :worried:",
                 statusOk: "AutoDeleteMsg já esta:",
                 statusNew: "AutoDeleteMsg agora esta",
+                autoDeleteNull: "Não há nenhum canal registrado :shushing_face:",
                 embedTitle: "Canais com",
             },
             help: {

@@ -1,4 +1,4 @@
-const { formatId, returnNull } = require("../../utils/functions.js");
+const { formatId } = require("../../utils/functions.js");
 
 module.exports.run = (bot, message, args, lang) => {
     try{
@@ -12,7 +12,7 @@ module.exports.run = (bot, message, args, lang) => {
             channel = message.channel;
             msg = args.join(" ").slice(0);
         }
-        if(returnNull(msg)) return message.reply(lang.helpReturn);
+        if(!msg) return message.reply(lang.helpReturn);
 
         return channel.send(msg);
     }catch(e){

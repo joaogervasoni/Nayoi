@@ -1,16 +1,16 @@
-const { returnNull, formatText, limitLength } = require("../../utils/functions.js");
+const { formatText, limitLength } = require("../../utils/functions.js");
 const fetch = require("node-fetch");
-const {MessageEmbed} = require("discord.js");
+const { MessageEmbed } = require("discord.js");
 
 module.exports.run = async (bot, message, args, lang) => {
     try{
         let cmd = args[0]
         let { tenorApi } = bot.apis;
 
-        if(returnNull(cmd)) return message.reply(lang.helpReturn)
+        if(!cmd) return message.reply(lang.helpReturn)
         cmd = formatText(cmd);
         const gif = await fetch(`https://api.tenor.com/v1/search?q=${cmd}&key=${tenorApi}&limit=1`).then(res => res.json());
-        if(returnNull(gif.results[0]) || returnNull(gif)) return message.reply(lang.returnNull)
+        if(!gif.results[0] || !gif) return message.reply(lang.returnNull)
 
         let first = gif.results[0];
         const embed = new MessageEmbed()

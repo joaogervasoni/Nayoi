@@ -1,5 +1,5 @@
-const {MessageEmbed} = require('discord.js');
-const {returnNull, formatId} = require("../../utils/functions.js");
+const { MessageEmbed } = require('discord.js');
+const { formatId } = require("../../utils/functions.js");
 const { twitchID } = require("../../botconfig.json");
 var api = require('twitch-api-v5');
 api.clientID = twitchID;
@@ -10,10 +10,10 @@ module.exports.run = async (bot, message, args, lang) => {
         let subcmd = args[1];
         let infos = null;
 
-        if(returnNull(cmd)) return message.reply(lang.helpReturn);
+        if(!cmd) return message.reply(lang.helpReturn);
 
         if(cmd === "on"){
-            if(returnNull(subcmd)) return message.reply(lang.helpReturn);
+            if(!subcmd) return message.reply(lang.helpReturn);
             let channel = formatId(subcmd);
             let chat = await message.guild.channels.cache.find(chat => chat.id === channel);
             if (!chat || chat === undefined || chat === null) return message.reply(lang.returnNull);
@@ -37,25 +37,25 @@ module.exports.run = async (bot, message, args, lang) => {
             return message.channel.send(`${lang.statusNew} \`${guild.twitch.status}\` :cry:`);
         }
         else if(cmd === "add"){
-            if(returnNull(subcmd)) return message.reply(lang.helpReturn);
+            if(!subcmd) return message.reply(lang.helpReturn);
             const guild = await bot.database.findOne("guild", {'guildId': message.guild.id});
             
             let channel = await message.guild.channels.cache.find(chat => chat.id === guild.twitch.channel);
-            if (returnNull(channel) || guild.twitch.status === "off") return message.reply(lang.notActived);
+            if (!channel || guild.twitch.status === "off") return message.reply(lang.notActived);
 
             let twitchGuild = await bot.database.find("twitchguild", { 'streamerId': subcmd, 'guildId': message.guild.id });
-            if(!returnNull(twitchGuild)) return message.channel.send(lang.exist);
+            if(twitchGuild) return message.channel.send(lang.exist);
 
             api.search.channels({ query: subcmd, limit:"100" }, (err, res) => {
                 if(err) {
                     console.log(err);
                 } else {
-                    if(returnNull(res)){
+                    if(!res){
                         return message.channel.send(lang.notFound)
                     }
-                    else if (!returnNull(res)){
+                    else if (res){
                         infos = res.channels.find(channel => channel.display_name.toLowerCase() === subcmd.toLowerCase())
-                        if(returnNull(infos)) return message.channel.send(lang.notFound)
+                        if(!infos) return message.channel.send(lang.notFound)
                         
                         if(twitchDB(infos, message, bot)){
                             message.channel.send(lang.success);
@@ -89,7 +89,7 @@ module.exports.run = async (bot, message, args, lang) => {
             let twitchGuild = await bot.database.find("twitchguild", { 'guildId': message.guild.id})
             let description = "";
 
-            if(!returnNull(twitchGuild)) {
+            if(twitchGuild) {
                 twitchGuild.forEach(element =>  {
                     description = description + "**Streamer:** `"+element.name+"` - Status: `"+element.config.status+"` - ID: `"+element.streamerId+"`\n"
                 });
@@ -106,7 +106,7 @@ module.exports.run = async (bot, message, args, lang) => {
             return message.channel.send(embed)
         }
         else if(cmd === "msg"){
-            if(returnNull(subcmd)) return message.reply(lang.helpReturn);
+            if(!subcmd) return message.reply(lang.helpReturn);
 
             let twitchGuild2 = await bot.database.findOne("twitchguild", { 'streamerId': subcmd, 'guildId': message.guild.id });
             if(!twitchGuild2) return message.channel.send(lang.notFound)
@@ -122,7 +122,7 @@ module.exports.run = async (bot, message, args, lang) => {
         else if(cmd === "ch" || cmd === "channel"){
             let channel = formatId(subcmd);
             let chat = await message.guild.channels.cache.find(chat => chat.id === channel);
-            if (returnNull(chat)) return message.reply(lang.returnNull);
+            if (!chat) return message.reply(lang.returnNull);
 
             const guild = await bot.database.findOne("guild", {'guildId': message.guild.id});
             guild.twitch.channel = channel;
@@ -138,7 +138,7 @@ module.exports.run = async (bot, message, args, lang) => {
 
 async function twitchDB(infos, message, bot){
     const twitchChannelCheck = await bot.database.findOne("twitchchannel", { 'streamerId': infos._id});
-    if(!returnNull(twitchChannelCheck)){
+    if(twitchChannelCheck){
         twitchChannelCheck.servers = parseInt(twitchChannelCheck.servers) + 1;
         await bot.database.save(twitchChannelCheck);
     }else{

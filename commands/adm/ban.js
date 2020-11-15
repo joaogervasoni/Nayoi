@@ -1,4 +1,4 @@
-const {returnNull, mentionById, limitLength} = require("../../utils/functions.js");
+const { mentionById, limitLength } = require("../../utils/functions.js");
 const {MessageEmbed} = require("discord.js");
 
 module.exports.run = async (bot, message, args, lang) => {
@@ -10,7 +10,7 @@ module.exports.run = async (bot, message, args, lang) => {
             user: null
         }
 
-        if(returnNull(cmd)) return message.reply(lang.helpReturn)
+        if(!cmd) return message.reply(lang.helpReturn)
         
         if(isNaN(cmd)) bUser.user = message.guild.member(message.mentions.users.first() || message.guild.members.cache.get(cmd))
         if(bUser.user) {

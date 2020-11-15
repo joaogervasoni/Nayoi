@@ -1,12 +1,4 @@
 module.exports = {
-    returnNull: function(text){
-        if(Array.isArray(text)){
-            if(text.length === 0) return true;
-        } 
-        if(!text || text === null || text === undefined) return true;
-        else return false;
-    },
-    
 	limitLength: function(text, limit){
         limit = limit.toLowerCase();
 
@@ -69,7 +61,7 @@ module.exports = {
     },
 
     formatId: function(idText){
-        if(module.exports.returnNull(idText)) return idText
+        if(!idText) return idText
         idText = idText.replace(/\D+/g, '');
         return idText;
     },

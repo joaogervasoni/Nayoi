@@ -46,6 +46,11 @@ class Database {
         console.log(chalk.blue(chalk.blueBright('[Database]'), `${this.models.size} models carregados`));
     }
 
+    check(obj){
+        if(obj.length === 0) return null;
+        else return obj;
+    }
+
     async save(model){
         try{
             await model.save();
@@ -86,7 +91,7 @@ class Database {
         try{
             let model = await this.getModel(modelName);
             model = await model.find(options);
-            return model;
+            return this.check(model);
         }catch(e){
             return new Error(e.stack);
         }

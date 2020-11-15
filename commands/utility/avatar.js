@@ -1,10 +1,9 @@
-const { returnNull } = require("../../utils/functions.js");
 const { MessageEmbed } = require("discord.js");
 
 module.exports.run = (bot, message, args, lang) => {
     try{
         let user = message.mentions.users.first();
-        if (returnNull(user)) user = message.member.user;
+        if (!user) user = message.member.user;
         
         const embed = new MessageEmbed()
         .setThumbnail(user.avatarURL())

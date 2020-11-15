@@ -1,9 +1,7 @@
-const { returnNull } = require("../../utils/functions");
-
 module.exports.run = async (bot, message, args, lang) => {
     try {
         let user = message.mentions.users.first();
-        if (returnNull(user)) user = message.member.user;
+        if (!user) user = message.member.user;
 
         userAvatar = user.avatarURL({ format: 'jpg' });
 

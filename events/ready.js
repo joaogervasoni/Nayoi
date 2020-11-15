@@ -1,5 +1,5 @@
 const { MessageEmbed } = require("discord.js");
-const { limitLength, returnNull } = require("../utils/functions.js");
+const { limitLength } = require("../utils/functions.js");
 const chalk = require('chalk');
 const api = require('twitch-api-v5');
 const Checks = require("../src/structures/checks");
@@ -46,6 +46,7 @@ module.exports = class {
 
     async mutes(){
         let mutes = await this.bot.database.find("mute", {});
+        if(!mutes) return
 
         for (let index = 0; index < mutes.length; index++){
             const element = mutes[index];
@@ -67,6 +68,7 @@ module.exports = class {
 
     async notices(){
         let notices = await this.bot.database.find("notice", {});
+        if(!notices) return
 
         for (let index = 0; index < notices.length; index++) {
             const element = notices[index];
@@ -75,7 +77,7 @@ module.exports = class {
             let bot = this.bot;
             setTimeout(async function(){
                 let noticeCheck = await bot.database.findOne("notice", { 'channelId': element.channelId, 'guildId': element.guildId, 'text': element.text });
-                if(returnNull(noticeCheck)) return
+                if(!noticeCheck) return
 
                 let guild = bot.guilds.cache.get(element.guildId);
                 let channel = guild.channels.cache.get(element.channelId);
@@ -103,9 +105,11 @@ module.exports = class {
             await new Promise(resolve => setTimeout(resolve, 60000));
             
             let streamer = await this.bot.database.find("twitchchannel", {});
+            if(!streamer) return
             
             for (let index = 0; index < streamer.length; index++){
                 let twitchGuild = await this.bot.database.find("twitchguild", { 'streamerId': streamer[index].streamerId });
+                if(!twitchGuild) return
 
                 for (let index = 0; index < twitchGuild.length; index++){
                     let guildT = await this.bot.database.findOne("guild", { 'guildId': twitchGuild[index].guildId });

@@ -1,10 +1,9 @@
-const {MessageEmbed} = require("discord.js");
-const { returnNull } = require("../../utils/functions.js");
+const { MessageEmbed } = require("discord.js");
 
 module.exports.run = async (bot, message, args, lang) =>  {
     try{
         const bug = args.join(" ");
-        if(returnNull(bug)) return message.reply(lang.returnNull)
+        if(!bug) return message.reply(lang.returnNull)
     
         const bugDB = await bot.database.create("bug", {
             guildId: message.guild.id,

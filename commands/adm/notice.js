@@ -1,4 +1,4 @@
-const { returnNull, formatId, limitLength } = require("../../utils/functions.js");
+const { formatId, limitLength } = require("../../utils/functions.js");
 const { MessageEmbed } = require("discord.js");
 const mongoose = require('mongoose');
 const ms = require("ms");
@@ -6,13 +6,13 @@ const ms = require("ms");
 module.exports.run = async (bot, message, args, lang) => {
     try{
         let cmd = args[0];
-        if(returnNull(cmd)) return message.reply(lang.helpReturn);
+        if(!cmd) return message.reply(lang.helpReturn);
     
         if(cmd === "show"){
             let notices = await bot.database.find("notice", { 'guildId': message.guild.id});
             let description = "";
     
-            if(!returnNull(notices)) {
+            if(notices) {
                 notices.forEach(element => {
                     description = description + `**ID:** \`${element._id}\` - **Channel:** <#${element.channelId}> - **TextType:** \`${element.textType}\` - **Date:** \`${new Date(element.date * 1)}\`\n`
                 });
@@ -28,10 +28,10 @@ module.exports.run = async (bot, message, args, lang) => {
         }
         else if(cmd === "remove"){
             let id = args[1];
-            if((returnNull(id)) || (!mongoose.Types.ObjectId.isValid(id))) return message.reply(lang.returnFalseId);
+            if((!id) || (!mongoose.Types.ObjectId.isValid(id))) return message.reply(lang.returnFalseId);
 
             let noticeDel = await bot.database.findOneAndRemove("notice", { '_id': id, 'guildId': message.guild.id })
-            if(returnNull(noticeDel)) return message.reply(lang.returnFalseId);
+            if(!noticeDel) return message.reply(lang.returnFalseId);
             
             return message.channel.send(lang.delNotice);
         }
@@ -40,7 +40,7 @@ module.exports.run = async (bot, message, args, lang) => {
             let time = args[1];
             let channel = message.guild.channels.cache.get(formatId(args[2]))
            
-            if(returnNull(time)) return message.reply(lang.invalidTime)
+            if(!time) return message.reply(lang.invalidTime)
             if(isNaN(args[1].substring(0, args[1].length-1)) && isNaN(args[1].charAt(args[1].length-1))) return message.reply(lang.invalidTime)
             time = ms(time);
             
@@ -55,7 +55,7 @@ module.exports.run = async (bot, message, args, lang) => {
                 channel = message.channel;
             } 
     
-            if(returnNull(text)) return message.reply(lang.returnNull)
+            if(!text) return message.reply(lang.returnNull)
             textDB = text;
     
             if(cmd === "embed"){
@@ -71,9 +71,9 @@ module.exports.run = async (bot, message, args, lang) => {
     
             setTimeout(async function(){
                 let channelExist = message.guild.channels.cache.get(channel.id)
-                if(returnNull(channelExist)) return
+                if(!channelExist) return
                 let noticeCheck = await bot.database.findOne("notice", { 'channelId': channel.id, 'guildId': message.guild.id, 'text': textDB });
-                if(returnNull(noticeCheck)) return
+                if(!noticeCheck) return
 
                 channel.send(text)
                 await bot.database.findOneAndRemove("notice", { 'channelId': channel.id, 'guildId': message.guild.id, 'text': textDB});

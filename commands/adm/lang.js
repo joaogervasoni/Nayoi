@@ -1,19 +1,18 @@
 const { MessageEmbed } = require("discord.js");
-const { returnNull } = require("../../utils/functions.js");
 
 module.exports.run = async (bot, message, args, lang) => {
     try{
         const cmd = args[0];
         let subcmd = args[1];
 
-        if(returnNull(cmd)) return message.reply(lang.helpReturn);
+        if(!cmd) return message.reply(lang.helpReturn);
 
         if(cmd === "change"){
-            if(returnNull(subcmd)) return message.channel.send(lang.invalidLang)
+            if(!subcmd) return message.channel.send(lang.invalidLang)
             if(subcmd === "en-us") return message.channel.send("`en-us` Language in progress !!")
 
             newLang = bot.langs.getLang(subcmd);
-            if(returnNull(newLang)) return message.channel.send(lang.invalidLang)
+            if(!newLang) return message.channel.send(lang.invalidLang)
  
             message.guild.language = newLang;
         

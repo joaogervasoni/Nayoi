@@ -1,11 +1,11 @@
-const {returnNull, mentionById, limitLength} = require("../../utils/functions.js");
-const {MessageEmbed} = require("discord.js");
+const { mentionById, limitLength } = require("../../utils/functions.js");
+const { MessageEmbed } = require("discord.js");
 
 module.exports.run = async (bot, message, args, lang) => {
     try{
         cmd = args[0];
 
-        if(returnNull(cmd) || returnNull(message.mentions.users.first())) return message.reply(lang.helpReturn)
+        if((!cmd) || (!message.mentions.users.first())) return message.reply(lang.helpReturn)
 
         let kUser = message.guild.member(message.mentions.users.first() || message.guild.members.cache.get(cmd))
         if(!kUser) return message.channel.send(lang.returnNull);

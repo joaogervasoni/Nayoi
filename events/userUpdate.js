@@ -1,5 +1,4 @@
 const { MessageAttachment, MessageEmbed } = require("discord.js");
-const { returnNull } = require("../utils/functions.js");
 const { createCanvas, loadImage } = require("canvas");
 const checkLinks = require('check-links')
 
@@ -10,21 +9,21 @@ module.exports = class{
 
     async run(oldUser, newUser){
         if(oldUser.bot === true) return
-        if(returnNull(oldUser) || returnNull(newUser)) return
+        if(!oldUser || !newUser) return
         if(oldUser.avatar === newUser.avatar && oldUser.tag === newUser.tag) return
     
         try{
             let guildDb = await this.bot.database.find("guild", { 'log.status': "on" });
-            if(returnNull(guildDb)) return;
+            if(!guildDb) return;
     
             //Tag
             if(oldUser.tag != newUser.tag){
                 for (let index = 0; index < guildDb.length; index++){
                     let guild = this.bot.guilds.cache.get(guildDb[index].guildId)
-                    if(!returnNull(guild)){
+                    if(guild){
                         const lang = await this.bot.langs.langReturn(guild.language, "userUpdate", "event");
                         let userFind = guild.members.cache.get(oldUser.id)
-                        if(!returnNull(userFind)){
+                        if(userFind){
                             let channel = guild.channels.cache.get(guildDb[index].log.channel)
     
                             const embedAll = new MessageEmbed()
@@ -59,10 +58,10 @@ module.exports = class{
                 
                 for (let index = 0; index < guildDb.length; index++){
                     let guild = this.bot.guilds.cache.get(guildDb[index].guildId)
-                    if(!returnNull(guild)){
+                    if(guild){
                         const lang = await this.bot.langs.langReturn(guild.language, "userUpdate", "event");
                         let userFind = guild.members.cache.get(oldUser.id)
-                        if(!returnNull(userFind)){
+                        if(userFind){
                             let channel = guild.channels.cache.get(guildDb[index].log.channel)
     
                             const embedAll = new MessageEmbed()
@@ -78,7 +77,6 @@ module.exports = class{
                     }
                 }
             }
-    
             return;
         }catch(e){
             this.bot.error.errorReturn(e, null, "userUpdate")

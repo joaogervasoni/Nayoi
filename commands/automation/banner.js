@@ -1,4 +1,3 @@
-const { returnNull } = require("../../utils/functions.js");
 const isImage = require('is-image');
 const checkLinks = require('check-links');
 
@@ -7,7 +6,7 @@ module.exports.run = async (bot, message, args, lang) => {
         const cmd = args[0];
         let subcmd = args[1];
 
-        if (returnNull(cmd)) return message.reply(lang.helpReturn);
+        if (!cmd) return message.reply(lang.helpReturn);
 
         if (cmd === "on" || cmd === "true") {
             const guild = await bot.database.findOne("guild", { 'guildId': message.guild.id });

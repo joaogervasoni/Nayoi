@@ -1,12 +1,12 @@
-const { returnNull, formatId } = require("../../utils/functions.js");
-const {MessageEmbed} = require('discord.js');
+const { formatId } = require("../../utils/functions.js");
+const { MessageEmbed } = require('discord.js');
 
 module.exports.run = async (bot, message, args, lang) => {
     try{
         const cmd = args[0];
         let subcmd = args[1];
 
-        if(returnNull(cmd)) return message.reply(lang.helpReturn);
+        if(!cmd) return message.reply(lang.helpReturn);
 
         if(cmd === "on"){
             subcmd = formatId(subcmd)
@@ -55,12 +55,14 @@ module.exports.run = async (bot, message, args, lang) => {
             return message.channel.send(`${lang.statusNew} \`${autodeletemsg.config.status}\` :cry:`);
         }
         else if (cmd === "show"){
-            let autodeletemsgs = await bot.database.find("autodeletemsg", { 'guildId': message.guild.id})
+            let autodeletemsgs = await bot.database.find("autodeletemsg", { 'guildId': message.guild.id});
             let description = "";
 
-            autodeletemsgs.forEach(element => {
-                description = description + "**Channel:** <#"+element.channelId+"> - Status: `"+element.config.status+"`\n"
-            });
+            if(autodeletemsgs) {
+                autodeletemsgs.forEach(element => {
+                    description = description + "**Channel:** <#"+element.channelId+"> - Status: `"+element.config.status+"`\n"
+                });
+            } else description = lang.autoDeleteNull;
 
             const embed = new MessageEmbed()
                 .setTitle(`${lang.embedTitle} AutoDeleteMsg`)

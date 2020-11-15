@@ -1,5 +1,5 @@
-const {returnNull, mentionById} = require("../../utils/functions.js");
-const {MessageEmbed} = require("discord.js");
+const { mentionById } = require("../../utils/functions.js");
+const { MessageEmbed } = require("discord.js");
 const ms = require("ms");
 
 module.exports.run = async (bot, message, args, lang) => {
@@ -10,7 +10,7 @@ module.exports.run = async (bot, message, args, lang) => {
             let mutes = await bot.database.find("mute", { 'guildId': message.guild.id });
             let description = "";
 
-            if(!returnNull(mutes)) {
+            if(mutes) {
                 mutes.forEach(element => {
                     description = description + `**User:** ${mentionById(element.userId)} - **Executor:** ${mentionById(element.executor)} - **Date Unmute:** \`${new Date(element.date * 1)}\`\n`
                 });
@@ -26,7 +26,7 @@ module.exports.run = async (bot, message, args, lang) => {
         }
         else if(cmd === "remove"){
             let mutedUser =  message.guild.member(message.mentions.users.first() || message.guild.member(args[1]));
-            if(returnNull(mutedUser)) return message.reply(lang.returnNull);
+            if(!mutedUser) return message.reply(lang.returnNull);
 
             if((message.member.roles.highest.rawPosition <= mutedUser.roles.highest.rawPosition) || (mutedUser.hasPermission("ADMINISTRATOR"))){
                 return message.reply(lang.highRole);
@@ -52,7 +52,7 @@ module.exports.run = async (bot, message, args, lang) => {
         if (toMute.roles.cache.find(role => role.name === "Muted")) return message.channel.send(lang.isMuted)
 
         let mutetime = args[1];
-        if(returnNull(mutetime)) return message.reply(lang.returnInvalid)
+        if(!mutetime) return message.reply(lang.returnInvalid)
         if(isNaN(args[1].substring(0, args[1].length-1)) && isNaN(args[1].charAt(args[1].length-1))) return message.reply(lang.returnInvalid)
         mutetime = ms(mutetime);
 

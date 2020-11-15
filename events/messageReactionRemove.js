@@ -1,4 +1,3 @@
-
 module.exports = class {
     constructor(client){
         this.bot = client;

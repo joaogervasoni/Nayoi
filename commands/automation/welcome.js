@@ -1,14 +1,14 @@
-const { returnNull, formatId } = require("../../utils/functions.js");
+const { formatId } = require("../../utils/functions.js");
 
 module.exports.run = async (bot, message, args, lang) => {
     try{
         const cmd = args[0];
         let subcmd = args[1];
         
-        if(returnNull(cmd)) return message.reply(lang.helpReturn);
+        if(!cmd) return message.reply(lang.helpReturn);
         
         if (cmd === "on" || cmd === "true"){
-            if(returnNull(subcmd)) return message.reply(lang.helpReturn);
+            if(!subcmd) return message.reply(lang.helpReturn);
             let channel = formatId(subcmd);
             let chat = await message.guild.channels.cache.find(chat => chat.id === channel );
             if (!chat || chat === undefined || chat === null) return message.reply(lang.returnNull);
@@ -41,7 +41,7 @@ module.exports.run = async (bot, message, args, lang) => {
         else if(cmd === "ch" || cmd === "channel"){
             let channel = formatId(subcmd);
             let chat = await message.guild.channels.cache.find(chat => chat.id === channel);
-            if (returnNull(chat)) return message.reply(lang.returnNull);
+            if (!chat) return message.reply(lang.returnNull);
 
             const guild = await bot.database.findOne("guild", {'guildId': message.guild.id});
             guild.welcome.channel = channel;

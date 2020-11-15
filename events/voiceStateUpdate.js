@@ -1,5 +1,4 @@
 const { MessageEmbed } = require("discord.js");
-const { returnNull } = require("../utils/functions.js");
 
 module.exports = class{
     constructor(client){
@@ -8,7 +7,7 @@ module.exports = class{
 
     async run(oldState, newState){
         if(oldState.bot === true) return
-        if(returnNull(oldState.channelID) && returnNull(newState.channelID)) return
+        if(!oldState.channelID && !newState.channelID) return
         if(oldState.channelID === newState.channelID) return
     
         const lang = await this.bot.langs.langReturn(oldState.guild.language, "voiceStateUpdate", "event");

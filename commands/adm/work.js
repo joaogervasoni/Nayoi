@@ -1,5 +1,5 @@
-const {returnNull, formatId} = require("../../utils/functions.js");
-const {MessageEmbed, BitField} = require("discord.js");
+const { formatId } = require("../../utils/functions.js");
+const { MessageEmbed, BitField } = require("discord.js");
 
 module.exports.run = async (bot, message, args, lang) => {
 
@@ -8,10 +8,10 @@ module.exports.run = async (bot, message, args, lang) => {
     if(cmd === "on"){
         let channel = args[1];
         let chat = await message.guild.channels.cache.find(chat => chat.id === formatId(channel));
-        if(returnNull(chat)) return message.reply(lang.helpReturn)
-    
-        const msg = args.join(" ").slice(cmd.length + channel.length);
-        if(returnNull(msg)) return message.reply(lang.textNull)
+        if(!chat) return message.reply(lang.helpReturn)
+        
+        const msg = args.join(" ").slice(cmd.length + channel.length + 1);
+        if(!msg) return message.reply(lang.textNull)
     
         let id = message.guild.roles.everyone.id;
         await chat.updateOverwrite(id, 
@@ -34,7 +34,7 @@ module.exports.run = async (bot, message, args, lang) => {
     else if(cmd === "off"){
         let channel = args[1];
         let chat = await message.guild.channels.cache.find(chat => chat.id === formatId(channel));
-        if(returnNull(chat)) return message.reply(lang.helpReturn)
+        if(!chat) return message.reply(lang.helpReturn)
 
         let id = message.guild.roles.everyone.id;
         await chat.updateOverwrite(id, 

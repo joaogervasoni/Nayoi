@@ -12,12 +12,14 @@ module.exports = class{
             await this.bot.database.deleteMany("autodeletemsg", { 'guildId': guild.id });
     
             let streamer = await this.bot.database.find("twitchchannel", {});
-            for (let index = 0; index < streamer.length; index++){
-                let twitchGuild = await this.bot.database.find("twitchguild", { 'streamerId': streamer[index].streamerId, 'guildId': guild.id });
-                if(twitchGuild){
-                    await this.bot.database.findOneAndRemove("twitchguild", { 'streamerId': streamer[index].streamerId, 'guildId': guild.id});
-                    streamer[index].servers = parseInt(streamer[index].servers) - 1;
-                    await this.bot.database.save(streamer[index]);
+            if(streamer){
+                for (let index = 0; index < streamer.length; index++){
+                    let twitchGuild = await this.bot.database.find("twitchguild", { 'streamerId': streamer[index].streamerId, 'guildId': guild.id });
+                    if(twitchGuild){
+                        await this.bot.database.findOneAndRemove("twitchguild", { 'streamerId': streamer[index].streamerId, 'guildId': guild.id});
+                        streamer[index].servers = parseInt(streamer[index].servers) - 1;
+                        await this.bot.database.save(streamer[index]);
+                    }
                 }
             }
             

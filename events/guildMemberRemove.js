@@ -1,5 +1,5 @@
 const { MessageEmbed } = require("discord.js");
-const { returnNull, limitLength } = require("../utils/functions.js");
+const { limitLength } = require("../utils/functions.js");
 
 module.exports = class{
     constructor(client){
@@ -23,7 +23,7 @@ module.exports = class{
                 let entry = await logs.entries.find(entry => entry.target === member.user);
                 let channel = member.guild.channels.cache.get(guild.log.channel)
     
-                if(!returnNull(channel)){
+                if(channel){
                     let embed = new MessageEmbed()
                     .setThumbnail(member.user.avatarURL())
                     .setColor(this.bot.baseColor)
