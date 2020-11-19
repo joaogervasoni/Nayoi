@@ -1,5 +1,3 @@
-const chalk = require('chalk');
-
 class Checks {
     constructor(client, options = {clear: false}){
         this.bot = client;
@@ -7,7 +5,7 @@ class Checks {
     }
 
     async init() {
-        if(this.options.clear === false) return console.log(chalk.red(chalk.redBright('[Checks]'), 'Limpeza de lixos desabilitada'));
+        if(this.options.clear === false) return this.bot.logger.warn('Limpeza de lixos desabilitada', 'checks');
 
         /*
         !!!! CAUTION !!!! CAUTION !!!! CAUTION !!!! CAUTION !!!!
@@ -21,7 +19,7 @@ class Checks {
             this.clearFalseRoleReaction(guild);
         }
 
-        return console.log(chalk.red(chalk.redBright('[Checks]'), 'Limpeza de lixos feita'));
+        return this.bot.logger.warn('Limpeza de lixos feita', 'checks'); 
 
         /*
         !!!! CAUTION !!!! CAUTION !!!! CAUTION !!!! CAUTION !!!!

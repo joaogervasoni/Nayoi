@@ -2,10 +2,10 @@ const { readdirSync } = require("fs");
 const { join } = require("path");
 const filePath = join(__dirname, "../../", "locales");
 const { Collection } = require("discord.js");
-const chalk = require('chalk');
 
 class Langs {
-    constructor(){
+    constructor(client){
+        this.bot = client;
         this.locales = new Collection();
         
         for (const cmd of readdirSync(filePath).filter(cmd => cmd.endsWith(".js"))){
@@ -13,7 +13,7 @@ class Langs {
             this.locales.set(prop.name, prop);
         }
 
-        console.log(chalk.blue(chalk.blueBright('[Lang]'), this.locales.size, 'langs carregadas'));
+        this.bot.logger.info(`${this.locales.size} langs carregadas`, 'lang');
     }
 
     async langReturn(guildLang, name, type) {

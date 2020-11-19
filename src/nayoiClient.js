@@ -3,8 +3,8 @@ const Langs = require('./structures/langs.js');
 const Database = require('./structures/database.js');
 const Error = require('./structures/error.js');
 const Canvas = require('./structures/canvas.js');
+const Logger = require('./structures/logger');
 const { readdir } = require('fs');
-const chalk = require('chalk');
 
 /** 
 * @extends Discord.Client
@@ -22,9 +22,10 @@ class NayoiClient extends Client {
         options.config.color ? this.baseColor = options.config.color : this.baseColor = "#ff8ff2";
         options.config.apis ? this.apis = options.config.apis : this.apis = {weatherApi: "", tenorApi: "", twitchID: ""};
 
-        this.database = new Database(options.config.mongodb);
-        this.langs = new Langs();
-        this.error = new Error(true);
+        this.logger = new Logger();
+        this.database = new Database(this, options.config.mongodb);
+        this.langs = new Langs(this);
+        this.error = new Error(this, true);
         
         this.snipes = new Map();
         this.commands = new Collection();
@@ -63,7 +64,7 @@ class NayoiClient extends Client {
                 super.on(evt.split(".")[0], (...args) => event.run(...args));
             });
             
-            console.log(chalk.blue(chalk.blueBright('[Events]'), `${files.length} eventos carregados`));
+            this.logger.info(`${files.length} eventos carregados`, 'events');
         });
         return this;
     }

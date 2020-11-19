@@ -1,18 +1,18 @@
 const {MessageEmbed} = require("discord.js");
-const chalk = require("chalk");
 
 class Error { 
-    constructor(logConsole = true) {
+    constructor(client, logConsole = true) {
+        this.bot = client;
         this.log = logConsole;
     }
 
     discordAPIError (error, obj, lang) {
         if(error.code === 50034){
-            console.log(chalk.red(chalk.redBright('[Error-Check]'), 'Erro 50034 tratado'));
+            this.bot.logger.warn('Erro 50034 tratado', 'error-check');
             return obj.reply(lang.error50034);
         }
         if(error.code === 50013){
-            console.log(chalk.red(chalk.redBright('[Error-Check]'), 'Erro 50013 tratado'));
+            this.bot.logger.warn('Erro 50013 tratado', 'error-check');
             return obj.reply(lang.error50013);
         }
         return
@@ -23,9 +23,9 @@ class Error {
         today = `${today.getDate()}/${today.getMonth()+1}/${today.getFullYear()}`
 
         if(obj){
-            console.log(chalk.red(chalk.redBright('[Error]'), `Name: ${name} // Error: ${error} // Guild: ${obj.guild} // Data: ${today}`));
+            this.bot.logger.error(`Name: ${name} // Error: ${error} // Guild: ${obj.guild} // Data: ${today}`, 'error');
         }else{
-            console.log(chalk.red(chalk.redBright('[Error]'), `Name: ${name} // Error: ${error} // Guild: objNull // Data: ${today}`));
+            this.bot.logger.error(`Name: ${name} // Error: ${error} // Guild: objNull // Data: ${today}`, 'error');
         }
     }
 
@@ -50,7 +50,6 @@ class Error {
             
             return obj.channel.send(embed);
         }
-        
     }
 }
 

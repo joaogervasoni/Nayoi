@@ -3,12 +3,11 @@ const { readdirSync } = require("fs");
 const { join } = require("path");
 const filePath = join(__dirname, "../../", "models");
 const { Collection } = require("discord.js");
-const chalk = require('chalk');
 
 class Database {
     #options
-
-    constructor(mongodb){
+    constructor(client, mongodb){
+        this.bot = client;
         this.models = new Collection();
         this.#options = {
             useNewUrlParser: true,
@@ -22,18 +21,18 @@ class Database {
 
     databaseConnection(mongodb){
         mongoose.connect(mongodb, this.#options)
-        .catch(error => console.error(chalk.red(chalk.redBright('[Database]'), `erro de conexão inicial: \n${error.stack}`)));
+        .catch(error => console.error(this.bot.logger.info(`erro de conexão inicial: \n${error.stack}`, 'database')));
         
         mongoose.connection.on('connected', () => {
-            console.log(chalk.blue(chalk.blueBright('[Database]'), 'conexão com db estabelecida'));
+            this.bot.logger.info('conexão com db estabelecida', 'database');
         });
 
         mongoose.connection.on('error', err => {
-            console.error(chalk.blue(chalk.blueBright('[Database]'), `erro de conexão \n${err.stack}`));
+           this.bot.logger.error(`erro de conexão \n${err.stack}`, 'database');
         });
 
         mongoose.connection.on('disconnected', () => {
-            console.warn(chalk.blue(chalk.blueBright('[Database]'), 'conexão com db perdida'));
+            this.bot.logger.warn('conexão com db perdida', 'database');
         });
     }
 
@@ -43,7 +42,7 @@ class Database {
             this.models.set(prop.modelName.toLowerCase(), prop);
         }
         
-        console.log(chalk.blue(chalk.blueBright('[Database]'), `${this.models.size} models carregados`));
+        this.bot.logger.info(`${this.models.size} models carregados`, 'database');
     }
 
     check(obj){

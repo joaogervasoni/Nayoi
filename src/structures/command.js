@@ -1,7 +1,6 @@
 const { readdirSync } = require("fs");
 const { join } = require("path");
 const filePath = join(__dirname, "../../", "commands");
-const chalk = require('chalk');
 
 module.exports.run = (bot) => {
     var paths = [filePath];
@@ -21,5 +20,6 @@ module.exports.run = (bot) => {
             }
         }
     }
-    console.log(chalk.blue(chalk.blueBright('[Commands]'), bot.commands.size, 'comandos carregados'));
+
+    bot.logger.info(`${bot.commands.size} comandos carregados`, 'commands');
 }
