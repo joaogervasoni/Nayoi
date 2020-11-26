@@ -145,7 +145,8 @@ async function embedColorF(msg, lang, bot, message){
         .setDescription(lang.ColorFalseDescription)
         .setColor(bot.baseColor);
 
-        return await message.channel.send(embed);
+        await message.channel.send(embed);
+        return null;
     }
 }
 
@@ -153,18 +154,26 @@ async function saveEmoji(msg, rolereaction, lang, message, baseEmojis){
     let emojisCache = msg.guild.emojis.cache;
     
     let [emojiid, roleid] = msg.content.split(/,\s+/);
-    if (!emojiid && !roleid) return;
+    if (!emojiid && !roleid) return rolereaction;
 
     let emoji = emojisCache.find(emoji => emoji.id === formatEmojiId(emojiid));
     let tst = emojiid.split(/ +/g);
     let emojiN = baseEmojis.find(em => em === tst[0]);
-    if(!emoji && !emojiN) return msg.channel.send(lang.returnEmojiNull); 
+    if(!emoji && !emojiN) {
+        await msg.channel.send(lang.returnEmojiNull);
+        return rolereaction;
+    } 
     
     let role = msg.guild.roles.cache.find(role => role.id === formatId(roleid));
-    if(!role) return msg.channel.send(lang.returnRoleNull);
+    if(!role) {
+        await msg.channel.send(lang.returnRoleNull);
+        return rolereaction;
+    }
     
-    if(role.rawPosition > message.member.roles.highest.rawPosition || !message.member.hasPermission("ADMINISTRATOR")) 
-        return msg.channel.send(lang.returnRoleHigh);
+    if(role.rawPosition > message.member.roles.highest.rawPosition || !message.member.hasPermission("ADMINISTRATOR")) {
+        await msg.channel.send(lang.returnRoleHigh);
+        return rolereaction;
+    }
 
     if(!emoji){
         rolereaction.emojis.push(emojiN)

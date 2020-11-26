@@ -437,7 +437,8 @@ module.exports =
                 description: "Gerencia autorole do servidor dando cargo automáticamente para quem entra",
                 usability: "Pode ser ativo utilizando `{prefix}autorole on @cargo`\n"
                 +"A role pode ser alterada utilizando `{prefix}autorole rol @cargo`\n",
-                additional: "`{prefix}autorole off` - Desabilita o autorole\n",
+                additional: "`{prefix}autorole off` - Desabilita o autorole\n"
+                +"`{prefix}autorole show` - Mostra cargo atual",
             }    
         },
         {
@@ -473,7 +474,8 @@ module.exports =
                 statusNew: "Bem-vindo agora esta",
                 msgChange: "Mensagem de Bem-vindo modificada :face_with_monocle:!!",
                 channelChange: "Canal trocado :face_with_monocle:!!",
-                returnAtual: "Mensagem atual é:",
+                returnAtualMsg: "Mensagem atual é:",
+                returnAtualChannel: "Channel atual é:",
             },
             help: {
                 description: "Gerencia toda a parte de Bem-Vindo do servidor",
@@ -484,7 +486,8 @@ module.exports =
                 +"`{membercount}` - Para monstrar o número de pessoas no servidor\n",
                 additional: "`{prefix}welcome off` - Para desabilitar o comando\n"
                 +"`{prefix}welcome ch #chat` - Altera o canal do bem-vindo\n"
-                +"`{prefix}welcome sh` - Exibe msg de bem-vindo\n",
+                +"`{prefix}welcome sh` - Exibe msg de bem-vindo\n"
+                +"`{prefix}welcome shch` - Exibe canal do bem-vindo\n",
                 others: "Caso queira utilizar banners no bem-vindo utilize o comando `{prefix}banner`",
             }    
         },
@@ -606,7 +609,7 @@ module.exports =
                 returnRoleNull: "Role não existe !!  Tente outro !!",
                 returnRoleHigh: "Role de maior grau que a sua !!  Tente outro !!",
                 ColorFalseTitle: "Escolha uma cor",
-                ColorFalseDescription: "A cor precisa ser no formato hex como no exemplo: #ffcce6",
+                ColorFalseDescription: "A cor precisa ser no formato hex como no exemplo: `#ffcce6`",
                 returnSave: "Emoji e Cargo salvos !!\n"
                 +"`Caso queira continuar digite + grupo de emoji/cargo !!`\n" 
                 +"Caso queira finalizar digite `!!done`",

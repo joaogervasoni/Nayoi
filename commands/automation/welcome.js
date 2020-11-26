@@ -51,7 +51,11 @@ module.exports.run = async (bot, message, args, lang) => {
         }
         else if(cmd === "sh" || cmd === "show"){
             const guild = await bot.database.findOne("guild", {'guildId': message.guild.id});
-            return message.channel.send(`\`${lang.returnAtual}\` ${guild.welcome.msg}`)
+            return message.channel.send(`\`${lang.returnAtualMsg}\` ${guild.welcome.msg}`)
+        }
+        else if(cmd === "shch" || cmd ==="showchannel"){
+            const guild = await bot.database.findOne("guild", {'guildId': message.guild.id});
+            return message.channel.send(`\`${lang.returnAtualChannel}\`<#${guild.welcome.channel}>`);
         }
         else return message.reply(lang.helpReturn)
     }catch(e){
