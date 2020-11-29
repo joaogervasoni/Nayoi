@@ -36,6 +36,7 @@ class Error {
 
         if (obj && typeObj === "message") {
             const lang = await obj.client.langs.langReturn(obj.guild.language, "error", "event");
+            this.bot.langs.langParams(lang, this.bot.prefix)
 
             if(error.name === "DiscordAPIError") return this.discordAPIError(error, obj, lang);
             
@@ -46,7 +47,7 @@ class Error {
                 .addField("Name", name, true)
                 .addField("Error" ,lang.errorField, true)
                 .setColor("c23a3a")
-                .setTimestamp()
+                .setTimestamp();
             
             return obj.channel.send(embed);
         }

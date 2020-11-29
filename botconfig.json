@@ -6,5 +6,9 @@
         "weatherApi": "token api weather",
         "tenorApi": "token api tenor",
         "twitchID": "twitch client id"
+    },
+    "links": {
+        "site": "https://nayoi.com",
+        "discord": ""
     }
 }

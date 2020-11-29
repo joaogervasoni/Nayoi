@@ -38,11 +38,13 @@ class Langs {
         return infos
     }
 
-    langParams(str, prefix, command){
+    langParams(str, prefix, command = null){
         for (const key in str) {
             if (str.hasOwnProperty(key)) {
                 str[key] = str[key].replace(/{prefix}/g, prefix);
                 str[key] = str[key].replace(/{cmdName}/g, command);
+                str[key] = str[key].replace(/{site}/g, this.bot.links.site);
+                str[key] = str[key].replace(/{discord}/g, this.bot.links.discord);
             }
         }
     }
