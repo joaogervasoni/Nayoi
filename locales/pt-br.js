@@ -75,7 +75,7 @@ module.exports =
         {
             name: "error",
             cmd:{
-                errorField: "Parece que encontrei um erro... Entre em contato com o suporte !!",
+                errorField: "Parece que encontrei um erro... Entre em contato com o suporte em nosso discord: {discord} !!",
                 error50034: "Não é possivel apagar uma mensagem mais antiga que `14` dias :persevere: !!",
                 error50013: 'Não tenho permissão para fazer isso !! Isso pode acontecer devido a 3 fatores:\n'
                 +'`Cargo maior` - Caso o cargo seja maior que o do bot ou seja Owner\n'
@@ -126,7 +126,8 @@ module.exports =
                 +"Caso esteja buscando pela lista de comandos digite `{prefix}commands`\n"
                 +"Espero que encontre o que procura :heart:",
                 embedField2_title: "Outros",
-                embedField2_text: "Para mais informações acesse: https://nayoi.com",
+                embedField2_text: "Para mais informações acesse: {site} "
+                +"ou entre em nosso discord: {discord}",
             },
             help: {
                 description: "Traz informações sobre comandos",

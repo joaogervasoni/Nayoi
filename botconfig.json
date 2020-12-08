@@ -1,5 +1,4 @@
 {
-    "token": "token api discord",
     "prefix": "n!",
     "mongodb": "user:pass",
     "apis":{
