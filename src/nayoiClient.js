@@ -18,10 +18,10 @@ class NayoiClient extends Client {
     constructor(options) {
         super(options.clientOptions || {});
 
-        options.config.prefix ? this.prefix = options.config.prefix : this.prefix = "n!";
-        options.config.color ? this.baseColor = options.config.color : this.baseColor = "#ff8ff2";
-        options.config.apis ? this.apis = options.config.apis : this.apis = {weatherApi: "", tenorApi: "", twitchID: ""};
-        options.config.links ? this.links = options.config.links : this.links = {site: "https://nayoi.com", discord: "null"};
+        this.prefix = options.config.prefix ? options.config.prefix : "n!";
+        this.baseColor = options.config.color ? options.config.color : "#ff8ff2";
+        this.apis = options.config.apis ? options.config.apis : {weatherApi: "", tenorApi: "", twitchID: ""};
+        this.links = options.config.links ? options.config.links : {site: "https://nayoi.com", discord: "null"};
 
         this.logger = new Logger();
         this.database = new Database(this, options.config.mongodb);
