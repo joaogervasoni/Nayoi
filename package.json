@@ -9,6 +9,7 @@
   "author": "Zaetic",
   "license": "ISC",
   "dependencies": {
+    "big-time": "^2.0.1",
     "canvas": "^2.6.1",
     "chalk": "^4.1.0",
     "check-links": "^1.1.8",

@@ -2,6 +2,7 @@ const { MessageEmbed } = require("discord.js");
 const { limitLength } = require("../utils/functions.js");
 const api = require('twitch-api-v5');
 const Checks = require("../src/structures/checks");
+const bt = require('big-time');
 
 module.exports = class {
     constructor(client) {
@@ -53,7 +54,7 @@ module.exports = class {
             let time = element.date - new Date().getTime();
 
             let bot = this.bot;
-            setTimeout(async function(){
+            bt.setTimeout(async function(){
                 let guild = bot.guilds.cache.get(element.guildId);
                 let member = guild.members.cache.get(element.userId);
                 let muterole = guild.roles.cache.find(role => role.name === "Muted");
@@ -75,7 +76,7 @@ module.exports = class {
             let time = element.date - new Date().getTime();
             
             let bot = this.bot;
-            setTimeout(async function(){
+            bt.setTimeout(async function(){
                 let noticeCheck = await bot.database.findOne("notice", { 'channelId': element.channelId, 'guildId': element.guildId, 'text': element.text });
                 if(!noticeCheck) return
 

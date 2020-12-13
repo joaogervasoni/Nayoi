@@ -2,6 +2,7 @@ const { formatId, limitLength } = require("../../utils/functions.js");
 const { MessageEmbed } = require("discord.js");
 const mongoose = require('mongoose');
 const ms = require("ms");
+const bt = require('big-time');
 
 module.exports.run = async (bot, message, args, lang) => {
     try{
@@ -69,7 +70,7 @@ module.exports.run = async (bot, message, args, lang) => {
     
             noticeDB(bot, time, channel, textDB, cmd, message.guild.id);
     
-            setTimeout(async function(){
+            bt.setTimeout(async function(){
                 let channelExist = message.guild.channels.cache.get(channel.id)
                 if(!channelExist) return
                 let noticeCheck = await bot.database.findOne("notice", { 'channelId': channel.id, 'guildId': message.guild.id, 'text': textDB });

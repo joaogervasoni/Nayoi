@@ -1,6 +1,7 @@
 const { mentionById } = require("../../utils/functions.js");
 const { MessageEmbed } = require("discord.js");
 const ms = require("ms");
+const bt = require('big-time');
 
 module.exports.run = async (bot, message, args, lang) => {
     
@@ -72,7 +73,7 @@ module.exports.run = async (bot, message, args, lang) => {
 
         message.reply(`<@${toMute.id}> ${lang.returnMuted} ${ms(mutetime)}`)
 
-        setTimeout(async function(){
+        bt.setTimeout(async function(){
             toMute.roles.remove(muterole.id);
             await bot.database.findOneAndRemove("mute", { 'guildId': message.guild.id, 'userId': toMute.user.id })
 
