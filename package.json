@@ -13,15 +13,14 @@
     "canvas": "^2.6.1",
     "chalk": "^4.1.0",
     "check-links": "^1.1.8",
-    "discord.js": "^12.4.1",
+    "discord.js": "^12.5.1",
     "dotenv": "^8.2.0",
     "is-color": "^1.0.2",
     "is-image": "^3.0.0",
-    "mathjs": "^7.5.1",
-    "mongoose": "^5.10.11",
-    "ms": "^2.1.2",
+    "mathjs": "^7.6.0",
+    "mongoose": "^5.11.7",
+    "ms": "^2.1.3",
     "node-fetch": "^2.6.1",
-    "path": "^0.12.7",
     "twitch-api-v5": "^2.0.4"
   }
 }
