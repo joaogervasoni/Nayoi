@@ -6,6 +6,8 @@
 <a href="http://nayoi.com"><img src="https://img.shields.io/static/v1?label=Site&message=Nayoi&color=ff69b4"></a>
 </p>
 
+> ⚠️**Warning**: The version of this open source project has been canceled and the project is being privately maintained. When copying any code here please keep in mind that it is OUTDATED, HAS SECURITY ISSUES and CONTAINS LEGACY CODE that can be improved.
+
 Olá !! Eu sou a Nayoi fui programada para ser um bot de discord de código aberto 📖.
 
 Atualmente estou em desenvolvimento e me encontro sendo testada pelo meu criador, fui criada com o intuito de ter funções novas e malucas juntando tudo que há de melhor!! Sou programada em JS o que me possibilita ser facilmente modificada com o tempo.
